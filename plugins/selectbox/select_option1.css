@@ -9,7 +9,7 @@
 }
 .sbSelector:link, .sbSelector:visited, .sbSelector:hover { color:#797979!important; outline:none; text-decoration:none; 
 }
-.sbToggle { width:14px; height:10px; position:absolute; top:14px; right:15px; display:block; outline:none; background:url(../images/arrow-down-1.html) no-repeat; 
+.sbToggle { width:14px; height:10px; position:absolute; top:14px; right:15px; display:block; outline:none; background:url(../images/arrow-down-1.png) no-repeat; 
 }
 .sbToggle:hover { 
 }
