@@ -1,5 +1,5 @@
 <!-- BANNER -->
-<div class="bannercontainer bannerV1">
+<div class="bannercontainer bannerV1" style="overflow:hidden">
   <div class="fullscreenbanner-container">
     <div class="fullscreenbanner">
       <ul>
@@ -15,7 +15,7 @@
               data-start="1500"
               data-easing="Back.easeInOut"
               data-endspeed="300" >
-              <img src="<?php echo $this->asset ?>img/home/banner-slider/sl1.png" alt="slider-image" style="width: auto; height: auto;">
+              <img src="<?php echo $this->asset ?>img/home/banner-slider/DentalLivramentoLogo.png" alt="slider-image" style="width: auto; height: auto;">
             </div>
 
             <div class="tp-caption rs-caption-2 sft"
@@ -26,7 +26,7 @@
               data-start="2000"
               data-easing="Back.easeInOut"
               data-endspeed="300">
-              Summer Hat
+              Dental Livramento<!--TROCAR ESSA FONTE POR CENTURY GOTHIC COR AZUL IGUAL AO LOGO-->
             </div>
 
             <div class="tp-caption rs-caption-3 sft"
@@ -39,7 +39,6 @@
               data-endspeed="300"
               data-endeasing="Power1.easeIn"
               data-captionhidden="off">
-              Start From - $59.00<br>
               <small>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque convallis turpis pharetra pretium nec eu sem.</small>
             </div>
             <div class="tp-caption rs-caption-4 sft"
@@ -57,7 +56,7 @@
           </div>
         </li>
         <li data-transition="slidehorizontal" data-slotamount="5" data-masterspeed="700"  data-title="Slide 2">
-          <img src="<?php echo $this->asset ?>img/home/banner-slider/slider-bg.jpg" alt="slidebg" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat">
+          <img src="<?php echo $this->asset ?>img/home/banner-slider/slider-bg0.jpg" alt="slidebg" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat">
           <div class="slider-caption slider-captionV1 container">
             <div class="tp-caption rs-caption-1 sft start"
               data-hoffset="0"
@@ -110,7 +109,7 @@
           </div>
         </li>
         <li data-transition="slidehorizontal" data-slotamount="5" data-masterspeed="700" data-title="Slide 3">
-            <img src="<?php echo $this->asset ?>img/home/banner-slider/slider-bg.jpg" alt="slidebg1" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat">
+            <img src="<?php echo $this->asset ?>img/home/banner-slider/slider-bg0.jpg" alt="slidebg1" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat">
             <div class="slider-caption slider-captionV1 container">
 
               <div class="tp-caption rs-caption-1 sft start"
