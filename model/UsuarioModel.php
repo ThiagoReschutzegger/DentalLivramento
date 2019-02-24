@@ -19,9 +19,7 @@ class UsuarioModel extends Model {
     public function getUsuarioByLogin($login) {
         $sql = "SELECT * FROM usuario WHERE login=:login";
         $resultado = $this->ExecuteQuery($sql, [':login' => $login]);
-        echo $login;
         if ($resultado) {
-            echo "entrou";
             $user = $resultado[0];
             return new Usuario($user['login'], $user['senha'], $user['nome'], $user['email'], $user['id_user']);
         } else {

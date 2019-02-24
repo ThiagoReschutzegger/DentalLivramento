@@ -14,13 +14,13 @@ $config->template = 'default';
 if ($_SERVER['HTTP_HOST'] == "localhost") {
     $config->dbuser = 'root'; //nomedoaluno
     $config->dbpassword = ''; //senha
-    $config->dbname = 'dentallivramento'; //nomedoaluno
+    $config->dbname = 'dentallivramento'; //nomedobanco
     $config->dbhost = 'localhost'; //servidor (127.0.0.1)
-    $config->dbdrive = 'mysql'; //servidor (127.0.0.1)
+    $config->dbdrive = 'mysql';
 } else {
     $config->dbuser = '2017_gill'; //nomedoaluno
     $config->dbpassword = 'g1ll'; //senha
-    $config->dbname = '2017_gill'; //nomedoaluno
-    $config->dbhost = '127.0.0.1'; //servidor (127.0.0.1)
-    $config->dbdrive = 'mysql'; //servidor (127.0.0.1)
+    $config->dbname = '2017_gill'; //nomedobanco
+    $config->dbhost = '127.0.0.1'; //servidor na web
+    $config->dbdrive = 'mysql';
 }
