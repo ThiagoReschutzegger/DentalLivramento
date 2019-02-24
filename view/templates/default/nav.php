@@ -34,16 +34,13 @@
             <div class="row">
               <div class="col-md-6 d-none d-md-block">
                 <ul class="list-inline">
-                  <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                  <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                  <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                  <li><a href="#"><i class="fa fa-vimeo"></i></a></li>
-                  <li><a href="#"><i class="fa fa-tumblr"></i></a></li>
+                  <li><a target="_blank" href="https://www.facebook.com/DentalLivramento/"><i class="fa fa-facebook"></i></a></li>
+                  <li><a target="_blank" href="https://www.instagram.com/dentallivramento/"><i class="fa fa-instagram"></i></a></li>
                 </ul>
               </div>
               <div class="col-md-6 col-12">
                 <ul class="list-inline float-right top-right">
-                  <li class="account-login"><span><a data-toggle="modal" href='.login-modal'>Log in</a><small>or</small><a data-toggle="modal" href='#signup'>Create an account</a></span></li>
+                  <!--<li class="account-login"><span><a data-toggle="modal" href='.login-modal'>Log in</a><small>or</small><a data-toggle="modal" href='#signup'>Create an account</a></span></li>
                   <li class="searchBox">
                     <a href="#"><i class="fa fa-search"></i></a>
                     <ul class="dropdown-menu dropdown-menu-right">
@@ -54,7 +51,7 @@
                         </span>
                       </li>
                     </ul>
-                  </li>
+                  </li>-->
                   <li class="dropdown cart-dropdown">
                     <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-shopping-cart"></i>$0</a>
                     <ul class="dropdown-menu dropdown-menu-right">
@@ -81,8 +78,8 @@
                       </li>
                       <li>
                         <div class="btn-group" role="group" aria-label="...">
-                          <button type="button" class="btn btn-default" onclick="location.href='<?php echo $this->asset ?>cart-page.html';">Shopping Cart</button>
-                          <button type="button" class="btn btn-default" onclick="location.href='<?php echo $this->asset ?>checkout-step-1.html';">Checkout</button>
+                          <button type="button" class="btn btn-default" onclick="location.href='<?php echo $this->asset ?>cart-page.html';">Carrinho</button>
+                          <button type="button" class="btn btn-default" onclick="location.href='<?php echo $this->asset ?>checkout-step-1.html';">Finalizar</button>
                         </div>
                       </li>
                     </ul>

@@ -1,5 +1,5 @@
 <!-- BANNER -->
-<div class="bannercontainer bannerV1" style="overflow:hidden">
+<div class="bannercontainer bannerV1 mouse-grab" style="overflow:hidden">
   <div class="fullscreenbanner-container">
     <div class="fullscreenbanner">
       <ul>
@@ -41,7 +41,7 @@
               data-captionhidden="off">
               <small>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque convallis turpis pharetra pretium nec eu sem.</small>
             </div>
-            <div class="tp-caption rs-caption-4 sft"
+            <!--<div class="tp-caption rs-caption-4 sft"
               data-hoffset="0"
               data-y="310"
               data-x="[15,15,42,15]"
@@ -52,7 +52,7 @@
               data-endeasing="Power1.easeIn"
               data-captionhidden="off">
               <span class="page-scroll"><a href="#" class="btn primary-btn">Buy Now<i class="fa fa-chevron-right"></i></a></span>
-            </div>
+            </div>-->
           </div>
         </li>
         <li data-transition="slidehorizontal" data-slotamount="5" data-masterspeed="700"  data-title="Slide 2">
@@ -225,7 +225,7 @@
       <h4>Featured Products</h4>
     </div>
 
-    <div class="row featuredProducts featuredProductsSlider margin-bottom">
+    <div class="row featuredProducts featuredProductsSlider margin-bottom mouse-grab">
       <div class="slide col-md-3">
         <div class="productImage clearfix">
           <img src="<?php echo $this->asset ?>img/home/featured-product/product-01.jpg" alt="featured-product-img">
@@ -429,7 +429,7 @@
 </section>
 
 <!-- LIGHT SECTION -->
-<section class="lightSection clearfix">
+<section class="lightSection clearfix mouse-grab">
   <div class="container">
     <div class="owl-carousel partnersLogoSlider">
       <div class="slide">

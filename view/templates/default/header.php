@@ -24,6 +24,7 @@
     <!-- CUSTOM CSS -->
     <link href="<?php echo $this->asset ?>css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo $this->asset ?>css/default.css" id="option_color">
+    <link rel="stylesheet" href="<?php echo $this->asset ?>css/custom.css">
 
     <!-- Icons -->
     <link rel="shortcut icon" href="<?php echo $this->asset ?>img/favicon.png">

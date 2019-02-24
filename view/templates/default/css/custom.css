@@ -1,0 +1,9 @@
+/* NOSSOS ESTILOS CUSTOMIZADOS */
+
+.mouse-grab{
+  cursor: grab;
+}
+
+.mouse-grab:active{
+  cursor: grabbing;
+}
