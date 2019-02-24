@@ -1,17 +1,11 @@
 <?php
 
-class MarcaAdmin extends Controller {
+class MarcaAdmin extends Admin {
 
-    protected $login;
+    //protected $model; -> mais alem
 
     public function __construct() {
         parent::__construct();
-        $this->view->setTemplate('admin');
-        $this->login = new Login();
-        if (!$this->login->isLogged()) {
-            $this->login();
-            die;
-        }
     }
 
     public function index() {
