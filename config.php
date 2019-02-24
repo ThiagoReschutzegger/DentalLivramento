@@ -15,8 +15,8 @@ if ($_SERVER['HTTP_HOST'] == "localhost") {
     $config->dbuser = 'root'; //nomedoaluno
     $config->dbpassword = ''; //senha
     $config->dbname = 'dentallivramento'; //nomedoaluno
-    $config->dbhost = 'root'; //servidor (127.0.0.1)
-    $config->dbdrive = 'root'; //servidor (127.0.0.1)
+    $config->dbhost = 'localhost'; //servidor (127.0.0.1)
+    $config->dbdrive = 'mysql'; //servidor (127.0.0.1)
 } else {
     $config->dbuser = '2017_gill'; //nomedoaluno
     $config->dbpassword = 'g1ll'; //senha

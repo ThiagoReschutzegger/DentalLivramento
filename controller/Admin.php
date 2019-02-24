@@ -15,18 +15,19 @@ class Admin extends Controller {
     }
 
     public function index() {
-        $this->view->load('header');
-        $this->view->load('admin');
-        $this->view->load('footer');
+      $this->view->load('header');
+      $this->view->load('nav');
+      $this->view->load('home');
+      $this->view->load('footer');
     }
 
     public function login() {
         $data['msg'] = '';
         if (filter_input(INPUT_POST, 'logar')) {
             $login = filter_input(INPUT_POST, 'login', FILTER_SANITIZE_STRING);
-            $senha = filter_input(INPUT_POST, 'senha');
+            $senha = filter_input(INPUT_POST, 'senha', FILTER_SANITIZE_STRING);
             if ($login && $senha) {
-                if ($this->login->verifyLogin(new Usuario(null, $login, $senha))) {
+                if ($this->login->verifyLogin(new Usuario($login, $senha))) {
                     if (filter_input(INPUT_POST, 'lembrar')) {
                         $this->login->createCookies();
                     }
@@ -46,10 +47,11 @@ class Admin extends Controller {
             //Recarrega a página
             //var_dump($_SESSION);
             //die;
-            $this->reload();
-            
+            $this->index();
+
         } else {
-            $this->view->load('login', $data);
+          $this->view->load('header');
+          $this->view->load('login', $data);
         }
     }
 
