@@ -15,10 +15,10 @@
               data-start="1500"
               data-easing="Back.easeInOut"
               data-endspeed="300" >
-              <img src="<?php echo $this->asset ?>img/home/banner-slider/DentalLivramentoLogo.png" alt="slider-image" style="width: auto; height: auto;">
+              <img src="<?php echo $this->asset ?>img/home/banner-slider/DentalLivramentoLogo.png" alt="slider-image img-fluid" style=" height: auto; margin-top: 10px;">
             </div>
 
-            <div class="tp-caption rs-caption-2 sft"
+            <div class="tp-caption rs-caption-2 sft fonte-e-cor-top"
               data-hoffset="0"
               data-y="100"
               data-x="[15,15,42,15]"
@@ -26,7 +26,7 @@
               data-start="2000"
               data-easing="Back.easeInOut"
               data-endspeed="300">
-              Dental Livramento<!--TROCAR ESSA FONTE POR CENTURY GOTHIC COR AZUL IGUAL AO LOGO-->
+              Dental Livramento<!--sempre que quiser, adiciona a class "fonte-e-cor-top"-->
             </div>
 
             <div class="tp-caption rs-caption-3 sft"

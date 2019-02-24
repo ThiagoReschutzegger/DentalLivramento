@@ -5,13 +5,13 @@
 	2.1 HEADER V1
 	2.1 HEADER V2
 	2.1 HEADER V3
-MAIN SLIDER 
+MAIN SLIDER
 	BANNER
 	BANNER V1
 	BANNER V2
 	BANNER V3
 	BANNER V4
-3.HOME 
+3.HOME
 	3.1 HOME
 		3.1.1 WHITE SECTION
 		3.1.2 LIGHT SECTION
@@ -517,7 +517,7 @@ a:hover, a:focus {
 }
 
 /*==============================================
---> 5 PRELOADER 
+--> 5 PRELOADER
 ================================================*/
 body {
   overflow: hidden;
@@ -2301,7 +2301,7 @@ body.bodyColor.container {
 
 .bannerV1 .tp-caption.rs-caption-2 {
   text-transform: capitalize;
-  color: #252525 !important;
+  color: #252525;
   font-size: 14px !important;
   line-height: 20px !important;
 }
