@@ -8,9 +8,9 @@
             <div class="info d-flex align-items-center">
               <div class="content">
                 <div class="logo">
-                  <h1>Dashboard</h1>
+                  <h1>Dental Livramento</h1>
                 </div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                <p>Painel de Controle</p>
               </div>
             </div>
           </div>
@@ -26,7 +26,7 @@
                     <input id="login-password" type="password" name="senha" placeholder="Senha" required data-msg="Por favor, digite sua senha" class="input-material">
                   </div><input type="submit" name="logar" class="btn btn-primary" value="Login" style="margin-bottom: 10px;" />
                   <!-- This should be submit button but I replaced it with <a> for demo purposes-->
-                </form><a href="#" class="forgot-pass">Forgot Password?</a><br><small>Do not have an account? </small><a href="register.html" class="signup">Signup</a>
+                </form>
               </div>
             </div>
           </div>
