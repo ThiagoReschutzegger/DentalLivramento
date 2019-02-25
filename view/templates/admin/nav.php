@@ -16,14 +16,15 @@
             <div class="navbar-header">
               <!-- Navbar Brand --><a href="index.html" class="navbar-brand d-none d-sm-inline-block">
                 <div class="brand-text d-none d-lg-inline-block"><span>Administrador </span><strong>&nbspDental Livramento</strong></div>
-                <div class="brand-text d-none d-sm-inline-block d-lg-none"><strong>BD</strong></div></a>
-              <!-- Toggle Button--><!--<a id="toggle-btn" href="#" class="menu-btn active"><span></span><span></span><span></span></a>-->
+                <div class="brand-text d-none d-sm-inline-block d-lg-none"><strong>ADM</strong></div></a>
+
+              <!-- Toggle Button--><a id="toggle-btn" href="#" class="menu-btn active"><span></span><span></span><span></span></a>
             </div>
             <!-- Navbar Menu -->
             <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
 
               <!-- Logout    -->
-              <li class="nav-item"><a href="<?php echo $this->base_url ?>/Admin/Logout" class="nav-link logout"> <span class="d-none d-sm-inline">Logout</span><i class="fa fa-sign-out"></i></a></li>
+              <li class="nav-item"><a href="<?php echo $this->base_url ?>/Admin/Logout" class="nav-link logout"> <span class="d-none d-sm-inline">Deslogar</span><i class="fa fa-sign-out"></i></a></li>
             </ul>
           </div>
         </div>
@@ -53,18 +54,11 @@
             </ul>
           </li>
           <li><a href="login.html"> <i class="icon-interface-windows"></i>Login page </a></li>
-        </ul><span class="heading">Extras</span>
+        </ul><!--<span class="heading">Extras</span>
         <ul class="list-unstyled">
           <li> <a href="#"> <i class="icon-flask"></i>Demo </a></li>
           <li> <a href="#"> <i class="icon-screen"></i>Demo </a></li>
           <li> <a href="#"> <i class="icon-mail"></i>Demo </a></li>
           <li> <a href="#"> <i class="icon-picture"></i>Demo </a></li>
-        </ul>
+        </ul>-->
       </nav>
-      <div class="content-inner">
-          <!-- Page Header-->
-          <header class="page-header">
-              <div class="container-fluid">
-                  <h2 class="no-margin-bottom">Painel de Controle</h2>
-              </div>
-          </header>

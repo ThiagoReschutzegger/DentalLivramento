@@ -17,7 +17,7 @@ class Admin extends Controller {
     public function index() {
       $this->view->load('header');
       $this->view->load('nav');
-      $this->view->load('home');
+      $this->view->load('index');
       $this->view->load('footer');
     }
 

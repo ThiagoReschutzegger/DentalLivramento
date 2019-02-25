@@ -1,3 +1,10 @@
+<div class="content-inner">
+    <!-- Page Header-->
+    <header class="page-header">
+        <div class="container-fluid">
+            <h2 class="no-margin-bottom">Painel de Controle</h2>
+        </div>
+    </header>
 <section class="dashboard-counts no-padding-bottom">
         <div class="container-fluid">
             <div class="row bg-white has-shadow">
@@ -5,7 +12,7 @@
                 <div class="col-xl-6 col-sm-6">
                     <div class="item d-flex align-items-center">
                         <div class="icon bg-red"><i class="icon-home"></i></div>
-                        <div class="title"><a class="linkDash" href="<?php echo $this->base_url . "AdminHome"; ?>"><span>Pantalla Inicial</span></a>
+                        <div class="title"><a class="linkDash" href="<?php echo $this->base_url . "HomeAdmin"; ?>"><span>Pantalla Inicial</span></a>
                             <!--<div class="progress">
                                 <div role="progressbar" style="width: 25%; height: 4px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-violet"></div>
                             </div>-->

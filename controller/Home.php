@@ -1,15 +1,17 @@
 <?php
 class Home extends Controller{
 
-    private $texto;
-
+    protected $model;
+    
     public function __construct() {
         parent::__construct();
-        $this->texto = "Olá Mundo!!";
+        $this->model = new HomeAdminModel();
     }
 
     public function index(){
-        $this->view->load('header');
+        $data['estilo'] = $this->model->getEstiloAtual();
+        
+        $this->view->load('header',$data['estilo']);
         $this->view->load('nav');
         $this->view->load('index');
         $this->view->load('footer');

@@ -68,3 +68,18 @@ ul.nav-tabs .nav-item .nav-link.active, .category-content {
 .logo-pl, .logo-pf {
   fill: #9B59B6;
 }
+
+
+@font-face {
+  font-family: GothicBold;
+  src: url(../plugins/fonts/GothicBold.ttf);
+}
+
+.fonte-e-cor-top{
+  font-family: GothicBold;
+  color: #9B59B6 !important;
+}
+
+#wf{
+  color: lime !important;
+}
