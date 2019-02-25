@@ -40,12 +40,12 @@ ul.nav-tabs .nav-item .nav-link.active, .category-content {
 }
 
 .fullscreenbanner-container .tp-bullets.preview4 {
-  background: linear-gradient(to bottom, #5cc2c8 0%, #5cc2c8 50%, #00bafa 51%, #00bafa 100%);
+  background: linear-gradient(to bottom, #48D1CC 0%, #48D1CC 50%, #00bafa 51%, #00bafa 100%);
 }
 
 .fullscreenbanner-container .tp-bullets.preview4::before,
 .fullscreenbanner-container .tp-bullets.preview4::after {
-  background: linear-gradient(135deg, #5cc2c8 0%, #5cc2c8 50%, #00bafa 51%, #00bafa 100%);
+  background: linear-gradient(135deg, #48D1CC 0%, #48D1CC 50%, #00bafa 51%, #00bafa 100%);
 }
 
 /*================ Special Function Mix ================= */
@@ -58,7 +58,7 @@ ul.nav-tabs .nav-item .nav-link.active, .category-content {
 }
 
 .masking-hover, .imageBox .productImage .productMasking, .whiteSection .featuredProducts .slide .productImage .productMasking, .mainContent .featuredProducts .slide .productImage .productMasking, .productsContent .productBox .productImage .productMasking, .whiteSection .featuredCollection .thumbnail .imageWrapper .masking, .mainContent .featuredCollection .thumbnail .imageWrapper .masking, .productListSingle .media .media-left .maskingImage {
-  background-color: rgba(71, 186, 193, 0.9) !important;
+  background-color: rgba(64,224,208,0.7) !important;
 }
 
 .quick-view .modal-dialog .modal-content .modal-body .media .media-body .btn-area .btn-primary:hover, .quick-view-drone .modal-dialog .modal-content .modal-body .media .media-body .btn-area .btn-primary:hover, .singleProduct .media .media-body .btn-area .btn-primary:hover {

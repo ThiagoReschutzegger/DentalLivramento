@@ -120,7 +120,7 @@
 	padding: 6px 10px;
 }
 .filterArea .sbOptions a:hover{
-    color: #47bac1 !important;
+    color: #00bafa !important;
 }
 /*QUICK VIEW DROP DOWN SELECT BOX*/
 .quick-drop .sbHolder, .quick-drop .sbSelector{
@@ -161,7 +161,7 @@
 	padding: 6px 10px;
 }
 .quick-drop .sbOptions a:hover{
-    color: #47bac1 ;
+    color: #00bafa ;
 }
 .quick-drop.resizeWidth .sbHolder, 
 .quick-drop.resizeWidth .sbSelector, 
@@ -209,7 +209,7 @@
 	padding: 6px 10px;
 }
 .step-drop .sbOptions a:hover{
-    color: #47bac1 !important;
+    color: #00bafa !important;
 }
 /*.quick-drop.resizeWidth .sbHolder, 
 .quick-drop.resizeWidth .sbSelector, 
