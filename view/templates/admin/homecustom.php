@@ -10,7 +10,7 @@
   <div class="container-fluid">
                   <div class="row">
                     <!-- Trending Articles-->
-                    <div class="col-lg-6">
+                    <div class="col-lg-5">
                       <div class="articles card">
                         <div class="card-close">
                           <div class="dropdown">
@@ -23,11 +23,11 @@
                         </div>
                           <?php foreach ($data as $estilo): ?>
                             <a id="Custom<?php echo $estilo->getId_estilo(); ?>" href="<?php echo $this->base_url ?>HomeAdmin/confirma_upd/<?php echo $estilo->getId_estilo(); ?>">
-                            <div class="statistic d-flex align-items-center bg-white has-shadow">
+                                <div class="statistic d-flex align-items-center <?php if($estilo->getStatus()!=1) echo 'bg-white' ?> has-shadow" <?php if($estilo->getStatus()==1) echo 'style="background-color:lightblue;"' ?>>
                               <div class="icon bg-red">
                                 <label for="Custom<?php echo $estilo->getId_estilo(); ?>"><div class="btn btn-primary container-fluid cor-apresentacao" style="width:50px; height:50px; background-color: <?php echo $estilo->getHexadecimal(); ?>; border-color:<?php echo $estilo->getHexadecimal(); ?> !important;"></div></label>
                               </div>
-                              <div class="text"><strong><?php echo $estilo->getNome(); ?></strong><br><small><?php echo $estilo->getHexadecimal(); ?></small></div>
+                              <div class="text float-right col-lg-6"><br><strong><?php echo $estilo->getNome(); ?></strong><br><small><?php echo $estilo->getHexadecimal(); ?></small></div>
                             </div>
                           </a>
                           <?php endforeach;?>

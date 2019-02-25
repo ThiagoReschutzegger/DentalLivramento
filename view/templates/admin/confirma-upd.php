@@ -11,7 +11,7 @@
   <div class="container-fluid">
                   <div class="row">
                     <!-- Trending Articles-->
-                    <div class="col-lg-6">
+                    <div class="col-lg-12">
                       <div class="articles card">
                         <div class="card-close">
                           <div class="dropdown">
@@ -20,7 +20,7 @@
                           </div>
                         </div>
                         <div class="card-header d-flex align-items-center">
-                          <h2 class="h3">Confirmar <?php echo $estilo->getNome(); ?> como Cor?</h2>
+                          <h2 class="h3">Confirmar <span style="color:<?php echo $estilo->getHexadecimal(); ?>"><?php echo $estilo->getNome(); ?></span> como Cor?</h2>
                         </div>
                         <form role="form" method="post" enctype="multipart/form-data">
                           <input type="hidden" name="id" value="<?php echo $estilo->getId_estilo(); ?>"/>
