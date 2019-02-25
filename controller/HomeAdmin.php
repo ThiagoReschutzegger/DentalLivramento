@@ -27,7 +27,7 @@ class HomeAdmin extends Admin {
         $status = filter_input(INPUT_POST, 'status', FILTER_SANITIZE_STRING);
         if($id){
                 $estilo = new Estilo($id,$hexadecimal,$local,$nome,$status);
-                if ($this->model->updateEstilo($estilo)) {//tentar fazer um de cada vez
+                if ($this->model->updateEstilo($estilo) && $this->model->zerarEstilo($estilo)) {//tentar fazer um de cada vez
                     $this->father->index();
                 } else {
                     $data['msg'] = 'Erro no cadastro';

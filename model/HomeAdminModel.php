@@ -38,8 +38,19 @@ class HomeAdminModel extends Model {
     }
 
     public function updateEstilo($estilo) {
-      $sql = "UPDATE estilo SET status = 0 WHERE id_estilo != :id;
-              UPDATE estilo SET status = 1 WHERE id_estilo = :id;";
+      $sql = "UPDATE estilo SET status = 1 WHERE id_estilo = :id;";
+      
+        $param = [':id'=>$estilo->getId_estilo()];
+
+        if ($this->ExecuteCommand($sql, $param)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public function zerarEstilo($estilo) {
+      $sql = "UPDATE estilo SET status = 0 WHERE id_estilo != :id;";
       
         $param = [':id'=>$estilo->getId_estilo()];
 
