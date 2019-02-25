@@ -1,3 +1,4 @@
+<?php  $estilo = $data; ?>
 <div class="content-inner">
     <!-- Page Header-->
 <header class="page-header">
@@ -19,18 +20,20 @@
                           </div>
                         </div>
                         <div class="card-header d-flex align-items-center">
-                          <h2 class="h3">Estilização da cores do site</h2>
+                          <h2 class="h3">Confirmar <?php echo $estilo->getNome(); ?> como Cor?</h2>
                         </div>
-                          <?php foreach ($data as $estilo): ?>
-                            <a id="Custom<?php echo $estilo->getId_estilo(); ?>" href="<?php echo $this->base_url ?>HomeAdmin/confirma_upd/<?php echo $estilo->getId_estilo(); ?>">
-                            <div class="statistic d-flex align-items-center bg-white has-shadow">
-                              <div class="icon bg-red">
-                                <label for="Custom<?php echo $estilo->getId_estilo(); ?>"><div class="btn btn-primary container-fluid cor-apresentacao" style="width:50px; height:50px; background-color: <?php echo $estilo->getHexadecimal(); ?>; border-color:<?php echo $estilo->getHexadecimal(); ?> !important;"></div></label>
-                              </div>
-                              <div class="text"><strong><?php echo $estilo->getNome(); ?></strong><br><small><?php echo $estilo->getHexadecimal(); ?></small></div>
-                            </div>
-                          </a>
-                          <?php endforeach;?>
+                        <form role="form" method="post" enctype="multipart/form-data">
+                          <input type="hidden" name="id" value="<?php echo $estilo->getId_estilo(); ?>"/>
+                            <input type="hidden" name="hexadecimal" value="<?php echo $estilo->getHexadecimal(); ?>"/>
+                            <input type="hidden" name="local" value="<?php echo $estilo->getLocal(); ?>"/>
+                            <input type="hidden" name="nome" value="<?php echo $estilo->getNome(); ?>"/>
+                            <input type="hidden" name="status" value="<?php echo $estilo->getStatus(); ?>"/>
+                          <div class="item d-flex align-items-center">
+
+                            <input type="submit" name="confirma" value="Confirmar alterações" class="btn btn-primary col-lg-12 col-md-12 col-sm-12">
+
+                          </div>
+                        </form>
                         </div>
                       </div>
                     </div>

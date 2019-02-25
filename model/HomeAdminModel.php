@@ -16,7 +16,7 @@ class HomeAdminModel extends Model {
       }
       return $list;
     }
-    
+
     public function getEstiloAtual() {
       $list = array();
       $sql = "SELECT * FROM estilo WHERE status=1";
@@ -28,13 +28,20 @@ class HomeAdminModel extends Model {
       }
       return $list;
     }
-    
-    public function updateEstilo($id) {
-      $sql = "UPDATE estilo SET status = 0 WHERE id_estilo != :Id;
-              UPDATE estilo SET status = 1 WHERE id_estilo = :Id;";
-      
-        $param = [':Id' => $id];
-        
+
+    public function getEstiloById($id) {
+
+        $sql = "SELECT * FROM estilo WHERE id_estilo=:id;";
+        $consulta = $this->ExecuteQuery($sql, [':id' => $id])[0];
+        $estilo = $this->ExecuteQuery($sql, [':id' => $id])[0];
+            return new Estilo( $estilo['id_estilo'],$estilo['hexadecimal'],$estilo['local'],$estilo['nome'],$estilo['status']);
+    }
+
+    public function updateEstilo($estilo) {
+      $sql = "UPDATE estilo SET status = 0 WHERE id_estilo != :id; UPDATE estilo SET status = 1 WHERE id_estilo = :id;";
+
+        $param = [':id'=>$estilo->getId_estilo(),':hexadecimal'=>$estilo->getHexadecimal(),':local'=>$estilo->getLocal(),':nome'=>$estilo->getNome(),':status'=>$estilo->getStatus()];
+
         if ($this->ExecuteCommand($sql, $param)) {
             return true;
         } else {

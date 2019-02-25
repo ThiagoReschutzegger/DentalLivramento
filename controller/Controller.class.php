@@ -33,6 +33,10 @@ class Controller {
         $this->view = new View();
     }
 
+    public function filter($input) {
+        return filter_input(INPUT_POST, $input, FILTER_SANITIZE_STRING);
+    }
+
     public function route($query = null) {
         $class = null;
         $this->query = $query;
@@ -67,10 +71,10 @@ class Controller {
 
         if (!$class) {
             $class = new $this->config->defaultClass;
-            $class->index();			
+            $class->index();
         }
     }
-    
+
     public function reload(){
         header('Location: '.$_SERVER['HTTP_REFERER']);
     }
