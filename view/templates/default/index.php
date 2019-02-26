@@ -171,9 +171,54 @@
   <div class="container">
 
     <div class="page-header">
-      <h4>Featured Collection</h4>
+      <h4 class="text-uppercase fonte-e-cor-top" >categorias</h4>
     </div>
+    <div class="row featuredCollection margin-bottom">
+      <div class="col-md-4 col-12">
+        <div class="thumbnail" onclick="location.href='<?php echo $this->asset ?>single-product.html';">
+          <div class="imageWrapper">
+            <img src="<?php echo $this->asset ?>img/home/featured-collection/featured-collection-01.jpg" alt="feature-collection-image">
+            <div class="caption">
+                <h3>Shoes Collections</h3>
+                <small>Start From $59.00</small>
+            </div>
+            <div class="masking">
+              <a href="<?php echo $this->asset ?>product-grid-left-sidebar.html" class="btn viewBtn">View Products</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-12">
+        <div class="thumbnail" onclick="location.href='<?php echo $this->asset ?>single-product.html';">
+          <div class="imageWrapper">
+            <img src="<?php echo $this->asset ?>img/home/featured-collection/featured-collection-02.jpg" alt="feature-collection-image">
+            <div class="caption">
+                <h3>Bags BagPacks</h3>
+                <small>Start From $150.00</small>
+            </div>
+            <div class="masking">
+              <a href="product-grid-left-sidebar.html" class="btn viewBtn">View Products</a>
+            </div>
+          </div>
 
+        </div>
+      </div>
+      <div class="col-md-4 col-12">
+        <div class="thumbnail" onclick="location.href='<?php echo $this->asset ?>single-product.html';">
+          <div class="imageWrapper">
+            <img src="<?php echo $this->asset ?>img/home/featured-collection/featured-collection-03.jpg" alt="feature-collection-image">
+            <div class="caption">
+                <h3>Glasses Collections</h3>
+                <small>Start From $25.00</small>
+            </div>
+            <div class="masking">
+              <a href="<?php echo $this->asset ?>product-grid-left-sidebar.html" class="btn viewBtn">View Products</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
     <div class="row featuredCollection margin-bottom">
       <div class="col-md-4 col-12">
         <div class="thumbnail" onclick="location.href='<?php echo $this->asset ?>single-product.html';">
@@ -221,8 +266,8 @@
       </div>
     </div>
 
-    <div class="page-header">
-      <h4>Featured Products</h4>
+    <div class="page-header text-uppercase">
+      <h4 class="text-uppercase fonte-e-cor-top">Produtos em Destaque</h4>
     </div>
 
     <div class="row featuredProducts featuredProductsSlider margin-bottom mouse-grab">
@@ -372,21 +417,21 @@
       </div>
     </div>
 
-    <div class="page-header">
+    <!--<div class="page-header">
       <h4>Latest Articles</h4>
     </div>
     <div class="row latestArticles">
       <div class="col-md-4">
         <div class="thumbnail">
-          <a href="<?php echo $this->asset ?>blog-single-right-sidebar.html">
-            <img src="<?php echo $this->asset ?>img/home/articles/articles-01.jpg" alt="article-image">
+          <a href="<?php //echo $this->asset ?>blog-single-right-sidebar.html">
+            <img src="<?php //echo $this->asset ?>img/home/articles/articles-01.jpg" alt="article-image">
           </a>
           <div class="date-holder">
             <p>08</p>
             <span>NOV</span>
           </div>
-          <h5><a href="<?php echo $this->asset ?>blog-single-right-sidebar.html">Leo Vitae Nibh Malesuada.</a></h5>
-          <span class="meta"> by <a class="pr-1" href="#">Abdus</a> / <a class="pl-1" href="<?php echo $this->asset ?>blog-single-right-sidebar.html">5 Comments</a></span>
+          <h5><a href="<?php //echo $this->asset ?>blog-single-right-sidebar.html">Leo Vitae Nibh Malesuada.</a></h5>
+          <span class="meta"> by <a class="pr-1" href="#">Abdus</a> / <a class="pl-1" href="<?php //echo $this->asset ?>blog-single-right-sidebar.html">5 Comments</a></span>
           <div class="caption">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque convallis nulla sed turpis pharetra pretium nec eu sem.</p>
           </div>
@@ -394,15 +439,15 @@
       </div>
       <div class="col-md-4">
         <div class="thumbnail">
-          <a href="<?php echo $this->asset ?>blog-single-right-sidebar.html">
-            <img src="<?php echo $this->asset ?>img/home/articles/articles-02.jpg" alt="article-image">
+          <a href="<?php //echo $this->asset ?>blog-single-right-sidebar.html">
+            <img src="<?php //echo $this->asset ?>img/home/articles/articles-02.jpg" alt="article-image">
           </a>
           <div class="date-holder">
             <p>29</p>
             <span>OCT</span>
           </div>
-          <h5><a href="<?php echo $this->asset ?>blog-single-right-sidebar.html">Malesuada Pulvinar Quis Fring.</a></h5>
-          <span class="meta"> by <a class="pr-1" href="#">Abdus</a> / <a class="pl-1" href="<?php echo $this->asset ?>blog-single-right-sidebar.html">4 Comments</a></span>
+          <h5><a href="<?php //echo $this->asset ?>blog-single-right-sidebar.html">Malesuada Pulvinar Quis Fring.</a></h5>
+          <span class="meta"> by <a class="pr-1" href="#">Abdus</a> / <a class="pl-1" href="<?php //echo $this->asset ?>blog-single-right-sidebar.html">4 Comments</a></span>
           <div class="caption">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque convallis nulla sed turpis pharetra pretium nec eu sem.</p>
           </div>
@@ -411,20 +456,20 @@
       <div class="col-md-4">
         <div class="thumbnail">
           <a href="blog-single-right-sidebar.html">
-            <img src="<?php echo $this->asset ?>img/home/articles/articles-03.jpg" alt="article-image">
+            <img src="<?php //echo $this->asset ?>img/home/articles/articles-03.jpg" alt="article-image">
           </a>
           <div class="date-holder">
             <p>15</p>
             <span>Sep</span>
           </div>
-          <h5><a href="<?php echo $this->asset ?>blog-single-right-sidebar.html">Proin Lectus Sed Tincidunt Auctor.</a></h5>
-          <span class="meta"> by <a class="pr-1" href="#">Abdus</a> / <a class="pl-1" href="<?php echo $this->asset ?>blog-single-right-sidebar.html">3 Comments</a></span>
+          <h5><a href="<?php //echo $this->asset ?>blog-single-right-sidebar.html">Proin Lectus Sed Tincidunt Auctor.</a></h5>
+          <span class="meta"> by <a class="pr-1" href="#">Abdus</a> / <a class="pl-1" href="<?php //echo $this->asset ?>blog-single-right-sidebar.html">3 Comments</a></span>
           <div class="caption">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque convallis nulla sed turpis pharetra pretium nec eu sem.</p>
           </div>
         </div>
       </div>
-    </div>
+    </div>-->
   </div>
 </section>
 

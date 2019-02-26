@@ -29,13 +29,13 @@ class HomeAdmin extends Admin {
                 $estilo = new Estilo($id,$hexadecimal,$local,$nome,$status);
                 if ($this->model->updateEstilo($estilo) && $this->model->zerarEstilo($estilo)) {//tentar fazer um de cada vez
                     $this->father->index();
+                    return true;
                 } else {
                     $data['msg'] = 'Erro no cadastro';
                 }
         }
       }
       $data['confirma'] = $this->model->getEstiloById($ident);
-      var_dump($data['confirma']);
       $this->view->load('header');
       $this->view->load('nav');
       $this->view->load('confirma-upd',$data['confirma']);

@@ -71,7 +71,7 @@
 <div class="container">
 <div class="row">
 <div class="col-md-7 col-12">
-  <p>&copy; 2019 Copyright Dental Livramento. Desenvolvido por <a target="_blank" href="http://webfrontier.000webhostapp.com/" id="wf" class="fonte-e-cor-top">Web Frontier</a>.</p>
+  <p>&copy; <?php echo date("Y"); ?> Dental Livramento. Desenvolvido por <a target="_blank" href="http://webfrontier.000webhostapp.com/" id="wf" class="fonte-e-cor-top">Web Frontier</a>.</p>
 </div>
 <div class="col-md-5 col-12">
   <ul class="list-inline">

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
+-- version 4.7.7
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 24-Fev-2019 às 05:42
--- Versão do servidor: 10.1.25-MariaDB
--- PHP Version: 5.6.31
+-- Generation Time: 26-Fev-2019 às 19:14
+-- Versão do servidor: 10.1.30-MariaDB
+-- PHP Version: 7.2.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -21,6 +21,75 @@ SET time_zone = "+00:00";
 --
 -- Database: `dentallivramento`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `estilo`
+--
+
+CREATE TABLE `estilo` (
+  `id_estilo` int(11) NOT NULL,
+  `hexadecimal` varchar(7) NOT NULL,
+  `local` varchar(250) NOT NULL,
+  `nome` varchar(25) NOT NULL,
+  `status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `estilo`
+--
+
+INSERT INTO `estilo` (`id_estilo`, `hexadecimal`, `local`, `nome`, `status`) VALUES
+(1, '#00BAFA', 'default.css', 'Azul', 1),
+(2, '#FFB548', 'color-option2.css', 'Amarelo', 0),
+(3, '#F45C5D', 'color-option4.css', 'Vermelho', 0),
+(4, '#9B59B6', 'color-option1.css', 'Roxo', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `grupo`
+--
+
+CREATE TABLE `grupo` (
+  `id_grupo` int(11) NOT NULL,
+  `nome` varchar(100) NOT NULL,
+  `imagem` varchar(10000) NOT NULL,
+  `descricao` varchar(3000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `marca`
+--
+
+CREATE TABLE `marca` (
+  `id_marca` int(10) UNSIGNED NOT NULL,
+  `nome` varchar(100) NOT NULL,
+  `imagem` varchar(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `produto`
+--
+
+CREATE TABLE `produto` (
+  `id_produto` int(10) UNSIGNED NOT NULL,
+  `barcode` varchar(150) NOT NULL,
+  `preco` varchar(7) NOT NULL,
+  `nome` varchar(200) NOT NULL,
+  `estoque` int(11) NOT NULL,
+  `imagem` varchar(100) NOT NULL,
+  `id_marca` int(11) NOT NULL,
+  `id_grupo` int(11) NOT NULL,
+  `descricao` int(11) DEFAULT NULL,
+  `destaque` enum('1','0') NOT NULL,
+  `tipo` enum('Arco','Dente','Resina','Bracket') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -49,6 +118,30 @@ INSERT INTO `usuario` (`id_user`, `nome`, `login`, `senha`, `email`, `dtupdate`)
 --
 
 --
+-- Indexes for table `estilo`
+--
+ALTER TABLE `estilo`
+  ADD PRIMARY KEY (`id_estilo`);
+
+--
+-- Indexes for table `grupo`
+--
+ALTER TABLE `grupo`
+  ADD PRIMARY KEY (`id_grupo`);
+
+--
+-- Indexes for table `marca`
+--
+ALTER TABLE `marca`
+  ADD PRIMARY KEY (`id_marca`);
+
+--
+-- Indexes for table `produto`
+--
+ALTER TABLE `produto`
+  ADD PRIMARY KEY (`id_produto`);
+
+--
 -- Indexes for table `usuario`
 --
 ALTER TABLE `usuario`
@@ -59,10 +152,35 @@ ALTER TABLE `usuario`
 --
 
 --
+-- AUTO_INCREMENT for table `estilo`
+--
+ALTER TABLE `estilo`
+  MODIFY `id_estilo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `grupo`
+--
+ALTER TABLE `grupo`
+  MODIFY `id_grupo` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `marca`
+--
+ALTER TABLE `marca`
+  MODIFY `id_marca` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `produto`
+--
+ALTER TABLE `produto`
+  MODIFY `id_produto` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_user` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;COMMIT;
+  MODIFY `id_user` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
