@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 26-Fev-2019 às 19:14
+-- Generation Time: 26-Fev-2019 às 23:13
 -- Versão do servidor: 10.1.30-MariaDB
 -- PHP Version: 7.2.2
 
@@ -21,6 +21,20 @@ SET time_zone = "+00:00";
 --
 -- Database: `dentallivramento`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `arco`
+--
+
+CREATE TABLE `arco` (
+  `id_produto` int(10) UNSIGNED NOT NULL,
+  `material` varchar(50) DEFAULT NULL,
+  `forma` varchar(50) DEFAULT NULL,
+  `posicao` varchar(50) DEFAULT NULL,
+  `tamanho` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -66,9 +80,9 @@ CREATE TABLE `grupo` (
 --
 
 CREATE TABLE `marca` (
-  `id_marca` int(10) UNSIGNED NOT NULL,
-  `nome` varchar(100) NOT NULL,
-  `imagem` varchar(250) NOT NULL
+  `id_marca` int(11) NOT NULL,
+  `nome` int(11) NOT NULL,
+  `logo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -84,11 +98,11 @@ CREATE TABLE `produto` (
   `nome` varchar(200) NOT NULL,
   `estoque` int(11) NOT NULL,
   `imagem` varchar(100) NOT NULL,
-  `id_marca` int(11) NOT NULL,
-  `id_grupo` int(11) NOT NULL,
   `descricao` int(11) DEFAULT NULL,
   `destaque` enum('1','0') NOT NULL,
-  `tipo` enum('Arco','Dente','Resina','Bracket') NOT NULL
+  `tipo` enum('Arco','Dente','Resina','Bracket') NOT NULL,
+  `id_grupo` int(11) NOT NULL,
+  `id_marca` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -118,6 +132,12 @@ INSERT INTO `usuario` (`id_user`, `nome`, `login`, `senha`, `email`, `dtupdate`)
 --
 
 --
+-- Indexes for table `arco`
+--
+ALTER TABLE `arco`
+  ADD PRIMARY KEY (`id_produto`);
+
+--
 -- Indexes for table `estilo`
 --
 ALTER TABLE `estilo`
@@ -139,7 +159,9 @@ ALTER TABLE `marca`
 -- Indexes for table `produto`
 --
 ALTER TABLE `produto`
-  ADD PRIMARY KEY (`id_produto`);
+  ADD PRIMARY KEY (`id_produto`),
+  ADD KEY `id_grupo` (`id_grupo`),
+  ADD KEY `id_marca` (`id_marca`);
 
 --
 -- Indexes for table `usuario`
@@ -167,7 +189,7 @@ ALTER TABLE `grupo`
 -- AUTO_INCREMENT for table `marca`
 --
 ALTER TABLE `marca`
-  MODIFY `id_marca` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id_marca` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `produto`
@@ -180,6 +202,23 @@ ALTER TABLE `produto`
 --
 ALTER TABLE `usuario`
   MODIFY `id_user` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Limitadores para a tabela `arco`
+--
+ALTER TABLE `arco`
+  ADD CONSTRAINT `produto_arco_fk` FOREIGN KEY (`id_produto`) REFERENCES `produto` (`id_produto`);
+
+--
+-- Limitadores para a tabela `produto`
+--
+ALTER TABLE `produto`
+  ADD CONSTRAINT `id_grupo` FOREIGN KEY (`id_grupo`) REFERENCES `grupo` (`id_grupo`),
+  ADD CONSTRAINT `id_marca` FOREIGN KEY (`id_marca`) REFERENCES `marca` (`id_marca`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
