@@ -39,7 +39,7 @@ class MarcaModel extends Model {
 
     public function updateMarca($marca) {
         $sql = "UPDATE marca SET nome = :nome, imagem = :imagem  WHERE id_marca = :id";
-        $param = [':nome'=>$marca->getNome(),':imagem'=>$marca->getImagem(),':id'=>$marca->getId_marca()];
+        $param = [':id'=>$marca->getId_marca(),':nome'=>$marca->getNome(),':imagem'=>$marca->getImagem()];
         if ($this->ExecuteCommand($sql,$param)) {
             return true;
         } else {
