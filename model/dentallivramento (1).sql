@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.7
+-- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 27-Fev-2019 às 07:17
--- Versão do servidor: 10.1.30-MariaDB
--- PHP Version: 7.2.2
+-- Generation Time: 27-Fev-2019 às 09:51
+-- Versão do servidor: 10.1.25-MariaDB
+-- PHP Version: 5.6.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -45,6 +45,7 @@ CREATE TABLE `arco` (
 CREATE TABLE `categoria` (
   `id_categoria` int(11) NOT NULL,
   `nome` varchar(100) NOT NULL,
+  `descricao` varchar(5000) NOT NULL,
   `imagem` varchar(5000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -52,8 +53,9 @@ CREATE TABLE `categoria` (
 -- Extraindo dados da tabela `categoria`
 --
 
-INSERT INTO `categoria` (`id_categoria`, `nome`, `imagem`) VALUES
-(1, 'Ortodontia', 'seila.jpg');
+INSERT INTO `categoria` (`id_categoria`, `nome`, `descricao`, `imagem`) VALUES
+(1, 'Ortodontia', 'pau de cu é rola', 'seila.jpg'),
+(2, 'ggeasy', 'asdfghj', 'asdfghj');
 
 -- --------------------------------------------------------
 
@@ -88,7 +90,6 @@ INSERT INTO `estilo` (`id_estilo`, `hexadecimal`, `local`, `nome`, `status`) VAL
 CREATE TABLE `grupo` (
   `id_grupo` int(11) NOT NULL,
   `nome` varchar(100) NOT NULL,
-  `descricao` varchar(3000) NOT NULL,
   `id_categoria` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -96,8 +97,8 @@ CREATE TABLE `grupo` (
 -- Extraindo dados da tabela `grupo`
 --
 
-INSERT INTO `grupo` (`id_grupo`, `nome`, `descricao`, `id_categoria`) VALUES
-(1, 'Ortodontia', 'lorem ipsum dolor sit amet testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste ', 1);
+INSERT INTO `grupo` (`id_grupo`, `nome`, `id_categoria`) VALUES
+(1, 'Ortodontias', 1);
 
 -- --------------------------------------------------------
 
@@ -116,7 +117,7 @@ CREATE TABLE `marca` (
 --
 
 INSERT INTO `marca` (`id_marca`, `nome`, `imagem`) VALUES
-(1, 'Marca de Teste', 'teste.png');
+(1, 'Marca de Teste', 'https://vandal-us.s3.amazonaws.com/spree/products/49846/original/open-uri20181203-14-1jczs.jpg');
 
 -- --------------------------------------------------------
 
@@ -224,38 +225,32 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT for table `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
+  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `estilo`
 --
 ALTER TABLE `estilo`
   MODIFY `id_estilo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
 -- AUTO_INCREMENT for table `grupo`
 --
 ALTER TABLE `grupo`
-  MODIFY `id_grupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
+  MODIFY `id_grupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `marca`
 --
 ALTER TABLE `marca`
   MODIFY `id_marca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT for table `produto`
 --
 ALTER TABLE `produto`
   MODIFY `id_produto` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT for table `usuario`
 --
 ALTER TABLE `usuario`
   MODIFY `id_user` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- Constraints for dumped tables
 --
