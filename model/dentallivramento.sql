@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 26-Fev-2019 às 23:13
+-- Generation Time: 27-Fev-2019 às 06:12
 -- Versão do servidor: 10.1.30-MariaDB
 -- PHP Version: 7.2.2
 
@@ -73,6 +73,13 @@ CREATE TABLE `grupo` (
   `descricao` varchar(3000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Extraindo dados da tabela `grupo`
+--
+
+INSERT INTO `grupo` (`id_grupo`, `nome`, `imagem`, `descricao`) VALUES
+(1, 'Ortodontia', 'grupoteste.png', 'lorem ipsum dolor sit amet testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste ');
+
 -- --------------------------------------------------------
 
 --
@@ -81,9 +88,16 @@ CREATE TABLE `grupo` (
 
 CREATE TABLE `marca` (
   `id_marca` int(11) NOT NULL,
-  `nome` int(11) NOT NULL,
-  `logo` int(11) NOT NULL
+  `nome` varchar(100) NOT NULL,
+  `imagem` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `marca`
+--
+
+INSERT INTO `marca` (`id_marca`, `nome`, `imagem`) VALUES
+(1, 'Marca de Teste', 'teste.png');
 
 -- --------------------------------------------------------
 
@@ -98,12 +112,19 @@ CREATE TABLE `produto` (
   `nome` varchar(200) NOT NULL,
   `estoque` int(11) NOT NULL,
   `imagem` varchar(100) NOT NULL,
-  `descricao` int(11) DEFAULT NULL,
+  `descricao` varchar(3000) DEFAULT NULL,
   `destaque` enum('1','0') NOT NULL,
-  `tipo` enum('Arco','Dente','Resina','Bracket') NOT NULL,
+  `tipo` enum('Arco','Dente','Resina','Bracket') DEFAULT NULL,
   `id_grupo` int(11) NOT NULL,
   `id_marca` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `produto`
+--
+
+INSERT INTO `produto` (`id_produto`, `barcode`, `preco`, `nome`, `estoque`, `imagem`, `descricao`, `destaque`, `tipo`, `id_grupo`, `id_marca`) VALUES
+(1, '324524353', '32.90', 'produto de teste', 10, 'imagem.jpg', 'lotem kwkejf testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste ', '1', NULL, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -183,19 +204,19 @@ ALTER TABLE `estilo`
 -- AUTO_INCREMENT for table `grupo`
 --
 ALTER TABLE `grupo`
-  MODIFY `id_grupo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_grupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `marca`
 --
 ALTER TABLE `marca`
-  MODIFY `id_marca` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_marca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `produto`
 --
 ALTER TABLE `produto`
-  MODIFY `id_produto` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id_produto` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `usuario`
