@@ -1,4 +1,4 @@
-      <!-- LIGHT SECTION -->
+<!-- LIGHT SECTION -->
       <!--<section class="lightSection clearfix pageHeader">
         <div class="container">
           <div class="row">
@@ -29,26 +29,26 @@
                   <div id="carousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
                       <div class="carousel-item active" data-thumb="0">
-                        <img src="<?php echo $this->asset; ?>img/products/signle-product/product-slide-big-01.jpg">
+                          <img src="<?php echo $data->getImagem(); ?>">
                       </div>
-                      <div class="carousel-item" data-thumb="1">
-                        <img src="<?php echo $this->asset; ?>img/products/signle-product/product-slide-big-02.jpg">
+                      <!--<div class="carousel-item" data-thumb="1">
+                        <img src="<?php //echo $this->asset; ?>img/products/signle-product/product-slide-big-02.jpg">
                       </div>
                       <div class="carousel-item" data-thumb="2">
-                        <img src="<?php echo $this->asset; ?>img/products/signle-product/product-slide-big-03.jpg">
+                        <img src="<?php //echo $this->asset; ?>img/products/signle-product/product-slide-big-03.jpg">
                       </div>
                       <div class="carousel-item" data-thumb="3">
-                        <img src="<?php echo $this->asset; ?>img/products/signle-product/product-slide-big-04.jpg">
-                      </div>
+                        <img src="<?php //echo $this->asset; ?>img/products/signle-product/product-slide-big-04.jpg">
+                      </div>-->
                     </div>
                   </div>
-                  <div class="clearfix">
+                  <!--<div class="clearfix">
                     <div id="thumbcarousel" class="carousel slide" data-interval="false">
                       <div class="carousel-inner">
-                          <div data-target="#carousel" data-slide-to="0" class="thumb"><img src="<?php echo $this->asset; ?>img/products/signle-product/product-slide-small-01.jpg"></div>
-                          <div data-target="#carousel" data-slide-to="1" class="thumb"><img src="<?php echo $this->asset; ?>img/products/signle-product/product-slide-small-02.jpg"></div>
-                          <div data-target="#carousel" data-slide-to="2" class="thumb"><img src="<?php echo $this->asset; ?>img/products/signle-product/product-slide-small-03.jpg"></div>
-                          <div data-target="#carousel" data-slide-to="3" class="thumb"><img src="<?php echo $this->asset; ?>img/products/signle-product/product-slide-small-04.jpg"></div>
+                          <div data-target="#carousel" data-slide-to="0" class="thumb"><img src="<?php //echo $this->asset; ?>img/products/signle-product/product-slide-small-01.jpg"></div>
+                          <div data-target="#carousel" data-slide-to="1" class="thumb"><img src="<?php //echo $this->asset; ?>img/products/signle-product/product-slide-small-02.jpg"></div>
+                          <div data-target="#carousel" data-slide-to="2" class="thumb"><img src="<?php //echo $this->asset; ?>img/products/signle-product/product-slide-small-03.jpg"></div>
+                          <div data-target="#carousel" data-slide-to="3" class="thumb"><img src="<?php //echo $this->asset; ?>img/products/signle-product/product-slide-small-04.jpg"></div>
                       </div>
                       <a class="left carousel-control" href="#thumbcarousel" role="button" data-slide="prev">
                         <span class="glyphicon glyphicon-chevron-left"></span>
@@ -57,16 +57,16 @@
                         <span class="glyphicon glyphicon-chevron-right"></span>
                       </a>
                     </div>
-                  </div>
+                  </div>-->
                 </div>
                 <div class="media-body">
                   <ul class="list-inline">
-                      <li><a href="<?php echo $this->base_url; ?>Home"><i class="fa fa-reply" aria-hidden="true"></i>Continue Shopping</a></li>
+                      <li><a href="<?php echo $this->base_url; ?>Home"><i class="fa fa-reply" aria-hidden="true"></i>Continuar comprando</a></li>
                     <!--<li><a href="#"><i class="fa fa-plus" aria-hidden="true"></i>Share This</a></li>-->
                   </ul>
-                  <h2>Old Skool Navy</h2>
-                  <h3>$149</h3>
-                  <p>Mauris lobortis augue ex, ut faucibus nisi mollis ac. Sed volutpat scelerisque ex ut ullamcorper. Cras at velit quis sapien dapibus laoreet a id odio. Sed sit amet accumsan ante, eu congue metus. Aenean eros tortor, cursus quis feugiat sed vestibulum.</p>
+                  <h2><?php echo $data->getNome(); ?></h2>
+                  <h3>R$ <?php echo $data->getPreco(); ?></h3>
+                  <p><?php echo $data->getDescricao(); ?></p>
                   <span class="quick-drop">
                     <select name="guiest_id3" id="guiest_id3" class="select-drop">
                       <option value="0">Size</option>
@@ -74,19 +74,19 @@
                       <option value="2">Medium</option>
                       <option value="3">Big</option>
                     </select>
+                    <br>
+                    <br>
+                    <br>
+                    
+                    <div class="form-group">
+                      <input type="number" min='0' max="<?php echo $data->getEstoque(); ?>" class="form-control" id="exampleInputPhone" placeholder="Quantidade">
+                    </div>
                   </span>
-                  <span class="quick-drop resizeWidth">
-                    <select name="guiest_id4" id="guiest_id4" class="select-drop">
-                      <option value="0">Qty</option>
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                    </select>
-                  </span>
+                  
                   <div class="btn-area">
                     <a href="cart-page.html" class="btn btn-primary btn-default">Add to cart <i class="fa fa-angle-right" aria-hidden="true"></i></a>
                   </div>
-                  <div class="tabArea">
+                  <!--<div class="tabArea">
                     <ul class="nav nav-tabs bar-tabs">
                       <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#details">details</a></li>
                       <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#about-art">about art</a></li>
@@ -113,13 +113,13 @@
                         <p>Mauris lobortis augue ex, ut faucibus nisi mollis ac. Sed volutpat scelerisque ex ut ullamcorper. Cras at velit quis sapien dapibus laoreet a id odio. Sed sit amet accumsan ante, eu congue metus. Aenean eros tortor, cursus quis feugiat sed, vestibulum vel purus.</p>
                       </div>
                     </div>
-                  </div>
+                  </div>-->
                 </div>
               </div>
             </div>
           </div>
           <div class="page-header">
-            <h4>Related Products</h4>
+            <h4 class="fonte-e-cor-top">Related Products</h4>
           </div>
           <div class="row productsContent">
 
