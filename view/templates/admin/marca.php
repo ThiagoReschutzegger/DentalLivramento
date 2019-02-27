@@ -22,13 +22,13 @@
                     <td><?php echo $marca->getNome(); ?></td>
                     <td>...</td>
                     <td>
-                      <a href="<?php echo $this->base_url; ?>MarcaAdmin/viewMarca">
+                      <a href="<?php echo $this->base_url; ?>MarcaAdmin/viewMarca/<?php echo $marca->getId_marca(); ?>">
                         <i class="fa fa-eye"></i>
                       </a>
                       <a href="<?php echo $this->base_url; ?>MarcaAdmin/updateMarca/<?php echo $marca->getId_marca(); ?>">
                         <i class="fa fa-pencil"></i>
                       </a>
-                      <a href="<?php echo $this->base_url; ?>MarcaAdmin/deleteMarca">
+                      <a href="<?php echo $this->base_url; ?>MarcaAdmin/deleteMarca/<?php echo $marca->getId_marca(); ?>">
                         <i class="fa fa-remove"></i>
                       </a>
                     </td>
