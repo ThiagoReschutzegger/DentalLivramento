@@ -10,6 +10,7 @@
 <script>
     function aparece() {
     var elemento = document.getElementById("teste2");
+    
     elemento.style.visibility = "visible";
   }
 </script>
