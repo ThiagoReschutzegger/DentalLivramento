@@ -11,14 +11,22 @@
                 <tr>
                   <th>Id</th>
                   <th>Nome - Grupo</th>
+                  <th>Categoria</th>
                   <th>Ações</th>
                 </tr>
               </thead>
               <tbody>
-                <?php foreach ($data as $grupo): ?>
+                <?php foreach ($data['grupo'] as $grupo): ?>
                 <tr>
                   <th scope="row"><?php echo $grupo->getId_grupo(); ?></th>
                   <td><?php echo $grupo->getNome(); ?></td>
+                  <td><?php
+                        foreach ($data['categoria'] as $categoria):
+                            if($grupo->getId_categoria() == $categoria->getId_categoria()){
+                                echo $categoria->getNome();
+                            }
+                        endforeach;
+                      ?></td>
                   <td>
                     <a href="<?php echo $this->base_url; ?>GrupoAdmin/updateGrupo/<?php echo $grupo->getId_grupo(); ?>">
                       <i class="fa fa-pencil"></i>

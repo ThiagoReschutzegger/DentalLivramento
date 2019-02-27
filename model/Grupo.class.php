@@ -9,7 +9,7 @@ class Grupo {
     function __construct($id_grupo, $nome, $id_categoria) {
         $this->id_grupo = $id_grupo;
         $this->nome = $nome;
-        $this->$id_categoria = $id_categoria;
+        $this->id_categoria = $id_categoria;
     }
 
     function getId_grupo() {

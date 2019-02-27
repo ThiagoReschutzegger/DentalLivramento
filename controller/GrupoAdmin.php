@@ -12,9 +12,10 @@ class GrupoAdmin extends Admin {
 
     public function index() {
       $data['grupo'] = $this->model->getGrupo();
+      $data['categoria'] = $this->model2->getCategoria();
       $this->view->load('header');
       $this->view->load('nav');
-      $this->view->load('grupo', $data['grupo']);
+      $this->view->load('grupo', $data);
       $this->view->load('footer');
     }
 
@@ -22,7 +23,7 @@ class GrupoAdmin extends Admin {
       $data['msg'] = '';
       if (filter_input(INPUT_POST, 'add')) {
         $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
-        $id_categoria = filter_input(INPUT_POST, 'id_categoria');
+        $id_categoria = filter_input(INPUT_POST, 'id_categoria', FILTER_SANITIZE_STRING);
 
             if ($nome && $id_categoria) {
                 $grupo = new Grupo(null,$nome, $id_categoria);
@@ -62,8 +63,10 @@ class GrupoAdmin extends Admin {
       if (filter_input(INPUT_POST, 'upd')) {
         $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_STRING);
         $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
-        if ($id && $nome) {
-            $grupo = new Grupo($id,$nome);
+        $id_categoria = filter_input(INPUT_POST, 'id_categoria', FILTER_SANITIZE_STRING);
+
+        if ($id && $nome && $id_categoria) {
+            $grupo = new Grupo($id,$nome,$id_categoria);
             if ($this->model->updateGrupo($grupo)) {
                 $this->index();
                 return true;
@@ -76,6 +79,7 @@ class GrupoAdmin extends Admin {
         }
       }
       $data['grupo'] = $this->model->getGrupoById($ident);
+      $data['categoria'] = $this->model2->getCategoria();
       $this->view->load('header');
       $this->view->load('nav');
       $this->view->load('upd-grupo', $data);
