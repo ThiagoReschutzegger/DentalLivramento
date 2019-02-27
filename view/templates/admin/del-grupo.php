@@ -10,17 +10,17 @@
           <label class="col-sm-2 form-control-label text-right">Nome</label>
           <div class="col-sm-8">
             <p><?php echo $grupo->getNome(); ?></p>
+            <div class="form-group row text-left">
+                <div class="col-sm-4 offset-sm-3">
+                  <form method="post">
+                  <a class="btn btn-primary" href="<?php echo $this->base_url; ?>GrupoAdmin">Voltar</a>
+                  <input type="submit" name="del" value="Deletar" class="btn btn-danger">
+                  </form>
+                </div>
+              </div>
           </div>
         </div>
-        <div class="line"></div>
-        <div class="form-group row">
-          <div class="col-sm-4 offset-sm-3">
-            <form method="post">
-            <a class="btn btn-primary" href="<?php echo $this->base_url; ?>GrupoAdmin">Voltar</a>
-            <input type="submit" name="del" value="Deletar" class="btn btn-secondary">
-            </form>
-          </div>
-        </div>
+        
     </div>
   </div>
 </div>
