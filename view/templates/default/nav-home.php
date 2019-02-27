@@ -149,29 +149,21 @@
                 </button>
               </a>
               <ul class="dropdown-menu dropdown-menu-left" id="teste2">
+                <?php foreach($data['categoria'] as $categoria): ?>
                 <li class="dropdown dropdown-submenu">
-                  <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                  <i class="lnr lnr-shirt" aria-hidden="true"></i>Fashion</a>
-                  <ul class="dropdown-menu">
-                    <li><a href="product-grid-left-sidebar.html">Accessories</a></li>
-                    <li><a href="product-grid-left-sidebar.html">Cosmetic</a></li>
-                  </ul>
+                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <i class="lnr lnr-shirt" aria-hidden="true"></i><?php echo $categoria->getNome(); ?></a>
+                    <ul class="dropdown-menu">
+                        <?php foreach($data['grupo'] as $grupo):
+                          if($grupo->getId_categoria() == $categoria->getId_categoria()){
+                            echo '<li><a href="'.$this->base_url.'Home/viewGrupo/'.$grupo->getId_grupo().'">'.$grupo->getNome().'</a></li>';
+                          }
+                        endforeach; ?>
+
+                    </ul>
                 </li>
-                <li><a href="product-grid-left-sidebar.html"><i class="lnr lnr-camera" aria-hidden="true"></i>Accessories</a></li>
-                <li><a href="product-grid-left-sidebar.html"><i class="lnr lnr-diamond" aria-hidden="true"></i>Cosmetic</a></li>
-                <li class="dropdown dropdown-submenu">
-                  <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                  <i class="lnr lnr-laptop-phone" aria-hidden="true"></i>Electronics</a>
-                  <ul class="dropdown-menu">
-                    <li><a href="product-grid-left-sidebar.html">Telivision</a></li>
-                    <li><a href="product-grid-left-sidebar.html">Air Conditioner</a></li>
-                    <li><a href="product-grid-left-sidebar.html">Fan</a></li>
-                    <li><a href="product-grid-left-sidebar.html">Room Heater</a></li>
-                  </ul>
-                </li>
-                <li><a href="product-grid-left-sidebar.html"><i class="lnr lnr-tablet" aria-hidden="true"></i>Mobile</a></li>
-                <li><a href="product-grid-left-sidebar.html"><i class="lnr lnr-laptop" aria-hidden="true"></i>Computer</a></li>
-                <li><a href="product-grid-left-sidebar.html"><img src="img/home/category/category-img1.jpg" alt="Image"></a></li>
+              <?php endforeach; ?>
+              <p></p>
               </ul>
             </div>
 

@@ -3,6 +3,8 @@ class Home extends Controller{
 
     protected $model;
     protected $modelproduto;
+    protected $modelCategoria;
+    protected $modelGrupo;
 
     public function __construct() {
         parent::__construct();
@@ -17,7 +19,7 @@ class Home extends Controller{
         $data['categoria'] = $this->modelCategoria->getCategoria();
         $data['grupo'] = $this->modelGrupo->getGrupo();
         $this->view->load('header',$data);
-        $this->view->load('nav-home');
+        $this->view->load('nav-home',$data);
         $this->view->load('index');
         $this->view->load('footer');
     }

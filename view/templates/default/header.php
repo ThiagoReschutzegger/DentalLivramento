@@ -22,7 +22,7 @@
 
     <!-- CUSTOM CSS -->
     <link href="<?php echo $this->asset ?>css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="<?php echo $this->asset ?>css/<?php echo $data->getLocal(); ?>" id="option_color">
+    <link rel="stylesheet" href="<?php echo $this->asset ?>css/<?php echo $data['estilo']->getLocal(); ?>" id="option_color">
     <link rel="stylesheet" href="<?php echo $this->asset ?>css/custom.css">
 
     <!-- Icons -->
