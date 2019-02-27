@@ -17,9 +17,13 @@ class Home extends Controller{
         $this->view->load('footer');
     }
 
-    public function imprimir($texto = null) {
-        $this->texto = ($texto) ? $texto : $this->texto;
-        echo $this->texto;
+    public function viewProduto(){
+        $data['estilo'] = $this->model->getEstiloAtual();
+        
+        $this->view->load('header',$data['estilo']);
+        $this->view->load('nav');
+        $this->view->load('single-product');
+        $this->view->load('footer');
     }
 
 }

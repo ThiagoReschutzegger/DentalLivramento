@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 27-Fev-2019 às 06:12
+-- Generation Time: 27-Fev-2019 às 07:17
 -- Versão do servidor: 10.1.30-MariaDB
 -- PHP Version: 7.2.2
 
@@ -39,6 +39,25 @@ CREATE TABLE `arco` (
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `categoria`
+--
+
+CREATE TABLE `categoria` (
+  `id_categoria` int(11) NOT NULL,
+  `nome` varchar(100) NOT NULL,
+  `imagem` varchar(5000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `categoria`
+--
+
+INSERT INTO `categoria` (`id_categoria`, `nome`, `imagem`) VALUES
+(1, 'Ortodontia', 'seila.jpg');
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `estilo`
 --
 
@@ -69,16 +88,16 @@ INSERT INTO `estilo` (`id_estilo`, `hexadecimal`, `local`, `nome`, `status`) VAL
 CREATE TABLE `grupo` (
   `id_grupo` int(11) NOT NULL,
   `nome` varchar(100) NOT NULL,
-  `imagem` varchar(10000) NOT NULL,
-  `descricao` varchar(3000) NOT NULL
+  `descricao` varchar(3000) NOT NULL,
+  `id_categoria` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `grupo`
 --
 
-INSERT INTO `grupo` (`id_grupo`, `nome`, `imagem`, `descricao`) VALUES
-(1, 'Ortodontia', 'grupoteste.png', 'lorem ipsum dolor sit amet testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste ');
+INSERT INTO `grupo` (`id_grupo`, `nome`, `descricao`, `id_categoria`) VALUES
+(1, 'Ortodontia', 'lorem ipsum dolor sit amet testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste ', 1);
 
 -- --------------------------------------------------------
 
@@ -159,6 +178,12 @@ ALTER TABLE `arco`
   ADD PRIMARY KEY (`id_produto`);
 
 --
+-- Indexes for table `categoria`
+--
+ALTER TABLE `categoria`
+  ADD PRIMARY KEY (`id_categoria`);
+
+--
 -- Indexes for table `estilo`
 --
 ALTER TABLE `estilo`
@@ -168,7 +193,8 @@ ALTER TABLE `estilo`
 -- Indexes for table `grupo`
 --
 ALTER TABLE `grupo`
-  ADD PRIMARY KEY (`id_grupo`);
+  ADD PRIMARY KEY (`id_grupo`),
+  ADD KEY `id_categoria` (`id_categoria`);
 
 --
 -- Indexes for table `marca`
@@ -193,6 +219,12 @@ ALTER TABLE `usuario`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `categoria`
+--
+ALTER TABLE `categoria`
+  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `estilo`
@@ -233,6 +265,12 @@ ALTER TABLE `usuario`
 --
 ALTER TABLE `arco`
   ADD CONSTRAINT `produto_arco_fk` FOREIGN KEY (`id_produto`) REFERENCES `produto` (`id_produto`);
+
+--
+-- Limitadores para a tabela `grupo`
+--
+ALTER TABLE `grupo`
+  ADD CONSTRAINT `id_categoria` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id_categoria`);
 
 --
 -- Limitadores para a tabela `produto`
