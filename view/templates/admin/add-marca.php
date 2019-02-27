@@ -7,14 +7,14 @@
     <div class="card-body">
       <form class="form-horizontal" method="post">
         <div class="form-group row">
-          <label class="col-sm-2 form-control-label text-right">Nome</label>
+          <label class="col-sm-2 form-control-label text-right">Nome:</label>
           <div class="col-sm-8">
             <input type="text" class="form-control" name="nome">
           </div>
         </div>
         <div class="line"></div>
         <div class="form-group row">
-          <label class="col-sm-2 form-control-label text-right">Link</label>
+          <label class="col-sm-2 form-control-label text-right">Link:</label>
           <div class="col-sm-8">
             <input type="text" class="form-control" name="imagem"><small class="help-block-none">Cole aqui o link da imagem. (sempre terminado em .jpg .png ou outros tipos de imagem)</small>
           </div>
