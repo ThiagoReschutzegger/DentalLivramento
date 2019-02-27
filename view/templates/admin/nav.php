@@ -43,17 +43,10 @@
         <!-- Sidebar Navidation Menus--><span class="heading">Main</span>
         <ul class="list-unstyled">
           <li><a href="<?php echo $this->base_url; ?>Admin"> <i class="icon-home"></i>Home </a></li>
-          <li><a href="<?php echo $this->base_url; ?>MarcaAdmin"> <i class="fa fa-photo"></i>Marcas </a></li>
+          <li><a href="<?php echo $this->base_url; ?>CategoriaAdmin"> <i class="fa fa-list"></i>Categorias </a></li>
           <li><a href="<?php echo $this->base_url; ?>GrupoAdmin"> <i class="icon-grid"></i>Grupos </a></li>
+          <li><a href="<?php echo $this->base_url; ?>MarcaAdmin"> <i class="fa fa-photo"></i>Marcas </a></li>
           <li><a href="<?php echo $this->base_url; ?>ProdutoAdmin"> <i class="icon-padnote"></i>Produtos </a></li>
-          <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Example dropdown </a>
-            <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
-              <li><a href="#">Page</a></li>
-              <li><a href="#">Page</a></li>
-              <li><a href="#">Page</a></li>
-            </ul>
-          </li>
-          <li><a href="login.html"> <i class="icon-interface-windows"></i>Login page </a></li>
         </ul><!--<span class="heading">Extras</span>
         <ul class="list-unstyled">
           <li> <a href="#"> <i class="icon-flask"></i>Demo </a></li>

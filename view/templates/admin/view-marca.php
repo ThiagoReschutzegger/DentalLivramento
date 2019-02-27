@@ -7,14 +7,14 @@
     </div>
     <div class="card-body">
         <div class="form-group row">
-          <label class="col-sm-2 form-control-label text-right">Nome</label>
+          <label class="col-sm-2 form-control-label text-right">Nome:</label>
           <div class="col-sm-8">
             <p><?php echo $marca->getNome(); ?></p>
           </div>
         </div>
         <div class="line"></div>
         <div class="form-group row">
-          <label class="col-sm-2 form-control-label text-right">Link</label>
+          <label class="col-sm-2 form-control-label text-right">Link:</label>
           <div class="col-sm-8">
             <img class="image-fluid" src="<?php echo $marca->getImagem(); ?>" width="500px" />
             <br>

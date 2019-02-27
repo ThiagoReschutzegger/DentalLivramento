@@ -7,7 +7,7 @@
     <div class="card-body">
       <form class="form-horizontal" method="post">
         <div class="form-group row">
-          <label class="col-sm-3 form-control-label text-right">Nome</label>
+          <label class="col-sm-3 form-control-label text-right">Nome:</label>
           <div class="col-sm-8">
             <input type="text" class="form-control" name="nome">
           </div>

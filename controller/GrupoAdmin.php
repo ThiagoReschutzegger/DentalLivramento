@@ -7,12 +7,12 @@ class GrupoAdmin extends Admin {
     public function __construct() {
         parent::__construct();
         $this->model = new GrupoModel();
-        $this->model2 = new CategoriaModel();
+        $this->modelCategoria = new CategoriaModel();
     }
 
     public function index() {
       $data['grupo'] = $this->model->getGrupo();
-      $data['categoria'] = $this->model2->getCategoria();
+      $data['categoria'] = $this->modelCategoria->getCategoria();
       $this->view->load('header');
       $this->view->load('nav');
       $this->view->load('grupo', $data);
@@ -38,7 +38,7 @@ class GrupoAdmin extends Admin {
 
             }
         }
-      $data['categoria'] = $this->model2->getCategoria();
+      $data['categoria'] = $this->modelCategoria->getCategoria();
       $this->view->load('header');
       $this->view->load('nav');
       $this->view->load('add-grupo', $data);
@@ -79,7 +79,7 @@ class GrupoAdmin extends Admin {
         }
       }
       $data['grupo'] = $this->model->getGrupoById($ident);
-      $data['categoria'] = $this->model2->getCategoria();
+      $data['categoria'] = $this->modelCategoria->getCategoria();
       $this->view->load('header');
       $this->view->load('nav');
       $this->view->load('upd-grupo', $data);
