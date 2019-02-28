@@ -5,6 +5,7 @@ class Home extends Controller{
     protected $modelproduto;
     protected $modelCategoria;
     protected $modelGrupo;
+    protected $modelDestaque;
 
     public function __construct() {
         parent::__construct();
@@ -12,12 +13,14 @@ class Home extends Controller{
         $this->modelproduto = new ProdutoModel();
         $this->modelCategoria = new CategoriaModel();
         $this->modelGrupo = new GrupoModel();
+        $this->modelDestaque = new DestaqueModel();
     }
 
     public function index(){
         $data['estilo'] = $this->model->getEstiloAtual();
         $data['categoria'] = $this->modelCategoria->getCategoria();
         $data['grupo'] = $this->modelGrupo->getGrupo();
+        $data['destaque'] = $this->modelDestaque->getDestaque();
         $this->view->load('header',$data);
         $this->view->load('nav-home',$data);
         $this->view->load('index', $data);

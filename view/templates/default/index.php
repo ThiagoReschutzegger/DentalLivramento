@@ -176,7 +176,7 @@
     <div class="row featuredCollection margin-bottom">
       <?php foreach($data['categoria'] as $categorias): ?>
           <div class="col-md-4 col-12">
-            <div class="thumbnail" onclick="location.href='<?php echo $this->base_url; ?>Home/viewGrupo/<?php echo $categorias->getId_categoria(); ?>';">
+            <div class="thumbnail">
               <div class="imageWrapper">
                 <img src="<?php echo $categorias->getImagem(); ?>" alt="feature-collection-image">
                 <div class="caption">
@@ -190,6 +190,50 @@
             </div>
           </div>
       <?php endforeach; ?>
+    </div>
+
+    <script>
+    function linkSlider(id) {
+        window.location.href=<?php echo $this->base_url; ?>+'Home/viewCategoria/'+id;
+    };
+    </script>
+    <!-- BANNER -->
+    <div class="container">
+      <div class="row justify-content-md-end">
+        <div class="col-sm-12 ml-auto bannercontainer ">
+          <div class="fullscreenbanner-container bannerV4">
+            <div class="fullscreenbanner">
+              <ul>
+                <?php foreach ($data['destaque'] as $destaque):
+                 foreach ($data['categoria'] as $categoria):
+                    if($destaque->getId_categoria() == $categoria->getId_categoria()){
+                      echo "
+                      <li data-transition='slidehorizontal' data-slotamount='5' data-masterspeed='700' data-title='Slide 1' onclick='linkSlider(".$categoria->getId_categoria().")' >
+
+                        <img src='".$categoria->getImagem()."' alt='slidebg1' data-bgfit='cover' data-bgposition='center center' data-bgrepeat='no-repeat'>
+                        <div class='slider-caption slider-captionV4'>
+                          <div  class='tp-caption rs-caption-2 sft'
+                            data-hoffset='0'
+                            data-x='85'
+                            data-y='115'
+                            data-speed='800'
+                            data-start='2000'
+                            data-easing='Back.easeInOut'
+                            data-endspeed='300'>
+                            <small>Destaque</small><br>
+                            <span style='text-shadow: 2px 2px rgba(255,255,255,0.8);'>".$destaque->getNome()."</span>
+                          </div>
+                        </div>
+
+                      </li>";
+                    } endforeach;
+                  endforeach;?>
+
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="page-header text-uppercase">

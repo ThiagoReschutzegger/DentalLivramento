@@ -21,7 +21,6 @@ class GrupoModel extends Model {
 
     public function insertGrupo($grupo) {
         $sql = "INSERT INTO grupo(nome, id_categoria) VALUES(:nome, :id_categoria)";
-        var_dump($grupo);
         if ($this->ExecuteCommand($sql,[':nome'=>$grupo->getNome(),':id_categoria'=>$grupo->getId_categoria()])){
             return true;
         } else {

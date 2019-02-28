@@ -3175,12 +3175,6 @@ body.bodyColor.container {
 }
 
 @media (min-width: 1200px) {
-  .bannerV4 {
-    width: 835px;
-  }
-}
-
-@media (min-width: 1200px) {
   .bannerV4 .fullscreenbanner {
     height: 470px !important;
   }
@@ -3226,6 +3220,9 @@ body.bodyColor.container {
   .slider-captionV4 .tp-caption.rs-caption-3,
   .slider-captionV4 .tp-caption.rs-caption-4 {
     width: 55%;
+  }
+  .button-slider{
+    padding-top: 50px;
   }
 }
 

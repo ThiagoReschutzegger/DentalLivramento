@@ -21,7 +21,6 @@ class DestaqueModel extends Model {
 
     public function insertDestaque($destaque) {
         $sql = "INSERT INTO destaque(nome, id_categoria) VALUES(:nome, :id_categoria)";
-        var_dump($destaque);
         if ($this->ExecuteCommand($sql,[':nome'=>$destaque->getNome(),':id_categoria'=>$destaque->getId_categoria()])){
             return true;
         } else {

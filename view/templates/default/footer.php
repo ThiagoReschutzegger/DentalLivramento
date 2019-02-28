@@ -201,7 +201,7 @@
 <script src="<?php echo $this->asset ?>plugins/countdown/jquery.syotimer.js"></script>
 <script src="<?php echo $this->asset ?>plugins/velocity/velocity.min.js"></script>
 <script src="<?php echo $this->asset ?>js/custom.js"></script>
-<script>
+<script type="text/javascript">
     $( document ).ready(function() {
         $( "#teste" ).click(function() {
             $("#teste2").toggle();
