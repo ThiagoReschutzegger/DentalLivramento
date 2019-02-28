@@ -59,19 +59,21 @@ class ProdutoModel extends Model {
 
     public function searchProduto($nome, $codigo) {
         $list = [];
-        echo $nome."<br>".$codigo;
-        $sql = "SELECT * FROM produto WHERE (barcode LIKE '%:codigo%' OR nome LIKE '%:nome%')";
-        $consulta = $this->ExecuteQuery($sql, [':codigo' => $codigo,':nome' => $nome]);
-        $teste = $consulta[0];
-        var_dump($teste);
-        die;
-        foreach ($consulta as $linha) {
-            $list[] = new Produto($linha['id_produto'], $linha['barcode'], $linha['preco'], $linha['nome'], $linha['estoque'], $linha['imagem'], $linha['descricao'], $linha['destaque'], $linha['tipo'], $linha['id_grupo'], $linha['id_marca']);
-            echo 'k';
-            
+        
+        if($nome == '' && $codigo != ''){
+            $sql = "SELECT * FROM produto WHERE (barcode LIKE '%{$codigo}%')";
         }
-        var_dump($list);
-        die;
+        if($nome != '' && $codigo == ''){
+            $sql = "SELECT * FROM produto WHERE (nome LIKE '%{$nome}%')";
+        }
+        if($nome != '' && $codigo != ''){
+            $sql = "SELECT * FROM produto WHERE (barcode LIKE '%{$codigo}%' OR nome LIKE '%{$nome}%')";
+        }
+        $consulta = $this->ExecuteQuery($sql,array());
+
+        foreach ($consulta as $linha) {
+            $list[] = new Produto($linha['id_produto'], $linha['barcode'], $linha['preco'], $linha['nome'], $linha['estoque'], $linha['imagem'], $linha['descricao'], $linha['destaque'], $linha['tipo'], $linha['id_grupo'], $linha['id_marca']);           
+        }
         return $list;
     }
 

@@ -20,34 +20,36 @@ class ProdutoAdmin extends Admin {
 
     public function buscaProduto($codigo = null, $nome = null) {
         $data['msg'] = '';
+        $data['resultado'] = 'inicio';
         if (filter_input(INPUT_POST, 'buscar')) {
             $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
             $codigo = filter_input(INPUT_POST, 'codigo', FILTER_SANITIZE_STRING);
+
+            //echo '<pre>';
+            //var_dump($nome);
+            //var_dump($codigo);
             
-            
-            if (isset($nome) || isset($codigo)) {
+            echo '</pre>';
+            if ($nome || $codigo) {
 
                 $resultado = $this->model->searchProduto($nome, $codigo);
-                echo "<pre>";
-                var_dump($resultado);
-                echo "</pre>";
-                
+                //echo '<pre>';
+                //var_dump($resultado);
+                //echo '</pre>';
                 if (!empty($resultado)) {
-                    echo "<pre>";
-                    var_dump($resultado);
-                    echo "</pre>";
-                    die;
-                    return true;
+                    $data['resultado'] = $resultado;
                 } else {
-                    $data['resultado'] = [];
+                    $data['resultado'] = 'vazio';
                 }
             } else {
                 $data['msg'] = 'Preencha todos os Campos!';
             }
+        }else{
+            $data['resultado'] = 'inicio';
         }
         $this->view->load('header');
         $this->view->load('nav');
-        $this->view->load('busca-produto');
+        $this->view->load('busca-produto', $data['resultado']);
         $this->view->load('footer');
     }
 
