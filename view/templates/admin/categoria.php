@@ -22,7 +22,7 @@
                   <th scope="row"><?php echo $categoria->getId_categoria(); ?></th>
                   <td><?php echo $categoria->getNome(); ?></td>
                   <td>...</td>
-                  <td><img class="img-fluid" src="<?php echo $categoria->getImagem(); ?>" width="100px" /></td>
+                  <td><img src="<?php echo $categoria->getImagem(); ?>" height="80px" /></td>
                   <td>
                     <a href="<?php echo $this->base_url; ?>CategoriaAdmin/viewCategoria/<?php echo $categoria->getId_categoria(); ?>">
                       <i class="fa fa-eye"></i>

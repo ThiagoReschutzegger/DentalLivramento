@@ -20,7 +20,7 @@ class Home extends Controller{
         $data['grupo'] = $this->modelGrupo->getGrupo();
         $this->view->load('header',$data);
         $this->view->load('nav-home',$data);
-        $this->view->load('index');
+        $this->view->load('index', $data);
         $this->view->load('footer');
     }
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 27-Fev-2019 às 09:51
+-- Generation Time: 28-Fev-2019 às 05:10
 -- Versão do servidor: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
@@ -54,8 +54,30 @@ CREATE TABLE `categoria` (
 --
 
 INSERT INTO `categoria` (`id_categoria`, `nome`, `descricao`, `imagem`) VALUES
-(1, 'Ortodontia', 'pau de cu é rola', 'seila.jpg'),
-(2, 'ggeasy', 'asdfghj', 'asdfghj');
+(1, 'Ortodontia', 'dentes', 'https://inepo.com.br/pacientes/wp-content/uploads/2018/09/banner-inicio-orto.png'),
+(2, 'ggeasy', 'izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi ', 'https://lh3.googleusercontent.com/-51a0dzFgUxk/VQcMWjcsBUI/AAAAAAAAAGE/IgmrgBiSeJQ/w530-h530-n-rw/keep-calm-and-gg-izi-1.png'),
+(3, 'nova categoria', 'blabla', 'https://inepo.com.br/pacientes/wp-content/uploads/2018/09/banner-inicio-orto.png'),
+(4, 'Aparelhos', 'aparato aparato aparato aparato aparato aparato aparato aparato aparato aparato aparato aparato aparato aparato ', 'http://odontologiaoraldent.com.br/wp-content/uploads/2017/03/ortodontia2.jpg'),
+(5, 'Promocao tal', 'asdasdas', 'http://www.ometac.com.br/wp-content/uploads/2014/10/dentista2014-frente.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `destaque`
+--
+
+CREATE TABLE `destaque` (
+  `id_destaque` int(11) NOT NULL,
+  `nome` varchar(100) NOT NULL,
+  `id_categoria` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `destaque`
+--
+
+INSERT INTO `destaque` (`id_destaque`, `nome`, `id_categoria`) VALUES
+(1, 'Promoção Especial Dia dos Pais Dental', 5);
 
 -- --------------------------------------------------------
 
@@ -98,7 +120,10 @@ CREATE TABLE `grupo` (
 --
 
 INSERT INTO `grupo` (`id_grupo`, `nome`, `id_categoria`) VALUES
-(1, 'Ortodontias', 1);
+(1, 'Ortodontias', 1),
+(10, 'grupo 2', 2),
+(12, 'grupo 3', 5),
+(13, 'grupo novo', 3);
 
 -- --------------------------------------------------------
 
@@ -185,6 +210,12 @@ ALTER TABLE `categoria`
   ADD PRIMARY KEY (`id_categoria`);
 
 --
+-- Indexes for table `destaque`
+--
+ALTER TABLE `destaque`
+  ADD PRIMARY KEY (`id_destaque`);
+
+--
 -- Indexes for table `estilo`
 --
 ALTER TABLE `estilo`
@@ -225,7 +256,12 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT for table `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `destaque`
+--
+ALTER TABLE `destaque`
+  MODIFY `id_destaque` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `estilo`
 --
@@ -235,7 +271,7 @@ ALTER TABLE `estilo`
 -- AUTO_INCREMENT for table `grupo`
 --
 ALTER TABLE `grupo`
-  MODIFY `id_grupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_grupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `marca`
 --

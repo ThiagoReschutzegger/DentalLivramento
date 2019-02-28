@@ -20,7 +20,7 @@
                   <tr>
                     <th scope="row"><?php echo $marca->getId_marca(); ?></th>
                     <td><?php echo $marca->getNome(); ?></td>
-                    <td><img class="img-fluid" src="<?php echo $marca->getImagem(); ?>" width="100px" /></td>
+                    <td><img src="<?php echo $marca->getImagem(); ?>" height="80px" /></td>
                     <td>
                       <a href="<?php echo $this->base_url; ?>MarcaAdmin/viewMarca/<?php echo $marca->getId_marca(); ?>">
                         <i class="fa fa-eye"></i>

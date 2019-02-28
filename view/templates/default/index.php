@@ -174,96 +174,22 @@
       <h4 class="text-uppercase fonte-e-cor-top" >categorias</h4>
     </div>
     <div class="row featuredCollection margin-bottom">
-      <div class="col-md-4 col-12">
-        <div class="thumbnail" onclick="location.href='<?php echo $this->asset ?>single-product.html';">
-          <div class="imageWrapper">
-            <img src="<?php echo $this->asset ?>img/home/featured-collection/featured-collection-01.jpg" alt="feature-collection-image">
-            <div class="caption">
-                <h3>Shoes Collections</h3>
-                <small>Start From $59.00</small>
-            </div>
-            <div class="masking">
-              <a href="<?php echo $this->asset ?>product-grid-left-sidebar.html" class="btn viewBtn">View Products</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 col-12">
-        <div class="thumbnail" onclick="location.href='<?php echo $this->asset ?>single-product.html';">
-          <div class="imageWrapper">
-            <img src="<?php echo $this->asset ?>img/home/featured-collection/featured-collection-02.jpg" alt="feature-collection-image">
-            <div class="caption">
-                <h3>Bags BagPacks</h3>
-                <small>Start From $150.00</small>
-            </div>
-            <div class="masking">
-              <a href="product-grid-left-sidebar.html" class="btn viewBtn">View Products</a>
+      <?php foreach($data['categoria'] as $categorias): ?>
+          <div class="col-md-4 col-12">
+            <div class="thumbnail" onclick="location.href='<?php echo $this->base_url; ?>Home/viewGrupo/<?php echo $categorias->getId_categoria(); ?>';">
+              <div class="imageWrapper">
+                <img src="<?php echo $categorias->getImagem(); ?>" alt="feature-collection-image">
+                <div class="caption">
+                    <h3><?php echo $categorias->getNome(); ?></h3>
+                    <small>Clique para vizualizar os grupos</small>
+                </div>
+                <div class="masking">
+                  <a href="<?php echo $this->base_url; ?>Home/viewGrupo/<?php echo $categorias->getId_categoria(); ?>" class="btn viewBtn">Ver Grupos</a> <!-- Passar o getId_categorias da categorias, pra exibir os grupos daquela categorias -->
+                </div>
+              </div>
             </div>
           </div>
-
-        </div>
-      </div>
-      <div class="col-md-4 col-12">
-        <div class="thumbnail" onclick="location.href='<?php echo $this->asset ?>single-product.html';">
-          <div class="imageWrapper">
-            <img src="<?php echo $this->asset ?>img/home/featured-collection/featured-collection-03.jpg" alt="feature-collection-image">
-            <div class="caption">
-                <h3>Glasses Collections</h3>
-                <small>Start From $25.00</small>
-            </div>
-            <div class="masking">
-              <a href="<?php echo $this->asset ?>product-grid-left-sidebar.html" class="btn viewBtn">View Products</a>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-    <div class="row featuredCollection margin-bottom">
-      <div class="col-md-4 col-12">
-        <div class="thumbnail" onclick="location.href='<?php echo $this->asset ?>single-product.html';">
-          <div class="imageWrapper">
-            <img src="<?php echo $this->asset ?>img/home/featured-collection/featured-collection-01.jpg" alt="feature-collection-image">
-            <div class="caption">
-                <h3>Shoes Collections</h3>
-                <small>Start From $59.00</small>
-            </div>
-            <div class="masking">
-              <a href="<?php echo $this->asset ?>product-grid-left-sidebar.html" class="btn viewBtn">View Products</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 col-12">
-        <div class="thumbnail" onclick="location.href='<?php echo $this->asset ?>single-product.html';">
-          <div class="imageWrapper">
-            <img src="<?php echo $this->asset ?>img/home/featured-collection/featured-collection-02.jpg" alt="feature-collection-image">
-            <div class="caption">
-                <h3>Bags BagPacks</h3>
-                <small>Start From $150.00</small>
-            </div>
-            <div class="masking">
-              <a href="product-grid-left-sidebar.html" class="btn viewBtn">View Products</a>
-            </div>
-          </div>
-
-        </div>
-      </div>
-      <div class="col-md-4 col-12">
-        <div class="thumbnail" onclick="location.href='<?php echo $this->asset ?>single-product.html';">
-          <div class="imageWrapper">
-            <img src="<?php echo $this->asset ?>img/home/featured-collection/featured-collection-03.jpg" alt="feature-collection-image">
-            <div class="caption">
-                <h3>Glasses Collections</h3>
-                <small>Start From $25.00</small>
-            </div>
-            <div class="masking">
-              <a href="<?php echo $this->asset ?>product-grid-left-sidebar.html" class="btn viewBtn">View Products</a>
-            </div>
-          </div>
-
-        </div>
-      </div>
+      <?php endforeach; ?>
     </div>
 
     <div class="page-header text-uppercase">

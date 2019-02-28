@@ -43,6 +43,7 @@
         <!-- Sidebar Navidation Menus--><span class="heading">Main</span>
         <ul class="list-unstyled">
           <li><a href="<?php echo $this->base_url; ?>Admin"> <i class="icon-home"></i>Home </a></li>
+          <li><a href="<?php echo $this->base_url; ?>DestaqueAdmin"> <i class="fa fa-star"></i>Destaques </a></li>
           <li><a href="<?php echo $this->base_url; ?>CategoriaAdmin"> <i class="fa fa-list"></i>Categorias </a></li>
           <li><a href="<?php echo $this->base_url; ?>GrupoAdmin"> <i class="icon-grid"></i>Grupos </a></li>
           <li><a href="<?php echo $this->base_url; ?>MarcaAdmin"> <i class="fa fa-photo"></i>Marcas </a></li>
