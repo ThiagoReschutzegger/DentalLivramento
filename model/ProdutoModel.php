@@ -13,6 +13,7 @@ class ProdutoModel extends Model {
         }
         return $list;
     }
+    
 
     public function getProdutoById($id) {
         $sql = "SELECT * FROM produto WHERE id_produto=:id;";
