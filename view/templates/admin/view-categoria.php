@@ -6,7 +6,7 @@
       <h3 class="h4">Vizualizar Categoria</h3>
     </div>
     <div class="card-body">
-      <img class="img-fluid text-right" src="<?php echo $categoria->getImagem(); ?>" width="300px" style="float: right;" />
+      <img class="img-fluid text-right" src="<?php echo $categoria->getImagem(); ?>" heigth="300px" style="float: right;" />
       <div class="col-sm-7 row">
         <h2><?php echo $categoria->getNome(); ?></h2>
       </div>

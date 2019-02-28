@@ -3,9 +3,17 @@
     #teste2{
         display:none;
     }
-    #teste{
+    .pointer{
         cursor: pointer;
     }
+    .no-select {
+        -webkit-touch-callout: none;
+          -webkit-user-select: none; 
+           -khtml-user-select: none;
+             -moz-user-select: none;
+              -ms-user-select: none; 
+                  user-select: none; 
+      }
 </style>
 
   <body class="body-wrapper">
@@ -137,17 +145,17 @@
 
         <!-- NAVBAR -->
         <nav class="navbar navbar-main navbar-default navbar-expand-md nav-V3" role="navigation">
-          <div class="container" id="teste" onclick="aparece();">
+          <div class="container">
 
-            <div class="nav-category dropdown">
-              <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-              Catagory
-                <button type="button">
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                </button>
-              </a>
+            <div class="nav-category dropdown no-select pointer">
+                <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <div id="teste">Categorias
+                  <button type="button">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button></div>
+                </a>
               <ul class="dropdown-menu dropdown-menu-left" id="teste2">
                 <?php foreach($data['categoria'] as $categoria): ?>
                 <li class="dropdown dropdown-submenu">
