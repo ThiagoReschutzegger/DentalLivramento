@@ -23,14 +23,23 @@ class ProdutoAdmin extends Admin {
         if (filter_input(INPUT_POST, 'buscar')) {
             $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
             $codigo = filter_input(INPUT_POST, 'codigo', FILTER_SANITIZE_STRING);
+            
+            
+            if (isset($nome) || isset($codigo)) {
 
-            if ($nome || $codigo) {
-                if ($this->model->searchProduto($nome,$codigo)) {
-                    $this->index();
+                $resultado = $this->model->searchProduto($nome, $codigo);
+                echo "<pre>";
+                var_dump($resultado);
+                echo "</pre>";
+                
+                if (!empty($resultado)) {
+                    echo "<pre>";
+                    var_dump($resultado);
+                    echo "</pre>";
+                    die;
                     return true;
                 } else {
-                    $data['msg'] = 'Erro!';
-                    die;
+                    $data['resultado'] = [];
                 }
             } else {
                 $data['msg'] = 'Preencha todos os Campos!';
