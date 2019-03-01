@@ -19,6 +19,8 @@ class ProdutoAdmin extends Admin {
     }
 
     public function buscaProduto($codigo = null, $nome = null) {
+        echo $codigo;
+        echo "<br>".$nome;
         $data['msg'] = '';
         $data['resultado'] = 'inicio';
         if (filter_input(INPUT_POST, 'buscar')) {
