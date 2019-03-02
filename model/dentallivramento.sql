@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
+-- version 4.7.7
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 28-Fev-2019 às 05:10
--- Versão do servidor: 10.1.25-MariaDB
--- PHP Version: 5.6.31
+-- Generation Time: 02-Mar-2019 às 02:57
+-- Versão do servidor: 10.1.30-MariaDB
+-- PHP Version: 7.2.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -21,20 +21,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `dentallivramento`
 --
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `arco`
---
-
-CREATE TABLE `arco` (
-  `id_produto` int(10) UNSIGNED NOT NULL,
-  `material` varchar(50) DEFAULT NULL,
-  `forma` varchar(50) DEFAULT NULL,
-  `posicao` varchar(50) DEFAULT NULL,
-  `tamanho` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -147,29 +133,43 @@ INSERT INTO `marca` (`id_marca`, `nome`, `imagem`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `packproduto`
+--
+
+CREATE TABLE `packproduto` (
+  `id_packproduto` int(11) NOT NULL,
+  `id_produto` int(11) NOT NULL,
+  `id_subgrupo` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `produto`
 --
 
 CREATE TABLE `produto` (
-  `id_produto` int(10) UNSIGNED NOT NULL,
-  `barcode` varchar(150) NOT NULL,
-  `preco` varchar(7) NOT NULL,
-  `nome` varchar(200) NOT NULL,
+  `id_produto` int(11) NOT NULL,
+  `barcode` varchar(50) NOT NULL,
+  `preco` varchar(10) NOT NULL,
   `estoque` int(11) NOT NULL,
-  `imagem` varchar(100) NOT NULL,
-  `descricao` varchar(3000) DEFAULT NULL,
-  `destaque` enum('1','0') NOT NULL,
-  `tipo` enum('Arco','Dente','Resina','Bracket') DEFAULT NULL,
+  `especificacao` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `subgrupo`
+--
+
+CREATE TABLE `subgrupo` (
+  `id_subgrupo` int(11) NOT NULL,
+  `nome` varchar(100) NOT NULL,
+  `descricao` varchar(5000) NOT NULL,
+  `imagem` varchar(5000) NOT NULL,
   `id_grupo` int(11) NOT NULL,
   `id_marca` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `produto`
---
-
-INSERT INTO `produto` (`id_produto`, `barcode`, `preco`, `nome`, `estoque`, `imagem`, `descricao`, `destaque`, `tipo`, `id_grupo`, `id_marca`) VALUES
-(1, '324524353', '32.90', 'produto de teste', 10, 'imagem.jpg', 'lotem kwkejf testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste testeteste ', '1', NULL, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -196,12 +196,6 @@ INSERT INTO `usuario` (`id_user`, `nome`, `login`, `senha`, `email`, `dtupdate`)
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `arco`
---
-ALTER TABLE `arco`
-  ADD PRIMARY KEY (`id_produto`);
 
 --
 -- Indexes for table `categoria`
@@ -235,10 +229,24 @@ ALTER TABLE `marca`
   ADD PRIMARY KEY (`id_marca`);
 
 --
+-- Indexes for table `packproduto`
+--
+ALTER TABLE `packproduto`
+  ADD PRIMARY KEY (`id_packproduto`),
+  ADD KEY `id_produto` (`id_produto`),
+  ADD KEY `id_subgrupo` (`id_subgrupo`);
+
+--
 -- Indexes for table `produto`
 --
 ALTER TABLE `produto`
-  ADD PRIMARY KEY (`id_produto`),
+  ADD PRIMARY KEY (`id_produto`);
+
+--
+-- Indexes for table `subgrupo`
+--
+ALTER TABLE `subgrupo`
+  ADD PRIMARY KEY (`id_subgrupo`),
   ADD KEY `id_grupo` (`id_grupo`),
   ADD KEY `id_marca` (`id_marca`);
 
@@ -257,45 +265,58 @@ ALTER TABLE `usuario`
 --
 ALTER TABLE `categoria`
   MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT for table `destaque`
 --
 ALTER TABLE `destaque`
   MODIFY `id_destaque` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `estilo`
 --
 ALTER TABLE `estilo`
   MODIFY `id_estilo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `grupo`
 --
 ALTER TABLE `grupo`
   MODIFY `id_grupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
 --
 -- AUTO_INCREMENT for table `marca`
 --
 ALTER TABLE `marca`
   MODIFY `id_marca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `packproduto`
+--
+ALTER TABLE `packproduto`
+  MODIFY `id_packproduto` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `produto`
 --
 ALTER TABLE `produto`
-  MODIFY `id_produto` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_produto` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `subgrupo`
+--
+ALTER TABLE `subgrupo`
+  MODIFY `id_subgrupo` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `usuario`
 --
 ALTER TABLE `usuario`
   MODIFY `id_user` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- Constraints for dumped tables
 --
-
---
--- Limitadores para a tabela `arco`
---
-ALTER TABLE `arco`
-  ADD CONSTRAINT `produto_arco_fk` FOREIGN KEY (`id_produto`) REFERENCES `produto` (`id_produto`);
 
 --
 -- Limitadores para a tabela `grupo`
@@ -304,9 +325,16 @@ ALTER TABLE `grupo`
   ADD CONSTRAINT `id_categoria` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id_categoria`);
 
 --
--- Limitadores para a tabela `produto`
+-- Limitadores para a tabela `packproduto`
 --
-ALTER TABLE `produto`
+ALTER TABLE `packproduto`
+  ADD CONSTRAINT `id_produto` FOREIGN KEY (`id_produto`) REFERENCES `produto` (`id_produto`),
+  ADD CONSTRAINT `id_subgrupo` FOREIGN KEY (`id_subgrupo`) REFERENCES `subgrupo` (`id_subgrupo`);
+
+--
+-- Limitadores para a tabela `subgrupo`
+--
+ALTER TABLE `subgrupo`
   ADD CONSTRAINT `id_grupo` FOREIGN KEY (`id_grupo`) REFERENCES `grupo` (`id_grupo`),
   ADD CONSTRAINT `id_marca` FOREIGN KEY (`id_marca`) REFERENCES `marca` (`id_marca`);
 COMMIT;

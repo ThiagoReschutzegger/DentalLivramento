@@ -67,7 +67,7 @@ class ProdutoModel extends Model {
             $sql = "SELECT * FROM produto WHERE (nome LIKE '%{$nome}%')";
         }
         if($nome != '' && $codigo != ''){
-            $sql = "SELECT * FROM produto WHERE (barcode LIKE '%{$codigo}%' OR nome LIKE '%{$nome}%')";
+            $sql = "SELECT * FROM produto WHERE (barcode LIKE '%{$codigo}%' OR nome LIKE '%{$nome}%') ORDER BY CASE barcode WHEN barcode='{$codigo}' and nome='{$nome}' THEN '0' WHEN barcode='{$codigo}' or nome='{$nome}' THEN '1' ELSE nome END";
         }
         $consulta = $this->ExecuteQuery($sql,array());
 
