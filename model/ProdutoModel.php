@@ -7,7 +7,7 @@ class ProdutoModel extends Model {
         $sql = "SELECT * FROM produto";
         $consulta = $this->ExecuteQuery($sql, array());
         foreach ($consulta as $linha) {
-            $list[] = new Produto($linha['id_produto'], $linha['barcode'], $linha['preco'], $linha['nome'], $linha['estoque'], $linha['imagem'], $linha['descricao'], $linha['destaque'], $linha['tipo'], $linha['id_grupo'], $linha['id_marca']);
+            $list[] = new Produto($linha['id_produto'], $linha['barcode'], $linha['preco'], $linha['estoque'], $linha['id_subgrupo']);
         }
         return $list;
     }
@@ -16,21 +16,15 @@ class ProdutoModel extends Model {
         $sql = "SELECT * FROM produto WHERE id_produto=:id;";
         $consulta = $this->ExecuteQuery($sql, [':id' => $id])[0];
         $produto = $this->ExecuteQuery($sql, [':id' => $id])[0];
-        return new Produto($produto['id_produto'], $produto['barcode'], $produto['preco'], $produto['nome'], $produto['estoque'], $produto['imagem'], $produto['descricao'], $produto['destaque'], $produto['tipo'], $produto['id_grupo'], $produto['id_marca']);
+        return new Produto($produto['id_produto'], $produto['barcode'], $produto['preco'], $produto['estoque'], $produto['id_subgrupo']);
     }
 
     public function insertProduto($produto) {
-        $sql = "INSERT INTO produto(barcode,preco,nome,estoque,imagem,descricao,destaque,tipo,id_grupo,id_marca) VALUES(:barcode,:preco,:nome,:estoque,:imagem,:descricao,:destaque,:tipo,:id_grupo,:id_marca)";
+        $sql = "INSERT INTO produto(barcode,preco,estoque,id_subgrupo) VALUES(:barcode,:preco,:estoque,:id_subgrupo)";
         if ($this->ExecuteCommand($sql, [':barcode' => $produto->getBarcode(),
                     ':preco' => $produto->getPreco(),
-                    ':nome' => $produto->getNome(),
                     ':estoque' => $produto->getEstoque(),
-                    ':imagem' => $produto->getImagem(),
-                    ':descricao' => $produto->getDescricao(),
-                    ':destaque' => $produto->getDestaque(),
-                    ':tipo' => $produto->getTipo(),
-                    ':id_grupo' => $produto->getId_produto(),
-                    ':id_marca' => $produto->getId_marca()
+                    ':id_subgrupo' => $produto->getId_subgrupo()
                 ])) {
             return true;
         } else {
@@ -48,8 +42,13 @@ class ProdutoModel extends Model {
     }
 
     public function updateProduto($produto) {
-        $sql = "UPDATE produto SET nome = :nome, imagem = :imagem  WHERE id_produto = :id";
-        $param = [':nome' => $produto->getNome(), ':imagem' => $produto->getImagem(), ':id' => $produto->getId_produto()];
+        $sql = "UPDATE produto SET barcode = :barcode, preco = :preco, estoque = :estoque, id_produto  = :id_prouto, id_subgrupo = :id_subgrupo WHERE id_produto = :id";
+        $param = [':barcode' => $produto->getBarcode(),
+                    ':preco' => $produto->getPreco(),
+                    ':estoque' => $produto->getEstoque(),
+                    ':id_prouto' => $produto->getId_produto(),
+                    ':id_subgrupogrupo' => $produto->getId_subgrupo()
+                ];
         if ($this->ExecuteCommand($sql, $param)) {
             return true;
         } else {
@@ -59,7 +58,7 @@ class ProdutoModel extends Model {
 
     public function searchProduto($nome, $codigo) {
         $list = [];
-        
+
         if($nome == '' && $codigo != ''){
             $sql = "SELECT * FROM produto WHERE (barcode LIKE '%{$codigo}%')";
         }
@@ -72,11 +71,11 @@ class ProdutoModel extends Model {
         $consulta = $this->ExecuteQuery($sql,array());
 
         foreach ($consulta as $linha) {
-            $list[] = new Produto($linha['id_produto'], $linha['barcode'], $linha['preco'], $linha['nome'], $linha['estoque'], $linha['imagem'], $linha['descricao'], $linha['destaque'], $linha['tipo'], $linha['id_grupo'], $linha['id_marca']);           
+            $list[] = new Produto($linha['id_produto'], $linha['barcode'], $linha['preco'], $linha['nome'], $linha['estoque'], $linha['imagem'], $linha['descricao'], $linha['destaque'], $linha['tipo'], $linha['id_grupo'], $linha['id_marca']);
         }
         return $list;
     }
 
-    
+
 
 }

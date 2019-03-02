@@ -8,11 +8,11 @@
     }
     .no-select {
         -webkit-touch-callout: none;
-          -webkit-user-select: none; 
+          -webkit-user-select: none;
            -khtml-user-select: none;
              -moz-user-select: none;
-              -ms-user-select: none; 
-                  user-select: none; 
+              -ms-user-select: none;
+                  user-select: none;
       }
 </style>
 
@@ -159,7 +159,7 @@
               <ul class="dropdown-menu dropdown-menu-left" id="teste2">
                 <?php foreach($data['categoria'] as $categoria): ?>
                 <li class="dropdown dropdown-submenu">
-                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                     <i class="lnr lnr-shirt" aria-hidden="true"></i><?php echo $categoria->getNome(); ?></a>
                     <ul class="dropdown-menu">
                         <?php foreach($data['grupo'] as $grupo):

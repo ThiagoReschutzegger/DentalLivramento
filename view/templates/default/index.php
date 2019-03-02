@@ -170,72 +170,6 @@
 <section class="mainContent clearfix">
   <div class="container">
 
-    <div class="page-header">
-      <h4 class="text-uppercase fonte-e-cor-top" >categorias</h4>
-    </div>
-    <div class="row featuredCollection margin-bottom">
-      <?php foreach($data['categoria'] as $categorias): ?>
-          <div class="col-md-4 col-12">
-            <div class="thumbnail">
-              <div class="imageWrapper">
-                <img src="<?php echo $categorias->getImagem(); ?>" alt="feature-collection-image">
-                <div class="caption">
-                    <h3><?php echo $categorias->getNome(); ?></h3>
-                    <small>Clique para vizualizar os grupos</small>
-                </div>
-                <div class="masking">
-                  <a href="<?php echo $this->base_url; ?>Home/viewGrupo/<?php echo $categorias->getId_categoria(); ?>" class="btn viewBtn">Ver Grupos</a> <!-- Passar o getId_categorias da categorias, pra exibir os grupos daquela categorias -->
-                </div>
-              </div>
-            </div>
-          </div>
-      <?php endforeach; ?>
-    </div>
-
-    <script>
-    function linkSlider(id) {
-        window.location.href=<?php echo $this->base_url; ?>+'Home/viewCategoria/'+id;
-    };
-    </script>
-    <!-- BANNER -->
-    <div class="container">
-      <div class="row justify-content-md-end">
-        <div class="col-sm-12 ml-auto bannercontainer ">
-          <div class="fullscreenbanner-container bannerV4">
-            <div class="fullscreenbanner">
-              <ul>
-                <?php foreach ($data['destaque'] as $destaque):
-                 foreach ($data['categoria'] as $categoria):
-                    if($destaque->getId_categoria() == $categoria->getId_categoria()){
-                      echo "
-                      <li data-transition='slidehorizontal' data-slotamount='5' data-masterspeed='700' data-title='Slide 1' onclick='linkSlider(".$categoria->getId_categoria().")' >
-
-                        <img src='".$categoria->getImagem()."' alt='slidebg1' data-bgfit='cover' data-bgposition='center center' data-bgrepeat='no-repeat'>
-                        <div class='slider-caption slider-captionV4'>
-                          <div  class='tp-caption rs-caption-2 sft'
-                            data-hoffset='0'
-                            data-x='85'
-                            data-y='115'
-                            data-speed='800'
-                            data-start='2000'
-                            data-easing='Back.easeInOut'
-                            data-endspeed='300'>
-                            <small>Destaque</small><br>
-                            <span style='text-shadow: 2px 2px rgba(255,255,255,0.8);'>".$destaque->getNome()."</span>
-                          </div>
-                        </div>
-
-                      </li>";
-                    } endforeach;
-                  endforeach;?>
-
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <div class="page-header text-uppercase">
       <h4 class="text-uppercase fonte-e-cor-top">Produtos em Destaque</h4>
     </div>
@@ -383,6 +317,50 @@
             <h4>Scarf Ring Corner</h4>
           </a>
           <h3>$79</h3>
+        </div>
+      </div>
+    </div>
+
+    <script>
+    function linkSlider(id) {
+        window.location.href=<?php echo $this->base_url; ?>+'Home/viewCategoria/'+id;
+    };
+    </script>
+    <!-- BANNER -->
+    <div class="container">
+      <div class="row justify-content-md-end">
+        <div class="col-sm-12 ml-auto bannercontainer ">
+          <div class="fullscreenbanner-container bannerV4">
+            <div class="fullscreenbanner">
+              <ul>
+                <?php foreach ($data['destaque'] as $destaque):
+                 foreach ($data['categoria'] as $categoria):
+                    if($destaque->getId_categoria() == $categoria->getId_categoria()){
+                      echo "
+                      <li data-transition='slidehorizontal' data-slotamount='5' data-masterspeed='700' data-title='Slide 1' onclick='linkSlider(".$categoria->getId_categoria().")' >
+
+                        <img src='".$categoria->getImagem()."' alt='slidebg1' data-bgfit='cover' data-bgposition='center center' data-bgrepeat='no-repeat'>
+                        <div class='slider-caption slider-captionV4'>
+                          <div  class='tp-caption rs-caption-2 sft'
+                            data-hoffset='0'
+                            data-x='85'
+                            data-y='115'
+                            data-speed='800'
+                            data-start='2000'
+                            data-easing='Back.easeInOut'
+                            data-endspeed='300'>
+                            <small>Destaque</small><br>
+                            <span style='text-shadow: 2px 2px rgba(255,255,255,0.8);'>".$destaque->getNome()."</span>
+                          </div>
+                        </div>
+
+                      </li>";
+                    } endforeach;
+                  endforeach;?>
+
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>
