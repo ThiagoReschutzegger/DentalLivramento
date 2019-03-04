@@ -56,7 +56,7 @@ class ProdutoModel extends Model {
         }
     }
 
-    public function searchProduto($nome, $codigo) {
+    public function searchProdutoUnitario($nome, $codigo) {
         $list = [];
 
         if($nome == '' && $codigo != ''){

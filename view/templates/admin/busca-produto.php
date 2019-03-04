@@ -6,20 +6,33 @@
         </div>
     </header>
     <section>
-        <div class="col-lg-8">                           
+        <div class="col-lg-12">                           
             <div class="card">
                 <div class="card-body">
                     <form method="POST" class="form-inline">
                         <div class="form-group">
-                            <label for="inlineFormInput" class="sr-only">Name</label>
-                            <input id="inlineFormInput" name="codigo" type="text" placeholder="CÓDIGO DE BARRAS" class="mr-5 form-control">
+                            <div class="col-sm-12 ">
+                                <span style='color:grey; font-size:15px'>&nbsp&nbsp&nbspOrganizar por:&nbsp&nbsp&nbsp</span>
+                                <select name="organizar" class="form-control">
+                                    <option value='1'>Produto unitário</option>
+                                    <option value='2'>Agrup. de produtos</option>
+                                </select>
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label for="inlineFormInputGroup" class="sr-only">Username</label>
-                            <input id="inlineFormInputGroup" name="nome" type="text" placeholder="NOME DO PRODUTO" class="mr-5 form-control">
+                            <label for='inlineFormInput' class="form-control-label">&nbsp&nbsp&nbspCód. de Barras&nbsp&nbsp&nbsp</label>
+                            <input id="inlineFormInput" name="codigo" type="text" placeholder="CÓDIGO DE BARRAS" class="mr-1 form-control">
                         </div>
                         <div class="form-group">
-                            <input type="submit" name="buscar" value="Buscar" class="btn btn-primary">
+                            <label for='inlineFormInputGroup' class="form-control-label">&nbsp&nbsp&nbspNome&nbsp&nbsp&nbsp</label>
+                            <input id="inlineFormInputGroup" name="nome" type="text" placeholder="NOME DO PRODUTO" class="mr-1 form-control">
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <div class="form-group col-lg-12 col-sm-12 col-md-12">
+                            <input type="submit" name="buscar" value="Buscar" class="btn btn-primary col-lg-12 col-sm-12 col-md-12">
                         </div>
                     </form>
                 </div>
@@ -61,7 +74,7 @@
                                         <td><?php echo substr($produto->getDescricao(), 0, 45) . "..."; ?></td>
                                         <td>
                                             <button type="button" class="btn btn-info btn-circle"><i class="fa fa-pencil"></i></button>
-                                            
+
                                         </td>
                                         <td>
                                             <button type="button" class="btn btn-danger btn-circle" data-toggle="modal" data-target="#excluir<?php echo $produto->getId_produto() ?>"><i class="fa fa-trash"></i></button>
