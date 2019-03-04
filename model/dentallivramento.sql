@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 02-Mar-2019 às 02:57
+-- Generation Time: 04-Mar-2019 às 23:09
 -- Versão do servidor: 10.1.30-MariaDB
 -- PHP Version: 7.2.2
 
@@ -167,6 +167,7 @@ CREATE TABLE `subgrupo` (
   `nome` varchar(100) NOT NULL,
   `descricao` varchar(5000) NOT NULL,
   `imagem` varchar(5000) NOT NULL,
+  `destaque` enum('1','0') NOT NULL,
   `id_grupo` int(11) NOT NULL,
   `id_marca` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -300,7 +301,7 @@ ALTER TABLE `packproduto`
 -- AUTO_INCREMENT for table `produto`
 --
 ALTER TABLE `produto`
-  MODIFY `id_produto` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_produto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `subgrupo`
