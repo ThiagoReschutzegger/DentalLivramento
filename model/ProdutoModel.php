@@ -7,23 +7,23 @@ class ProdutoModel extends Model {
         $sql = "SELECT * FROM produto";
         $consulta = $this->ExecuteQuery($sql, array());
         foreach ($consulta as $linha) {
-            $list[] = new Produto($linha['id_produto'], $linha['barcode'], $linha['preco'], $linha['estoque'], $linha['id_subgrupo']);
+            $list[] = new Produto($linha['id_produto'], $linha['barcode'], $linha['preco'], $linha['estoque'], $linha['especificacao']);
         }
         return $list;
     }
 
     public function getProdutoById($id) {
         $sql = "SELECT * FROM produto WHERE id_produto=:id;";
-        $consulta = $this->ExecuteQuery($sql, [':id' => $id])[0];
         $produto = $this->ExecuteQuery($sql, [':id' => $id])[0];
-        return new Produto($produto['id_produto'], $produto['barcode'], $produto['preco'], $produto['estoque'], $produto['id_subgrupo']);
+        return new Produto($produto['id_produto'], $produto['barcode'], $produto['preco'], $produto['estoque'], $produto['especificacao']);
     }
 
     public function insertProduto($produto) {
-        $sql = "INSERT INTO produto(barcode,preco,estoque,id_subgrupo) VALUES(:barcode,:preco,:estoque,:id_subgrupo)";
+        $sql = "INSERT INTO produto(barcode,preco,estoque,especificacao,id_subgrupo) VALUES(:barcode,:preco,:estoque,:especificacao,:id_subgrupo)";
         if ($this->ExecuteCommand($sql, [':barcode' => $produto->getBarcode(),
                     ':preco' => $produto->getPreco(),
                     ':estoque' => $produto->getEstoque(),
+                    ':especificacao' => $produto->getEspecificacao(),
                     ':id_subgrupo' => $produto->getId_subgrupo()
                 ])) {
             return true;
@@ -42,12 +42,12 @@ class ProdutoModel extends Model {
     }
 
     public function updateProduto($produto) {
-        $sql = "UPDATE produto SET barcode = :barcode, preco = :preco, estoque = :estoque, id_produto  = :id_prouto, id_subgrupo = :id_subgrupo WHERE id_produto = :id";
+        $sql = "UPDATE produto SET barcode = :barcode, preco = :preco, estoque = :estoque, especificacao = :especificacao WHERE id_produto = :id";
         $param = [':barcode' => $produto->getBarcode(),
                     ':preco' => $produto->getPreco(),
                     ':estoque' => $produto->getEstoque(),
                     ':id_prouto' => $produto->getId_produto(),
-                    ':id_subgrupogrupo' => $produto->getId_subgrupo()
+                    ':especificacao' => $produto->getEspecificacao()
                 ];
         if ($this->ExecuteCommand($sql, $param)) {
             return true;
@@ -74,10 +74,10 @@ class ProdutoModel extends Model {
         $consulta = $this->ExecuteQuery($sql,array());
 
         foreach ($consulta as $linha) {
-            
+
             $list[] = new Packproduto($linha['id_packproduto'],$linha['id_produto'],$linha['barcode'],$linha['preco'],$linha['estoque'],$linha['especificacao'],$linha['id_subgrupo'],$linha['nome'],$linha['descricao'],$linha['imagem'],$linha['destaque'],$linha['id_grupo'],$linha['id_marca']);
         }
-        
+
         //echo '<pre>';var_dump($consulta);echo '</pre>';die;
 
         return $list;

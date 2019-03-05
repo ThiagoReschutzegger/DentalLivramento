@@ -7,9 +7,15 @@ class SubgrupoModel extends Model {
         $sql = "SELECT * FROM subgrupo";
         $consulta = $this->ExecuteQuery($sql, array());
         foreach ($consulta as $linha) {
-            $list[] = new Subgrupo($linha['id_subgrupo'], $linha['nome'], $linha['imagem'], $linha['descricao'], $linha['id_grupo'], $linha['id_marca']);
+            $list[] = new Subgrupo($linha['id_subgrupo'], $linha['nome'], $linha['descricao'], $linha['imagem'],  $linha['destaque'], $linha['id_grupo'], $linha['id_marca']);
         }
         return $list;
+    }
+
+    public function getSupreme($nome, $descricao, $imagem) {
+        $sql = "SELECT * FROM subgrupo WHERE nome = :nome AND descricao = :descricao AND imagem = :imagem;";
+        $subgrupo = $this->ExecuteQuery($sql, [':nome' => $nome, ':descricao' => $descricao, ':imagem' => $imagem ])[0];
+        return new Subgrupo($subgrupo['id_subgrupo'], $subgrupo['nome'], $subgrupo['imagem'], $subgrupo['descricao'], $subgrupo['destaque'], $subgrupo['id_grupo'], $subgrupo['id_marca']);
     }
 
     public function getSubgrupoById($id) {
@@ -20,10 +26,11 @@ class SubgrupoModel extends Model {
     }
 
     public function insertSubgrupo($subgrupo) {
-        $sql = "INSERT INTO subgrupo(nome,imagem,descricao,id_grupo,id_marca) VALUES(:nome,:imagem,:descricao,:id_grupo,:id_marca)";
+        $sql = "INSERT INTO subgrupo(nome,descricao,imagem,destaque,id_grupo,id_marca) VALUES(:nome,:descricao,:imagem,:destaque,:id_grupo,:id_marca)";
         if ($this->ExecuteCommand($sql, [':nome' => $subgrupo->getNome(),
-                                        ':imagem' => $subgrupo->getImagem(),
                                         ':descricao' => $subgrupo->getDescricao(),
+                                        ':imagem' => $subgrupo->getImagem(),
+                                        ':destaque' => $subgrupo->getDestaque(),
                                         ':id_grupo' => $subgrupo->getId_grupo(),
                                         ':id_marca' => $subgrupo->getId_marca()
                                     ])) {

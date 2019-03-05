@@ -4,16 +4,18 @@ class Subgrupo {
 
     public $id_subgrupo;
     public $nome;
-    public $imagem;
     public $descricao;
+    public $imagem;
+    public $destaque;
     public $id_grupo;
     public $id_marca;
 
-    function __construct($id_subgrupo, $nome, $imagem, $descricao, $id_grupo, $id_marca) {
+    function __construct($id_subgrupo, $nome, $descricao, $imagem, $destaque, $id_grupo, $id_marca) {
         $this->id_subgrupo = $id_subgrupo;
         $this->nome = $nome;
-        $this->imagem = $imagem;
         $this->descricao = $descricao;
+        $this->imagem = $imagem;
+        $this->destaque = $destaque;
         $this->id_grupo = $id_grupo;
         $this->id_marca = $id_marca;
     }
@@ -28,6 +30,10 @@ class Subgrupo {
 
     function getImagem() {
         return $this->imagem;
+    }
+
+    function getDestaque() {
+        return $this->destaque;
     }
 
     function getDescricao() {
@@ -52,6 +58,10 @@ class Subgrupo {
 
     function setImagem($imagem) {
         $this->imagem = $imagem;
+    }
+
+    function setDestaque($destaque) {
+        $this->destaque = $destaque;
     }
 
     function setDescricao($descricao) {

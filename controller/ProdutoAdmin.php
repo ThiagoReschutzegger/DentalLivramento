@@ -93,29 +93,10 @@ class ProdutoAdmin extends Admin {
       $this->view->load('footer');
   }
 
-  public function addProdutoMarca($ident) { //seleciona a marca em que será adicionado o produto completo
+  public function addProdutoCompleto($id_gp) {
     $data['msg'] = '';
     $data['marca'] = $this->modelMarca->getMarca();
-    if (filter_input(INPUT_POST, 'next')) {
-      $id_marca = filter_input(INPUT_POST, 'id_marca', FILTER_SANITIZE_STRING);
 
-          if ($id_marca) {
-              $this->addProdutoCompleto($ident, $id_marca);
-              return true;
-          } else {
-               $data['msg'] = 'Preencha todos os Campos!';
-
-          }
-      }
-
-    $this->view->load('header');
-    $this->view->load('nav');
-    $this->view->load('add-prod-marca',$data);
-    $this->view->load('footer');
-}
-
-  public function addProdutoCompleto($id_gp, $id_marc) {
-    $data['msg'] = '';
     if (filter_input(INPUT_POST, 'add')) {
       $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING); //Sg
       $descricao = filter_input(INPUT_POST, 'descricao', FILTER_SANITIZE_STRING); //Sg
@@ -124,25 +105,35 @@ class ProdutoAdmin extends Admin {
       $preco = filter_input(INPUT_POST, 'preco', FILTER_SANITIZE_STRING); //Prod
       $estoque = filter_input(INPUT_POST, 'estoque', FILTER_SANITIZE_STRING); //Prod
       $imagem = filter_input(INPUT_POST, 'imagem', FILTER_SANITIZE_STRING); //Sg
+      $id_marca = filter_input(INPUT_POST, 'id_marca', FILTER_SANITIZE_STRING); //Sg
 
           if ($nome && $descricao && $especificacao && $barcode && $preco && $estoque && $imagem) {
-            $subgrupo = new Subgrupo(null, $nome, $imagem, $descricao, $id_gp, $id_marc);
-            $produto = new Produto(null, $barcode, $preco, $estoque, $especificacao);
-              if ($this->modelSubgrupo->insertSubgrupo($subgrupo) && $this->modelProduto->insertProduto($produto)) {
-                    $this->index();
-                   return true;
+            $subgrupo = new Subgrupo(null, $nome, $descricao, $imagem, 0, $id_gp, $id_marca);
+
+              if ($this->modelSubgrupo->insertSubgrupo($subgrupo)) {
+                    $algo = $this->modelSubgrupo->getSupreme($nome, $descricao, $imagem);
+                    $id_subgrupo = $algo->getId_subgrupo();
+                    $produto = new Produto(null, $barcode, $preco, $estoque, $especificacao, $id_subgrupo);
+                    if($this->model->insertProduto($produto)){
+                        $this->index();
+                        return true;
+                    }else {
+                        $data['msg'] = 'Erro prod!';
+                        return false;
+                        }
               } else {
-                  $data['msg'] = 'Erro!';
+                  $data['msg'] = 'Erro sub!';
+                  return false;
                   }
           } else {
                $data['msg'] = 'Preencha todos os Campos!';
-
+               return false;
           }
       }
 
       $this->view->load('header');
       $this->view->load('nav');
-      $this->view->load('add-prod');
+      $this->view->load('add-prod',$data);
       $this->view->load('footer');
 }
 
