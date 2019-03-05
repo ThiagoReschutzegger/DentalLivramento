@@ -25,11 +25,11 @@
       <?php endforeach; ?>
         <div class="form-group row">
           <div class="col-sm-4 offset-sm-3">
+            <a class="btn btn-primary" href="<?php echo $this->base_url; ?>CategoriaAdmin/addCategoria">Adicionar Categoria</a>
+            <br>
+            <br>
             <input type="reset" class="btn btn-secondary" value="Limpar" />
             <input type="submit" class="btn btn-success" value="Salvar" name="add" />
-            <br>
-            <br>
-            <a class="btn btn-primary" href="<?php echo $this->base_url; ?>CategoriaAdmin/addCategoria">Adicionar Categoria</a>
           </div>
         </div>
         <?php if ($data['msg']): ?>
