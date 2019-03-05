@@ -1,9 +1,6 @@
 <?php
 
 class HomeAdminModel extends Model {
-    /*
-     * Retorna o nº de dias que foi trocada a senha
-     */
 
     public function getEstilo() {
       $list = array();
@@ -39,7 +36,7 @@ class HomeAdminModel extends Model {
 
     public function updateEstilo($estilo) {
       $sql = "UPDATE estilo SET status = 1 WHERE id_estilo = :id;";
-      
+
         $param = [':id'=>$estilo->getId_estilo()];
 
         if ($this->ExecuteCommand($sql, $param)) {
@@ -48,10 +45,10 @@ class HomeAdminModel extends Model {
             return false;
         }
     }
-    
+
     public function zerarEstilo($estilo) {
       $sql = "UPDATE estilo SET status = 0 WHERE id_estilo != :id;";
-      
+
         $param = [':id'=>$estilo->getId_estilo()];
 
         if ($this->ExecuteCommand($sql, $param)) {

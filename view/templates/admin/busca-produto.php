@@ -58,9 +58,10 @@
                                 <table class="table table-striped table-hover">
                                     <thead>
                                         <tr>
+                                            <th>Imagem</th>
+                                            <th>Cód. Barras</th>
                                             <th>Nome</th>
-                                            <th>Logo</th>
-                                            <th>Descripción</th>
+                                            <th>Especificação</th>
                                             <th>Editar</th>
                                             <th>Excluir</th>
                                             <th>Pág.</th>
@@ -70,8 +71,9 @@
                                         <?php foreach ($data as $produto): ?>
                                             <tr>
                                                 <td><center><img height="100" src="<?php echo $produto->getImagem(); ?>"></center></td>
-                                        <td><?php echo $produto->getNome(); ?></td>
-                                        <td><?php echo substr($produto->getDescricao(), 0, 45) . "..."; ?></td>
+                                        <td><?php echo $produto->getBarcode(); ?></td>
+                                        <td><?php echo substr($produto->getNome(), 0, 45) . "..."; ?></td>
+                                        <td><?php echo substr($produto->getEspecificacao(), 0, 45) . "..."; ?></td>
                                         <td>
                                             <button type="button" class="btn btn-info btn-circle"><i class="fa fa-pencil"></i></button>
 
@@ -80,7 +82,7 @@
                                             <button type="button" class="btn btn-danger btn-circle" data-toggle="modal" data-target="#excluir<?php echo $produto->getId_produto() ?>"><i class="fa fa-trash"></i></button>
                                         </td>
                                         <td>
-                                            <a href="<?php echo $this->base_url ?>Home/viewProduto/<?php echo $produto->getId(); ?>"><button type="button" class="btn btn-secondary"><i class="fa fa-arrow-right"></i></button></a>
+                                            <a href="<?php echo $this->base_url ?>Home/viewProduto/<?php echo $produto->getId_produto(); ?>"><button type="button" class="btn btn-secondary"><i class="fa fa-eye"></i></button></a>
                                         </td>
                                         </tr>
                                     <?php endforeach; ?>

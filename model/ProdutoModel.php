@@ -59,8 +59,11 @@ class ProdutoModel extends Model {
     public function searchProdutoUnitario($nome, $codigo) {
         $list = [];
 
+        $nome = strtoupper($nome);
+        $codigo = strtoupper($codigo);
+
         if($nome == '' && $codigo != ''){
-            $sql = "SELECT * FROM produto WHERE (barcode LIKE '%{$codigo}%')";
+            $sql = "SELECT id_packproduto, produto.id_produto, produto.barcode, produto.preco, produto.estoque, produto.especificacao, subgrupo.* FROM packproduto JOIN produto ON packproduto.id_produto=produto.id_produto JOIN subgrupo ON packproduto.id_subgrupo=subgrupo.id_subgrupo WHERE (UPPER(produto.barcode) LIKE '%{$codigo}%')";
         }
         if($nome != '' && $codigo == ''){
             $sql = "SELECT * FROM produto WHERE (nome LIKE '%{$nome}%')";
@@ -71,17 +74,20 @@ class ProdutoModel extends Model {
         $consulta = $this->ExecuteQuery($sql,array());
 
         foreach ($consulta as $linha) {
-            $list[] = new Produto($linha['id_produto'], $linha['barcode'], $linha['preco'], $linha['nome'], $linha['estoque'], $linha['imagem'], $linha['descricao'], $linha['destaque'], $linha['tipo'], $linha['id_grupo'], $linha['id_marca']);
+            
+            $list[] = new Packproduto($linha['id_packproduto'],$linha['id_produto'],$linha['barcode'],$linha['preco'],$linha['estoque'],$linha['especificacao'],$linha['id_subgrupo'],$linha['nome'],$linha['descricao'],$linha['imagem'],$linha['destaque'],$linha['id_grupo'],$linha['id_marca']);
         }
         
+        //echo '<pre>';var_dump($consulta);echo '</pre>';die;
+
         return $list;
     }
-    
+
         public function searchProdutoAgrupado($nome, $codigo) {
         $list = [];
 
         if($nome == '' && $codigo != ''){
-            $sql = "SELECT * FROM produto WHERE (barcode LIKE '%{$codigo}%')";
+            $sql = "SELECT * FROM subgrupo WHERE (barcode LIKE '%{$codigo}%')";
         }
         if($nome != '' && $codigo == ''){
             $sql = "SELECT * FROM produto WHERE (nome LIKE '%{$nome}%')";
@@ -89,12 +95,13 @@ class ProdutoModel extends Model {
         if($nome != '' && $codigo != ''){
             $sql = "SELECT * FROM produto WHERE (barcode LIKE '%{$codigo}%' OR nome LIKE '%{$nome}%') ORDER BY CASE barcode WHEN barcode='{$codigo}' and nome='{$nome}' THEN '0' WHEN barcode='{$codigo}' or nome='{$nome}' THEN '1' ELSE nome END";
         }
+
         $consulta = $this->ExecuteQuery($sql,array());
 
         foreach ($consulta as $linha) {
-            $list[] = new Produto($linha['id_produto'], $linha['barcode'], $linha['preco'], $linha['nome'], $linha['estoque'], $linha['imagem'], $linha['descricao'], $linha['destaque'], $linha['tipo'], $linha['id_grupo'], $linha['id_marca']);
+            $list[] = new Produto($linha['id_produto'], $linha['barcode'], $linha['preco'], $linha['nome'], $linha['estoque'], $linha['imagem'], $linha['especificacao'], $linha['destaque'], $linha['tipo'], $linha['id_grupo'], $linha['id_marca']);
         }
-        
+
         return $list;
     }
 

@@ -41,7 +41,8 @@ class ProdutoAdmin extends Admin {
                     $resultado = $this->model->searchProdutoUnitario($nome, $codigo);
 
                     //echo '<pre>';var_dump($resultado);echo '</pre>';
-
+                    //die;
+                    
                     if (!empty($resultado)) {
                         $data['resultado'] = $resultado;
                     } else {

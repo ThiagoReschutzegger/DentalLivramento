@@ -14,10 +14,11 @@ class Packproduto {
   public $nome;
   public $imagem;
   public $descricao;
+  public $destaque;
   public $id_grupo;
   public $id_marca;
 
-    function __construct($id_packproduto, $id_produto, $barcode, $preco, $estoque, $especificacao, $id_subgrupo, $nome, $imagem, $descricao, $id_grupo, $id_marca){
+    function __construct($id_packproduto, $id_produto, $barcode, $preco, $estoque, $especificacao, $id_subgrupo, $nome, $descricao, $imagem, $destaque, $id_grupo, $id_marca){
         $this->id_packproduto = $id_packproduto;
         $this->id_produto = $id_produto;
         $this->barcode = $barcode;
@@ -26,12 +27,13 @@ class Packproduto {
         $this->id_grupo = $especificacao;
         $this->id_subgrupo = $id_subgrupo;
         $this->nome = $nome;
+        $this->destaque = $destaque;
         $this->imagem = $imagem;
         $this->descricao = $descricao;
         $this->id_grupo = $id_grupo;
         $this->id_marca = $id_marca;
     }
-
+    
     function getId_packproduto() {
         return $this->id_packproduto;
     }
@@ -72,6 +74,10 @@ class Packproduto {
         return $this->descricao;
     }
 
+    function getDestaque() {
+        return $this->destaque;
+    }
+
     function getId_grupo() {
         return $this->id_grupo;
     }
@@ -79,8 +85,6 @@ class Packproduto {
     function getId_marca() {
         return $this->id_marca;
     }
-
-
 
     function setId_packproduto($id_packproduto) {
         $this->id_packproduto = $id_packproduto;
@@ -98,11 +102,11 @@ class Packproduto {
         $this->preco = $preco;
     }
 
-  function setEstoque($estoque) {
+    function setEstoque($estoque) {
         $this->estoque = $estoque;
     }
 
-  function setEspecificacao($especificacao) {
+    function setEspecificacao($especificacao) {
         $this->especificacao = $especificacao;
     }
 
@@ -122,6 +126,10 @@ class Packproduto {
         $this->descricao = $descricao;
     }
 
+    function setDestaque($destaque) {
+        $this->destaque = $destaque;
+    }
+
     function setId_grupo($id_grupo) {
         $this->id_grupo = $id_grupo;
     }
@@ -130,4 +138,6 @@ class Packproduto {
         $this->id_marca = $id_marca;
     }
 
+
+    
 }
