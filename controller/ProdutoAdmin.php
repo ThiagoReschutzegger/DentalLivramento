@@ -24,37 +24,57 @@ class ProdutoAdmin extends Admin {
         $this->view->load('footer');
     }
 
-    public function buscaProduto($codigo = null, $nome = null) {
-        echo $codigo;
-        echo "<br>".$nome;
+    public function buscaProduto() {
+
         $data['msg'] = '';
         $data['resultado'] = 'inicio';
+
         if (filter_input(INPUT_POST, 'buscar')) {
-            $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
-            $codigo = filter_input(INPUT_POST, 'codigo', FILTER_SANITIZE_STRING);
+            if ((filter_input(INPUT_POST, 'organizar', FILTER_SANITIZE_STRING)) == '1') {
 
-            //echo '<pre>';
-            //var_dump($nome);
-            //var_dump($codigo);
+                $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
+                $codigo = filter_input(INPUT_POST, 'codigo', FILTER_SANITIZE_STRING);
 
-            echo '</pre>';
-            if ($nome || $codigo) {
+                //echo '<pre>';var_dump($nome);var_dump($codigo);echo '</pre>';
 
-                $resultado = $this->model->searchProduto($nome, $codigo);
-                //echo '<pre>';
-                //var_dump($resultado);
-                //echo '</pre>';
-                if (!empty($resultado)) {
-                    $data['resultado'] = $resultado;
+                if ($nome || $codigo) {
+                    $resultado = $this->model->searchProdutoUnitario($nome, $codigo);
+
+                    //echo '<pre>';var_dump($resultado);echo '</pre>';
+
+                    if (!empty($resultado)) {
+                        $data['resultado'] = $resultado;
+                    } else {
+                        $data['resultado'] = 'vazio';
+                    }
                 } else {
-                    $data['resultado'] = 'vazio';
+                    $data['resultado'] = 'inicio';
                 }
-            } else {
-                $data['msg'] = 'Preencha todos os Campos!';
+            } elseif ((filter_input(INPUT_POST, 'organizar', FILTER_SANITIZE_STRING)) == '2') {
+
+                $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
+                $codigo = filter_input(INPUT_POST, 'codigo', FILTER_SANITIZE_STRING);
+
+                //echo '<pre>';var_dump($nome);var_dump($codigo);echo '</pre>';
+
+                if ($nome || $codigo) {
+                    $resultado = $this->model->searchProdutoAgrupado($nome, $codigo);
+
+                    //echo '<pre>';var_dump($resultado);echo '</pre>';
+
+                    if (!empty($resultado)) {
+                        $data['resultado'] = $resultado;
+                    } else {
+                        $data['resultado'] = 'vazio';
+                    }
+                } else {
+                    $data['resultado'] = 'inicio';
+                }
             }
-        }else{
+        } else {
             $data['resultado'] = 'inicio';
         }
+
         $this->view->load('header');
         $this->view->load('nav');
         $this->view->load('busca-produto', $data['resultado']);
