@@ -54,10 +54,31 @@
             <input type="text" class="form-control" name="imagem"><small class="help-block-none">Cole aqui o link da imagem. <b style="color:red;">SEMPRE terminado em <i>.jpg</i>, <i>.png</i> ou outras extensões imagem.</b></small>
           </div>
         </div>
+
+
+        <label class="col-sm-3 form-control-label text-right">Selecione a Marca:</label>
+        <?php foreach( $data['marca'] as $marca ): ?>
+        <div class="form-group row">
+          <label class="col-sm-3"></label>
+          <div class="col-sm-8">
+            <input id="id_marca<?php echo $marca->getId_marca(); ?>" type="radio" class="radio-template" name="id_marca" value="<?php echo $marca->getId_marca(); ?>">
+            <label from="id_marca<?php echo $marca->getId_marca(); ?>" class="form-control-label text-right"><?php echo $marca->getNome(); ?></label>
+          </div>
+        </div>
+      <?php endforeach; ?>
+        <div class="form-group row">
+          <div class="col-sm-4 offset-sm-3">
+            <a class="btn btn-primary" href="<?php echo $this->base_url; ?>MarcaAdmin/addMarca">Adicionar Marca</a>
+            <br>
+            <br>
+          </div>
+        </div>
+
+
         <div class="form-group row">
           <div class="col-sm-4 offset-sm-3">
             <input type="reset" class="btn btn-secondary" value="Limpar" />
-            <input type="submit" class="btn btn-primary" value="Salvar" name="add" />
+            <input type="submit" class="btn btn-success" value="Salvar" name="add" />
           </div>
         </div>
         <?php if ($data['msg']): ?>

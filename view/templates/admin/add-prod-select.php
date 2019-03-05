@@ -29,7 +29,7 @@
                           <th scope="row">'.$grupo->getId_grupo().'</th>
                           <td>'.$grupo->getNome().'</td>
                           <td>
-                          <a class="btn btn-success" style="font-size: 10px;" href="'.$this->base_url.'ProdutoAdmin/addProdutoMarca/'.$grupo->getId_grupo().'"><i class="fa fa-check"></i></a>
+                          <a class="btn btn-success" style="font-size: 10px;" href="'.$this->base_url.'ProdutoAdmin/addProdutoCompleto/'.$grupo->getId_grupo().'"><i class="fa fa-check"></i></a>
                           </td>
                           </tr>';
                           $algum = true;

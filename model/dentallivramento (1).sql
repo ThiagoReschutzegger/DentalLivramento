@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.7
+-- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 04-Mar-2019 às 23:09
--- Versão do servidor: 10.1.30-MariaDB
--- PHP Version: 7.2.2
+-- Generation Time: 05-Mar-2019 às 22:32
+-- Versão do servidor: 10.1.25-MariaDB
+-- PHP Version: 5.6.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -107,7 +107,7 @@ CREATE TABLE `grupo` (
 
 INSERT INTO `grupo` (`id_grupo`, `nome`, `id_categoria`) VALUES
 (1, 'Ortodontias', 1),
-(10, 'grupo 2', 2),
+(10, 'grupo 2', 1),
 (12, 'grupo 3', 5),
 (13, 'grupo novo', 3);
 
@@ -128,7 +128,9 @@ CREATE TABLE `marca` (
 --
 
 INSERT INTO `marca` (`id_marca`, `nome`, `imagem`) VALUES
-(1, 'Marca de Teste', 'https://vandal-us.s3.amazonaws.com/spree/products/49846/original/open-uri20181203-14-1jczs.jpg');
+(1, 'Marca de Teste', 'https://vandal-us.s3.amazonaws.com/spree/products/49846/original/open-uri20181203-14-1jczs.jpg'),
+(2, 'Puma', 'https://www.nicepng.com/png/detail/269-2696215_puma-fuma-logo-2-by-brian-logo-puma.png'),
+(3, 'qwert', 'qwerty');
 
 -- --------------------------------------------------------
 
@@ -153,8 +155,16 @@ CREATE TABLE `produto` (
   `barcode` varchar(50) NOT NULL,
   `preco` varchar(10) NOT NULL,
   `estoque` int(11) NOT NULL,
-  `especificacao` varchar(500) NOT NULL
+  `especificacao` varchar(500) NOT NULL,
+  `id_subgrupo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `produto`
+--
+
+INSERT INTO `produto` (`id_produto`, `barcode`, `preco`, `estoque`, `especificacao`, `id_subgrupo`) VALUES
+(3, '12345', '12345', 0, 'qwerty&#39;', 5);
 
 -- --------------------------------------------------------
 
@@ -171,6 +181,14 @@ CREATE TABLE `subgrupo` (
   `id_grupo` int(11) NOT NULL,
   `id_marca` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `subgrupo`
+--
+
+INSERT INTO `subgrupo` (`id_subgrupo`, `nome`, `descricao`, `imagem`, `destaque`, `id_grupo`, `id_marca`) VALUES
+(3, 'qwert', 'wert', 'wertghgf', '0', 13, 2),
+(5, 'qwert', 'qwert', 'qwerty', '0', 12, 2);
 
 -- --------------------------------------------------------
 
@@ -266,55 +284,46 @@ ALTER TABLE `usuario`
 --
 ALTER TABLE `categoria`
   MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
 --
 -- AUTO_INCREMENT for table `destaque`
 --
 ALTER TABLE `destaque`
   MODIFY `id_destaque` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT for table `estilo`
 --
 ALTER TABLE `estilo`
   MODIFY `id_estilo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
 -- AUTO_INCREMENT for table `grupo`
 --
 ALTER TABLE `grupo`
-  MODIFY `id_grupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-
+  MODIFY `id_grupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `marca`
 --
 ALTER TABLE `marca`
-  MODIFY `id_marca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
+  MODIFY `id_marca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `packproduto`
 --
 ALTER TABLE `packproduto`
   MODIFY `id_packproduto` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `produto`
 --
 ALTER TABLE `produto`
-  MODIFY `id_produto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
+  MODIFY `id_produto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `subgrupo`
 --
 ALTER TABLE `subgrupo`
-  MODIFY `id_subgrupo` int(11) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id_subgrupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `usuario`
 --
 ALTER TABLE `usuario`
   MODIFY `id_user` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- Constraints for dumped tables
 --

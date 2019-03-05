@@ -7,13 +7,15 @@ class Produto {
     public $preco;
     public $estoque;
     public $especificacao;
+    public $id_subgrupo;
 
-    function __construct($id_produto, $barcode, $preco, $estoque, $especificacao){
+    function __construct($id_produto, $barcode, $preco, $estoque, $especificacao, $id_subgrupo){
         $this->id_produto = $id_produto;
         $this->barcode = $barcode;
         $this->preco = $preco;
         $this->estoque = $estoque;
-        $this->id_grupo = $especificacao;
+        $this->especificacao = $especificacao;
+        $this->id_subgrupo = $id_subgrupo;
     }
 
     function getId_produto() {
@@ -36,6 +38,10 @@ class Produto {
         return $this->especificacao;
     }
 
+    function getId_subgrupo() {
+        return $this->id_subgrupo;
+    }
+
     function setId_produto($id_produto) {
         $this->id_produto = $id_produto;
     }
@@ -55,5 +61,9 @@ class Produto {
   function setEspecificacao($especificacao) {
         $this->especificacao = $especificacao;
     }
+
+    function setId_subgrupo($id_subgrupo) {
+          $this->id_subgrupo = $id_subgrupo;
+      }
 
 }
