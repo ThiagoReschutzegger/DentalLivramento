@@ -7,6 +7,7 @@ class ProdutoAdmin extends Admin {
     protected $modelGrupo;
     protected $modelSubgrupo;
     protected $modelMarca;
+    protected $modelPack;
 
     public function __construct() {
         parent::__construct();
@@ -15,6 +16,7 @@ class ProdutoAdmin extends Admin {
         $this->modelGrupo = new GrupoModel();
         $this->modelSubgrupo = new SubgrupoModel();
         $this->modelMarca = new MarcaModel();
+        $this->modelPack = new PackprodutoModel();
     }
 
     public function index() {
@@ -42,7 +44,7 @@ class ProdutoAdmin extends Admin {
 
                     //echo '<pre>';var_dump($resultado);echo '</pre>';
                     //die;
-                    
+
                     if (!empty($resultado)) {
                         $data['resultado'] = $resultado;
                     } else {
@@ -83,58 +85,67 @@ class ProdutoAdmin extends Admin {
     }
 
     public function addProdutoWhere() { //seleciona o grupo em que será adicionado o produto completo
-      $data['msg'] = '';
-      $data['categoria'] = $this->modelCategoria->getCategoria();
-      $data['grupo'] = $this->modelGrupo->getGrupo();
+        $data['msg'] = '';
+        $data['categoria'] = $this->modelCategoria->getCategoria();
+        $data['grupo'] = $this->modelGrupo->getGrupo();
 
-      $this->view->load('header');
-      $this->view->load('nav');
-      $this->view->load('add-prod-select',$data);
-      $this->view->load('footer');
-  }
+        $this->view->load('header');
+        $this->view->load('nav');
+        $this->view->load('add-prod-select', $data);
+        $this->view->load('footer');
+    }
 
-  public function addProdutoCompleto($id_gp) {
-    $data['msg'] = '';
-    $data['marca'] = $this->modelMarca->getMarca();
+    public function addProdutoCompleto($id_gp) {
+        $data['msg'] = '';
+        $data['marca'] = $this->modelMarca->getMarca();
 
-    if (filter_input(INPUT_POST, 'add')) {
-      $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING); //Sg
-      $descricao = filter_input(INPUT_POST, 'descricao', FILTER_SANITIZE_STRING); //Sg
-      $especificacao = filter_input(INPUT_POST, 'especificacao', FILTER_SANITIZE_STRING); //Prod
-      $barcode = filter_input(INPUT_POST, 'barcode', FILTER_SANITIZE_STRING); //Prod
-      $preco = filter_input(INPUT_POST, 'preco', FILTER_SANITIZE_STRING); //Prod
-      $estoque = filter_input(INPUT_POST, 'estoque', FILTER_SANITIZE_STRING); //Prod
-      $imagem = filter_input(INPUT_POST, 'imagem', FILTER_SANITIZE_STRING); //Sg
-      $id_marca = filter_input(INPUT_POST, 'id_marca', FILTER_SANITIZE_STRING); //Sg
+        if (filter_input(INPUT_POST, 'add')) {
+            $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING); //Sg
+            $descricao = filter_input(INPUT_POST, 'descricao', FILTER_SANITIZE_STRING); //Sg
+            $especificacao = filter_input(INPUT_POST, 'especificacao', FILTER_SANITIZE_STRING); //Prod
+            $barcode = filter_input(INPUT_POST, 'barcode', FILTER_SANITIZE_STRING); //Prod
+            $preco = filter_input(INPUT_POST, 'preco', FILTER_SANITIZE_STRING); //Prod
+            $estoque = filter_input(INPUT_POST, 'estoque', FILTER_SANITIZE_STRING); //Prod
+            $imagem = filter_input(INPUT_POST, 'imagem', FILTER_SANITIZE_STRING); //Sg
+            $id_marca = filter_input(INPUT_POST, 'id_marca', FILTER_SANITIZE_STRING); //Sg
 
-          if ($nome && $descricao && $especificacao && $barcode && $preco && $estoque && $imagem) {
-            $subgrupo = new Subgrupo(null, $nome, $descricao, $imagem, 0, $id_gp, $id_marca);
+            if ($nome && $descricao && $especificacao && $barcode && $preco && $estoque && $imagem) {
+                $subgrupo = new Subgrupo(null, $nome, $descricao, $imagem, 0, $id_gp, $id_marca);
 
-              if ($this->modelSubgrupo->insertSubgrupo($subgrupo)) {
+                if ($this->modelSubgrupo->insertSubgrupo($subgrupo)) {
                     $algo = $this->modelSubgrupo->getSupreme($nome, $descricao, $imagem);
                     $id_subgrupo = $algo->getId_subgrupo();
                     $produto = new Produto(null, $barcode, $preco, $estoque, $especificacao, $id_subgrupo);
-                    if($this->model->insertProduto($produto)){
+                    if ($this->model->insertProduto($produto)) {
                         $this->index();
                         return true;
-                    }else {
+                    } else {
                         $data['msg'] = 'Erro prod!';
-                        return false;
-                        }
-              } else {
-                  $data['msg'] = 'Erro sub!';
-                  return false;
-                  }
-          } else {
-               $data['msg'] = 'Preencha todos os Campos!';
-               return false;
-          }
-      }
+                    }
+                } else {
+                    $data['msg'] = 'Erro sub!';
+                }
+            } else {
+                $data['msg'] = 'Preencha todos os Campos!';
+            }
+        }
 
-      $this->view->load('header');
-      $this->view->load('nav');
-      $this->view->load('add-prod',$data);
-      $this->view->load('footer');
-}
+        $this->view->load('header');
+        $this->view->load('nav');
+        $this->view->load('add-prod', $data);
+        $this->view->load('footer');
+    }
+
+    public function viewProduto($id) {
+
+        $data = $this->modelPack->getPackprodutoById($id);
+
+        //echo '<pre>';var_dump($data);echo '</pre>';die;
+
+        $this->view->load('header');
+        $this->view->load('nav');
+        $this->view->load('view-single-prod', $data);
+        $this->view->load('footer');
+    }
 
 }

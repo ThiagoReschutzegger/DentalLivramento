@@ -2,29 +2,25 @@
 
 class Packproduto {
 
-  public $id_packproduto;
+    public $id_produto;
+    public $barcode;
+    public $preco;
+    public $estoque;
+    public $especificacao;
+    public $id_subgrupo;
+    public $nome;
+    public $imagem;
+    public $descricao;
+    public $destaque;
+    public $id_grupo;
+    public $id_marca;
 
-  public $id_produto;
-  public $barcode;
-  public $preco;
-  public $estoque;
-  public $especificacao;
-
-  public $id_subgrupo;
-  public $nome;
-  public $imagem;
-  public $descricao;
-  public $destaque;
-  public $id_grupo;
-  public $id_marca;
-
-    function __construct($id_packproduto, $id_produto, $barcode, $preco, $estoque, $especificacao, $id_subgrupo, $nome, $descricao, $imagem, $destaque, $id_grupo, $id_marca){
-        $this->id_packproduto = $id_packproduto;
+    function __construct($id_produto, $barcode, $preco, $estoque, $especificacao, $id_subgrupo, $nome, $descricao, $imagem, $destaque, $id_grupo, $id_marca) {
         $this->id_produto = $id_produto;
         $this->barcode = $barcode;
         $this->preco = $preco;
         $this->estoque = $estoque;
-        $this->id_grupo = $especificacao;
+        $this->especificacao = $especificacao;
         $this->id_subgrupo = $id_subgrupo;
         $this->nome = $nome;
         $this->destaque = $destaque;
@@ -32,10 +28,6 @@ class Packproduto {
         $this->descricao = $descricao;
         $this->id_grupo = $id_grupo;
         $this->id_marca = $id_marca;
-    }
-    
-    function getId_packproduto() {
-        return $this->id_packproduto;
     }
 
     function getId_produto() {
@@ -86,10 +78,6 @@ class Packproduto {
         return $this->id_marca;
     }
 
-    function setId_packproduto($id_packproduto) {
-        $this->id_packproduto = $id_packproduto;
-    }
-
     function setId_produto($id_produto) {
         $this->id_produto = $id_produto;
     }
@@ -138,6 +126,4 @@ class Packproduto {
         $this->id_marca = $id_marca;
     }
 
-
-    
 }
