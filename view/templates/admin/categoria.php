@@ -9,20 +9,18 @@
             <table class="table table-striped">
               <thead>
                 <tr>
-                  <th>Id</th>
-                  <th>Nome - Categoria</th>
+                  <th>Nome da Categoria</th>
                   <th>Descrição</th>
-                  <th>Link - imagem</th>
+                  <th>Link da imagem</th>
                   <th>Ações</th>
                 </tr>
               </thead>
               <tbody>
                 <?php foreach ($data as $categoria): ?>
                 <tr>
-                  <th scope="row"><?php echo $categoria->getId_categoria(); ?></th>
                   <td><?php echo $categoria->getNome(); ?></td>
-                  <td>...</td>
-                  <td><img src="<?php echo $categoria->getImagem(); ?>" height="80px" /></td>
+                  <td><?php echo substr($categoria->getDescricao(), 0, 45) . "..."; ?></td>
+                  <td><a target="_blank" href='<?php echo $categoria->getImagem(); ?>'><img src="<?php echo $categoria->getImagem(); ?>" height="65px" /></a></td>
                   <td>
                     <a href="<?php echo $this->base_url; ?>CategoriaAdmin/viewCategoria/<?php echo $categoria->getId_categoria(); ?>">
                       <i class="fa fa-eye"></i>

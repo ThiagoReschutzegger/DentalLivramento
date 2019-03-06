@@ -16,42 +16,42 @@
               <table class="table table-striped table-hover">
                 <thead>
                   <tr>
-                    <th>Id</th>
-                    <th>Nome Grupo</th>
+                    <th>Nome do Grupo</th>
                     <th></th>
                   </tr>
                 </thead>
                 <tbody>
 
                     <?php foreach ($data['grupo'] as $grupo):
-                      if ($grupo->getId_categoria() == $categoria->getId_categoria()){
+                      if ($grupo->getId_categoria() == $categoria->getId_categoria()):
                           echo '<tr>
-                          <th scope="row">'.$grupo->getId_grupo().'</th>
                           <td>'.$grupo->getNome().'</td>
                           <td>
-                          <a class="btn btn-success" style="font-size: 10px;" href="'.$this->base_url.'ProdutoAdmin/addProdutoCompleto/'.$grupo->getId_grupo().'"><i class="fa fa-check"></i></a>
+                          <a class="btn btn-primary" style="font-size: 10px;" href="'.$this->base_url.'ProdutoAdmin/addProdutoCompleto/'.$grupo->getId_grupo().'"><i class="fa fa-map-pin"></i></a>
                           </td>
                           </tr>';
                           $algum = true;
-                      }
+                      endif;
                    endforeach;
                    if(!$algum){
-                     echo '<tr>
-                     <td colspan="3">Nenhum grupo selecionado nessa categoria.</td>
-                     </tr>';
+                     echo '<tr><td colspan="3">Nenhum grupo existente nessa categoria.</td></tr>';
                      $algum = true;
                    }
                   ?>
                 </tbody>
               </table>
+              <div class="col-sm-12 mx-auto" style='margin:10px'>
+                <a class="btn btn-success btn-block" href="<?php echo $this->base_url; ?>CategoriaAdmin/addCategoria">Adicionar Grupo</a>
+              </div>
             </div>
           </div>
         </div>
     </div>
   <?php $algum = false; endforeach; ?>
-  <div class="col-sm-6">
-    <a class="btn btn-primary" href="<?php echo $this->base_url; ?>CategoriaAdmin/addCategoria">Adicionar Categoria</a>
-  </div>
+
+</div>
+<div class="col-sm-12 mx-auto" style='margin:10px'>
+  <a class="btn btn-success btn-block" href="<?php echo $this->base_url; ?>CategoriaAdmin/addCategoria">Adicionar Categoria</a>
 </div>
 </div>
 </div>
