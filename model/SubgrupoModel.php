@@ -6,22 +6,32 @@ class SubgrupoModel extends Model {
         $list = [];
         $sql = "SELECT * FROM subgrupo";
         $consulta = $this->ExecuteQuery($sql, array());
-        foreach ($consulta as $linha) {
-            $list[] = new Subgrupo($linha['id_subgrupo'], $linha['nome'], $linha['descricao'], $linha['imagem'],  $linha['destaque'], $linha['id_grupo'], $linha['id_marca']);
+        foreach ($consulta as $subgrupo) {
+            $list[] = new Subgrupo($subgrupo['id_subgrupo'], $subgrupo['nome'], $subgrupo['descricao'], $subgrupo['imagem'], $subgrupo['destaque'], $subgrupo['id_grupo'], $subgrupo['id_marca']);
         }
         return $list;
     }
 
-    public function getSupreme($nome, $descricao, $imagem) {
+    public function getIdBy($nome, $descricao, $imagem) {
         $sql = "SELECT * FROM subgrupo WHERE nome = :nome AND descricao = :descricao AND imagem = :imagem;";
         $subgrupo = $this->ExecuteQuery($sql, [':nome' => $nome, ':descricao' => $descricao, ':imagem' => $imagem ])[0];
-        return new Subgrupo($subgrupo['id_subgrupo'], $subgrupo['nome'], $subgrupo['descricao'], $subgrupo['imagem'], $subgrupo['destaque'], $subgrupo['id_grupo'], $subgrupo['id_marca']);
+        return new Subgrupo($subgrupo['id_subgrupo'], $subgrupo['nome'], $subgrupo['descricao'], $subgrupo['imagem'],  $subgrupo['destaque'], $subgrupo['id_grupo'], $subgrupo['id_marca']);
     }
 
     public function getSubgrupoById($id) {
-        $sql = "SELECT * FROM subgrupo WHERE id_subgrupo=:id;";
+        $sql = "SELECT * FROM subgrupo WHERE id_subgrupo = :id;";
         $subgrupo = $this->ExecuteQuery($sql, [':id' => $id])[0];
         return new Subgrupo($subgrupo['id_subgrupo'], $subgrupo['nome'], $subgrupo['descricao'], $subgrupo['imagem'], $subgrupo['destaque'], $subgrupo['id_grupo'], $subgrupo['id_marca']);
+    }
+
+    public function getSubgrupoByGrupo($id) {
+        $list = [];
+        $sql = "SELECT * FROM subgrupo WHERE id_grupo = :id;";
+        $consulta = $this->ExecuteQuery($sql, [':id' => $id]);
+        foreach ($consulta as $subgrupo) {
+            $list[] = new Subgrupo($subgrupo['id_subgrupo'], $subgrupo['nome'], $subgrupo['descricao'], $subgrupo['imagem'], $subgrupo['destaque'], $subgrupo['id_grupo'], $subgrupo['id_marca']);
+        }
+        return $list;
     }
 
     public function insertSubgrupo($subgrupo) {

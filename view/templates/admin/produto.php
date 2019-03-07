@@ -38,9 +38,9 @@
                 <!-- Item -->
                 <div class="col-xl-3 col-sm-6">
                     <div class="item d-flex align-items-center">
-                        <div class="icon bg-green"><i class="icon-bill"></i></div>
-                        <a href="<?php echo $this->base_url; ?>ProdutoAdmin/addProduto">
-                            <div class="title"><span>Adicionar em<br>massa</span>
+                        <div class="icon bg-green"><i class="fa fa-copy"></i></div>
+                        <a href="<?php echo $this->base_url; ?>ProdutoAdmin/addCommonWhere">
+                            <div class="title"><span>Adicionar<br>semelhante</span>
                                 <div class="progress">
                                     <div role="progressbar" style="width: 100%; height: 4px;" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-green"></div>
                                 </div>
