@@ -1,4 +1,3 @@
-<?php $categoria = $data['categoria']; ?>
 <div class="container-fluid" style="margin-top: 50px">
 <div class="col-lg-12">
   <?php if ($data['msg']): ?>
@@ -11,37 +10,46 @@
   <?php endif ?>
   <div class="card">
     <div class="card-header d-flex align-items-center">
-      <h3 class="h4">Adicionar Categoria</h3>
+      <h3 class="h4">Adicionar Produto</h3>
     </div>
     <div class="card-body">
       <form class="form-horizontal" method="post">
-        <input type="hidden" name="id" value="<?php echo $categoria->getId_categoria(); ?>">
         <div class="form-group row">
-          <label class="col-sm-2 form-control-label text-right">Nome:</label>
+          <label class="col-sm-2 form-control-label text-right">Especificação:</label>
           <div class="col-sm-8">
-            <input type="text" class="form-control" name="nome" value="<?php echo $categoria->getNome(); ?>">
+            <input type="text" class="form-control" name="especificacao">
           </div>
         </div>
         <div class="line"></div>
         <div class="form-group row">
-          <label class="col-sm-2 form-control-label text-right">Descrição:</label>
+          <label class="col-sm-2 form-control-label text-right">Código de Barras:</label>
           <div class="col-sm-8">
-            <textarea class="form-control" name="descricao"><?php echo $categoria->getDescricao(); ?></textarea>
+            <input type="number" class="form-control" name="barcode">
           </div>
         </div>
         <div class="line"></div>
         <div class="form-group row">
-          <label class="col-sm-2 form-control-label text-right">Link:</label>
+          <label class="col-sm-2 form-control-label text-right">Preço:</label>
           <div class="col-sm-8">
-            <input type="text" class="form-control" name="imagem" value="<?php echo $categoria->getImagem(); ?>"><small class="help-block-none">Cole aqui o link da imagem. (sempre terminado em .jpg .png ou outros tipos de imagem)</small>
+            <input type="text" class="form-control" placeholder="atualizar mais bonetinho" name="preco">
           </div>
         </div>
+        <div class="line"></div>
+        <div class="form-group row">
+          <label class="col-sm-2 form-control-label text-right">Estoque:</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" name="estoque">
+          </div>
+        </div>
+        <div class="line"></div>
         <div class="form-group row">
           <div class="col-sm-4 offset-sm-3">
             <input type="reset" class="btn btn-secondary" value="Limpar" />
-            <input type="submit" class="btn btn-primary" value="Salvar" name="upd" />
+            <input type="submit" class="btn btn-success" value="Salvar" name="add" /><br><br>
+            <a href="<?php echo $this->base_url; ?>ProdutoAdmin" class="btn btn-danger">Parar de Adicionar<a/>
           </div>
         </div>
+
       </form>
     </div>
   </div>

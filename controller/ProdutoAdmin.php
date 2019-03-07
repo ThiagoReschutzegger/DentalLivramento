@@ -42,7 +42,7 @@ class ProdutoAdmin extends Admin {
 
                     //echo '<pre>';var_dump($resultado);echo '</pre>';
                     //die;
-                    
+
                     if (!empty($resultado)) {
                         $data['resultado'] = $resultado;
                     } else {
@@ -107,27 +107,22 @@ class ProdutoAdmin extends Admin {
       $imagem = filter_input(INPUT_POST, 'imagem', FILTER_SANITIZE_STRING); //Sg
       $id_marca = filter_input(INPUT_POST, 'id_marca', FILTER_SANITIZE_STRING); //Sg
 
-          if ($nome && $descricao && $especificacao && $barcode && $preco && $estoque && $imagem) {
-            $subgrupo = new Subgrupo(null, $nome, $descricao, $imagem, 0, $id_gp, $id_marca);
-
+          if ($nome && $descricao && $especificacao && $barcode && $preco && $estoque && $imagem && $id_marca) {
+              $subgrupo = new Subgrupo(null, $nome, $descricao, $imagem, 0, $id_gp, $id_marca);
               if ($this->modelSubgrupo->insertSubgrupo($subgrupo)) {
-                    $algo = $this->modelSubgrupo->getSupreme($nome, $descricao, $imagem);
+                    $algo = $this->modelSubgrupo->getIdBy($nome, $descricao, $imagem);
                     $id_subgrupo = $algo->getId_subgrupo();
                     $produto = new Produto(null, $barcode, $preco, $estoque, $especificacao, $id_subgrupo);
                     if($this->model->insertProduto($produto)){
-                        $this->index();
-                        return true;
+                        $data['msg'] = 'Adicionado com Sucesso!';
                     }else {
                         $data['msg'] = 'Erro prod!';
-                        return false;
                         }
               } else {
                   $data['msg'] = 'Erro sub!';
-                  return false;
                   }
           } else {
                $data['msg'] = 'Preencha todos os Campos!';
-               return false;
           }
       }
 
@@ -135,6 +130,53 @@ class ProdutoAdmin extends Admin {
       $this->view->load('nav');
       $this->view->load('add-prod',$data);
       $this->view->load('footer');
-}
+    }
+
+    public function addCommonWhere() { //seleciona o grupo em que será adicionado o produto completo
+      $data['msg'] = '';
+      $data['categoria'] = $this->modelCategoria->getCategoria();
+      $data['grupo'] = $this->modelGrupo->getGrupo();
+
+      $this->view->load('header');
+      $this->view->load('nav');
+      $this->view->load('add-common-select',$data);
+      $this->view->load('footer');
+  }
+
+    public function addCommonProd($id) { //seleciona o grupo em que será adicionado o produto completo
+      $data['msg'] = '';
+      $data['subgrupo'] = $this->modelSubgrupo->getSubgrupoByGrupo($id);
+
+      $this->view->load('header');
+      $this->view->load('nav');
+      $this->view->load('add-common-sub',$data);
+      $this->view->load('footer');
+    }
+
+    public function addCommon($id) {
+      $data['msg'] = '';
+
+      if (filter_input(INPUT_POST, 'add')) {
+        $especificacao = filter_input(INPUT_POST, 'especificacao', FILTER_SANITIZE_STRING); //Prod
+        $barcode = filter_input(INPUT_POST, 'barcode', FILTER_SANITIZE_STRING); //Prod
+        $preco = filter_input(INPUT_POST, 'preco', FILTER_SANITIZE_STRING); //Prod
+        $estoque = filter_input(INPUT_POST, 'estoque', FILTER_SANITIZE_STRING); //Prod
+
+            if ($especificacao && $barcode && $preco && $estoque) {
+                    $produto = new Produto(null, $barcode, $preco, $estoque, $especificacao, $id);
+                    if($this->model->insertProduto($produto)){
+                        $data['msg'] = 'Adicionado com Sucesso!';
+                    }else {
+                        $data['msg'] = 'Erro!';
+                    }
+             }else {
+                 $data['msg'] = 'Preencha todos os Campos!';
+            }
+          }
+        $this->view->load('header');
+        $this->view->load('nav');
+        $this->view->load('add-common',$data);
+        $this->view->load('footer');
+      }
 
 }

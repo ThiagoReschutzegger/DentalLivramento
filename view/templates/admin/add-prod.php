@@ -78,12 +78,13 @@
         <div class="form-group row">
           <div class="col-sm-4 offset-sm-3">
             <input type="reset" class="btn btn-secondary" value="Limpar" />
-            <input type="submit" class="btn btn-success" value="Salvar" name="add" />
+            <input type="submit" class="btn btn-success" value="Salvar" name="add" /><br><br>
+            <a href="<?php echo $this->base_url; ?>ProdutoAdmin" class="btn btn-danger">Parar de Adicionar<a/>
           </div>
         </div>
         <?php if ($data['msg']): ?>
-          <div class="row col-sm-12">
-              <div class="alert alert-danger alert-dismissable">
+          <div class="row container-fluid">
+              <div class="col-lg-12 alert alert-<?php if($data['msg']== 'Adicionado com Sucesso!'){ echo "success";} else{ echo "danger";}?> alert-dismissable">
                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                   <?php echo $data['msg'] ?>
               </div>
