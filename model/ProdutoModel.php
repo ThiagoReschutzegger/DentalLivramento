@@ -7,7 +7,7 @@
           $sql = "SELECT * FROM produto";
           $consulta = $this->ExecuteQuery($sql, array());
           foreach ($consulta as $linha) {
-              $list[] = new Produto($linha['id_produto'], $linha['barcode'], $linha['preco'], $linha['estoque'], $linha['especificacao']);
+              $list[] = new Produto($linha['id_produto'], $linha['barcode'], $linha['preco'], $linha['estoque'], $linha['especificacao'],$linha['id_subgrupo']);
           }
           return $list;
       }
@@ -15,7 +15,17 @@
       public function getProdutoById($id) {
           $sql = "SELECT * FROM produto WHERE id_produto=:id;";
           $produto = $this->ExecuteQuery($sql, [':id' => $id])[0];
-          return new Produto($produto['id_produto'], $produto['barcode'], $produto['preco'], $produto['estoque'], $produto['especificacao']);
+          return new Produto($produto['id_produto'], $produto['barcode'], $produto['preco'], $produto['estoque'], $produto['especificacao'],$produto['id_subgrupo']);
+      }
+
+      public function getProdutosBySubgrupoId($id) {
+          $list = [];
+          $sql = "SELECT * FROM produto WHERE id_subgrupo=:id;";
+          $produto = $this->ExecuteQuery($sql, [':id' => $id]);
+          foreach ($produto as $linha) {
+              $list[] = new Produto($linha['id_produto'], $linha['barcode'], $linha['preco'], $linha['estoque'], $linha['especificacao'], $linha['id_subgrupo']);
+          }
+          return $list;
       }
 
       public function insertProduto($produto) {

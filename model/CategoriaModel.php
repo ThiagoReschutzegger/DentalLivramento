@@ -47,4 +47,15 @@ class CategoriaModel extends Model {
         }
     }
 
+    public function getCategoriaByGrupoId($id) {
+        $list = [];
+        $sql = "SELECT categoria.* FROM grupo JOIN categoria ON grupo.id_categoria=categoria.id_categoria WHERE id_grupo = :id";
+        $query = $this->ExecuteQuery($sql, [':id' => $id]);
+        foreach ($query as $linha) {
+            $list[] = new Categoria($linha['id_categoria'], $linha['nome'], $linha['descricao'], $linha['imagem']);
+        }
+        //echo 'Cok';
+        return $list;
+    }
+
 }

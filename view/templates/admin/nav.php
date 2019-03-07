@@ -46,7 +46,7 @@
           <li><a href="<?php echo $this->base_url; ?>DestaqueAdmin"> <i class="fa fa-star"></i>Destaques </a></li>
           <li><a href="<?php echo $this->base_url; ?>CategoriaAdmin"> <i class="fa fa-list"></i>Categorias </a></li>
           <li><a href="<?php echo $this->base_url; ?>GrupoAdmin"> <i class="icon-grid"></i>Grupos </a></li>
-          <li><a href="<?php echo $this->base_url; ?>MarcaAdmin"> <i class="fa fa-photo"></i>Marcas </a></li>
+          <li><a href="<?php echo $this->base_url; ?>MarcaAdmin"> <i class="fa fa-flag"></i>Marcas </a></li>
           <li><a href="<?php echo $this->base_url; ?>ProdutoAdmin"> <i class="fa fa-barcode"></i>Produtos </a></li>
         </ul><!--<span class="heading">Extras</span>
         <ul class="list-unstyled">

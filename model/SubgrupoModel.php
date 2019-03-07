@@ -15,14 +15,13 @@ class SubgrupoModel extends Model {
     public function getSupreme($nome, $descricao, $imagem) {
         $sql = "SELECT * FROM subgrupo WHERE nome = :nome AND descricao = :descricao AND imagem = :imagem;";
         $subgrupo = $this->ExecuteQuery($sql, [':nome' => $nome, ':descricao' => $descricao, ':imagem' => $imagem ])[0];
-        return new Subgrupo($subgrupo['id_subgrupo'], $subgrupo['nome'], $subgrupo['imagem'], $subgrupo['descricao'], $subgrupo['destaque'], $subgrupo['id_grupo'], $subgrupo['id_marca']);
+        return new Subgrupo($subgrupo['id_subgrupo'], $subgrupo['nome'], $subgrupo['descricao'], $subgrupo['imagem'], $subgrupo['destaque'], $subgrupo['id_grupo'], $subgrupo['id_marca']);
     }
 
     public function getSubgrupoById($id) {
         $sql = "SELECT * FROM subgrupo WHERE id_subgrupo=:id;";
-        $consulta = $this->ExecuteQuery($sql, [':id' => $id])[0];
         $subgrupo = $this->ExecuteQuery($sql, [':id' => $id])[0];
-        return new Subgrupo($subgrupo['id_subgrupo'], $subgrupo['nome'], $subgrupo['imagem'], $subgrupo['descricao'], $subgrupo['id_grupo'], $subgrupo['id_marca']);
+        return new Subgrupo($subgrupo['id_subgrupo'], $subgrupo['nome'], $subgrupo['descricao'], $subgrupo['imagem'], $subgrupo['destaque'], $subgrupo['id_grupo'], $subgrupo['id_marca']);
     }
 
     public function insertSubgrupo($subgrupo) {

@@ -34,14 +34,14 @@
                       endif;
                    endforeach;
                    if(!$algum){
-                     echo '<tr><td colspan="3">Nenhum grupo existente nessa categoria.</td></tr>';
+                     echo '<tr><td colspan="3"><center>Nenhum grupo existente nessa categoria.</center></td></tr>';
                      $algum = true;
                    }
                   ?>
                 </tbody>
               </table>
               <div class="col-sm-12 mx-auto" style='margin:10px'>
-                <a class="btn btn-success btn-block" href="<?php echo $this->base_url; ?>CategoriaAdmin/addCategoria">Adicionar Grupo</a>
+                <a class="btn btn-info btn-block" href="<?php echo $this->base_url; ?>CategoriaAdmin/addCategoria">Adicionar Grupo</a>
               </div>
             </div>
           </div>

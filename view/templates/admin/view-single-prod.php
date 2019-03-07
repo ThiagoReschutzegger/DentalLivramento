@@ -22,11 +22,11 @@
                             <p>Preço atual:<span class='text-blue' style='margin-left: 10px'>R$ <?php echo (float)$data->getPreco(); ?></span></p>
                             <p>Estoque:<span class='text-blue' style='margin-left: 10px'><?php echo (float)$data->getEstoque(); ?> un.</span></p>
                             <div class="text-center">
-                              <a href="<?php echo $this->base_url; ?>CRIAR METODO"><button type="button" class="btn btn-primary btn-lg">Visualizar itens semelhantes</button></a>
+                              <a href="<?php echo $this->base_url; ?>ProdutoAdmin/viewSubOf/<?php echo $data->getId_subgrupo(); ?>"><button type="button" class="btn btn-primary btn-lg">Visualizar itens semelhantes</button></a>
                             </div>
                         </div>
                     </div>
-                    <a class="btn btn-secondary btn-block" style="margin-top:20px" href="<?php echo $this->base_url; ?>ProdutoAdmin/buscaProduto"><i class="fa fa-long-arrow-left"></i>&nbsp&nbspVoltar</a>
+                    <!-- <a class="btn btn-secondary btn-block" style="margin-top:20px" href="<?php echo $this->base_url; ?>ProdutoAdmin/buscaProduto"><i class="fa fa-long-arrow-left"></i>&nbsp&nbspVoltar</a> -->
                   </div>
               </div>
           </div>

@@ -65,5 +65,14 @@ class GrupoModel extends Model {
         }
     }
 
-
+    public function getGrupoBySubgrupoId($id) {
+        $list = [];
+        $sql = "SELECT grupo.* FROM subgrupo JOIN grupo ON subgrupo.id_grupo=grupo.id_grupo WHERE id_subgrupo = :id";
+        $query = $this->ExecuteQuery($sql, [':id' => $id]);
+        foreach ($query as $linha) {
+            $list[] = new Grupo($linha['id_grupo'], $linha['nome'], $linha['id_categoria']);
+        }
+        //echo 'Gok';
+        return $list;
+    }
 }

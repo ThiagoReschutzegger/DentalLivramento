@@ -95,6 +95,21 @@ class ProdutoAdmin extends Admin {
         $this->view->load('footer');
     }
 
+    public function viewSubOf($id_subgrupo) { //seleciona o grupo em que será adicionado o produto completo
+        $data['sub'] = $this->modelSubgrupo->getSubgrupoById($id_subgrupo);
+        $data['prod'] = $this->model->getProdutosBySubgrupoId($id_subgrupo);
+        $data['marca'] = $this->modelMarca->getMarcaBySubgrupoId($id_subgrupo)[0];
+        $data['grupo'] = $this->modelGrupo->getGrupoBySubgrupoId($id_subgrupo);
+        //echo '<pre>';var_dump($data);echo '</pre>';die;
+        $data['cat'] = $this->modelCategoria->getCategoriaByGrupoId($data['grupo'][0]->getId_grupo());
+
+
+        $this->view->load('header');
+        $this->view->load('nav');
+        $this->view->load('produtos-in-subgrupo', $data);
+        $this->view->load('footer');
+    }
+
     public function addProdutoCompleto($id_gp) {
         $data['msg'] = '';
         $data['marca'] = $this->modelMarca->getMarca();

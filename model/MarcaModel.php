@@ -47,4 +47,15 @@ class MarcaModel extends Model {
         }
     }
 
+    public function getMarcaBySubgrupoId($id) {
+        $list = [];
+        $sql = "SELECT marca.* FROM subgrupo JOIN marca ON subgrupo.id_marca=marca.id_marca WHERE id_subgrupo = :id";
+        $query = $this->ExecuteQuery($sql, [':id' => $id]);
+        foreach ($query as $linha) {
+            $list[] = new Marca($linha['id_marca'], $linha['nome'], $linha['imagem']);
+        }
+        //echo 'Mok';
+        return $list;
+    }
+
 }
