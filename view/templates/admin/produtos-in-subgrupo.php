@@ -20,10 +20,10 @@
                           <img class="image-fluid border border-light rounded shadow p-3 mb-5 bg-white" style="margin:15px;max-width:300px" src="<?php echo $subgrupo->getImagem(); ?>">
                       </div>
                     </div>
-                    <div class="row">
+                    <div class="text-center">
 
 
-                        <div class="float-right text-left" style='margin-left:20px;'>
+                        <div class="text-left" style='margin-left:20px;'>
                           <br>
                             <h1 class='text-center'>
                               <span class='text-blue'><?php echo $subgrupo->getNome(); ?></span>

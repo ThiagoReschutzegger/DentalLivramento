@@ -1,5 +1,13 @@
 <div class="container-fluid" style="margin-top: 50px">
 <div class="col-lg-12">
+  <?php if ($data['msg']): ?>
+    <div class="row container-fluid">
+        <div class="col-lg-12 alert alert-<?php if($data['msg']== 'Adicionado com Sucesso!'){ echo "success";} else{ echo "danger";}?> alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <?php echo $data['msg'] ?>
+        </div>
+    </div>
+  <?php endif ?>
   <div class="card">
     <div class="card-header d-flex align-items-center">
       <h3 class="h4">Adicionar Produto</h3>
@@ -82,14 +90,6 @@
             <a href="<?php echo $this->base_url; ?>ProdutoAdmin" class="btn btn-danger">Parar de Adicionar<a/>
           </div>
         </div>
-        <?php if ($data['msg']): ?>
-          <div class="row container-fluid">
-              <div class="col-lg-12 alert alert-<?php if($data['msg']== 'Adicionado com Sucesso!'){ echo "success";} else{ echo "danger";}?> alert-dismissable">
-                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                  <?php echo $data['msg'] ?>
-              </div>
-          </div>
-        <?php endif ?>
       </form>
     </div>
   </div>
