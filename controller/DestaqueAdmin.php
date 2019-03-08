@@ -28,8 +28,7 @@ class DestaqueAdmin extends Admin {
             if ($nome && $id_categoria) {
                 $destaque = new Destaque(null,$nome, $id_categoria);
                 if ($this->model->insertDestaque($destaque)) {
-                      $this->index();
-                     return true;
+                      $data['msg'] = 'Adicionado com Sucesso!';
                 } else {
                     $data['msg'] = 'Erro!';
                     }

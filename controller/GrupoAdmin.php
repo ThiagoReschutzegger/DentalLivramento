@@ -28,8 +28,7 @@ class GrupoAdmin extends Admin {
             if ($nome && $id_categoria) {
                 $grupo = new Grupo(null,$nome, $id_categoria);
                 if ($this->model->insertGrupo($grupo)) {
-                      $this->index();
-                     return true;
+                      $data['msg'] = 'Adicionado com Sucesso!';
                 } else {
                     $data['msg'] = 'Erro!';
                     }
