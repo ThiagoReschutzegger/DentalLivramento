@@ -25,25 +25,26 @@
           </div>
         </div>
         <div class="line"></div>
-        <label class="col-sm-3 form-control-label text-right">Selecionar Categoria:</label>
-        <?php foreach( $data['categoria'] as $categoria ): ?>
         <div class="form-group row">
-          <label class="col-sm-3"></label>
+          <label class="col-sm-3 form-control-label text-right">Selecione a Categoria:</label>
           <div class="col-sm-8">
-            <input id="id_categoria<?php echo $categoria->getId_categoria(); ?>" type="radio" class="radio-template" name="id_categoria" value="<?php echo $categoria->getId_categoria(); ?>" <?php if($destaque->getId_categoria() == $categoria->getId_categoria()){echo 'checked';} ?> >
-            <label from="id_categoria<?php echo $categoria->getId_categoria(); ?>" class="form-control-label text-right"><?php echo $categoria->getNome(); ?></label>
+            <select class="form-control" name="id_categoria">
+              <option disabled="true">Selecione:</option>
+              <?php foreach( $data['categoria'] as $categoria ): ?>
+                  <option value="<?php echo $categoria->getId_categoria(); ?>" <?php if($destaque->getId_categoria() == $categoria->getId_categoria()){echo 'selected="selected"';} ?> ><?php echo $categoria->getNome(); ?></option>
+              <?php endforeach; ?>
+            </select>
           </div>
         </div>
-      <?php endforeach; ?>
-      <div class="col-sm-6 text-right">
-        <a class="btn btn-success" href="<?php echo $this->base_url; ?>CategoriaAdmin/addCategoria">Adicionar Categoria</a>
-      </div>
-      <br>
         <div class="form-group row">
-          <div class="col-sm-4 offset-sm-3">
-            <input type="reset" class="btn btn-secondary" value="Limpar" />
-            <input type="submit" class="btn btn-primary" value="Salvar" name="upd" />
+          <div class="col-sm-8 offset-sm-3 text-right">
+            <a class="btn btn-primary" href="<?php echo $this->base_url; ?>CategoriaAdmin/addCategoria">Adicionar Categoria</a>
+            <br>
           </div>
+        </div>
+        <div class="form-group row">
+          <input type="reset" class="btn btn-secondary col-sm-4 offset-sm-2" style="margin-right: 10px;" value="Limpar" />
+          <input type="submit" class="btn btn-success col-sm-4 " value="Salvar" name="upd" />
         </div>
       </form>
     </div>
