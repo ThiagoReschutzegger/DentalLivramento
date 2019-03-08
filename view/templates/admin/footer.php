@@ -21,6 +21,7 @@
 <script src="<?php echo $this->asset; ?>vendor/jquery.cookie/jquery.cookie.js"> </script>
 <script src="<?php echo $this->asset; ?>vendor/chart.js/Chart.min.js"></script>
 <script src="<?php echo $this->asset; ?>vendor/jquery-validation/jquery.validate.min.js"></script>
+<script src="<?php echo $this->asset; ?>js/charts-home.js"></script>
 <!-- Main File-->
 <script src="<?php echo $this->asset; ?>js/front.js"></script>
 </body>

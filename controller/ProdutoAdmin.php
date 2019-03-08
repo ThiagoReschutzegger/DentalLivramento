@@ -181,7 +181,7 @@ class ProdutoAdmin extends Admin {
         $this->view->load('footer');
       }
 
-      public function viewSubOf($id_subgrupo) { //seleciona o grupo em que será adicionado o produto completo
+      public function viewSubOf($id_subgrupo, $mensagem=null) { //seleciona o grupo em que será adicionado o produto completo
         $data['sub'] = $this->modelSubgrupo->getSubgrupoById($id_subgrupo);
         $data['prod'] = $this->model->getProdutosBySubgrupoId($id_subgrupo);
         $data['marca'] = $this->modelMarca->getMarcaBySubgrupoId($id_subgrupo)[0];
@@ -197,7 +197,7 @@ class ProdutoAdmin extends Admin {
     }
 
 
-public function viewProduto($id) {
+    public function viewProduto($id) {
 
         $data = $this->modelPack->getPackprodutoById($id);
 
@@ -209,5 +209,37 @@ public function viewProduto($id) {
         $this->view->load('footer');
     }
 
+
+    public function deleteProduto($string) {//thiago
+      $pieces = explode(".", $string);
+
+      $id = $pieces[0];
+      $data['id_subgrupo'] = $pieces[1];
+      $data['nome'] = $pieces[2];
+      $data['esp'] = $pieces[3];
+
+      $data['msg'][0] = '';
+      $data['msg'][1] = 0;
+      //echo '<pre>';var_dump($pieces);echo '</pre>';die;
+
+      if (filter_input(INPUT_POST, 'del')) {
+        if($this->model->removeProduto($id)){
+          $data['msg'][0] = 'Produto deletado com sucesso!';
+          $data['msg'][1] = 1;
+          //$this->viewSubOf($id_subgrupo,$data['msg']);
+          $this->index();
+        }else{
+          $data['msg'][0] = 'Ocorreu algum erro ao deletar produto, Guillermo... Tente novamente mais tarde.';
+          $data['msg'][1] = 2;
+          // $this->viewSubOf($id_subgrupo,$data['msg']);
+          $this->index();
+        }
+      }
+      $data['produto'] = $this->model->getProdutoById($id);
+      $this->view->load('header');
+      $this->view->load('nav');
+      $this->view->load('del-produto', $data);
+      $this->view->load('footer');
+    }
 
 }
