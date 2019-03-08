@@ -26,7 +26,12 @@
                         <div class="container-fluid text-left" style='margin-left:20px;'>
                           <br>
                             <h1 class='text-center'>
-                              <span class='text-blue'><?php echo $subgrupo->getNome(); ?></span><a href=""><button class='btn btn-outline-secondary' style="font-size:20px; font-weight:normal; margin:10px"><i class="fa fa-pencil"></i></button></a>
+                              <span class='text-blue'><?php echo $subgrupo->getNome(); ?></span>
+                              <a href="<?php echo $this->base_url; ?>ProdutoAdmin/updateSub/<?php echo $subgrupo->getId_subgrupo(); ?>">
+                                  <button class='btn btn-outline-secondary' style="font-size:20px; font-weight:normal; margin:10px">
+                                    <i class="fa fa-pencil"></i>
+                                  </button>
+                                </a>
 
                               <br>
                               <br>

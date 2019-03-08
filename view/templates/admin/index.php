@@ -12,7 +12,7 @@
                 <div class="col-xl-6 col-sm-6">
                     <div class="item d-flex align-items-center">
                         <div class="icon bg-red"><i class="icon-home"></i></div>
-                        <div class="title"><a class="linkDash" href="<?php echo $this->base_url; ?>"><span>Pantalla Inicial</span></a>
+                        <div class="title"><a class="linkDash" href="<?php echo $this->base_url . "HomeAdmin"; ?>"><span>Personalizar</span></a>
                             <!--<div class="progress">
                                 <div role="progressbar" style="width: 25%; height: 4px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-violet"></div>
                             </div>-->
@@ -23,8 +23,8 @@
                 <!-- Item -->
                 <div class="col-xl-6 col-sm-6">
                     <div class="item d-flex align-items-center">
-                        <div class="icon bg-yellow"><i class="icon-picture"></i></div>
-                        <div class="title"><a class="linkDash" href="<?php echo $this->base_url . "HomeAdmin"; ?>"><span>Personalizar<br></span></a>
+                        <div class="icon bg-yellow"><i class="fa fa-star"></i></div>
+                        <div class="title"><a class="linkDash" href="<?php echo $this->base_url . "HomeAdmin"; ?>"><span>Destaques<br></span></a>
                             <!--<div class="progress">
                                 <div role="progressbar" style="width: 25%; height: 4px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-violet"></div>
                             </div>-->
@@ -37,8 +37,8 @@
                 <!-- Item -->
                 <div class="col-xl-6 col-sm-6">
                     <div class="item d-flex align-items-center">
-                        <div class="icon bg-green"><i class="icon-interface-windows"></i></div>
-                        <div class="title"><a class="linkDash" href="<?php echo $this->base_url . "AdminMarcas"; ?>"><span>Marcas<br></span></a>
+                        <div class="icon bg-green"><i class="fa fa-list"></i></div>
+                        <div class="title"><a class="linkDash" href="<?php echo $this->base_url . "CategoriaAdmin"; ?>"><span>Categorias<br></span></a>
 
                         </div>
 
@@ -47,8 +47,8 @@
                 <!-- Item -->
                 <div class="col-xl-6 col-sm-6">
                     <div class="item d-flex align-items-center">
-                        <div class="icon bg-orange"><i class="icon-interface-windows"></i></div>
-                        <div class="title"><a class="linkDash" href="<?php echo $this->base_url . "AdminProductos"; ?>"><span>Productos<br></span></a>
+                        <div class="icon bg-orange"><i class="icon-grid"></i></div>
+                        <div class="title"><a class="linkDash" href="<?php echo $this->base_url . "GrupoAdmin"; ?>"><span>Grupos<br></span></a>
                         </div>
                     </div>
                 </div>
@@ -57,8 +57,8 @@
                 <!-- Item -->
                 <div class="col-xl-6 col-sm-6">
                     <div class="item d-flex align-items-center">
-                        <div class="icon bg-violet"><i class="icon-interface-windows"></i></div>
-                        <div class="title"><a class="linkDash" href="<?php echo $this->base_url . "AdminTemporadas"; ?>"><span>Temporadas<br></span></a>
+                        <div class="icon bg-violet"><i class="fa fa-flag"></i></div>
+                        <div class="title"><a class="linkDash" href="<?php echo $this->base_url . "MarcaAdmin"; ?>"><span>Marcas<br></span></a>
 
                         </div>
 
@@ -67,8 +67,8 @@
                 <!-- Item -->
                 <div class="col-xl-6 col-sm-6">
                     <div class="item d-flex align-items-center">
-                        <div class="icon bg-blue"><i class="icon-mail"></i></div>
-                        <div class="title"><a class="linkDash" href="<?php echo $this->base_url . "AdminContacto"; ?>"><span>Contacto<br></span></a>
+                        <div class="icon bg-blue"><i class="fa fa-barcode"></i></div>
+                        <div class="title"><a class="linkDash" href="<?php echo $this->base_url . "ProdutoAdmin"; ?>"><span>Produtos<br></span></a>
                         </div>
                     </div>
                 </div>
@@ -105,7 +105,7 @@
                         </div>
                         <div class="card-header d-flex align-items-center">
                             <h2 class="h3">Visualización</h2>
-                            <!--<div class="badge badge-rounded bg-green">4 New       </div>-->
+                            <div class="badge badge-rounded bg-blue"><a style="color: white;" class="linkDash" href="<?php echo $this->base_url; ?>" target="_blank">Abrir em nova guia</a></div>
                         </div>
                         <div class="card-body no-padding">
                             <iframe src="<?php echo $this->base_url; ?>" id="siteView" frameborder="0" height="700">

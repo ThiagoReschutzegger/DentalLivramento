@@ -59,11 +59,12 @@ class SubgrupoModel extends Model {
     }
 
     public function updateSubgrupo($subgrupo) {
-        $sql = "UPDATE subgrupo SET nome = :nome, imagem = :imagem, descricao = :descricao, id_grupo = :id_grupo, id_marca = :id_marca WHERE id_subgrupo = :id";
+        $sql = "UPDATE subgrupo SET nome = :nome, descricao = :descricao, imagem = :imagem, destaque = :destaque, id_grupo = :id_grupo, id_marca = :id_marca WHERE id_subgrupo = :id_subgrupo";
         $param = [':id_subgrupo' => $subgrupo->getId_subgrupo(),
                   ':nome' => $subgrupo->getNome(),
-                  ':imagem' => $subgrupo->getImagem(),
                   ':descricao' => $subgrupo->getDescricao(),
+                  ':imagem' => $subgrupo->getImagem(),
+                  ':destaque' => $subgrupo->getDestaque(),
                   ':id_grupo' => $subgrupo->getId_grupo(),
                   ':id_marca' => $subgrupo->getId_marca()
                 ];

@@ -242,4 +242,37 @@ class ProdutoAdmin extends Admin {
       $this->view->load('footer');
     }
 
+    public function updateSub($id_subgrupo) { //seleciona o grupo em que será adicionado o produto completo
+      $data['subgrupo'] = $this->modelSubgrupo->getSubgrupoById($id_subgrupo);
+      $data['grupo'] = $this->modelGrupo->getGrupo();
+      $data['marca'] = $this->modelMarca->getMarca();
+      $data['msg'] = '';
+
+      if (filter_input(INPUT_POST, 'upd')) {
+        $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
+        $descricao = filter_input(INPUT_POST, 'descricao', FILTER_SANITIZE_STRING);
+        $imagem = filter_input(INPUT_POST, 'imagem', FILTER_SANITIZE_STRING);
+        $id_grupo = filter_input(INPUT_POST, 'id_grupo', FILTER_SANITIZE_STRING);
+        $id_marca = filter_input(INPUT_POST, 'id_marca', FILTER_SANITIZE_STRING);
+
+        if ($id_subgrupo && $nome && $descricao && $imagem && $id_grupo && $id_marca) {
+            $subgrupo = new Subgrupo($id_subgrupo, $nome, $descricao, $imagem, 0, $id_grupo, $id_marca);
+            if ($this->modelSubgrupo->updateSubgrupo($subgrupo)) {
+                $this->viewSubOf($id_subgrupo);
+                return true;
+            } else {
+              $this->viewSubOf($id_subgrupo);
+              return true;
+                }
+        } else {
+             $data['msg'] = 'Preencha todos os Campos!';
+        }
+      }
+
+      $this->view->load('header');
+      $this->view->load('nav');
+      $this->view->load('upd-sub', $data);
+      $this->view->load('footer');
+  }
+
 }
