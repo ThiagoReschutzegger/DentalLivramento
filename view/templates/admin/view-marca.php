@@ -16,7 +16,7 @@
         <div class="form-group row">
           <label class="col-sm-2 form-control-label text-right">Link:</label>
           <div class="col-sm-8">
-            <img class="image-fluid" src="<?php echo $marca->getImagem(); ?>" width="500px" />
+            <img class="image-fluid" src="<?php echo $marca->getImagem(); ?>" height="300px" />
             <br>
             <small>"<?php echo $marca->getImagem(); ?>"</small>
           </div>

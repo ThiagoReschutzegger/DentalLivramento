@@ -31,7 +31,10 @@
         <div class="form-group row">
           <label class="col-sm-3 form-control-label text-right">Preço:</label>
           <div class="col-sm-8">
-            <input type="text" class="form-control" placeholder="atualizar mais bonetinho" name="preco">
+            <div class="input-group">
+                <div class="input-group-prepend"><span class="input-group-text">R$</span></div>
+                <input type="number" class="form-control" name="preco" min="0.00" step="0.01">
+            </div>
           </div>
         </div>
         <div class="line"></div>

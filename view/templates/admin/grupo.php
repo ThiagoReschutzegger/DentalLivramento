@@ -1,8 +1,16 @@
-<div class="container-fluid" style="margin-top: 50px;">
+<div class="content-inner">
+    <!-- Page Header-->
+    <header class="page-header">
+        <div class="container-fluid">
+            <h2 class="no-margin-bottom">Grupo Admin</h2>
+        </div>
+    </header>
+<section class="dashboard-counts no-padding-bottom">
+<div class="container-fluid">
   <div class="col-lg-12">
       <div class="card">
         <div class="card-header d-flex align-items-center">
-          <h3 class="h4">Grupo Admin</h3>
+          <h3 class="h4">Grupos</h3>
         </div>
         <div class="card-body">
           <div class="table-responsive">
@@ -28,10 +36,10 @@
                         endforeach;
                       ?></td>
                   <td>
-                    <a href="<?php echo $this->base_url; ?>GrupoAdmin/updateGrupo/<?php echo $grupo->getId_grupo(); ?>">
+                    <a class="btn btn-info" style="font-size: 15px;" href="<?php echo $this->base_url; ?>GrupoAdmin/updateGrupo/<?php echo $grupo->getId_grupo(); ?>">
                       <i class="fa fa-pencil"></i>
                     </a>
-                    <a href="<?php echo $this->base_url; ?>GrupoAdmin/deleteGrupo/<?php echo $grupo->getId_grupo(); ?>">
+                    <a class="btn btn-danger" style="font-size: 15px;" href="<?php echo $this->base_url; ?>GrupoAdmin/deleteGrupo/<?php echo $grupo->getId_grupo(); ?>">
                       <i class="fa fa-remove"></i>
                     </a>
                   </td>

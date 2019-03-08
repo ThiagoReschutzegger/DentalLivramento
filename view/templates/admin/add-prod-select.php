@@ -27,7 +27,7 @@
                           echo '<tr>
                           <td>'.$grupo->getNome().'</td>
                           <td>
-                          <a class="btn btn-primary" style="font-size: 10px;" href="'.$this->base_url.'ProdutoAdmin/addProdutoCompleto/'.$grupo->getId_grupo().'"><i class="fa fa-map-pin"></i></a>
+                          <a class="btn btn-primary" href="'.$this->base_url.'ProdutoAdmin/addProdutoCompleto/'.$grupo->getId_grupo().'"><i class="fa fa-angle-double-right"></i></a>
                           </td>
                           </tr>';
                           $algum = true;

@@ -30,10 +30,8 @@
           </div>
         </div>
         <div class="form-group row">
-          <div class="col-sm-4 offset-sm-3">
-            <input type="reset" class="btn btn-secondary" value="Limpar" />
-            <input type="submit" class="btn btn-primary" value="Salvar" name="upd" />
-          </div>
+          <input type="reset" class="btn btn-secondary col-sm-4 offset-sm-2" style="margin-right: 10px;" value="Limpar" />
+          <input type="submit" class="btn btn-success col-sm-4 " value="Salvar" name="upd" />
         </div>
       </form>
     </div>

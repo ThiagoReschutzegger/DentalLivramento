@@ -6,33 +6,37 @@
                 <h3 class="h4">Vizualizar Categoria</h3>
             </div>
             <div class="card-body">
-                <img class="img-fluid text-right" src="<?php echo $categoria->getImagem(); ?>" heigth="300px" style="float: right;" />
-                <div class="col-sm-7 row">
-                    <h2><?php echo $categoria->getNome(); ?></h2>
-                </div>
-                <div class="row">
-                    <div class="col-sm-9">
-                        <p><?php echo $categoria->getDescricao(); ?></p>
-                    </div>
-                </div>
-                <div class="line"><h4>Grupos selecionados:</h4></div>
-                <div class="row">
-                    <div class="col-sm-7">
-                        <p>
-                            <?php
-                            foreach ($data['grupo'] as $grupo):
-                                if ($grupo->getId_categoria() == $categoria->getId_categoria()) {
-                                    echo $grupo->getNome() . "<br>";
-                                }
-                            endforeach;
-                            ?>
-                        </p>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-sm-4 offset-sm-3">
-                        <a class="btn btn-secondary" href="<?php echo $this->base_url; ?>CategoriaAdmin">Voltar</a>
-                    </div>
+                <div style="margin:10px">
+                  <div class="row">
+                      <div class="float-left">
+                          <img class="image-fluid border border-light rounded shadow p-3 mb-5 bg-white" style="margin:15px;max-width:300px" src="<?php echo $categoria->getImagem(); ?>">
+                      </div>
+
+                      <div class="float-right text-left" style='margin-left:20px;'>
+                        <br>
+                          <h1><span class='text-blue'><?php echo $categoria->getNome(); ?></span>
+                          <br><br><span style="color:lightgrey; font-size:15px; font-weight:normal"><?php echo $categoria->getDescricao(); ?></span>
+                          </h1>
+                          <br>
+                          <p class="row">Grupos Selecionados:
+                            <a href="<?php echo $this->base_url; ?>GrupoAdmin">
+                              <span class='text-blue' style='margin-left: 10px'>
+                              <?php
+                              foreach ($data['grupo'] as $grupo):
+                                  if ($grupo->getId_categoria() == $categoria->getId_categoria()) {
+                                      echo $grupo->getNome() . "<br>";
+                                  }
+                              endforeach;
+                              ?>
+                            </span>
+                           </a>
+                          </p>
+                          <div class="text-center">
+                            <a href="<?php echo $this->base_url; ?>CategoriaAdmin"><button type="button" class="btn btn-primary">Voltar</button></a>
+                          </div>
+                      </div>
+                  </div>
+                  <!-- <a class="btn btn-secondary btn-block" style="margin-top:20px" href="<?php echo $this->base_url; ?>ProdutoAdmin/buscaProduto"><i class="fa fa-long-arrow-left"></i>&nbsp&nbspVoltar</a> -->
                 </div>
             </div>
         </div>

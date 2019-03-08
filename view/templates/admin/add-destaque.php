@@ -25,6 +25,15 @@
         <div class="form-group row">
           <label class="col-sm-3 form-control-label text-right">Selecione a Categoria:</label>
           <div class="col-sm-8">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                  <button data-toggle="dropdown" type="button" class="btn btn-outline-secondary dropdown-toggle" aria-expanded="false">Selecionar<span class="caret"></span></button>
+                  <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">
+                    <a disabled="true" class="dropdown-item">Selecionar</a>
+                    <div class="dropdown-divider"></div>
+                    <a href="<?php echo $this->base_url; ?>CategoriaAdmin/addCategoria" class="dropdown-item">Adicionar</a>
+                  </div>
+                </div>
             <select class="form-control" name="id_categoria">
               <option selected="selected" disabled="true">Selecione:</option>
               <?php foreach( $data['categoria'] as $categoria ): ?>
@@ -32,12 +41,6 @@
               <?php endforeach; ?>
             </select>
           </div>
-        </div>
-
-        <div class="form-group row">
-          <div class="col-sm-8 offset-sm-3 text-right">
-            <a class="btn btn-primary" href="<?php echo $this->base_url; ?>CategoriaAdmin/addCategoria">Adicionar Categoria</a>
-            <br>
           </div>
         </div>
 

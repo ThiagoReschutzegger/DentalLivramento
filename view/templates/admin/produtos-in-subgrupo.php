@@ -23,7 +23,7 @@
                     <div class="row">
 
 
-                        <div class="float-right text-left" style='margin-left:20px;'>
+                        <div class="container-fluid text-left" style='margin-left:20px;'>
                           <br>
                             <h1 class='text-center'>
                               <span class='text-blue'><?php echo $subgrupo->getNome(); ?></span><a href=""><button class='btn btn-outline-secondary' style="font-size:20px; font-weight:normal; margin:10px"><i class="fa fa-pencil"></i></button></a>
@@ -39,7 +39,7 @@
                               <div style="border:1px solid royalblue;display: inline-block" class='rounded'>
                                 <a href="<?php echo $this->base_url;?>CategoriaAdmin/viewCategoria/<?php echo $categoria->getId_categoria()?>"><button class='btn btn-outline-primary' style="font-size:20px; font-weight:normal;margin:5px"><i class="fa fa-list"></i>&nbsp&nbsp<?php echo $categoria->getNome() ?></button></a>
                                 <i class='fa fa-long-arrow-right text-blue'></i>
-                                <a href="#"><button class='btn btn-outline-primary' style="font-size:20px; font-weight:normal;margin:5px"><i class="icon-grid"></i>&nbsp&nbsp<?php echo $grupo->getNome() ?></button></a>
+                                <a href="<?php echo $this->base_url;?>GrupoAdmin"><button class='btn btn-outline-primary' style="font-size:20px; font-weight:normal;margin:5px"><i class="icon-grid"></i>&nbsp&nbsp<?php echo $grupo->getNome() ?></button></a>
                               </div>
                             </h1>
                             <br>

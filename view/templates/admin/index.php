@@ -12,7 +12,7 @@
                 <div class="col-xl-6 col-sm-6">
                     <div class="item d-flex align-items-center">
                         <div class="icon bg-red"><i class="icon-home"></i></div>
-                        <div class="title"><a class="linkDash" href="<?php echo $this->base_url . "HomeAdmin"; ?>"><span>Pantalla Inicial</span></a>
+                        <div class="title"><a class="linkDash" href="<?php echo $this->base_url; ?>"><span>Pantalla Inicial</span></a>
                             <!--<div class="progress">
                                 <div role="progressbar" style="width: 25%; height: 4px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-violet"></div>
                             </div>-->
@@ -24,7 +24,7 @@
                 <div class="col-xl-6 col-sm-6">
                     <div class="item d-flex align-items-center">
                         <div class="icon bg-yellow"><i class="icon-picture"></i></div>
-                        <div class="title"><a class="linkDash" href="<?php echo $this->base_url . "AdminGaleria"; ?>"><span>Galeria<br></span></a>
+                        <div class="title"><a class="linkDash" href="<?php echo $this->base_url . "HomeAdmin"; ?>"><span>Personalizar<br></span></a>
                             <!--<div class="progress">
                                 <div role="progressbar" style="width: 25%; height: 4px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-violet"></div>
                             </div>-->
@@ -156,8 +156,9 @@
                                 <div class="row">
                                     <div class="col-12">Algum problema com o site?<br>Contate-nos via Facebook:
                                       <div class="client-title">
-                                        <a href="https://www.facebook.com/Web-Frontier-254973305404391/" target="_blank"><i class="fa fa-facebook"></i> Web Frontier</div><br>
-                                    </div>
+                                        <a href="https://www.facebook.com/Web-Frontier-254973305404391/" target="_blank"><i class="fa fa-facebook"></i> Web Frontier</a><br>
+                                        <a href="https://webfrontier.000webhostapp.com  " target="_blank">webfrontier.com</a></div><br>
+                                  </div>
                                 </div>
                             </div>
                         </div>

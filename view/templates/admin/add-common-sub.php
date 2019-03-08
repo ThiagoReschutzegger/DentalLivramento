@@ -20,7 +20,7 @@
                   <th scope="row"><?php echo $subgrupo->getId_subgrupo(); ?></th>
                   <td><?php echo $subgrupo->getNome(); ?></td>
                   <td>
-                      <a class="btn btn-success" style="font-size: 10px;" href="<?php echo $this->base_url; ?>ProdutoAdmin/addCommon/<?php echo $subgrupo->getId_subgrupo(); ?>"><i class="fa fa-check"></i></a>
+                      <a class="btn btn-primary" href="<?php echo $this->base_url; ?>ProdutoAdmin/addCommon/<?php echo $subgrupo->getId_subgrupo(); ?>"><i class="fa fa-angle-double-right"></i></a>
                   </td>
                 </tr>
               <?php endforeach; ?>
