@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
+-- version 4.7.7
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 05-Mar-2019 às 22:32
--- Versão do servidor: 10.1.25-MariaDB
--- PHP Version: 5.6.31
+-- Generation Time: 07-Mar-2019 às 19:35
+-- Versão do servidor: 10.1.30-MariaDB
+-- PHP Version: 7.2.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -40,11 +40,7 @@ CREATE TABLE `categoria` (
 --
 
 INSERT INTO `categoria` (`id_categoria`, `nome`, `descricao`, `imagem`) VALUES
-(1, 'Ortodontia', 'dentes', 'https://inepo.com.br/pacientes/wp-content/uploads/2018/09/banner-inicio-orto.png'),
-(2, 'ggeasy', 'izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi izi pizi ', 'https://lh3.googleusercontent.com/-51a0dzFgUxk/VQcMWjcsBUI/AAAAAAAAAGE/IgmrgBiSeJQ/w530-h530-n-rw/keep-calm-and-gg-izi-1.png'),
-(3, 'nova categoria', 'blabla', 'https://inepo.com.br/pacientes/wp-content/uploads/2018/09/banner-inicio-orto.png'),
-(4, 'Aparelhos', 'aparato aparato aparato aparato aparato aparato aparato aparato aparato aparato aparato aparato aparato aparato ', 'http://odontologiaoraldent.com.br/wp-content/uploads/2017/03/ortodontia2.jpg'),
-(5, 'Promocao tal', 'asdasdas', 'http://www.ometac.com.br/wp-content/uploads/2014/10/dentista2014-frente.jpg');
+(6, 'Equipamentos', 'Equipamentos e acessórios odontológicos para o seu consultório disponíveis para venda.', 'https://conteudo.imguol.com.br/blogs/125/files/2016/10/utensilios-e-equipamentos-de-dentista-odontologia-broca-espatula-1452201753205_1920x1127.jpg');
 
 -- --------------------------------------------------------
 
@@ -106,10 +102,7 @@ CREATE TABLE `grupo` (
 --
 
 INSERT INTO `grupo` (`id_grupo`, `nome`, `id_categoria`) VALUES
-(1, 'Ortodontias', 1),
-(10, 'grupo 2', 1),
-(12, 'grupo 3', 5),
-(13, 'grupo novo', 3);
+(15, 'Acessórios', 6);
 
 -- --------------------------------------------------------
 
@@ -120,7 +113,7 @@ INSERT INTO `grupo` (`id_grupo`, `nome`, `id_categoria`) VALUES
 CREATE TABLE `marca` (
   `id_marca` int(11) NOT NULL,
   `nome` varchar(100) NOT NULL,
-  `imagem` varchar(500) NOT NULL
+  `imagem` varchar(5000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -131,18 +124,6 @@ INSERT INTO `marca` (`id_marca`, `nome`, `imagem`) VALUES
 (1, 'Marca de Teste', 'https://vandal-us.s3.amazonaws.com/spree/products/49846/original/open-uri20181203-14-1jczs.jpg'),
 (2, 'Puma', 'https://www.nicepng.com/png/detail/269-2696215_puma-fuma-logo-2-by-brian-logo-puma.png'),
 (3, 'qwert', 'qwerty');
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `packproduto`
---
-
-CREATE TABLE `packproduto` (
-  `id_packproduto` int(11) NOT NULL,
-  `id_produto` int(11) NOT NULL,
-  `id_subgrupo` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -164,7 +145,11 @@ CREATE TABLE `produto` (
 --
 
 INSERT INTO `produto` (`id_produto`, `barcode`, `preco`, `estoque`, `especificacao`, `id_subgrupo`) VALUES
-(3, '12345', '12345', 0, 'qwerty&#39;', 5);
+(1, '33287500', '45.90', 38, 'Azul de Tamanho numero 25 e Superior', 1),
+(2, '44445555', '39.90', 34, 'Azul e tamanho 12', 2),
+(3, '43682337', '50.60', 23, 'Amarelo com bolinhas marrons', 3),
+(4, '43682338', '50.60', 31, 'Azul com bolinhas marrons', 3),
+(5, '43682339', '40.6', 34, 'Verde com bolinhas pretas', 3);
 
 -- --------------------------------------------------------
 
@@ -187,8 +172,9 @@ CREATE TABLE `subgrupo` (
 --
 
 INSERT INTO `subgrupo` (`id_subgrupo`, `nome`, `descricao`, `imagem`, `destaque`, `id_grupo`, `id_marca`) VALUES
-(3, 'qwert', 'wert', 'wertghgf', '0', 13, 2),
-(5, 'qwert', 'qwert', 'qwerty', '0', 12, 2);
+(1, 'Elástico Dental para Gatos', 'O melhor elástico dental para gatos disponibilizado pela marca Puma', 'https://meusanimais.com.br/wp-content/uploads/2015/03/chocalho-gato.jpg', '0', 15, 2),
+(2, 'Elástico Dental para Cavalos', 'O melhor elastico', 'https://ae01.alicdn.com/kf/HTB1ebTLodfJ8KJjy0Feq6xKEXXaG/100-cm-USB-Cobrado-Decora-o-Tubos-Luminosos-LED-Rabos-de-Cavalo-Rabo-de-Cavalo-Equita.jpg_640x640.jpg', '0', 15, 3),
+(3, 'Elástico Dental para Girafas', 'No entanto, não podemos esquecer que a execução dos pontos do programa assume importantes posições no estabelecimento dos índices pretendidos. Caros amigos, o comprometimento entre as equipes ainda não demonstrou convincentemente que vai participar na mudança do impacto na agilidade decisória. Do mesmo modo, a valorização de fatores subjetivos nos obriga à análise das condições inegavelmente apropriadas. Nunca é demais lembrar o peso e o significado destes problemas, uma vez que a necessidade de renovação processual desafia a capacidade de equalização das posturas dos órgãos dirigentes com relação às suas atribuições. Assim mesmo, o início da atividade geral de formação de atitudes pode nos levar a considerar a reestruturação das diretrizes de desenvolvimento para o futuro. ', 'https://abrilsuperinteressante.files.wordpress.com/2016/09/super_imggirafa.jpg', '0', 15, 2);
 
 -- --------------------------------------------------------
 
@@ -248,18 +234,11 @@ ALTER TABLE `marca`
   ADD PRIMARY KEY (`id_marca`);
 
 --
--- Indexes for table `packproduto`
---
-ALTER TABLE `packproduto`
-  ADD PRIMARY KEY (`id_packproduto`),
-  ADD KEY `id_produto` (`id_produto`),
-  ADD KEY `id_subgrupo` (`id_subgrupo`);
-
---
 -- Indexes for table `produto`
 --
 ALTER TABLE `produto`
-  ADD PRIMARY KEY (`id_produto`);
+  ADD PRIMARY KEY (`id_produto`),
+  ADD KEY `id_subgrupo` (`id_subgrupo`);
 
 --
 -- Indexes for table `subgrupo`
@@ -283,47 +262,50 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT for table `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT for table `destaque`
 --
 ALTER TABLE `destaque`
   MODIFY `id_destaque` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `estilo`
 --
 ALTER TABLE `estilo`
   MODIFY `id_estilo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `grupo`
 --
 ALTER TABLE `grupo`
-  MODIFY `id_grupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_grupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
 --
 -- AUTO_INCREMENT for table `marca`
 --
 ALTER TABLE `marca`
   MODIFY `id_marca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT for table `packproduto`
---
-ALTER TABLE `packproduto`
-  MODIFY `id_packproduto` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `produto`
 --
 ALTER TABLE `produto`
-  MODIFY `id_produto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_produto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT for table `subgrupo`
 --
 ALTER TABLE `subgrupo`
-  MODIFY `id_subgrupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_subgrupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT for table `usuario`
 --
 ALTER TABLE `usuario`
   MODIFY `id_user` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- Constraints for dumped tables
 --
@@ -335,10 +317,9 @@ ALTER TABLE `grupo`
   ADD CONSTRAINT `id_categoria` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id_categoria`);
 
 --
--- Limitadores para a tabela `packproduto`
+-- Limitadores para a tabela `produto`
 --
-ALTER TABLE `packproduto`
-  ADD CONSTRAINT `id_produto` FOREIGN KEY (`id_produto`) REFERENCES `produto` (`id_produto`),
+ALTER TABLE `produto`
   ADD CONSTRAINT `id_subgrupo` FOREIGN KEY (`id_subgrupo`) REFERENCES `subgrupo` (`id_subgrupo`);
 
 --
