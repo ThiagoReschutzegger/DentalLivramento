@@ -23,15 +23,10 @@
                     <div class="row">
 
 
-                        <div class="container-fluid text-left" style='margin-left:20px;'>
+                        <div class="float-right text-left" style='margin-left:20px;'>
                           <br>
                             <h1 class='text-center'>
-                              <span class='text-blue'><?php echo $subgrupo->getNome(); ?></span>
-                              <a href="<?php echo $this->base_url; ?>ProdutoAdmin/updateSub/<?php echo $subgrupo->getId_subgrupo(); ?>">
-                                  <button class='btn btn-outline-secondary' style="font-size:20px; font-weight:normal; margin:10px">
-                                    <i class="fa fa-pencil"></i>
-                                  </button>
-                                </a>
+                              <span class='text-blue'><?php echo $subgrupo->getNome(); ?></span><a href=""><button class='btn btn-outline-secondary' style="font-size:20px; font-weight:normal; margin:10px"><i class="fa fa-pencil"></i></button></a>
 
                               <br>
                               <br>
@@ -44,7 +39,7 @@
                               <div style="border:1px solid royalblue;display: inline-block" class='rounded'>
                                 <a href="<?php echo $this->base_url;?>CategoriaAdmin/viewCategoria/<?php echo $categoria->getId_categoria()?>"><button class='btn btn-outline-primary' style="font-size:20px; font-weight:normal;margin:5px"><i class="fa fa-list"></i>&nbsp&nbsp<?php echo $categoria->getNome() ?></button></a>
                                 <i class='fa fa-long-arrow-right text-blue'></i>
-                                <a href="<?php echo $this->base_url;?>GrupoAdmin"><button class='btn btn-outline-primary' style="font-size:20px; font-weight:normal;margin:5px"><i class="icon-grid"></i>&nbsp&nbsp<?php echo $grupo->getNome() ?></button></a>
+                                <a href="#"><button class='btn btn-outline-primary' style="font-size:20px; font-weight:normal;margin:5px"><i class="icon-grid"></i>&nbsp&nbsp<?php echo $grupo->getNome() ?></button></a>
                               </div>
                             </h1>
                             <br>
@@ -69,7 +64,7 @@
                                             <td><?php echo $produto->getBarcode(); ?></td>
                                             <td><?php echo substr($produto->getEspecificacao(), 0, 100) . "..."; ?></td>
                                             <td>R$&nbsp&nbsp<?php echo $produto->getPreco(); ?></td>
-                                            <td><?php echo $produto->getEstoque(); ?></td>
+                                            <td><?php echo $produto->getEstoque(); ?> un.</td>
                                             <td>
                                             <center><a href="<?php echo $this->base_url ?>ProdutoAdmin/viewProduto/<?php echo $produto->getId_produto(); ?>"><button type="button" class="btn btn-secondary btn-block"><i class="fa fa-eye"></i></button></a></center>
                                             </td>

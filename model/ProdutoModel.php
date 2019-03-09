@@ -155,21 +155,21 @@
           $list = [];
 
           if ($nome == '' && $codigo != '') {
-              $sql = "SELECT * FROM subgrupo WHERE (barcode LIKE '%{$codigo}%')";
+            $sql = "SELECT DISTINCT subgrupo.* FROM subgrupo JOIN produto ON produto.id_subgrupo=subgrupo.id_subgrupo WHERE UPPER(produto.barcode) like '%{$codigo}%'";
           }
           if ($nome != '' && $codigo == '') {
-              $sql = "SELECT * FROM produto WHERE (nome LIKE '%{$nome}%')";
+            $sql = "SELECT DISTINCT subgrupo.* FROM subgrupo JOIN produto ON produto.id_subgrupo=subgrupo.id_subgrupo WHERE UPPER(subgrupo.nome) like '%{$nome}%'";
           }
           if ($nome != '' && $codigo != '') {
-              $sql = "SELECT * FROM produto WHERE (barcode LIKE '%{$codigo}%' OR nome LIKE '%{$nome}%') ORDER BY CASE barcode WHEN barcode='{$codigo}' and nome='{$nome}' THEN '0' WHEN barcode='{$codigo}' or nome='{$nome}' THEN '1' ELSE nome END";
+            $sql = "SELECT DISTINCT subgrupo.* FROM subgrupo JOIN produto ON produto.id_subgrupo=subgrupo.id_subgrupo WHERE UPPER(produto.barcode) like '%{$codigo}%' OR UPPER(subgrupo.nome) like '%{$nome}%'";
           }
 
           $consulta = $this->ExecuteQuery($sql, array());
 
-          foreach ($consulta as $linha) {
-              $list[] = new Produto($linha['id_produto'], $linha['barcode'], $linha['preco'], $linha['nome'], $linha['estoque'], $linha['imagem'], $linha['especificacao'], $linha['destaque'], $linha['tipo'], $linha['id_grupo'], $linha['id_marca']);
+          foreach ($consulta as $subgrupo) {
+            $list[] = new Subgrupo($subgrupo['id_subgrupo'], $subgrupo['nome'], $subgrupo['descricao'], $subgrupo['imagem'], $subgrupo['destaque'], $subgrupo['id_grupo'], $subgrupo['id_marca']);
           }
-
+          //echo '<pre>';var_dump($list);echo '</pre>';die;
           return $list;
       }
 

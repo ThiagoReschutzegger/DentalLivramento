@@ -29,6 +29,7 @@ class ProdutoAdmin extends Admin {
     public function buscaProduto() {
 
         $data['msg'] = '';
+        $data['status'] = '0';
         $data['resultado'] = 'inicio';
 
         if (filter_input(INPUT_POST, 'buscar')) {
@@ -41,7 +42,7 @@ class ProdutoAdmin extends Admin {
 
                 if ($nome || $codigo) {
                     $resultado = $this->model->searchProdutoUnitario($nome, $codigo);
-
+                    $data['status'] = '1';
                     //echo '<pre>';var_dump($resultado);echo '</pre>';
                     //die;
 
@@ -62,7 +63,7 @@ class ProdutoAdmin extends Admin {
 
                 if ($nome || $codigo) {
                     $resultado = $this->model->searchProdutoAgrupado($nome, $codigo);
-
+                    $data['status'] = '2';
                     //echo '<pre>';var_dump($resultado);echo '</pre>';
 
                     if (!empty($resultado)) {
@@ -80,7 +81,7 @@ class ProdutoAdmin extends Admin {
 
         $this->view->load('header');
         $this->view->load('nav');
-        $this->view->load('busca-produto', $data['resultado']);
+        $this->view->load('busca-produto', $data);
         $this->view->load('footer');
     }
 

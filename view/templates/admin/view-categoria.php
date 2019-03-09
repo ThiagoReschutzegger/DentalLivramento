@@ -14,11 +14,16 @@
 
                       <div class="float-right text-left" style='margin-left:20px;'>
                         <br>
-                          <h1><span class='text-blue'><?php echo $categoria->getNome(); ?></span>
-                          <br><br><span style="color:lightgrey; font-size:15px; font-weight:normal"><?php echo $categoria->getDescricao(); ?></span>
-                          </h1>
+                          <h1><span class='text-blue'><?php echo $categoria->getNome(); ?></span></h1>
                           <br>
-                          <p class="row">Grupos Selecionados:
+                          <p class="row">Descrição:
+                            <a href="<?php echo $this->base_url; ?>GrupoAdmin">
+                              <span class='text-blue' style='margin-left: 10px'>
+                              <?php echo $categoria->getDescricao(); ?>
+                            </span>
+                           </a>
+                          </p>
+                          <p class="row">Grupos da Categoria:
                             <a href="<?php echo $this->base_url; ?>GrupoAdmin">
                               <span class='text-blue' style='margin-left: 10px'>
                               <?php
@@ -31,9 +36,11 @@
                             </span>
                            </a>
                           </p>
-                          <div class="text-center">
-                            <a href="<?php echo $this->base_url; ?>CategoriaAdmin"><button type="button" class="btn btn-primary">Voltar</button></a>
-                          </div>
+
+                      </div>
+
+                      <div class="text-center">
+                        <a href="<?php echo $this->base_url; ?>CategoriaAdmin"><button type="button" class="btn btn-block btn-primary">Voltar</button></a>
                       </div>
                   </div>
                   <!-- <a class="btn btn-secondary btn-block" style="margin-top:20px" href="<?php echo $this->base_url; ?>ProdutoAdmin/buscaProduto"><i class="fa fa-long-arrow-left"></i>&nbsp&nbspVoltar</a> -->

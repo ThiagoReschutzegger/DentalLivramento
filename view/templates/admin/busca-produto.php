@@ -14,8 +14,8 @@
                               <div class="col-sm-12 ">
                                   <span style='color:grey; font-size:15px'>&nbsp&nbsp&nbspOrganizar por:&nbsp&nbsp&nbsp</span>
                                   <select name="organizar" class="form-control">
-                                      <option value='1'>Produto unitário</option>
                                       <option value='2'>Agrup. de produtos</option>
+                                      <option value='1'>Produto unitário</option>
                                   </select>
                               </div>
                           </div>
@@ -41,15 +41,16 @@
           <div class="col-lg-12">
               <div class="card">
                   <div class="card-body">
-                      <?php if ($data == 'inicio'): ?>
+                      <?php if ($data['resultado'] == 'inicio'): ?>
                           <div class="alert alert-info" role="alert">
                               Insira alguns dos campos.
                           </div>
-                      <?php elseif ($data == 'vazio'): ?>
+                      <?php elseif ($data['resultado'] == 'vazio'): ?>
                           <div class="alert alert-warning" role="alert">
                               Não foi encontrado nenhum valor correspondente
                           </div>
                       <?php else: ?>
+                        <?php if($data['status'] == '1'): ?>
                           <div class="card-header d-flex align-items-center">
                               <h3 class="h4">Resultado da busca</h3>
                           </div>
@@ -66,7 +67,7 @@
                                           </tr>
                                       </thead>
                                       <tbody>
-                                          <?php foreach ($data as $produto): ?>
+                                          <?php foreach ($data['resultado'] as $produto): ?>
                                               <tr>
                                                   <td><center><img height="100" src="<?php echo $produto->getImagem(); ?>"></center></td>
                                           <td><?php echo $produto->getBarcode(); ?></td>
@@ -84,6 +85,42 @@
                                   </table>
                               </div>
                           </div>
+                        <?php elseif ($data['status'] == '2'): ?>
+                          <div class="card-header d-flex align-items-center">
+                              <h3 class="h4">Resultado da busca</h3>
+                          </div>
+                          <div class="card-body">
+                              <div class="table-responsive">
+                                  <table class="table table-striped table-hover">
+                                      <thead>
+                                          <tr>
+                                              <th>Imagem</th>
+                                              <th>Nome</th>
+                                              <th>Descrição</th>
+                                              <th>Marca</th>
+                                              <th>Visualizar</th>
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                          <?php foreach ($data['resultado'] as $produto): ?>
+                                              <tr>
+                                                  <td><center><img height="100" src="<?php echo $produto->getImagem(); ?>"></center></td>
+                                          <td><?php echo $produto->getNome(); ?></td>
+                                          <td><?php echo substr($produto->getDescricao(), 0, 45) . "<br>".substr($produto->getDescricao(), 46, 90)."..."; ?></td>
+                                          <td><?php echo $produto->getId_marca(); ?></td>
+                                          <td>
+                                          <center><a href="<?php echo $this->base_url ?>ProdutoAdmin/viewSubOf/<?php echo $produto->getId_subgrupo(); ?>"><button type="button" class="btn btn-secondary btn-block"><i class="fa fa-eye"></i></button></a></center>
+                                          </td>
+                                          </tr>
+                                      <?php endforeach; ?>
+                                      <tr>
+                                          <td colspan="8"><center><a href="<?php echo $this->base_url; ?>ProdutoAdmin/addProdutoWhere" class="btn btn-success btn-lg btn-block"><i class="fa fa-plus"></i></a></center></td>
+                                      </tr>
+                                      </tbody>
+                                  </table>
+                              </div>
+                          </div>
+                        <?php endif;?>
                       <?php endif; ?>
 
                   </div>
