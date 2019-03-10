@@ -83,7 +83,6 @@
         <div class="form-group row">
           <input type="reset" class="btn btn-secondary col-sm-4 offset-sm-2" style="margin-right: 10px;" value="Limpar" />
           <input type="submit" class="btn btn-success col-sm-4 " value="Salvar" name="upd" />
-          <a href="<?php echo $this->base_url; ?>ProdutoAdmin" class="btn btn-danger col-sm-8 offset-sm-2" style="margin-top: 10px;">Parar de Adicionar<a/>
         </div>
       </form>
     </div>

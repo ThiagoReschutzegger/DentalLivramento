@@ -51,8 +51,8 @@
                 <!-- Item -->
                 <div class="col-xl-3 col-sm-6">
                     <div class="item d-flex align-items-center">
-                        <div class="icon bg-orange"><i class="fa fa-image"></i></div>
-                        <div class="title"><span>1 imagem<br>para <i>n</i> produtos</span>
+                        <div class="icon bg-orange"><i class="fa fa-upload"></i></div>
+                        <div class="title"><span>Atualizar<br>produtos</span>
                             <div class="progress">
                                 <div role="progressbar" style="width: 100%; height: 4px;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-orange"></div>
                             </div>
