@@ -26,8 +26,7 @@ class MarcaAdmin extends Admin {
             if ($nome && $imagem) {
                 $marca = new Marca(null,$nome,$imagem);
                 if ($this->model->insertMarca($marca)) {
-                      $this->index();
-                     return true;
+                     $data['msg'] = 'Adicionado com Sucesso!';
                 } else {
                     $data['msg'] = 'Erro!';
                     }

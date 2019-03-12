@@ -96,7 +96,7 @@ class ProdutoAdmin extends Admin {
       $this->view->load('footer');
   }
 
-  public function addProdutoCompleto($id_gp) {
+  public function addProdutoCompleto($id_gp) { //Edu
     $data['msg'] = '';
     $data['marca'] = $this->modelMarca->getMarca();
 
@@ -135,7 +135,7 @@ class ProdutoAdmin extends Admin {
       $this->view->load('footer');
     }
 
-    public function addCommonWhere() { //seleciona o grupo em que será adicionado o produto completo
+    public function addCommonWhere() { //seleciona o grupo em que so sub grupo está. Edu
       $data['msg'] = '';
       $data['categoria'] = $this->modelCategoria->getCategoria();
       $data['grupo'] = $this->modelGrupo->getGrupo();
@@ -146,7 +146,7 @@ class ProdutoAdmin extends Admin {
       $this->view->load('footer');
   }
 
-    public function addCommonProd($id) { //seleciona o grupo em que será adicionado o produto completo
+    public function addCommonProd($id) { //seleciona o subgrupo em que será adicionada a especificacao. Edu
       $data['msg'] = '';
       $data['subgrupo'] = $this->modelSubgrupo->getSubgrupoByGrupo($id);
 
@@ -156,8 +156,9 @@ class ProdutoAdmin extends Admin {
       $this->view->load('footer');
     }
 
-    public function addCommon($id) {
+    public function addCommon($id) { //Edu
       $data['msg'] = '';
+      $data['id'] = $id;
 
       if (filter_input(INPUT_POST, 'add')) {
         $especificacao = filter_input(INPUT_POST, 'especificacao', FILTER_SANITIZE_STRING); //Prod
@@ -182,7 +183,7 @@ class ProdutoAdmin extends Admin {
         $this->view->load('footer');
       }
 
-      public function viewSubOf($id_subgrupo, $mensagem=null) { //seleciona o grupo em que será adicionado o produto completo
+      public function viewSubOf($id_subgrupo, $mensagem=null) { //seleciona o grupo em que será adicionado o produto completo. Edu
         $data['sub'] = $this->modelSubgrupo->getSubgrupoById($id_subgrupo);
         $data['prod'] = $this->model->getProdutosBySubgrupoId($id_subgrupo);
         $data['marca'] = $this->modelMarca->getMarcaBySubgrupoId($id_subgrupo)[0];
@@ -229,11 +230,10 @@ class ProdutoAdmin extends Admin {
           $data['msg'][1] = 1;
           //$this->viewSubOf($id_subgrupo,$data['msg']);
           $this->index();
+          return true;
         }else{
           $data['msg'][0] = 'Ocorreu algum erro ao deletar produto, Guillermo... Tente novamente mais tarde.';
           $data['msg'][1] = 2;
-          // $this->viewSubOf($id_subgrupo,$data['msg']);
-          $this->index();
         }
       }
       $data['produto'] = $this->model->getProdutoById($id);
@@ -243,7 +243,7 @@ class ProdutoAdmin extends Admin {
       $this->view->load('footer');
     }
 
-    public function updateSub($id_subgrupo) { //seleciona o grupo em que será adicionado o produto completo
+    public function updateSub($id_subgrupo) { //Edu
       $data['subgrupo'] = $this->modelSubgrupo->getSubgrupoById($id_subgrupo);
       $data['grupo'] = $this->modelGrupo->getGrupo();
       $data['marca'] = $this->modelMarca->getMarca();
@@ -276,31 +276,91 @@ class ProdutoAdmin extends Admin {
       $this->view->load('footer');
   }
 
-  public function uploadTxt(){
+  public function deleteProdutoCompleto($id_subgrupo) {//deleta o subgrupo com todos os produtos que estão relacionados a ele. Edu
+    $data['msg'] = '';
+    $data['produto'] = $this->model->getProdutosBySubgrupoId($id_subgrupo);
+    $data['subgrupo'] = $this->modelSubgrupo->getSubgrupoById($id_subgrupo);
 
-    if(filter_input(INPUT_POST, 'add')){
-            $src = $_FILES['arquivo']['tmp_name'];
-            $name = $_FILES['arquivo']['name'];
-            if($src){
-                if(move_uploaded_file($src, "view/imagens/".$name)){
-                    if($this->model->addImagem(new Imagem(null,$name,$tam))){
-                        $this->index();
-                        return true;
-                    }else{
-                        $data['msg'] = 'Erro no cadastro';
-                    }
-                }else{
-                    $data['msg'] = 'Erro no cadastro';
-                }
-            }else{
-                $data['msg'] = 'Informe todos os campos';
-            }
+    if (filter_input(INPUT_POST, 'del')) {
+      foreach($data['produto'] as $prod){
+          if($this->model->removeProduto($prod->getId_produto())){
+            $data['msg'] = 'Produto deletado com sucesso!';
+          }else{
+            $data['msg'] = 'Ocorreu algum erro ao deletar produto, Guillermo... Tente novamente mais tarde.';
+          }
         }
+        if($this->modelSubgrupo->removeSubgrupo($id_subgrupo)){
+          $data['msg'] = 'Produtos deletados com sucesso!';
+          $this->index();
+          return true;
+        }else{
+          $data['msg'] = 'Ocorreu algum erro ao deletar produto, Guillermo... Tente novamente mais tarde.';
+        }
+    }
+    $this->view->load('header');
+    $this->view->load('nav');
+    $this->view->load('del-produtos', $data);
+    $this->view->load('footer');
+  }
+
+  public function updateProduto($id_produto) { //Edu
+    $data['produto'] = $this->model->getProdutoById($id_produto);
+    $data['msg'] = '';
+
+    if (filter_input(INPUT_POST, 'upd')) {
+      $barcode = filter_input(INPUT_POST, 'barcode', FILTER_SANITIZE_STRING);
+      $preco = filter_input(INPUT_POST, 'preco', FILTER_SANITIZE_STRING);
+      $estoque = filter_input(INPUT_POST, 'estoque', FILTER_SANITIZE_STRING);
+      $especificacao = filter_input(INPUT_POST, 'especificacao', FILTER_SANITIZE_STRING);
+      $id_subgrupo = $data['produto']->getId_subgrupo();
+
+      if ($barcode && $preco && $estoque && $especificacao && $id_subgrupo) {
+          $produto = new Produto($id_produto, $barcode, $preco, $estoque, $especificacao, $id_subgrupo);
+          if ($this->model->updateProduto($produto)) {
+              $this->viewSubOf($id_subgrupo);
+              return true;
+          } else {
+            $this->viewSubOf($id_subgrupo);
+            return true;
+              }
+      } else {
+           $data['msg'] = 'Preencha todos os Campos!';
+      }
+    }
 
     $this->view->load('header');
     $this->view->load('nav');
-    $this->view->load('upload');
+    $this->view->load('upd-prod', $data);
     $this->view->load('footer');
-  }
+}
+
+public function uploadTxt(){
+
+  if(filter_input(INPUT_POST, 'add')){
+          $src = $_FILES['arquivo']['tmp_name'];
+          $name = $_FILES['arquivo']['name'];
+          if($src){
+              if(move_uploaded_file($src, "view/imagens/".$name)){
+                  if($this->model->addImagem(new Imagem(null,$name,$tam))){
+                      $this->index();
+                      return true;
+                  }else{
+                      $data['msg'] = 'Erro no cadastro';
+                  }
+              }else{
+                  $data['msg'] = 'Erro no cadastro';
+              }
+          }else{
+              $data['msg'] = 'Informe todos os campos';
+          }
+      }
+
+  $this->view->load('header');
+  $this->view->load('nav');
+  $this->view->load('upload');
+  $this->view->load('footer');
+}
+
+
 
 }

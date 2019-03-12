@@ -11,10 +11,13 @@ $esp = $data['esp'];
       <h3 class="h4">Deletar Produto</h3>
     </div>
     <div class="card-body alert-danger">
-        <div class="form-group row">
-          <label class="col-sm-2 form-control-label text-right">Nome</label><p><?php echo $nome ?></p>
-          <br>
-          <label class="col-sm-2 form-control-label text-right">Especificação</label><p><?php echo $esp ?></p>
+        <div class="form-group">
+          <div class="row">
+          <label class="col-sm-2 form-control-label text-right">Nome:</label><p><?php echo $nome ?></p>
+        </div>
+          <div class="row">
+          <label class="col-sm-2 form-control-label text-right">Especificação:</label><p><?php echo $esp ?></p>
+        </div>
           <div class="col-sm-8">
             <div class="form-group row text-left">
                 <div class="col-sm-4 offset-sm-3">

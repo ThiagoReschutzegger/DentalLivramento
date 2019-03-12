@@ -28,8 +28,7 @@ class CategoriaAdmin extends Admin {
             if ($nome && $descricao && $imagem) {
                 $categoria = new Categoria(null,$nome,$descricao,$imagem);
                 if ($this->model->insertCategoria($categoria)) {
-                      $this->index();
-                     return true;
+                      $data['msg'] = 'Adicionado com Sucesso!';
                 } else {
                     $data['msg'] = 'Erro!';
                     }

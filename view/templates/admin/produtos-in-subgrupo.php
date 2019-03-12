@@ -22,11 +22,20 @@
                     </div>
                     <div class="row">
 
-
-                        <div class="float-right text-left" style='margin-left:20px;'>
+                        <div class="container-fluid text-left" style='margin-left:20px;'>
                           <br>
                             <h1 class='text-center'>
-                              <span class='text-blue'><?php echo $subgrupo->getNome(); ?></span><a href="<?php echo $this->base_url; ?>ProdutoAdmin/updateSub/<?php echo $subgrupo->getId_subgrupo() ?>"><button class='btn btn-outline-secondary' style="font-size:20px; font-weight:normal; margin:10px"><i class="fa fa-pencil"></i></button></a>
+                              <span class='text-blue'><?php echo $subgrupo->getNome(); ?></span>
+                              <a href="<?php echo $this->base_url; ?>ProdutoAdmin/updateSub/<?php echo $subgrupo->getId_subgrupo() ?>">
+                                <button class='btn btn-outline-secondary' style="font-size:20px; font-weight:normal; margin:10px">
+                                  <i class="fa fa-pencil"></i>
+                                </button>
+                              </a>
+                              <a href="<?php echo $this->base_url; ?>ProdutoAdmin/deleteProdutoCompleto/<?php echo $subgrupo->getId_subgrupo() ?>">
+                                <button class='btn btn-outline-secondary' style="font-size:20px; font-weight:normal; margin:10px">
+                                  <i class="fa fa-trash"></i>
+                                </button>
+                              </a>
 
                               <br>
                               <br>
@@ -69,7 +78,7 @@
                                             <center><a href="<?php echo $this->base_url ?>ProdutoAdmin/viewProduto/<?php echo $produto->getId_produto(); ?>"><button type="button" class="btn btn-secondary btn-block"><i class="fa fa-eye"></i></button></a></center>
                                             </td>
                                             <td>
-                                            <center><a href="<?php echo $this->base_url ?>ProdutoAdmin/viewProduto/<?php echo $produto->getId_produto(); ?>"><button type="button" class="btn btn-info btn-block"><i class="fa fa-pencil"></i></button></a></center>
+                                            <center><a href="<?php echo $this->base_url ?>ProdutoAdmin/updateProduto/<?php echo $produto->getId_produto(); ?>"><button type="button" class="btn btn-info btn-block"><i class="fa fa-pencil"></i></button></a></center>
                                             </td>
                                             <td>
                                             <center><a href="<?php echo $this->base_url ?>ProdutoAdmin/deleteProduto/<?php echo $produto->getId_produto(); ?>.<?php echo $subgrupo->getId_subgrupo(); ?>.<?php echo $subgrupo->getNome(); ?>.<?php echo $produto->getEspecificacao(); ?>"><button type="button" class="btn btn-danger btn-block"><i class="fa fa-trash"></i></button></a></center>

@@ -52,12 +52,13 @@
       }
 
       public function updateProduto($produto) {
-          $sql = "UPDATE produto SET barcode = :barcode, preco = :preco, estoque = :estoque, especificacao = :especificacao WHERE id_produto = :id";
-          $param = [':barcode' => $produto->getBarcode(),
+          $sql = "UPDATE produto SET barcode = :barcode, preco = :preco, estoque = :estoque, especificacao = :especificacao, id_subgrupo = :id_subgrupo WHERE id_produto = :id";
+          $param = [':id' => $produto->getId_produto(),
+              ':barcode' => $produto->getBarcode(),
               ':preco' => $produto->getPreco(),
               ':estoque' => $produto->getEstoque(),
-              ':id_prouto' => $produto->getId_produto(),
-              ':especificacao' => $produto->getEspecificacao()
+              ':especificacao' => $produto->getEspecificacao(),
+              ':id_subgrupo' => $produto->getId_subgrupo()
           ];
           if ($this->ExecuteCommand($sql, $param)) {
               return true;

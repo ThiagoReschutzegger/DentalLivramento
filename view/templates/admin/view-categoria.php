@@ -36,12 +36,14 @@
                             </span>
                            </a>
                           </p>
-
+                          <div class="form-group row">
+                            <a class="btn btn-primary col-sm-4 offset-sm-2" style="margin-right: 10px;" href="<?php echo $this->base_url; ?>CategoriaAdmin">Voltar</a>
+                          </div>
                       </div>
 
-                      <div class="text-center">
-                        <a href="<?php echo $this->base_url; ?>CategoriaAdmin"><button type="button" class="btn btn-block btn-primary">Voltar</button></a>
-                      </div>
+
+
+
                   </div>
                   <!-- <a class="btn btn-secondary btn-block" style="margin-top:20px" href="<?php echo $this->base_url; ?>ProdutoAdmin/buscaProduto"><i class="fa fa-long-arrow-left"></i>&nbsp&nbspVoltar</a> -->
                 </div>
