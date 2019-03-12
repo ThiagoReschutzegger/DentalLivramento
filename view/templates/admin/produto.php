@@ -48,15 +48,16 @@
                         </a>
                     </div>
                 </div>
-                <!-- Item -->
                 <div class="col-xl-3 col-sm-6">
                     <div class="item d-flex align-items-center">
-                        <div class="icon bg-orange"><i class="fa fa-image"></i></div>
-                        <div class="title"><span>1 imagem<br>para <i>n</i> produtos</span>
-                            <div class="progress">
-                                <div role="progressbar" style="width: 100%; height: 4px;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-orange"></div>
+                        <div class="icon bg-yellow"><i class="fa fa-upload"></i></div>
+                        <a href="<?php echo $this->base_url; ?>ProdutoAdmin/uploadTxt">
+                            <div class="title"><span>Atualizar preço e estoque com .txt</span>
+                                <div class="progress">
+                                    <div role="progressbar" style="width: 100%; height: 4px;" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-yellow"></div>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
             </div>

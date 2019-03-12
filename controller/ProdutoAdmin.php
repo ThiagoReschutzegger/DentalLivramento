@@ -276,4 +276,31 @@ class ProdutoAdmin extends Admin {
       $this->view->load('footer');
   }
 
+  public function uploadTxt(){
+
+    if(filter_input(INPUT_POST, 'add')){
+            $src = $_FILES['arquivo']['tmp_name'];
+            $name = $_FILES['arquivo']['name'];
+            if($src){
+                if(move_uploaded_file($src, "view/imagens/".$name)){
+                    if($this->model->addImagem(new Imagem(null,$name,$tam))){
+                        $this->index();
+                        return true;
+                    }else{
+                        $data['msg'] = 'Erro no cadastro';
+                    }
+                }else{
+                    $data['msg'] = 'Erro no cadastro';
+                }
+            }else{
+                $data['msg'] = 'Informe todos os campos';
+            }
+        }
+
+    $this->view->load('header');
+    $this->view->load('nav');
+    $this->view->load('upload');
+    $this->view->load('footer');
+  }
+
 }
