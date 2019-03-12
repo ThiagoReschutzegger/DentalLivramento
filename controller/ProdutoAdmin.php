@@ -303,4 +303,35 @@ class ProdutoAdmin extends Admin {
     $this->view->load('footer');
   }
 
+  public function updateProduto($id_produto) { //Edu
+    $data['produto'] = $this->model->getProdutoById($id_produto);
+    $data['msg'] = '';
+
+    if (filter_input(INPUT_POST, 'upd')) {
+      $barcode = filter_input(INPUT_POST, 'barcode', FILTER_SANITIZE_STRING);
+      $preco = filter_input(INPUT_POST, 'preco', FILTER_SANITIZE_STRING);
+      $estoque = filter_input(INPUT_POST, 'estoque', FILTER_SANITIZE_STRING);
+      $especificacao = filter_input(INPUT_POST, 'especificacao', FILTER_SANITIZE_STRING);
+      $id_subgrupo = $data['produto']->getId_subgrupo();
+
+      if ($barcode && $preco && $estoque && $especificacao && $id_subgrupo) {
+          $produto = new Produto($id_produto, $barcode, $preco, $estoque, $especificacao, $id_subgrupo);
+          if ($this->model->updateProduto($produto)) {
+              $this->viewSubOf($id_subgrupo);
+              return true;
+          } else {
+            $this->viewSubOf($id_subgrupo);
+            return true;
+              }
+      } else {
+           $data['msg'] = 'Preencha todos os Campos!';
+      }
+    }
+
+    $this->view->load('header');
+    $this->view->load('nav');
+    $this->view->load('upd-prod', $data);
+    $this->view->load('footer');
+}
+
 }

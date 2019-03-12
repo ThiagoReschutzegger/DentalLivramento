@@ -28,10 +28,9 @@
           </div>
         </div>
         <div class="form-group row">
-          <div class="col-sm-4 offset-sm-3">
-            <input type="reset" class="btn btn-secondary" value="Limpar" />
-            <input type="submit" class="btn btn-primary" value="Salvar" name="add" />
-          </div>
+          <input type="reset" class="btn btn-secondary col-sm-4 offset-sm-2" style="margin-right: 10px;" value="Limpar" />
+          <input type="submit" class="btn btn-success col-sm-4 " value="Salvar" name="add" />
+            <a href="<?php echo $this->base_url; ?>MarcaAdmin" class="btn btn-danger col-sm-8 offset-sm-2" style="margin-top: 10px;">Parar de Adicionar<a/>
         </div>
       </form>
     </div>

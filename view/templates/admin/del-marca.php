@@ -21,14 +21,14 @@
             <small>"<?php echo $marca->getImagem(); ?>"</small>
           </div>
         </div>
-        <div class="form-group row">
-          <div class="col-sm-4 offset-sm-3">
-            <form method="post">
-            <a class="btn btn-primary" href="<?php echo $this->base_url; ?>MarcaAdmin">Voltar</a>
-            <input type="submit" name="del" value="Deletar" class="btn btn-secondary">
-            </form>
-          </div>
-        </div>
+
+        <form method="post">
+            <div class="form-group row">
+              <a class="btn btn-primary col-sm-4 offset-sm-2" style="margin-right: 10px;" href="<?php echo $this->base_url; ?>MarcaAdmin">Voltar</a>
+              <input type="submit" name="del" value="Deletar" class="btn btn-danger col-sm-4 ">
+            </div>
+        </form>
+
     </div>
   </div>
 </div>
