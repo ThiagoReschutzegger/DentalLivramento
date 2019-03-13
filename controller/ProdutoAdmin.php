@@ -335,7 +335,7 @@ class ProdutoAdmin extends Admin {
 }
 
 public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. Sujeito à mudanças. Thiago
-
+  $data['arrays'] = '';
   if(filter_input(INPUT_POST, 'add')){
           $src = $_FILES['arquivo']['tmp_name'];
           $name = $_FILES['arquivo']['name'];
@@ -353,6 +353,10 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
 
             $barcode_errado = array();
             $barcode_certo = array();
+            $barcode_atualizado = array();
+
+            $barcode_array = $this->model->getAllBarcodes();
+            // echo '<pre>';print_r($barcode_array);echo '</pre>';die;
 
             foreach ($linhas as $row){
               $divisao = explode("|",$row);
@@ -361,18 +365,21 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
               $preco = $divisao[1];
               $estoque = $divisao[2];
 
-              $verificacao = $this->model->updateByTxt($barcode,$preco,$estoque);
+              $verificacao = $this->model->updateByTxt($barcode,$preco,$estoque,$barcode_array);
 
-              if($verificacao[0]){
+              if($verificacao[0] == 1){
                 array_push($barcode_certo, $verificacao[1]);
-              }else{
+              }elseif($verificacao[0] == 3){
                 array_push($barcode_errado, $verificacao[1]);
+              }elseif($verificacao[0] == 2){
+                array_push($barcode_atualizado, $verificacao[1]);
               }
             }
+            $data['arrays'] = array($barcode_certo,$barcode_errado);
 
-
-            echo '<pre>';var_dump($barcode_certo);echo '</pre><br>';die;
-            echo '<pre>';var_dump($barcode_errado);echo '</pre>';die;
+            //echo '<pre>';var_dump($barcode_certo);echo '</pre><br>';
+            //echo '<pre>';var_dump($barcode_errado);echo '</pre>';
+            //echo '<pre>';var_dump($barcode_atualizado);echo '</pre>';die;
 
 
           }else{
@@ -382,7 +389,7 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
 
   $this->view->load('header');
   $this->view->load('nav');
-  $this->view->load('upload');
+  $this->view->load('upload',$data['arrays']);
   $this->view->load('footer');
 }
 

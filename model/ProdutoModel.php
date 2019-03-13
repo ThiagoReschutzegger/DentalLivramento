@@ -174,16 +174,50 @@
           return $list;
       }
 
-      public function updateByTxt($barcode,$preco,$estoque) {
-        $sql = "UPDATE produto SET preco = {$estoque}, estoque = {$estoque} WHERE barcode = {$barcode}";
+      public function getAllBarcodes() {
 
-        if ($this->ExecuteCommand($sql, array())) {
-          echo 'c';
-            $ver = array(true,$barcode);
+          $list = [];
+
+          $sql = "SELECT barcode from produto";
+          $consulta = $this->ExecuteQuery($sql, $list);
+
+          foreach ($consulta as $barcode) {
+            $list[] = $barcode['barcode'];
+          }
+          //echo '<pre>';var_dump($list);echo '</pre>';die;
+          return $list;
+      }
+
+      public function updateByTxt($barcode,$preco,$estoque,$array) {
+
+        //echo '<pre>';var_dump($array);echo '</pre>';
+        //echo '<pre>';var_dump($barcode);echo '</pre>';
+
+        if(in_array($barcode, $array)){
+
+          //echo '<h1 style="COLOR:blue">existe</h1>';
+
+          $sql = "UPDATE produto SET preco = :preco, estoque = :estoque WHERE barcode = :barcode";
+          $param = [':barcode' => $barcode,
+                    ':preco' => $preco,
+                    ':estoque' => $estoque
+                    ];
+          if ($this->ExecuteCommand($sql, $param)) {
+
+            //echo '<h1 style="COLOR:green">CERTO</h1>';
+
+              $ver = array(1,$barcode);
+              return $ver;
+          }else{
+            $ver = array(2,$barcode);
             return $ver;
-        } else {
-          echo 'a';
-          $ver = array(false,$barcode);
+          }
+
+        }else {
+
+          //echo '<h1 style="COLOR:RED">ERRADO</h1>';
+
+          $ver = array(3,$barcode);
           return $ver;
         }
 
