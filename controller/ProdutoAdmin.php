@@ -348,16 +348,32 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
 
             //echo ($content);die;
 
-              // if(move_uploaded_file($src, "view/imagens/".$name)){
-              //     if($this->model->addImagem(new Imagem(null,$name,$tam))){
-              //         $this->index();
-              //         return true;
-              //     }else{
-              //         $data['msg'] = 'Erro no cadastro';
-              //     }
-              // }else{
-              //     $data['msg'] = 'Erro no cadastro';
-              //}
+            $linhas = explode(" ",$content)[0];
+            $linhas = explode("\n",$content);
+
+            $barcode_errado = array();
+            $barcode_certo = array();
+
+            foreach ($linhas as $row){
+              $divisao = explode("|",$row);
+
+              $barcode = $divisao[0];
+              $preco = $divisao[1];
+              $estoque = $divisao[2];
+
+              $verificacao = $this->model->updateByTxt($barcode,$preco,$estoque);
+
+              if($verificacao[0]){
+                array_push($barcode_certo, $verificacao[1]);
+              }else{
+                array_push($barcode_errado, $verificacao[1]);
+              }
+            }
+
+
+            echo '<pre>';var_dump($barcode_certo);echo '</pre><br>';die;
+            echo '<pre>';var_dump($barcode_errado);echo '</pre>';die;
+
 
           }else{
               $data['msg'] = 'Informe todos os campos';

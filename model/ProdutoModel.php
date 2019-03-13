@@ -174,4 +174,19 @@
           return $list;
       }
 
+      public function updateByTxt($barcode,$preco,$estoque) {
+        $sql = "UPDATE produto SET preco = {$estoque}, estoque = {$estoque} WHERE barcode = {$barcode}";
+
+        if ($this->ExecuteCommand($sql, array())) {
+          echo 'c';
+            $ver = array(true,$barcode);
+            return $ver;
+        } else {
+          echo 'a';
+          $ver = array(false,$barcode);
+          return $ver;
+        }
+
+      }
+
   }
