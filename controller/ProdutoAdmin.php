@@ -334,22 +334,31 @@ class ProdutoAdmin extends Admin {
     $this->view->load('footer');
 }
 
-public function uploadTxt(){
+public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. Sujeito à mudanças. Thiago
 
   if(filter_input(INPUT_POST, 'add')){
           $src = $_FILES['arquivo']['tmp_name'];
           $name = $_FILES['arquivo']['name'];
           if($src){
-              if(move_uploaded_file($src, "view/imagens/".$name)){
-                  if($this->model->addImagem(new Imagem(null,$name,$tam))){
-                      $this->index();
-                      return true;
-                  }else{
-                      $data['msg'] = 'Erro no cadastro';
-                  }
-              }else{
-                  $data['msg'] = 'Erro no cadastro';
-              }
+
+            //echo '<pre>';var_dump($src);echo '</pre>';die;
+
+            $handle = fopen($src, 'r');
+            $content = fread($handle,filesize($src));
+
+            //echo ($content);die;
+
+              // if(move_uploaded_file($src, "view/imagens/".$name)){
+              //     if($this->model->addImagem(new Imagem(null,$name,$tam))){
+              //         $this->index();
+              //         return true;
+              //     }else{
+              //         $data['msg'] = 'Erro no cadastro';
+              //     }
+              // }else{
+              //     $data['msg'] = 'Erro no cadastro';
+              //}
+
           }else{
               $data['msg'] = 'Informe todos os campos';
           }

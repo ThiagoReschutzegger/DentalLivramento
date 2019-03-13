@@ -24,12 +24,12 @@
         <div class="form-group row">
           <label class="col-sm-3 form-control-label text-right">Descrição:</label>
           <div class="col-sm-8">
-            <textarea class="form-control" name="descricao"></textarea>
+            <textarea class="form-control" name="descricao">A categoria não possui descrição.</textarea>
           </div>
         </div>
         <div class="line"></div>
         <div class="form-group row">
-          <label class="col-sm-3 form-control-label text-right">Link:</label>
+          <label class="col-sm-3 form-control-label text-right">Link da imagem:</label>
           <div class="col-sm-8">
             <input type="text" class="form-control" name="imagem"><small class="help-block-none">Cole aqui o link da imagem. <b style="color:red;">SEMPRE terminado em <i>.jpg</i>, <i>.png</i> ou outras extensões imagem.</b></small>
           </div>

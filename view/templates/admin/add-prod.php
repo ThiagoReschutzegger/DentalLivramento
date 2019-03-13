@@ -1,3 +1,13 @@
+<script>
+$("textarea").focus(function() {
+
+    if( $(this).val() == "Produto sem descrição." ) {
+        $(this).val("");
+    }
+
+});
+</script>
+
 <div class="container-fluid" style="margin-top: 50px">
 <div class="col-lg-12">
   <?php if ($data['msg']): ?>
@@ -24,7 +34,7 @@
         <div class="form-group row">
           <label class="col-sm-3 form-control-label text-right">Descrição:</label>
           <div class="col-sm-8">
-            <textarea class="form-control" name="descricao"></textarea>
+            <textarea class="form-control" name="descricao">Produto sem descrição.</textarea>
           </div>
         </div>
         <div class="line"></div>
