@@ -35,7 +35,8 @@ class SliderModel extends Model {
     }
 
     public function insertSlider($slider) {
-        $sql = "INSERT INTO slider(id_subgrupo,imagem,fundo,status) VALUES(:id_subgrupo,:imagem,:fundo,status)";
+      // print_r($slider);die;
+        $sql = "INSERT INTO slider(id_subgrupo,imagem,fundo,status) VALUES(:id_subgrupo,:imagem,:fundo,:status)";
         if ($this->ExecuteCommand($sql,[':id_subgrupo'=>$slider->getId_subgrupo(),':fundo'=>$slider->getFundo(),':imagem'=>$slider->getImagem(),':status'=>$slider->getStatus()])){
             return true;
         } else {

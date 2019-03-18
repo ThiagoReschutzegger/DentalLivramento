@@ -416,6 +416,27 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
     $data['msg'] = '';
     $data['sub'] = $this->modelSubgrupo->getSubgrupoById($id);
 
+    if (filter_input(INPUT_POST, 'add')) {
+          $nome = $data['sub']->getNome();
+          $imagem = filter_input(INPUT_POST, 'imagem', FILTER_SANITIZE_STRING);
+          $fundo = filter_input(INPUT_POST, 'fundo', FILTER_SANITIZE_STRING);
+          $descricao = $data['sub']->getDescricao();
+
+          if ($nome && $imagem && $fundo && $descricao) {
+              $slider = new Slider(0,$data['sub']->getId_subgrupo(), $imagem, $fundo, 1);
+              if ($this->modelSlider->insertSlider($slider)) {
+                   $data['msg'] = 'Adicionado com Sucesso!';
+                   $this->index();
+                   die;
+              } else {
+                  $data['msg'] = 'Erro!';
+                  }
+          } else {
+               $data['msg'] = 'Preencha todos os Campos!';
+
+          }
+      }
+
     $this->view->load('header');
     $this->view->load('nav');
     $this->view->load('add-slider',$data);

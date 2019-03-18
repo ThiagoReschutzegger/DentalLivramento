@@ -38,7 +38,7 @@
         <div class="form-group row">
           <label class="col-sm-2 form-control-label text-right">Link da imagem de fundo:</label>
           <div class="col-sm-8">
-          <input type="text" class="form-control" name="funco"><small class="help-block-none">Cole aqui o link da imagem (sempre terminado em <i><b style="color:red">.png, .jpg</b></i>)</small>
+          <input type="text" class="form-control" name="fundo"><small class="help-block-none">Cole aqui o link da imagem (sempre terminado em <i><b style="color:red">.png, .jpg</b></i>)</small>
           </div>
         </div>
         <div class="form-group row">
