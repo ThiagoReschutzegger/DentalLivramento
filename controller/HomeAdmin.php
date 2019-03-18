@@ -41,5 +41,4 @@ class HomeAdmin extends Admin {
       $this->view->load('confirma-upd',$data['confirma']);
       $this->view->load('footer');
     }
-
 }

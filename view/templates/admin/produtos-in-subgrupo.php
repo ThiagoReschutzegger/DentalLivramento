@@ -4,6 +4,7 @@
   $grupo = $data['grupo'][0];
   $marca = $data['marca'];
   $categoria = $data['cat'][0];
+  $bool = in_array($subgrupo->getId_subgrupo(), $data['sliderids'])? true : false;
   //echo '<pre>';var_dump($subgrupo);echo "<br>";var_dump($item);die;
 ?>
 
@@ -17,12 +18,19 @@
                   <div style="margin:10px">
                     <div class='row'>
                       <div class="mx-auto text-center">
-                          <img class="image-fluid border border-light rounded shadow p-3 mb-5 bg-white" style="margin:15px;max-width:300px" src="<?php echo $subgrupo->getImagem(); ?>">
+                        <?php if($bool): ?>
+                        <a href="<?php echo $this->base_url;?>HomeAdmin/deleteSliderBySubId/<?php echo $subgrupo->getId_subgrupo() ?>"><button class='btn btn-outline-danger' style="font-size:20px; font-weight:normal"><i class="fa fa-star"></i>&nbsp&nbspExcluir do slider principal</button></a>
+                        <?php else:?>
+                        <a href="<?php echo $this->base_url;?>HomeAdmin/addSlider/<?php echo $subgrupo->getId_subgrupo() ?>"><button class='btn btn-outline-success' style="font-size:20px; font-weight:normal"><i class="fa fa-star"></i>&nbsp&nbspAdicionar ao slider principal</button></a>
+                        <?php endif;?>
+                        <br>
+                        <img class="image-fluid border border-light rounded shadow p-3 mb-5 bg-white" style="margin:15px;max-width:300px" src="<?php echo $subgrupo->getImagem(); ?>">
                       </div>
                     </div>
                     <div class="row">
 
                         <div class="container-fluid text-left" style='margin-left:20px;'>
+
                           <br>
                             <h1 class='text-center'>
                               <span class='text-blue'><?php echo $subgrupo->getNome(); ?></span>

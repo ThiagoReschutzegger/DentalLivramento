@@ -8,6 +8,7 @@ class ProdutoAdmin extends Admin {
     protected $modelSubgrupo;
     protected $modelMarca;
     protected $modelPack;
+    protected $modelSlider;
 
     public function __construct() {
         parent::__construct();
@@ -17,6 +18,7 @@ class ProdutoAdmin extends Admin {
         $this->modelSubgrupo = new SubgrupoModel();
         $this->modelMarca = new MarcaModel();
         $this->modelPack = new PackprodutoModel();
+        $this->modelSlider = new SliderModel();
     }
 
     public function index() {
@@ -190,6 +192,7 @@ class ProdutoAdmin extends Admin {
         $data['grupo'] = $this->modelGrupo->getGrupoBySubgrupoId($id_subgrupo);
         //echo '<pre>';var_dump($data);echo '</pre>';die;
         $data['cat'] = $this->modelCategoria->getCategoriaByGrupoId($data['grupo'][0]->getId_grupo());
+        $data['sliderids'] = $this->modelSlider->getSliderSubgrupoIds();
 
 
         $this->view->load('header');

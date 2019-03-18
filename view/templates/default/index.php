@@ -55,61 +55,66 @@
             </div>-->
           </div>
         </li>
-        <li data-transition="slidehorizontal" data-slotamount="5" data-masterspeed="700"  data-title="Slide 2">
-          <img src="<?php echo $this->asset ?>img/home/banner-slider/slider-bg0.jpg" alt="slidebg" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat">
-          <div class="slider-caption slider-captionV1 container">
-            <div class="tp-caption rs-caption-1 sft start"
-              data-hoffset="0"
-              data-y="0"
-              data-x="[15,15,42,15]"
-              data-speed="800"
-              data-start="1500"
-              data-easing="Back.easeInOut"
-              data-endspeed="300">
-              <img src="<?php echo $this->asset ?>img/home/banner-slider/sl2.png" alt="slider-image">
-            </div>
+        <?php $i = 0; ?>
+        <?php foreach ($data['slider'] as $slider): ?>
+          <?php ++$i; ?>
+          <?php if($i % 2 != 0): ?>
+            <li data-transition="slidehorizontal" data-slotamount="5" data-masterspeed="700"  data-title="Slide 2">
+            <img src="<?php echo $slider[0]->getFundo() == null || $slider[0]->getFundo() == ''? $this->asset."img/home/banner-slider/slider-bg0.jpg" : $slider[0]->getFundo() ; ?>" alt="slidebg" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat">
+            <div class="slider-caption slider-captionV1 container">
+              <div class="tp-caption rs-caption-1 sft start"
+                data-hoffset="0"
+                data-y="0"
+                data-x="[15,15,42,15]"
+                data-speed="800"
+                data-start="1500"
+                data-easing="Back.easeInOut"
+                data-endspeed="300">
+                <img src="<?php echo $slider[0]->getImagem() == null ? "" : $slider[0]->getImagem() ; ?>" alt="slider-image">
+              </div>
 
-            <div class="tp-caption rs-caption-2 sft "
-              data-hoffset="0"
-              data-y="100"
-              data-x="600"
-              data-speed="800"
-              data-start="2000"
-              data-easing="Back.easeInOut"
-              data-endspeed="300">
-              Ladies Backpack
-            </div>
+              <div class="tp-caption rs-caption-2 sft "
+                data-hoffset="0"
+                data-y="100"
+                data-x="600"
+                data-speed="800"
+                data-start="2000"
+                data-easing="Back.easeInOut"
+                data-endspeed="300">
+                <?php echo $slider[1]->getNome() ; ?>
+              </div>
 
-            <div class="tp-caption rs-caption-3 sft"
-              data-hoffset="0"
-              data-y="175"
-              data-x="600"
-              data-speed="1000"
-              data-start="3000"
-              data-easing="Power4.easeOut"
-              data-endspeed="300"
-              data-endeasing="Power1.easeIn"
-              data-captionhidden="off">
-              Start From - $259.00 <br>
-              <small>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque convallis turpis pharetra pretium nec eu sem.</small>
-            </div>
+              <div class="tp-caption rs-caption-3 sft"
+                data-hoffset="0"
+                data-y="175"
+                data-x="600"
+                data-speed="1000"
+                data-start="3000"
+                data-easing="Power4.easeOut"
+                data-endspeed="300"
+                data-endeasing="Power1.easeIn"
+                data-captionhidden="off">
+                Start From - $259.00 <br>
+                <small><?php echo substr($slider[1]->getDescricao(),0,150); if(strlen($slider[1]->getDescricao())>=150) echo "..."; ?></small><br>
+              </div>
 
-            <div class="tp-caption rs-caption-4 sft"
-              data-hoffset="0"
-              data-y="310"
-              data-x="600"
-              data-speed="800"
-              data-start="3500"
-              data-easing="Power4.easeOut"
-              data-endspeed="300"
-              data-endeasing="Power1.easeIn"
-              data-captionhidden="off">
-              <span class="page-scroll"><a href="#" class="btn primary-btn">Buy Now<i class="fa fa-chevron-right"></i></a></span>
+              <div class="tp-caption rs-caption-4 sft"
+                data-hoffset="0"
+                data-y="310"
+                data-x="600"
+                data-speed="800"
+                data-start="3500"
+                data-easing="Power4.easeOut"
+                data-endspeed="300"
+                data-endeasing="Power1.easeIn"
+                data-captionhidden="off">
+                <span class="page-scroll"><a href="<?php echo $this->base_url; ?>viewSub/<?php echo $slider[1]->getId_subgrupo() ; ?>" class="btn primary-btn">Comprar<i class="fa fa-chevron-right"></i></a></span>
+              </div>
             </div>
-          </div>
-        </li>
-        <li data-transition="slidehorizontal" data-slotamount="5" data-masterspeed="700" data-title="Slide 3">
-            <img src="<?php echo $this->asset ?>img/home/banner-slider/slider-bg0.jpg" alt="slidebg1" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat">
+          </li>
+          <?php elseif ($i % 2 == 0): ?>
+            <li data-transition="slidehorizontal" data-slotamount="5" data-masterspeed="700" data-title="Slide 3">
+            <img src="<?php echo $slider[0]->getFundo() == null || $slider[0]->getFundo() == ''? $this->asset."img/home/banner-slider/slider-bg0.jpg" : $slider[0]->getFundo() ; ?>" alt="slidebg1" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat">
             <div class="slider-caption slider-captionV1 container">
 
               <div class="tp-caption rs-caption-1 sft start"
@@ -120,7 +125,7 @@
                 data-start="1500"
                 data-easing="Back.easeInOut"
                 data-endspeed="300" >
-                <img src="<?php echo $this->asset ?>img/home/banner-slider/shoe1.png" alt="slider-image" style="width: 781px; height: 416px;">
+                <img src="<?php echo $slider[0]->getImagem() == null ? "" : $slider[0]->getImagem() ; ?>" alt="slider-image" style="width: 781px; height: 416px;">
               </div>
 
               <div class="tp-caption rs-caption-2 sft"
@@ -131,7 +136,7 @@
                 data-start="2000"
                 data-easing="Back.easeInOut"
                 data-endspeed="300">
-                Canvas Sneaker
+                <?php echo $slider[1]->getNome() ; ?>
               </div>
 
               <div class="tp-caption rs-caption-3 sft"
@@ -145,7 +150,7 @@
                 data-endeasing="Power1.easeIn"
                 data-captionhidden="off">
                 Start From - $259.00 <br>
-                <small>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque convallis turpis pharetra pretium nec eu sem.</small>
+                <small><?php echo substr($slider[1]->getDescricao(),0,150); if(strlen($slider[1]->getDescricao())>=150) echo "..."; ?></small>
               </div>
               <div class="tp-caption rs-caption-4 sft"
                 data-hoffset="0"
@@ -157,10 +162,12 @@
                 data-endspeed="300"
                 data-endeasing="Power1.easeIn"
                 data-captionhidden="off">
-                <span class="page-scroll"><a href="#" class="btn primary-btn">Buy Now<i class="fa fa-chevron-right"></i></a></span>
+                <span class="page-scroll"><a href="<?php echo $this->base_url; ?>viewSub/<?php echo $slider[1]->getId_subgrupo() ; ?>" class="btn primary-btn">Comprar<i class="fa fa-chevron-right"></i></a></span>
               </div>
             </div>
           </li>
+          <?php endif;?>
+        <?php endforeach; ?>
       </ul>
     </div>
   </div>
@@ -422,49 +429,16 @@
 </section>
 
 <!-- LIGHT SECTION -->
-<section class="lightSection clearfix mouse-grab">
+<section class="lightSection clearfix mouse-grab" style='filter:grayscale(100%);'>
   <div class="container">
     <div class="owl-carousel partnersLogoSlider">
+      <?php foreach ($data['marca'] as $marca) :?>
       <div class="slide">
         <div class="partnersLogo clearfix">
-          <img src="<?php echo $this->asset ?>img/home/partners/partner-01.png" alt="partner-img">
+          <img src="<?php echo $marca->getImagem(); ?>" height="60px" alt="partner-img">
         </div>
       </div>
-      <div class="slide">
-        <div class="partnersLogo clearfix">
-          <img src="<?php echo $this->asset ?>img/home/partners/partner-02.png" alt="partner-img">
-        </div>
-      </div>
-      <div class="slide">
-        <div class="partnersLogo clearfix">
-          <img src="<?php echo $this->asset ?>img/home/partners/partner-03.png" alt="partner-img">
-        </div>
-      </div>
-      <div class="slide">
-        <div class="partnersLogo clearfix">
-          <img src="<?php echo $this->asset ?>img/home/partners/partner-04.png" alt="partner-img">
-        </div>
-      </div>
-      <div class="slide">
-        <div class="partnersLogo clearfix">
-          <img src="<?php echo $this->asset ?>img/home/partners/partner-05.png" alt="partner-img">
-        </div>
-      </div>
-      <div class="slide">
-        <div class="partnersLogo clearfix">
-          <img src="<?php echo $this->asset ?>img/home/partners/partner-01.png" alt="partner-img">
-        </div>
-      </div>
-      <div class="slide">
-        <div class="partnersLogo clearfix">
-          <img src="<?php echo $this->asset ?>img/home/partners/partner-02.png" alt="partner-img">
-        </div>
-      </div>
-      <div class="slide">
-        <div class="partnersLogo clearfix">
-          <img src="<?php echo $this->asset ?>img/home/partners/partner-03.png" alt="partner-img">
-        </div>
-      </div>
+    <?php endforeach; ?>
     </div>
   </div>
 </section>

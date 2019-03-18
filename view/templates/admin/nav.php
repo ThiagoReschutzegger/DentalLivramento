@@ -48,6 +48,7 @@
           <li><a href="<?php echo $this->base_url; ?>GrupoAdmin"> <i class="icon-grid"></i>Grupos </a></li>
           <li><a href="<?php echo $this->base_url; ?>MarcaAdmin"> <i class="fa fa-flag"></i>Marcas </a></li>
           <li><a href="<?php echo $this->base_url; ?>ProdutoAdmin"> <i class="fa fa-barcode"></i>Produtos </a></li>
+          <li><a href="<?php echo $this->base_url; ?>PedidoAdmin"> <i class="fa fa-cart-arrow-down"></i>Pedidos </a></li>
           <li><a href="<?php echo $this->base_url; ?>Admin"> <i class="fa fa-address-book"></i>Manual do Usuário </a></li>
         </ul><!--<span class="heading">Extras</span>
         <ul class="list-unstyled">
