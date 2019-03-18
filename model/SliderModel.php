@@ -28,10 +28,10 @@ class SliderModel extends Model {
         return $slider;
     }
 
-    public function getSliderById($id) {
-        $sql = "SELECT * FROM slider WHERE id_slider=:id;";
+    public function getSliderBySubId($id) {
+        $sql = "SELECT slider.id_slider, slider.id_subgrupo, slider.imagem, slider.fundo, slider.status,subgrupo.id_subgrupo, subgrupo.nome,subgrupo.descricao FROM slider JOIN subgrupo ON slider.id_subgrupo = subgrupo.id_subgrupo WHERE subgrupo.id_subgrupo = :id;";
         $linha = $this->ExecuteQuery($sql, [':id' => $id])[0];
-            return new Slider($linha['id_slider'],$linha['id_subgrupo'],$linha['imagem'],$linha['status']);
+            return array(new Slider($linha['id_slider'],$linha['id_subgrupo'],$linha['imagem'],$linha['fundo'],$linha['status']), new Subgrupo ($linha['id_subgrupo'],$linha['nome'],$linha['descricao'],null,null,null,null));
     }
 
     public function insertSlider($slider) {
@@ -44,7 +44,7 @@ class SliderModel extends Model {
     }
 
      public  function removeSlider($id) {
-        $sql = "DELETE FROM slider WHERE id_slider = :id";
+        $sql = "DELETE FROM slider WHERE id_subgrupo = :id";
         if ($this->ExecuteCommand($sql, [':id'=>$id])) {
             return true;
         } else {

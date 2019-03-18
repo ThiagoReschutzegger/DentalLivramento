@@ -201,7 +201,6 @@ class ProdutoAdmin extends Admin {
         $this->view->load('footer');
     }
 
-
     public function viewProduto($id) {
 
         $data = $this->modelPack->getPackprodutoById($id);
@@ -396,6 +395,31 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
   $this->view->load('footer');
 }
 
+  public function deleteSliderBySubId($id){ // DELETAR SLIDER ATRAVES DO ID DO SUBGRUPO
 
+    $data['slider'] = $this->modelSlider->getSliderBySubId($id);
+
+
+    if (filter_input(INPUT_POST, 'del')) {
+      $this->modelSlider->removeSlider($id);
+      $this->index();
+      return true;
+    }
+
+    $this->view->load('header');
+    $this->view->load('nav');
+    $this->view->load('del-slider',$data['slider']);
+    $this->view->load('footer');
+  }
+
+  public function addSlider($id){ // DELETAR SLIDER ATRAVES DO ID DO SUBGRUPO
+    $data['msg'] = '';
+    $data['sub'] = $this->modelSubgrupo->getSubgrupoById($id);
+
+    $this->view->load('header');
+    $this->view->load('nav');
+    $this->view->load('add-slider',$data);
+    $this->view->load('footer');
+  }
 
 }
