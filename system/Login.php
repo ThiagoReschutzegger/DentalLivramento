@@ -75,12 +75,24 @@ class Login {
     public function getCookie() {
         $this->cookie->getCookieUser();
     }
-    
+
+    public function getSessionCarrinho() {
+        $this->session->getSessionCarrinho();
+    }
+    public function createSessionCarrinho() {
+        $this->session->setSessionCarrinho($this->user);
+    }
+
     public function getLoggedUser(){
         if($this->session->isSessionExist()){
             return $this->getSession();
         }elseif($this->cookie->isCookieExist()){
             return $this->getCookie();
+        }
+    }
+    public function getLoggedCarrinho(){
+        if($this->session->isSessionCarrinhoExist()){
+            return $this->getSession();
         }
     }
 
@@ -92,7 +104,16 @@ class Login {
         }
         return $this->logged;
     }
-    
+
+    public function isCarrinhoLogged() {
+      if($this->session->isSessionExist() || $this->cookie->isCookieExist()){
+          $this->logged = true;
+      }else{
+          $this->logged = false;
+      }
+      return $this->logged;
+  }
+
     public function logout(){
         $this->session->destroySession();
         $this->cookie->destroyCookie();

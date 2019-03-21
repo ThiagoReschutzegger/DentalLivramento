@@ -14,7 +14,7 @@
           <div class="navbar-holder d-flex align-items-center justify-content-between">
             <!-- Navbar Header-->
             <div class="navbar-header">
-              <!-- Navbar Brand --><a href="index.html" class="navbar-brand d-none d-sm-inline-block">
+              <!-- Navbar Brand --><a href="<?php echo $this->base_url; ?>Admin" class="navbar-brand d-none d-sm-inline-block">
                 <div class="brand-text d-none d-lg-inline-block"><span>Administrador </span><strong>&nbspDental Livramento</strong></div>
                 <div class="brand-text d-none d-sm-inline-block d-lg-none"><strong>ADM</strong></div></a>
 
@@ -42,7 +42,7 @@
         </div>
         <!-- Sidebar Navidation Menus--><span class="heading">Main</span>
         <ul class="list-unstyled">
-          <li><a href="<?php echo $this->base_url; ?>Admin"> <i class="icon-home"></i>Home </a></li>
+          <li><a href="<?php echo $this->base_url; ?>HomeAdmin"> <i class="icon-home"></i>Personalizar </a></li>
           <li><a href="<?php echo $this->base_url; ?>DestaqueAdmin"> <i class="fa fa-star"></i>Destaques </a></li>
           <li><a href="<?php echo $this->base_url; ?>CategoriaAdmin"> <i class="fa fa-list"></i>Categorias </a></li>
           <li><a href="<?php echo $this->base_url; ?>GrupoAdmin"> <i class="icon-grid"></i>Grupos </a></li>

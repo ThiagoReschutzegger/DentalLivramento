@@ -24,20 +24,40 @@ class Session {
         $_SESSION['user'] = $user;
     }
 
+    public function setSessionCarrinho($carrinho) {
+        $_SESSION['carrinho'] = $carrinho;
+    }
+
     public function getSessionUser() {
         return (isset($_SESSION['user'])) ? $_SESSION['user'] : false;
     }
 
+    public function getSessionCarrinho() {
+        return (isset($_SESSION['carrinho'])) ? $_SESSION['carrinho'] : false;
+    }
+
     public function setSessionAtribute($nome, $valor) {
-        $_SESSION['user'][$nome] = $value;
+        $_SESSION['user'][$nome] = $valor;
+    }
+
+    public function setSessionCarrinhoAtribute($nome, $valor) {
+        $_SESSION['carrinho'][$nome] = $valor;
     }
 
     public function getSessionAtribute($nome) {
         return $_SESSION['user'][$nome];
     }
 
+    public function getSessionCarrinhoAtribute($nome) {
+        return $_SESSION['carrinho'][$nome];
+    }
+
     public function isSessionExist() {
         return (isset($_SESSION['user'])) ? true : false;
+    }
+
+    public function isSessionCarrinhoExist() {
+        return (isset($_SESSION['carrinho'])) ? true : false;
     }
 
     public function destroySession() {
@@ -45,3 +65,5 @@ class Session {
     }
 
 }
+
+?>
