@@ -122,8 +122,7 @@ $marca = $data['marca'];
                 		</table>
                   </div>
                   <div class="btn-area text-right">
-                    <input type="submit" name="add">
-                    <button  style="width: 240px;" name="add" class="btn btn-primary btn-default">Adicionar ao carrinho  <i class="fa fa-angle-right" aria-hidden="true"></i></button>
+                    <input type="submit" style="width: 220px;" name="add" class="btn btn-primary btn-default" value='Adicionar ao carrinho'/>
                   </div>
                 </form>
                 </div>
