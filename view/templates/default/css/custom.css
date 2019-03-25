@@ -7,3 +7,13 @@
 .mouse-grab:active{
   cursor: grabbing;
 }
+
+.table-espec{
+  width: 80% !important;
+}
+
+@media (max-width: 500px) {
+  .table-espec{
+    width: 100% !important;
+  }
+}

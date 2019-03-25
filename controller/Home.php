@@ -8,6 +8,7 @@ class Home extends Controller{
     protected $modelDestaque;
     protected $modelSlider;
     protected $modelMarca;
+    protected $modelPackproduto;
 
     public function __construct() {
         parent::__construct();
@@ -18,6 +19,7 @@ class Home extends Controller{
         $this->modelDestaque = new DestaqueModel();
         $this->modelSlider = new SliderModel();
         $this->modelMarca = new MarcaModel();
+        $this->modelPackproduto = new PackprodutoModel();
     }
 
     public function index(){
@@ -39,19 +41,51 @@ class Home extends Controller{
         $this->view->load('footer');
     }
 
-    public function viewProduto($id){
+    public function viewProduto($id){ //Edu
         $data['estilo'] = $this->model->getEstiloAtual();
+        $data['packproduto'] = $this->modelPackproduto->getPackprodutoBySubgrupo($id);
+        $pkpd = $data['packproduto'][0];
+        $data['grupo'] = $this->modelGrupo->getGrupoById($pkpd->getId_grupo());
+        $data['categoria'] = $this->modelCategoria->getCategoriaById($data['grupo']->getId_categoria());
+        $data['marca'] = $this->modelMarca->getMarcaById($pkpd->getId_marca());
 
-        $data['produto'] = $this->modelproduto->getProdutoById($id);
+        $preco_aux = [];
+        $estoque_aux = [];
+        $id_aux = [];
+        foreach ($data['packproduto'] as $produtos){
+          $preco_aux[] = number_format((float)$produtos->getPreco(), 2);
+          $estoque_aux[] = $produtos->getEstoque();
+          $id_aux[] = $produtos->getId_produto();
+        }
+        $data['preco-ate'] = min($preco_aux);
+        $estoque_total = array_sum($estoque_aux);
+        if($estoque_total > 50){
+          $data['estoque-msg'] = 'color: #49c32c; border: 1px solid #49c32c;">Em estoque';
+        }else if($estoque_total < 51 && $estoque_total > 25){
+          $data['estoque-msg'] = 'color: #eabf38; border: 1px solid #eabf38;">Poucas unidades';
+        }else if($estoque_total < 26){
+          $data['estoque-msg'] = 'color: #f55c5d; border: 1px solid #f55c5d;">Últimas unidades';
+        }
 
-        //echo "<pre>";
-        //var_dump($data['produto']);
-        //echo "</pre>";
-        //die;
+        $quantidade = [];
+        $id_itens = [];
 
-        $this->view->load('header',$data['estilo']);
-        $this->view->load('nav');
-        $this->view->load('single-product',$data['produto']);
+        if (filter_input(INPUT_POST, 'add')) {
+          foreach($id_aux as $linha){
+            if(filter_input(INPUT_POST, 'espec'.$linha, FILTER_SANITIZE_STRING) > 0){
+              $quantidade[] = filter_input(INPUT_POST, 'espec'.$linha, FILTER_SANITIZE_STRING); //qtd das especializações que forem > 0
+              $id_itens[] = $linha; //id_produto das especializações selecionadas
+            }
+          }
+
+          var_dump($quantidade);
+          echo '<br>';
+          var_dump($id_itens);
+        }
+
+        $this->view->load('header',$data);
+        $this->view->load('nav',$data);
+        $this->view->load('single-product',$data);
         $this->view->load('footer');
     }
 
