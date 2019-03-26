@@ -9,6 +9,8 @@ class Home extends Controller{
     protected $modelSlider;
     protected $modelMarca;
     protected $modelPackproduto;
+    protected $carrinho;
+    protected $login;
 
     public function __construct() {
         parent::__construct();
@@ -20,6 +22,10 @@ class Home extends Controller{
         $this->modelSlider = new SliderModel();
         $this->modelMarca = new MarcaModel();
         $this->modelPackproduto = new PackprodutoModel();
+        $this->login = new Login();
+        if(isset($_SESSION['carrinho'])){
+            $this->carrinho = $_SESSION['carrinho'];
+        }
     }
 
     public function index(){
@@ -34,6 +40,7 @@ class Home extends Controller{
         // var_dump($data['marca']);
         // echo "</pre>";
         // die;
+        echo "<pre>";var_dump($_SESSION['carrinho']);echo "</pre>";
 
         $this->view->load('header',$data);
         $this->view->load('nav-home',$data);
@@ -77,6 +84,10 @@ class Home extends Controller{
               $id_itens[] = $linha; //id_produto das especializações selecionadas
             }
           }
+
+          $this->login->createSessionCarrinho();
+          $_SESSION['carrinho'] = "kk";
+          echo "<pre>";var_dump($_SESSION['carrinho']);echo "</pre>";
 
           var_dump($quantidade);
           echo '<br>';

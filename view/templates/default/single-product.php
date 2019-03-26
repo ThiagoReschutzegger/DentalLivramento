@@ -97,7 +97,7 @@ $marca = $data['marca'];
                   <hr>                                              <!-- " -->
                   <p><?php echo $produto->getDescricao(); ?></p>
                   <form method="post">
-                  <div style="height:155px;  overflow:auto;  margin-top:20px; margin-bottom:20px;">
+                  <div style="max-height:300px; min-height:155px;  overflow:auto;  margin-top:20px; margin-bottom:20px;" >
                   <table class="table">
                       <thead>
                           <tr>
@@ -110,7 +110,7 @@ $marca = $data['marca'];
                       <tbody>
                         <?php foreach ($data['packproduto'] as $produtos): ?>
                           <tr>
-                  					<th scope="row">R$<?php echo $produtos->getPreco(); ?></th>
+                  					<th scope="row">R$<span style="margin:2px"><?php echo $produtos->getPreco(); ?></span></th>
                   					<td><?php echo $produtos->getEspecificacao(); ?></td>
                             <th><?php echo $produtos->getEstoque(); ?> und.</th>
                             <td>
