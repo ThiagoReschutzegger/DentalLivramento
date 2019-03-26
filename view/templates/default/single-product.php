@@ -4,6 +4,20 @@ $grupo = $data['grupo'];
 $categoria = $data['categoria'];
 $marca = $data['marca'];
 
+$espec_aux = [];
+$espec_real = [];
+$var = false;
+$i = 0;
+
+foreach ($data['packproduto'] as $produtos):
+
+  foreach ($espec_aux as $linha){
+      if($produtos->getEspecificacao() == $linha){
+        $espec_real[] = $produtos->getEspecificacao();
+      }
+  }
+  $espec_aux[] = $produtos->getEspecificacao();
+endforeach;
 ?>
       <!-- LIGHT SECTION -->
       <section class="lightSection clearfix pageHeader">
@@ -103,21 +117,44 @@ $marca = $data['marca'];
                           <tr>
                             <th>Preço</th>
                             <th width="600px;">Nome</th>
-                            <th>Estoque</th>
                             <th>Quantidade</th>
                           </tr>
                       </thead>
                       <tbody>
-                        <?php foreach ($data['packproduto'] as $produtos): ?>
+                        <?php foreach ($data['packproduto'] as $produtos):
+                          foreach ($espec_real as $linha){
+                              if($produtos->getEspecificacao() == $linha){
+                                $var = true;
+                              }
+                          }
+                          if($var){
+                             $var = false;
+                             continue;
+                          }
+                        ?>
                           <tr>
                   					<th scope="row">R$<?php echo $produtos->getPreco(); ?></th>
                   					<td><?php echo $produtos->getEspecificacao(); ?></td>
-                            <th><?php echo $produtos->getEstoque(); ?> und.</th>
                             <td>
                         				<input name="espec<?php echo $produtos->getId_produto(); ?>" style="width: 100px; height: 30px; margin:0;" type="number" class="form-control" value="0" placeholder="Qtd." onkeypress="return isNumberKey(event)">
                             </td>
                   				</tr>
                         <?php endforeach; ?>
+                        <?php foreach ($data['packproduto'] as $produtos):
+
+                            if($produtos->getEspecificacao() == $espec_real[$i]):
+                            ?>
+                        <tr>
+                          <th scope="row">R$<?php echo $produtos->getPreco(); ?></th>
+                          <td><?php echo $produtos->getEspecificacao(); ?></td>
+                          <td>
+                              <input name="espec<?php echo $produtos->getId_produto(); ?>" style="width: 100px; height: 30px; margin:0;" type="number" class="form-control" value="0" min="0" placeholder="Qtd." onkeypress="return isNumberKey(event)">
+                          </td>
+                        </tr>
+                        <?php
+                        $i++;
+                          endif;
+                       endforeach; ?>
                 			</tbody>
                 		</table>
                   </div>
