@@ -85,7 +85,7 @@ class Home extends Controller{
 
         $this->view->load('header',$data);
         $this->view->load('nav',$data);
-        $this->view->load('single-product',$data);
+        $this->view->load('single-product',$data); //single-product2
         $this->view->load('footer');
     }
 
