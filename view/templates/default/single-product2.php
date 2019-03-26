@@ -4,21 +4,6 @@ $grupo = $data['grupo'];
 $categoria = $data['categoria'];
 $marca = $data['marca'];
 
-$estoque_aux = [];
-$espec_aux = [];
-$espec_real = [];
-$var = false;
-$i = 0;
-
-foreach ($data['packproduto'] as $produtos):
-
-  foreach ($espec_aux as $linha){
-      if($produtos->getEspecificacao() == $linha){
-        $espec_real[] = $produtos->getEspecificacao();
-      }
-  }
-  $espec_aux[] = $produtos->getEspecificacao();
-endforeach;
 ?>
       <!-- LIGHT SECTION -->
       <section class="lightSection clearfix pageHeader">
@@ -123,18 +108,7 @@ endforeach;
                           </tr>
                       </thead>
                       <tbody>
-                        <?php foreach ($data['packproduto'] as $produtos):
-                          foreach ($espec_real as $linha){
-                              if($produtos->getEspecificacao() == $linha){
-                                $estoque_aux[$produtos->getId_produto()] = $produtos->getEstoque();
-                                $var = true;
-                              }
-                          }
-                          if($var){
-                             $var = false;
-                             continue;
-                          }
-                        ?>
+                        <?php foreach ($data['packproduto'] as $produtos): ?>
                           <tr>
                   					<th scope="row">R$<?php echo $produtos->getPreco(); ?></th>
                   					<td><?php echo $produtos->getEspecificacao(); ?></td>
@@ -144,25 +118,6 @@ endforeach;
                             </td>
                   				</tr>
                         <?php endforeach; ?>
-                        <?php foreach ($data['packproduto'] as $produtos):
-
-                          $linha = $espec_real[$i];
-                          var_dump($linha);
-                          die;
-                            if($produtos->getEspecificacao() == $linha):
-                            ?>
-                        <tr>
-                          <th scope="row">R$<?php echo $produtos->getPreco(); ?></th>
-                          <td><?php echo $produtos->getEspecificacao(); ?></td>
-                          <th><?php echo $produtos->getEstoque(); ?> und.</th>
-                          <td>
-                              <input name="espec<?php echo $produtos->getId_produto(); ?>" style="width: 100px; height: 30px; margin:0;" type="number" class="form-control" value="0" placeholder="Qtd." onkeypress="return isNumberKey(event)">
-                          </td>
-                        </tr>
-                        <?php
-                          endif;
-                        $i++;
-                       endforeach; ?>
                 			</tbody>
                 		</table>
                   </div>
