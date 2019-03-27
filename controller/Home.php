@@ -23,9 +23,11 @@ class Home extends Controller{
         $this->modelMarca = new MarcaModel();
         $this->modelPackproduto = new PackprodutoModel();
         $this->login = new Login();
+        // session_destroy();die;
         if(isset($_SESSION['carrinho'])){
             $this->carrinho = $_SESSION['carrinho'];
         }
+        //echo "<pre>";var_dump($_SESSION['carrinho']);echo "</pre>";
     }
 
     public function index(){
@@ -40,8 +42,6 @@ class Home extends Controller{
         // var_dump($data['marca']);
         // echo "</pre>";
         // die;
-
-        echo "<pre>";var_dump($_SESSION['carrinho']);echo "</pre>";
 
         $this->view->load('header',$data);
         $this->view->load('nav-home',$data);
@@ -74,35 +74,27 @@ class Home extends Controller{
         }else if($estoque_total < 26){
           $data['estoque-msg'] = 'color: #f55c5d; border: 1px solid #f55c5d;">Últimas unidades';
         }
-
-        $quantidade = [];
-        $id_itens = [];
-        $carrinho = [];
-        $tem_algo_no_cart = false;
-
+        $cart = [];
+        $valor_carrinho = 0;
         if (filter_input(INPUT_POST, 'add')) {
           foreach($id_aux as $linha){
             if(filter_input(INPUT_POST, 'espec'.$linha, FILTER_SANITIZE_STRING) > 0){
 
-              //$carrinho[] = new ItemCarrinho($id_itens[],filter_input(INPUT_POST, 'espec'.$linha, FILTER_SANITIZE_STRING),0);
+              $quantidade = filter_input(INPUT_POST, 'espec'.$linha, FILTER_SANITIZE_STRING); //qtd das especializações que forem > 0
+              $id_itens = $linha; //id_produto das especializações selecionadas
+              $preco_unitario = $this->modelproduto->getPrecoByProdutoId($id_itens);
+              echo $preco_unitario;
+              $preco_total = $quantidade * $preco_unitario;
 
-              $quantidade[] = filter_input(INPUT_POST, 'espec'.$linha, FILTER_SANITIZE_STRING); //qtd das especializações que forem > 0
-              $id_itens[] = $linha; //id_produto das especializações selecionadas
-              $tem_algo_no_cart = true;
-              echo "<pre>";var_dump($quantidade);echo "</pre>";
-              echo "<pre>";var_dump($id_itens);echo "</pre>";die;
+              array_push($cart,new ItemCarrinho($id_itens,$quantidade,$preco_total));
+              $this->login->createSessionCarrinho();
+              $_SESSION['carrinho'] = $cart;
+
             }
           }
-          if($tem_algo_no_cart){
-            $this->login->createSessionCarrinho();
-            $_SESSION['carrinho'] = $carrinho;
-            echo "<pre>";var_dump($_SESSION['carrinho']);echo "</pre>";
-
-            var_dump($quantidade);
-            echo '<br>';
-            var_dump($id_itens);
-          }
+          //echo "<pre>";var_dump($_SESSION['carrinho']);echo "</pre>";
         }
+
         $this->view->load('header',$data);
         $this->view->load('nav',$data);
         $this->view->load('single-product',$data); //single-product2

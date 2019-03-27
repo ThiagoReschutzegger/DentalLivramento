@@ -18,6 +18,12 @@
           return new Produto($produto['id_produto'], $produto['barcode'], $produto['preco'], $produto['estoque'], $produto['especificacao'],$produto['id_subgrupo']);
       }
 
+      public function getPrecoByProdutoId($id) {
+          $sql = "SELECT preco FROM produto WHERE id_produto=:id;";
+          $produto = $this->ExecuteQuery($sql, [':id' => $id])[0];
+          return $produto['preco'];
+      }
+
       public function getProdutosBySubgrupoId($id) {
           $list = [];
           $sql = "SELECT * FROM produto WHERE id_subgrupo=:id;";

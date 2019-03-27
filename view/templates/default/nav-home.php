@@ -1,4 +1,11 @@
-
+<?php
+  if($_SESSION['carrinho'] != null){
+    $count = 0;
+    foreach ($_SESSION['carrinho'] as $item){
+      $count += $item->getPrecoitem();
+    }
+  }
+?>
 <style>
     #teste2{
         display:none;
@@ -106,38 +113,34 @@
               <a href="cart-page.html" class="dropdown-toggle shop-cart" data-toggle="dropdown">
                 <i class="fa fa-shopping-cart"></i>
                 <span class="d-none d-md-block">
-                  <span class="cart-total">Your Cart (3)</span><br>
-                  <span class="cart-price">$80.00</span>
+                  <span class="cart-total">Carrinho <span style="background-color: coral;color:white;border:1px solid coral;border-radius:20%;">&nbsp<?php echo ($_SESSION['carrinho'] != NULL) ? count($_SESSION['carrinho']) : 0; ?>&nbsp</span></span><br>
+                  <span class="cart-price">
+                    R$ <?php echo number_format((float)$count, 2, ',', '') ?>
+                  </span>
                 </span>
               </a>
               <ul class="dropdown-menu dropdown-menu-right">
-                <li>Item(s) in your cart</li>
+                <?php if($_SESSION['carrinho'] != NULL): ?>
+                <li><?php echo count($_SESSION['carrinho']) > 1? "Itens" : "Item"?> em seu carrinho</li>
+                <?php foreach($_SESSION['carrinho'] as $item): ?>
                 <li>
                   <a href="single-product.html">
                     <div class="media">
                       <img class="media-left media-object" src="img/home/cart-items/cart-item-01.jpg" alt="cart-Image">
                       <div class="media-body">
-                        <h5 class="media-heading">INCIDIDUNT UT <br><span>2 X $199</span></h5>
+                        <h5 class="media-heading">NOME<br><span><?php echo $item->getQuantidade(); ?> X $199</span></h5>
                       </div>
                     </div>
                   </a>
                 </li>
-                <li>
-                  <a href="single-product.html">
-                    <div class="media">
-                      <img class="media-left media-object" src="img/home/cart-items/cart-item-01.jpg" alt="cart-Image">
-                      <div class="media-body">
-                        <h5 class="media-heading">INCIDIDUNT UT <br><span>2 X $199</span></h5>
-                      </div>
-                    </div>
-                  </a>
-                </li>
+              <?php endforeach; ?>
                 <li>
                   <div class="btn-group" role="group" aria-label="...">
                     <button type="button" class="btn btn-default" onclick="location.href='cart-page.html';">Shopping Cart</button>
                     <button type="button" class="btn btn-default" onclick="location.href='checkout-step-1.html';">Checkout</button>
                   </div>
                 </li>
+              <?php endif;?>
               </ul>
             </div>
           </div>

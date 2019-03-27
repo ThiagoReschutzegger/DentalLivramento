@@ -143,7 +143,7 @@ endforeach;
                         <?php
                         if($espec_real):
                          foreach ($data['packproduto'] as $produtos):
-
+                           if($i == count($espec_real)) continue;
                             if($produtos->getEspecificacao() == $espec_real[$i]):
                             ?>
                         <tr>
