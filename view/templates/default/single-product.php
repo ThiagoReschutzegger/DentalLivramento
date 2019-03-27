@@ -140,7 +140,9 @@ endforeach;
                             </td>
                   				</tr>
                         <?php endforeach; ?>
-                        <?php foreach ($data['packproduto'] as $produtos):
+                        <?php
+                        if($espec_real):
+                         foreach ($data['packproduto'] as $produtos):
 
                             if($produtos->getEspecificacao() == $espec_real[$i]):
                             ?>
@@ -154,7 +156,8 @@ endforeach;
                         <?php
                         $i++;
                           endif;
-                       endforeach; ?>
+                       endforeach;
+                     endif; ?>
                 			</tbody>
                 		</table>
                   </div>
