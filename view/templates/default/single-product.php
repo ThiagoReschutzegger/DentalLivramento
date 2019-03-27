@@ -112,7 +112,7 @@ endforeach;
                   <p><?php echo $produto->getDescricao(); ?></p>
                   <form method="post">
                   <div style="max-height:300px; min-height:155px;  overflow:auto;  margin-top:20px; margin-bottom:20px;" >
-                  <table class="table">
+                  <table class="table table-espec">
                       <thead>
                           <tr>
                             <th>Preço</th>
@@ -143,7 +143,7 @@ endforeach;
                         <?php
                         if($espec_real):
                          foreach ($data['packproduto'] as $produtos):
-
+                           if($i == count($espec_real)) continue;
                             if($produtos->getEspecificacao() == $espec_real[$i]):
                             ?>
                         <tr>
@@ -161,7 +161,7 @@ endforeach;
                 			</tbody>
                 		</table>
                   </div>
-                  <div class="btn-area text-right">
+                  <div class="btn-area text-right table-espec">
                     <input type="submit" style="width: 220px;" name="add" class="btn btn-primary btn-default" value='Adicionar ao carrinho'/>
                   </div>
                 </form>
