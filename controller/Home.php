@@ -77,12 +77,9 @@ class Home extends Controller{
 
         $quantidade = [];
         $id_itens = [];
-<<<<<<< HEAD
         $carrinho = [];
-=======
         $tem_algo_no_cart = false;
 
->>>>>>> 307fea65833cbc438476958a0ea4d68806eda411
         if (filter_input(INPUT_POST, 'add')) {
           foreach($id_aux as $linha){
             if(filter_input(INPUT_POST, 'espec'.$linha, FILTER_SANITIZE_STRING) > 0){
@@ -91,37 +88,24 @@ class Home extends Controller{
 
               $quantidade[] = filter_input(INPUT_POST, 'espec'.$linha, FILTER_SANITIZE_STRING); //qtd das especializações que forem > 0
               $id_itens[] = $linha; //id_produto das especializações selecionadas
-<<<<<<< HEAD
-
+              $tem_algo_no_cart = true;
               echo "<pre>";var_dump($quantidade);echo "</pre>";
               echo "<pre>";var_dump($id_itens);echo "</pre>";die;
-              
-=======
-              $tem_algo_no_cart = true;
->>>>>>> 307fea65833cbc438476958a0ea4d68806eda411
             }
           }
           if($tem_algo_no_cart){
             $this->login->createSessionCarrinho();
             $_SESSION['carrinho'] = "kk";
             echo "<pre>";var_dump($_SESSION['carrinho']);echo "</pre>";
+            $this->login->createSessionCarrinho();
+            $_SESSION['carrinho'] = $carrinho;
+            echo "<pre>";var_dump($_SESSION['carrinho']);echo "</pre>";
 
-<<<<<<< HEAD
-          $this->login->createSessionCarrinho();
-          $_SESSION['carrinho'] = $carrinho;
-          echo "<pre>";var_dump($_SESSION['carrinho']);echo "</pre>";
-
-          var_dump($quantidade);
-          echo '<br>';
-          var_dump($id_itens);
-=======
             var_dump($quantidade);
             echo '<br>';
             var_dump($id_itens);
           }
->>>>>>> 307fea65833cbc438476958a0ea4d68806eda411
         }
-
         $this->view->load('header',$data);
         $this->view->load('nav',$data);
         $this->view->load('single-product',$data); //single-product2
