@@ -95,9 +95,6 @@ class Home extends Controller{
           }
           if($tem_algo_no_cart){
             $this->login->createSessionCarrinho();
-            $_SESSION['carrinho'] = "kk";
-            echo "<pre>";var_dump($_SESSION['carrinho']);echo "</pre>";
-            $this->login->createSessionCarrinho();
             $_SESSION['carrinho'] = $carrinho;
             echo "<pre>";var_dump($_SESSION['carrinho']);echo "</pre>";
 
