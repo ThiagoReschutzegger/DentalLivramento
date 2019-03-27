@@ -40,6 +40,7 @@ class Home extends Controller{
         // var_dump($data['marca']);
         // echo "</pre>";
         // die;
+
         echo "<pre>";var_dump($_SESSION['carrinho']);echo "</pre>";
 
         $this->view->load('header',$data);
@@ -76,17 +77,24 @@ class Home extends Controller{
 
         $quantidade = [];
         $id_itens = [];
-
+        $carrinho = [];
         if (filter_input(INPUT_POST, 'add')) {
           foreach($id_aux as $linha){
             if(filter_input(INPUT_POST, 'espec'.$linha, FILTER_SANITIZE_STRING) > 0){
+
+              //$carrinho[] = new ItemCarrinho($id_itens[],filter_input(INPUT_POST, 'espec'.$linha, FILTER_SANITIZE_STRING),0);
+
               $quantidade[] = filter_input(INPUT_POST, 'espec'.$linha, FILTER_SANITIZE_STRING); //qtd das especializações que forem > 0
               $id_itens[] = $linha; //id_produto das especializações selecionadas
+
+              echo "<pre>";var_dump($quantidade);echo "</pre>";
+              echo "<pre>";var_dump($id_itens);echo "</pre>";die;
+              
             }
           }
 
           $this->login->createSessionCarrinho();
-          $_SESSION['carrinho'] = "kk";
+          $_SESSION['carrinho'] = $carrinho;
           echo "<pre>";var_dump($_SESSION['carrinho']);echo "</pre>";
 
           var_dump($quantidade);
