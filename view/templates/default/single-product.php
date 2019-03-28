@@ -25,7 +25,7 @@ endforeach;
           <div class="row">
             <div class="col-md-6">
               <div class="page-title">
-                <h2>Vizualizar Produto</h2>
+                <h2>Visualizar Produto</h2>
               </div>
             </div>
             <div class="col-md-6">
@@ -110,14 +110,17 @@ endforeach;
                   <?php echo $data['estoque-msg'];?></span>
                   <hr>                                              <!-- " -->
                   <p><?php echo $produto->getDescricao(); ?></p>
+                  <div class="cartListInner">
+                  <div class="table-responsive">
                   <form method="post">
                   <div style="max-height:300px; min-height:155px;  overflow:auto;  margin-top:20px; margin-bottom:20px;" >
-                  <table class="table table-espec">
+                  <table class="table">
                       <thead>
                           <tr>
-                            <th>Preço</th>
-                            <th width="600px;">Nome</th>
-                            <th>Quantidade</th>
+                            <th style="display: none;"></th>
+                            <th style="font-weight: 400;">Preço</th>
+                            <th style="font-weight: 400;">Nome</th>
+                            <th style="font-weight: 400;">Quantidade</th>
                           </tr>
                       </thead>
                       <tbody>
@@ -133,10 +136,13 @@ endforeach;
                           }
                         ?>
                           <tr>
-                  					<th scope="row">R$<span style="margin:2px"><?php echo $produtos->getPreco(); ?></span></th>
+                            <td style="display: none;"></td>
+                  					<td><b>R$<span style="margin:2px"><?php echo $produtos->getPreco(); ?></span></b></td>
                   					<td><?php echo $produtos->getEspecificacao(); ?></td>
-                            <td>
-                        				<input name="espec<?php echo $produtos->getId_produto(); ?>" style="width: 100px; height: 30px; margin:0;" type="number" class="form-control" value="0" placeholder="Qtd." onkeypress="return isNumberKey(event)">
+                            <td class="count-input">
+                              <a class="incr-btn" data-action="decrease" href="#"><i class="fa fa-minus"></i></a>
+                                <input class="quantity" name="espec<?php echo $produtos->getId_produto(); ?>" style="margin:0;" type="number" value="0" placeholder="Qtd." onkeypress="return isNumberKey(event)">
+                              <a class="incr-btn" data-action="increase" href="#"><i class="fa fa-plus"></i></a>
                             </td>
                   				</tr>
                         <?php endforeach; ?>
@@ -147,10 +153,13 @@ endforeach;
                             if($produtos->getEspecificacao() == $espec_real[$i]):
                             ?>
                         <tr>
-                          <th scope="row">R$<?php echo $produtos->getPreco(); ?></th>
+                          <td style="display: none;"></td>
+                          <td><b>R$<?php echo $produtos->getPreco(); ?></b></td>
                           <td><?php echo $produtos->getEspecificacao(); ?></td>
-                          <td>
-                              <input name="espec<?php echo $produtos->getId_produto(); ?>" style="width: 100px; height: 30px; margin:0;" type="number" class="form-control" value="0" min="0" placeholder="Qtd." onkeypress="return isNumberKey(event)">
+                          <td class="count-input">
+                            <a class="incr-btn" data-action="decrease" href="#"><i class="fa fa-minus"></i></a>
+                              <input class="quantity" name="espec<?php echo $produtos->getId_produto(); ?>" style="margin:0;" type="number" value="0" placeholder="Qtd." onkeypress="return isNumberKey(event)">
+                            <a class="incr-btn" data-action="increase" href="#"><i class="fa fa-plus"></i></a>
                           </td>
                         </tr>
                         <?php
@@ -161,10 +170,13 @@ endforeach;
                 			</tbody>
                 		</table>
                   </div>
-                  <div class="btn-area text-right table-espec">
+
+                  <div class="btn-area text-right">
                     <input type="submit" style="width: 220px;" name="add" class="btn btn-primary btn-default" value='Adicionar ao carrinho'/>
                   </div>
                 </form>
+              </div>
+                </div>
                 </div>
               </div>
             </div>

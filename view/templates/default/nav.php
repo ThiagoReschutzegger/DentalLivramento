@@ -78,8 +78,8 @@
                       </li>
                       <li>
                         <div class="btn-group" role="group" aria-label="...">
-                          <button type="button" class="btn btn-default" onclick="location.href='<?php echo $this->asset ?>cart-page.html';">Carrinho</button>
-                          <button type="button" class="btn btn-default" onclick="location.href='<?php echo $this->asset ?>checkout-step-1.html';">Finalizar</button>
+                          <button type="button" class="btn btn-default" onclick="location.href='<?php echo $this->base_url; ?>Home/viewCart';">Carrinho</button>
+                          <button type="button" class="btn btn-default" onclick="location.href='<?php echo $this->base_url; ?>Home/step1';">Checkout</button>
                         </div>
                       </li>
                     </ul>

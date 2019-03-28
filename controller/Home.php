@@ -101,4 +101,23 @@ class Home extends Controller{
         $this->view->load('footer');
     }
 
+    public function viewCart(){
+        $data['estilo'] = $this->model->getEstiloAtual();
+        $data['categoria'] = $this->modelCategoria->getCategoria();
+        $data['grupo'] = $this->modelGrupo->getGrupo();
+        $data['destaque'] = $this->modelDestaque->getDestaque();
+        $data['slider'] = $this->modelSlider->getSlider();
+        $data['marca'] = $this->modelMarca->getMarca();
+
+        // echo "<pre>";
+        // var_dump($data['marca']);
+        // echo "</pre>";
+        // die;
+
+        $this->view->load('header',$data);
+        $this->view->load('nav',$data);
+        $this->view->load('cart', $data);
+        $this->view->load('footer');
+    }
+
 }

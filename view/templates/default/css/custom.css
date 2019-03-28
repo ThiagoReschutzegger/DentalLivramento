@@ -16,4 +16,21 @@
   .table-espec{
     width: 100% !important;
   }
+  .font-table-cart{
+    font-size: 10px !important;
+    font-weight: 400 !important;
+  }
+  .list-unstyled li{
+    font-size: 120% !important;
+  }
+}
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance:textfield;
 }

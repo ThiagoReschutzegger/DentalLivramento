@@ -136,8 +136,8 @@
               <?php endforeach; ?>
                 <li>
                   <div class="btn-group" role="group" aria-label="...">
-                    <button type="button" class="btn btn-default" onclick="location.href='cart-page.html';">Shopping Cart</button>
-                    <button type="button" class="btn btn-default" onclick="location.href='checkout-step-1.html';">Checkout</button>
+                    <button type="button" class="btn btn-default" onclick="location.href='<?php echo $this->base_url; ?>Home/viewCart';">Carrinho</button>
+                    <button type="button" class="btn btn-default" onclick="location.href='<?php echo $this->base_url; ?>Home/step1';">Checkout</button>
                   </div>
                 </li>
               <?php endif;?>
