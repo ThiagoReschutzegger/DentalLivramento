@@ -109,14 +109,25 @@ class Home extends Controller{
         $data['slider'] = $this->modelSlider->getSlider();
         $data['marca'] = $this->modelMarca->getMarca();
 
-        // echo "<pre>";
-        // var_dump($data['marca']);
-        // echo "</pre>";
-        // die;
 
         $this->view->load('header',$data);
         $this->view->load('nav',$data);
         $this->view->load('cart', $data);
+        $this->view->load('footer');
+    }
+
+    public function step1(){
+        $data['estilo'] = $this->model->getEstiloAtual();
+        $data['categoria'] = $this->modelCategoria->getCategoria();
+        $data['grupo'] = $this->modelGrupo->getGrupo();
+        $data['destaque'] = $this->modelDestaque->getDestaque();
+        $data['slider'] = $this->modelSlider->getSlider();
+        $data['marca'] = $this->modelMarca->getMarca();
+
+
+        $this->view->load('header',$data);
+        $this->view->load('nav',$data);
+        $this->view->load('step-1', $data);
         $this->view->load('footer');
     }
 
