@@ -39,3 +39,8 @@ input:invalid{
   background-color: lightcoral;
   border-color: red;color:white
 }
+
+*::selection {
+    background: lightblue;
+    color: #343434;
+}

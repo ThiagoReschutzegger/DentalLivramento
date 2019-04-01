@@ -40,13 +40,14 @@
                 <tbody>
                   <tr>
                     <td class="">
-                      <a href="<?php echo $this->base_url; ?>Home/viewCart" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></a>
                       <span class="cartImage"><img src="<?php echo $this->asset;?>img/products/cart-image1.jpg" alt="image"></span>
                     </td>
                     <td class="font-table-cart">Italian Winter Hat</td>
                     <td class="font-table-cart">R$ 10.00</td>
                     <td class="font-table-cart" style="text-transform: lowercase;"><b>5</b> unid.</td>
-                    <td class="font-table-cart">R$ 50.00</td>
+                    <td class="font-table-cart">R$ 50.00
+                      <a href="<?php echo $this->base_url; ?>Home/viewCart" style="color: #00bafa; position: relative; margin-right: 5px; opacity: 1; float: right; font-size: 1.5rem;"><span aria-hidden="true">&times;</span></a>
+                    </td>
                   </tr>
 
                 </tbody>

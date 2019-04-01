@@ -123,24 +123,20 @@
       </div>
       <div class="col-md-4">
         <div class="summery-box">
-          <h4>Order Summery</h4>
-          <p>Excepteur sint occaecat cupidat non proi dent sunt.officia.</p>
+          <h4>Dados do Pedido</h4>
+          <p>Um pequeno resumo do seu pedido.</p>
           <ul class="list-unstyled">
             <li class="d-flex justify-content-between">
               <span class="tag">Subtotal</span>
-              <span class="val">$237.00</span>
+              <span class="val">R$ 50.00</span>
             </li>
             <li class="d-flex justify-content-between">
-              <span class="tag">Shipping & Handling</span>
-              <span class="val">$12.00 </span>
-            </li>
-            <li class="d-flex justify-content-between">
-              <span class="tag">Estimated Tax</span>
-              <span class="val">$0.00 </span>
+              <span class="tag">Entrega</span>
+              <span class="val">R$ 0.00</span>
             </li>
             <li class="d-flex justify-content-between">
               <span class="tag">Total</span>
-              <span class="val">USD  $249.00 </span>
+              <span class="val">R$ 50.00 </span>
             </li>
           </ul>
         </div>

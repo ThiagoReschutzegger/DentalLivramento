@@ -101,7 +101,7 @@ class Home extends Controller{
         $this->view->load('footer');
     }
 
-    public function viewCart(){
+    public function viewCart(){ //Edu
         $data['estilo'] = $this->model->getEstiloAtual();
         $data['categoria'] = $this->modelCategoria->getCategoria();
         $data['grupo'] = $this->modelGrupo->getGrupo();
@@ -116,7 +116,7 @@ class Home extends Controller{
         $this->view->load('footer');
     }
 
-    public function step1(){
+    public function step1(){ //Edu
         $data['estilo'] = $this->model->getEstiloAtual();
         $data['categoria'] = $this->modelCategoria->getCategoria();
         $data['grupo'] = $this->modelGrupo->getGrupo();
@@ -124,10 +124,36 @@ class Home extends Controller{
         $data['slider'] = $this->modelSlider->getSlider();
         $data['marca'] = $this->modelMarca->getMarca();
 
+        if (filter_input(INPUT_POST, 'add')) {
+          header('location:' . $this->config->base_url . 'Home/step2');
+        }
 
         $this->view->load('header',$data);
         $this->view->load('nav',$data);
         $this->view->load('step-1', $data);
+        $this->view->load('footer');
+    }
+
+    public function step2(){ //Edu
+        $data['estilo'] = $this->model->getEstiloAtual();
+        $data['categoria'] = $this->modelCategoria->getCategoria();
+        $data['grupo'] = $this->modelGrupo->getGrupo();
+        $data['destaque'] = $this->modelDestaque->getDestaque();
+        $data['slider'] = $this->modelSlider->getSlider();
+        $data['marca'] = $this->modelMarca->getMarca();
+
+        $this->view->load('header',$data);
+        $this->view->load('nav',$data);
+        $this->view->load('step-2', $data);
+        $this->view->load('footer');
+    }
+
+    public function step3(){ //Edu
+        $data['estilo'] = $this->model->getEstiloAtual();
+
+        $this->view->load('header',$data);
+        $this->view->load('nav',$data);
+        $this->view->load('step-3', $data);
         $this->view->load('footer');
     }
 
