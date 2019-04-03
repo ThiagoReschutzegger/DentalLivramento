@@ -27,7 +27,7 @@ class Home extends Controller{
         if(isset($_SESSION['carrinho'])){
             $this->carrinho = $_SESSION['carrinho'];
         }
-        //echo "<pre>";var_dump($_SESSION['carrinho']);echo "</pre>";
+        echo "<pre>";var_dump($_SESSION['carrinho']);echo "</pre>";
     }
 
     public function index(){
@@ -37,16 +37,34 @@ class Home extends Controller{
         $data['destaque'] = $this->modelDestaque->getDestaque();
         $data['slider'] = $this->modelSlider->getSlider();
         $data['marca'] = $this->modelMarca->getMarca();
+        $data['itens'] = '';
 
         // echo "<pre>";
         // var_dump($data['marca']);
         // echo "</pre>";
         // die;
 
+        if(isset($_SESSION['carrinho'])){
+          $list = [];
+            foreach($_SESSION['carrinho'] as $item){
+
+              $list[] = array($this->modelPackproduto->getPackprodutoById($item->getId_produto()),$item->getQuantidade());
+
+            }
+
+            // echo "<pre>";
+            // var_dump($list);
+            // echo "</pre>";
+
+            $data['itens'] = $list;
+
+        }
+
         $this->view->load('header',$data);
         $this->view->load('nav-home',$data);
         $this->view->load('index', $data);
         $this->view->load('footer');
+
     }
 
     public function viewProduto($id){ //Edu
@@ -83,12 +101,16 @@ class Home extends Controller{
               $quantidade = filter_input(INPUT_POST, 'espec'.$linha, FILTER_SANITIZE_STRING); //qtd das especializações que forem > 0
               $id_itens = $linha; //id_produto das especializações selecionadas
               $preco_unitario = $this->modelproduto->getPrecoByProdutoId($id_itens);
-              echo $preco_unitario;
+              // echo $preco_unitario;
               $preco_total = $quantidade * $preco_unitario;
 
               array_push($cart,new ItemCarrinho($id_itens,$quantidade,$preco_total));
-              $this->login->createSessionCarrinho();
-              $_SESSION['carrinho'] = $cart;
+              if(isset($_SESSION['carrinho'])){
+                array_push($_SESSION['carrinho'],$cart);
+              }else{
+                $this->login->createSessionCarrinho();
+                $_SESSION['carrinho'] = $cart;
+              }
 
             }
           }

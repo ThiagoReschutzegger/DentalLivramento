@@ -1,5 +1,5 @@
 <?php
-  if($_SESSION['carrinho'] != null){
+  if(isset($_SESSION['carrinho']) && $data['itens'] != ''){
     $count = 0;
     foreach ($_SESSION['carrinho'] as $item){
       $count += $item->getPrecoitem();
@@ -113,22 +113,25 @@
               <a href="cart-page.html" class="dropdown-toggle shop-cart" data-toggle="dropdown">
                 <i class="fa fa-shopping-cart"></i>
                 <span class="d-none d-md-block">
-                  <span class="cart-total">Carrinho <span style="background-color: coral;color:white;border:1px solid coral;border-radius:20%;">&nbsp<?php echo ($_SESSION['carrinho'] != NULL) ? count($_SESSION['carrinho']) : 0; ?>&nbsp</span></span><br>
+                  <span class="cart-total">Carrinho <span style="background-color: coral;color:white;border:1px solid coral;border-radius:20%;">&nbsp<?php echo (isset($_SESSION['carrinho'])) ? count($_SESSION['carrinho']) : 0; ?>&nbsp</span></span><br>
                   <span class="cart-price">
-                    R$ <?php echo number_format((float)$count, 2, ',', '') ?>
+                    R$ <?php echo (isset($_SESSION['carrinho']) && $data['itens'] != '')? number_format((float)$count, 2, ',', ''): "0,00" ?>
                   </span>
                 </span>
               </a>
               <ul class="dropdown-menu dropdown-menu-right">
-                <?php if($_SESSION['carrinho'] != NULL): ?>
-                <li><?php echo count($_SESSION['carrinho']) > 1? "Itens" : "Item"?> em seu carrinho</li>
-                <?php foreach($_SESSION['carrinho'] as $item): ?>
+                <?php if(isset($_SESSION['carrinho']) && $data['itens'] != ''): ?>
+                <li><?php echo count($data['itens']) > 1? "Itens" : "Item"?> em seu carrinho</li>
+                <?php foreach($data['itens'] as $item): ?>
                 <li>
                   <a href="single-product.html">
                     <div class="media">
-                      <img class="media-left media-object" src="img/home/cart-items/cart-item-01.jpg" alt="cart-Image">
+                      <img class="media-left media-object img-fluid" style="max-height:70px;max-width:80px;" src="<?php echo $item[0]->getImagem(); ?>" alt="cart-Image">
                       <div class="media-body">
-                        <h5 class="media-heading">NOME<br><span><?php echo $item->getQuantidade(); ?> X $199</span></h5>
+                        <h5 class="media-heading"><?php echo $item[0]->getNome(); ?></h5>
+                        <span><?php echo $item[0]->getEspecificacao(); ?></span>
+                        <br>
+                        <h5><span><?php echo $item[1]; ?> X R$ <?php echo $item[0]->getPreco(); ?></span></h5>
                       </div>
                     </div>
                   </a>
@@ -140,7 +143,9 @@
                     <button type="button" class="btn btn-default" onclick="location.href='<?php echo $this->base_url; ?>Home/step1';">Checkout</button>
                   </div>
                 </li>
-              <?php endif;?>
+              <?php else: ?>
+                <li>Adicione itens ao seu carrinho!</li>
+              <?php endif; ?>
               </ul>
             </div>
           </div>
