@@ -1,3 +1,11 @@
+<?php
+  if(isset($_SESSION['carrinho']) && $data['itens'] != ''){
+    $count = 0;
+    foreach ($_SESSION['carrinho'] as $item){
+      $count += $item->getPrecoitem();
+    }
+  }
+?>
 <!-- LIGHT SECTION -->
 <section class="lightSection clearfix pageHeader">
   <div class="container">
@@ -126,17 +134,15 @@
           <h4>Dados do Pedido</h4>
           <p>Um pequeno resumo do seu pedido.</p>
           <ul class="list-unstyled">
-            <li class="d-flex justify-content-between">
-              <span class="tag">Subtotal</span>
-              <span class="val">R$ 50.00</span>
-            </li>
-            <li class="d-flex justify-content-between">
-              <span class="tag">Entrega</span>
-              <span class="val">R$ 0.00</span>
-            </li>
+            <?php foreach ($data['itens'] as $key): ?>
+              <li class="d-flex justify-content-between">
+                <span class="tag"><?php echo $key[0]->getNome();?><br><span style="font-size:11px;" ><?php echo $key[0]->getEspecificacao();?></span></span>
+                <span class="val">R$ <?php echo $key[0]->getPreco(); ?></span>
+              </li>
+            <?php endforeach; ?>
             <li class="d-flex justify-content-between">
               <span class="tag">Total</span>
-              <span class="val">R$ 50.00 </span>
+              <span class="val">R$ <?php echo number_format((float)($count), 2, ',', ''); ?> </span>
             </li>
           </ul>
         </div>

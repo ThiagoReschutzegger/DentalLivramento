@@ -39,21 +39,12 @@ class Home extends Controller{
         $data['marca'] = $this->modelMarca->getMarca();
         $data['itens'] = '';
 
-        // echo "<pre>";
-        // var_dump($data['marca']);
-        // echo "</pre>";
-        // die;
-
         if(isset($_SESSION['carrinho'])){
           $list = [];
             foreach($_SESSION['carrinho'] as $item){
               $list[] = array($this->modelPackproduto->getPackprodutoById($item->getId_produto()),$item->getQuantidade());
 
             }
-
-            // echo "<pre>";
-            // var_dump($list);
-            // echo "</pre>";
 
             $data['itens'] = $list;
 
@@ -127,14 +118,30 @@ class Home extends Controller{
         $this->view->load('footer');
     }
 
-    public function viewCart(){ //Edu
+    public function viewCart($deletar = -1){ //Edu
         $data['estilo'] = $this->model->getEstiloAtual();
         $data['categoria'] = $this->modelCategoria->getCategoria();
         $data['grupo'] = $this->modelGrupo->getGrupo();
         $data['destaque'] = $this->modelDestaque->getDestaque();
         $data['slider'] = $this->modelSlider->getSlider();
         $data['marca'] = $this->modelMarca->getMarca();
+        $data['itens'] = '';
 
+        if(isset($_SESSION['carrinho'])){
+          $list = [];
+            foreach($_SESSION['carrinho'] as $item){
+              $list[] = array($this->modelPackproduto->getPackprodutoById($item->getId_produto()),$item->getQuantidade());
+            }
+
+            $data['itens'] = $list;
+            //echo "<pre>";var_dump($data['itens']);echo "</pre>";die;
+        }
+
+        if($deletar != -1){
+          array_splice($_SESSION['carrinho'], $deletar, 1);
+          //echo "<pre>";var_dump($_SESSION['carrinho']);echo "</pre>";die;
+          header('location:' . $this->config->base_url . 'Home/viewCart');
+        }
 
         $this->view->load('header',$data);
         $this->view->load('nav',$data);
@@ -149,6 +156,17 @@ class Home extends Controller{
         $data['destaque'] = $this->modelDestaque->getDestaque();
         $data['slider'] = $this->modelSlider->getSlider();
         $data['marca'] = $this->modelMarca->getMarca();
+        $data['itens'] = '';
+
+        if(isset($_SESSION['carrinho'])){
+          $list = [];
+            foreach($_SESSION['carrinho'] as $item){
+              $list[] = array($this->modelPackproduto->getPackprodutoById($item->getId_produto()),$item->getQuantidade());
+            }
+
+            $data['itens'] = $list;
+            //echo "<pre>";var_dump($data['itens']);echo "</pre>";die;
+        }
 
         if (filter_input(INPUT_POST, 'add')) {
           header('location:' . $this->config->base_url . 'Home/step2');
@@ -167,6 +185,17 @@ class Home extends Controller{
         $data['destaque'] = $this->modelDestaque->getDestaque();
         $data['slider'] = $this->modelSlider->getSlider();
         $data['marca'] = $this->modelMarca->getMarca();
+        $data['itens'] = '';
+
+        if(isset($_SESSION['carrinho'])){
+          $list = [];
+            foreach($_SESSION['carrinho'] as $item){
+              $list[] = array($this->modelPackproduto->getPackprodutoById($item->getId_produto()),$item->getQuantidade());
+            }
+
+            $data['itens'] = $list;
+            //echo "<pre>";var_dump($data['itens']);echo "</pre>";die;
+        }
 
         $this->view->load('header',$data);
         $this->view->load('nav',$data);
