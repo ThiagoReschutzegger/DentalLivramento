@@ -23,11 +23,11 @@ class Home extends Controller{
         $this->modelMarca = new MarcaModel();
         $this->modelPackproduto = new PackprodutoModel();
         $this->login = new Login();
-        // session_destroy();die;
+        //session_destroy();die;
         if(isset($_SESSION['carrinho'])){
             $this->carrinho = $_SESSION['carrinho'];
         }
-        echo "<pre>";var_dump($_SESSION['carrinho']);echo "</pre>";
+        //echo "<pre>";var_dump($_SESSION['carrinho']);echo "</pre>";
     }
 
     public function index(){
@@ -47,7 +47,6 @@ class Home extends Controller{
         if(isset($_SESSION['carrinho'])){
           $list = [];
             foreach($_SESSION['carrinho'] as $item){
-
               $list[] = array($this->modelPackproduto->getPackprodutoById($item->getId_produto()),$item->getQuantidade());
 
             }
@@ -105,16 +104,21 @@ class Home extends Controller{
               $preco_total = $quantidade * $preco_unitario;
 
               array_push($cart,new ItemCarrinho($id_itens,$quantidade,$preco_total));
-              if(isset($_SESSION['carrinho'])){
-                array_push($_SESSION['carrinho'],$cart);
-              }else{
-                $this->login->createSessionCarrinho();
-                $_SESSION['carrinho'] = $cart;
-              }
 
             }
           }
           //echo "<pre>";var_dump($_SESSION['carrinho']);echo "</pre>";
+          if(isset($_SESSION['carrinho'])){
+            foreach($cart as $seila){
+              array_push($_SESSION['carrinho'],$seila);
+            }
+          }else{
+            $this->login->createSessionCarrinho();
+            $_SESSION['carrinho'] = [];
+            foreach($cart as $seila){
+              array_push($_SESSION['carrinho'],$seila);
+            }
+          }
         }
 
         $this->view->load('header',$data);
