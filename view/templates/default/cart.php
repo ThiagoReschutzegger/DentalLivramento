@@ -13,7 +13,7 @@
       <div class="row tableInner">
         <div class="col-sm-12">
           <div class="page-title">
-            <h2>carrinho</h2>
+            <h2>Seu carrinho</h2>
             <ol class="breadcrumb" >
               <li style="color: white;">
                 <a href="<?php echo $this->base_url; ?>">Home</a>
@@ -28,6 +28,7 @@
 </section>
 
 <!-- MAIN CONTENT SECTION -->
+<?php if(isset($_SESSION['carrinho']) && $data['itens']):?>
 <section class="mainContent clearfix cartListWrapper">
   <div class="container">
     <div class="row">
@@ -57,7 +58,7 @@
                     <td class="font-table-cart">R$ <?php echo $item[0]->getPreco(); ?></td>
                     <td class="font-table-cart" style="text-transform: lowercase;"><b><?php echo $item[1]; ?></b> unid.</td>
                     <td class="font-table-cart">R$ <?php echo number_format((float)((float)$item[0]->getPreco() * (float)$item[1]), 2, ',', ''); ?>
-                      <a href="<?php echo $this->base_url; ?>Home/viewCart/<?php echo $i; ?>" style="color: #00bafa; position: relative; margin-right: 5px; opacity: 1; float: right; font-size: 1.5rem;"><span aria-hidden="true">&times;</span></a>
+                      <a href="<?php echo $this->base_url; ?>Home/viewCart/i.<?php echo $i; ?>" style="color: #00bafa; position: relative; margin-right: 5px; opacity: 1; float: right; font-size: 1.5rem;"><span aria-hidden="true">&times;</span></a>
                     </td>
                   </tr>
                 <?php
@@ -84,3 +85,22 @@
     </div>
   </div>
 </section>
+<?php else: ?>
+  <section class="mainContent clearfix stepsWrapper">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="innerWrapper clearfix stepsPage">
+            <div class="row justify-content-center order-confirm">
+              <div class="col-md-8 col-lg-6 text-center">
+                <h2>Não há nada em seu carrinho.</h2>
+                <span>Adicione itens para poder comprar.</span><br>
+                <a href="<?php echo $this->base_url;?>" class="btn btn-primary btn-default">Voltar às Compras</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<?php endif; ?>

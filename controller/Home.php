@@ -23,7 +23,7 @@ class Home extends Controller{
         $this->modelMarca = new MarcaModel();
         $this->modelPackproduto = new PackprodutoModel();
         $this->login = new Login();
-        //session_destroy();die;
+        // session_destroy();die;
         if(isset($_SESSION['carrinho'])){
             $this->carrinho = $_SESSION['carrinho'];
         }
@@ -138,7 +138,12 @@ class Home extends Controller{
         }
 
         if($deletar != -1){
-          array_splice($_SESSION['carrinho'], $deletar, 1);
+          $string = explode(".",$deletar);
+          $index = $string[1];
+          if(count($_SESSION['carrinho'])==1){
+            session_destroy();
+          }
+          array_splice($_SESSION['carrinho'], $index, 1);
           //echo "<pre>";var_dump($_SESSION['carrinho']);echo "</pre>";die;
           header('location:' . $this->config->base_url . 'Home/viewCart');
         }
