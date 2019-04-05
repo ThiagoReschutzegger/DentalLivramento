@@ -1,3 +1,11 @@
+<?php
+  if(isset($_SESSION['carrinho']) && $data['itens'] != ''){
+    $count = 0;
+    foreach ($_SESSION['carrinho'] as $item){
+      $count += $item->getPrecoitem();
+    }
+  }
+?>
 <!-- LIGHT SECTION -->
 <section class="lightSection clearfix pageHeader">
   <div class="container">
@@ -47,26 +55,30 @@
           <form class="row" method="POST" role="form">
             <div class="col-12">
               <div class="page-header">
-                <h4>Dados do Cliente</h4>
+                <h4>DADOS DO CLIENTE</h4>
               </div>
             </div>
             <div class="form-group col-12">
-              <label for="">Nome Completo:</label>
+              <label for="">Nome Completo<span style='color:red'>*</span></label>
               <input type="text" name="nome" class="form-control" required>
             </div>
             <div class="form-group col-12">
-              <label for="">Endereço:</label>
-              <input type="text" name="endereco" class="form-control" required>
+              <label for="">Endereço</label>
+              <input type="text" name="endereco" class="form-control" >
             </div>
             <div class="form-group col-md-8 col-12">
-              <label for="">Cidade:</label>
-              <input type="text" name="cidade" class="form-control" required>
+              <label for="">Cidade</label>
+              <input type="text" name="cidade" class="form-control">
+            </div>
+            <div class="form-group col-md-8 col-12">
+              <label for="">CEP</label>
+              <input type="text" name="cep" class="form-control cep">
             </div>
             <div class="form-group col-md-4 col-12">
-              <label for="">UF:</label>
+              <label for="">UF</label>
               <div class="form-group row">
                 <div class="quick-drop col-12 selectOptions ">
-                  <select name="uf" class="form-control select-drop" required>
+                  <select name="uf" class="form-control select-drop">
                       <option>Selecione o Estado</option>
                   		<option value="ac">Acre</option>
                   		<option value="al">Alagoas</option>
@@ -100,21 +112,21 @@
               </div>
             </div>
             <div class="form-group col-md-6 col-12">
-              <label for="">Email</label>
+              <label for="">Email<span style='color:red'>*</span></label>
               <input type="email" name="email" class="form-control" required>
             </div>
             <div class="form-group col-md-6 col-12">
-              <label for="">Celular</label>
-              <input type="number" name="telefone" placeholder="(00)0000-0000" pattern="\(\d{2}\)\d{4}-\d{4}" class="form-control" required>
+              <label for="">Celular<span style='color:red'>*</span></label>
+              <input name="telefone" placeholder="(00)0000-0000"  class="form-control ddd_tel" required>
             </div>
             <div class="form-group col-12">
-              <label for="">Mensagem:</label>
-              <textarea name="mensagem" class="form-control" required></textarea>
+              <label for="">Mensagem</label>
+              <textarea name="mensagem" class="form-control"></textarea>
             </div>
             <div class="col-12">
               <div class="well well-lg clearfix">
                 <ul class="pager">
-                  <li class="next "><input type="submit" name="next" class="btn btn-primary btn-default float-right" value="Continuar"></li>
+                  <li class="next "><input type="submit" name="add" class="btn btn-primary btn-default float-right" value="Continuar"></li>
                 </ul>
               </div>
             </div>
@@ -126,17 +138,15 @@
           <h4>Dados do Pedido</h4>
           <p>Um pequeno resumo do seu pedido.</p>
           <ul class="list-unstyled">
-            <li class="d-flex justify-content-between">
-              <span class="tag">Subtotal</span>
-              <span class="val">R$ 50.00</span>
-            </li>
-            <li class="d-flex justify-content-between">
-              <span class="tag">Entrega</span>
-              <span class="val">R$ 0.00</span>
-            </li>
+            <?php foreach ($data['itens'] as $key): ?>
+              <li class="d-flex justify-content-between">
+                <span class="tag"><?php echo $key[0]->getNome();?><br><span style="font-size:11px;" ><?php echo $key[0]->getEspecificacao();?></span></span>
+                <span class="val">R$ <?php echo $key[0]->getPreco(); ?></span>
+              </li>
+            <?php endforeach; ?>
             <li class="d-flex justify-content-between">
               <span class="tag">Total</span>
-              <span class="val">R$ 50.00 </span>
+              <span class="val">R$ <?php echo number_format((float)($count), 2, ',', ''); ?> </span>
             </li>
           </ul>
         </div>

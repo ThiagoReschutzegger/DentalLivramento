@@ -9,6 +9,7 @@ class Home extends Controller{
     protected $modelSlider;
     protected $modelMarca;
     protected $modelPackproduto;
+    protected $modelCarrinho;
     protected $carrinho;
     protected $login;
 
@@ -21,7 +22,9 @@ class Home extends Controller{
         $this->modelDestaque = new DestaqueModel();
         $this->modelSlider = new SliderModel();
         $this->modelMarca = new MarcaModel();
+        $this->modelCarrinho = new CarrinhoModel();
         $this->modelPackproduto = new PackprodutoModel();
+        $this->modelItemcarrinho = new ItemcarrinhoModel();
         $this->login = new Login();
         // session_destroy();die;
         if(isset($_SESSION['carrinho'])){
@@ -37,16 +40,13 @@ class Home extends Controller{
         $data['destaque'] = $this->modelDestaque->getDestaque();
         $data['slider'] = $this->modelSlider->getSlider();
         $data['marca'] = $this->modelMarca->getMarca();
-
-        // echo "<pre>";
-        // var_dump($data['marca']);
-        // echo "</pre>";
-        // die;
+        $data['itens'] = $this->getList();
 
         $this->view->load('header',$data);
         $this->view->load('nav-home',$data);
         $this->view->load('index', $data);
         $this->view->load('footer');
+
     }
 
     public function viewProduto($id){ //Edu
@@ -83,16 +83,25 @@ class Home extends Controller{
               $quantidade = filter_input(INPUT_POST, 'espec'.$linha, FILTER_SANITIZE_STRING); //qtd das especializações que forem > 0
               $id_itens = $linha; //id_produto das especializações selecionadas
               $preco_unitario = $this->modelproduto->getPrecoByProdutoId($id_itens);
-              echo $preco_unitario;
+              // echo $preco_unitario;
               $preco_total = $quantidade * $preco_unitario;
 
               array_push($cart,new ItemCarrinho($id_itens,$quantidade,$preco_total));
-              $this->login->createSessionCarrinho();
-              $_SESSION['carrinho'] = $cart;
 
             }
           }
           //echo "<pre>";var_dump($_SESSION['carrinho']);echo "</pre>";
+          if(isset($_SESSION['carrinho'])){
+            foreach($cart as $seila){
+              array_push($_SESSION['carrinho'],$seila);
+            }
+          }else{
+            $this->login->createSessionCarrinho();
+            $_SESSION['carrinho'] = [];
+            foreach($cart as $seila){
+              array_push($_SESSION['carrinho'],$seila);
+            }
+          }
         }
 
         $this->view->load('header',$data);
@@ -101,14 +110,25 @@ class Home extends Controller{
         $this->view->load('footer');
     }
 
-    public function viewCart(){ //Edu
+    public function viewCart($deletar = -1){ //Edu
         $data['estilo'] = $this->model->getEstiloAtual();
         $data['categoria'] = $this->modelCategoria->getCategoria();
         $data['grupo'] = $this->modelGrupo->getGrupo();
         $data['destaque'] = $this->modelDestaque->getDestaque();
         $data['slider'] = $this->modelSlider->getSlider();
         $data['marca'] = $this->modelMarca->getMarca();
+        $data['itens'] = $this->getList();
 
+        if($deletar != -1){
+          $string = explode(".",$deletar);
+          $index = $string[1];
+          if(count($_SESSION['carrinho'])==1){
+            session_destroy();
+          }
+          array_splice($_SESSION['carrinho'], $index, 1);
+          //echo "<pre>";var_dump($_SESSION['carrinho']);echo "</pre>";die;
+          header('location:' . $this->config->base_url . 'Home/viewCart');
+        }
 
         $this->view->load('header',$data);
         $this->view->load('nav',$data);
@@ -117,35 +137,72 @@ class Home extends Controller{
     }
 
     public function step1(){ //Edu
+        if(isset($_SESSION['carrinho'])){
         $data['estilo'] = $this->model->getEstiloAtual();
         $data['categoria'] = $this->modelCategoria->getCategoria();
         $data['grupo'] = $this->modelGrupo->getGrupo();
         $data['destaque'] = $this->modelDestaque->getDestaque();
         $data['slider'] = $this->modelSlider->getSlider();
         $data['marca'] = $this->modelMarca->getMarca();
+        $data['itens'] = $this->getList();
 
         if (filter_input(INPUT_POST, 'add')) {
-          header('location:' . $this->config->base_url . 'Home/step2');
+          $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
+          $endereco = filter_input(INPUT_POST, 'endereco', FILTER_SANITIZE_STRING);
+          $cep = filter_input(INPUT_POST, 'cep', FILTER_SANITIZE_STRING);
+          $cidade = filter_input(INPUT_POST, 'cidade', FILTER_SANITIZE_STRING);
+          $uf = filter_input(INPUT_POST, 'uf', FILTER_SANITIZE_STRING);
+          $telefone = filter_input(INPUT_POST, 'telefone', FILTER_SANITIZE_STRING);
+          $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING);
+          $mensagem = filter_input(INPUT_POST, 'mensagem', FILTER_SANITIZE_STRING);
+
+          if ($nome && $email && $telefone) {
+            $dados = array($nome,$endereco,$cep,$cidade,$uf,$telefone,$email,$mensagem);
+            $this->step2($dados);
+            die;
+          } else {
+            $data['msg'] = 'Preencha todos os Campos!';
+          }
         }
 
         $this->view->load('header',$data);
         $this->view->load('nav',$data);
         $this->view->load('step-1', $data);
         $this->view->load('footer');
+      }else{
+        header('location:' . $this->config->base_url . 'Home/viewCart');
+      }
     }
 
-    public function step2(){ //Edu
-        $data['estilo'] = $this->model->getEstiloAtual();
-        $data['categoria'] = $this->modelCategoria->getCategoria();
-        $data['grupo'] = $this->modelGrupo->getGrupo();
-        $data['destaque'] = $this->modelDestaque->getDestaque();
-        $data['slider'] = $this->modelSlider->getSlider();
-        $data['marca'] = $this->modelMarca->getMarca();
+    public function step2($dados = NULL){ //Edu
+        if($dados != NULL){
+          $data['estilo'] = $this->model->getEstiloAtual();
+          $data['categoria'] = $this->modelCategoria->getCategoria();
+          $data['grupo'] = $this->modelGrupo->getGrupo();
+          $data['destaque'] = $this->modelDestaque->getDestaque();
+          $data['slider'] = $this->modelSlider->getSlider();
+          $data['marca'] = $this->modelMarca->getMarca();
+          $data['itens'] = $this->getList();
 
-        $this->view->load('header',$data);
-        $this->view->load('nav',$data);
-        $this->view->load('step-2', $data);
-        $this->view->load('footer');
+          if (filter_input(INPUT_POST, 'add')) {
+            $bool = $this->modelCarrinho->insertCarrinho();
+            if($bool){
+              $idcarrinho = $this->modelCarrinho->getLastIdInserted();
+
+              foreach($data['itens'] as $item){
+                $itemcarrinho = new ItemCarrinhoBanco(null,$item[0]->getId_produto(),$item[1],$idcarrinho);
+                $test = $this->modelItemcarrinho->insertItemcarrinho($itemcarrinho);
+              }
+            }
+          }
+
+          $this->view->load('header',$data);
+          $this->view->load('nav',$data);
+          $this->view->load('step-2', $data);
+          $this->view->load('footer');
+        }else{
+          header('location:' . $this->config->base_url . 'Home/step1');
+        }
     }
 
     public function step3(){ //Edu
@@ -155,6 +212,21 @@ class Home extends Controller{
         $this->view->load('nav',$data);
         $this->view->load('step-3', $data);
         $this->view->load('footer');
+    }
+
+    private function getList(){
+      if(isset($_SESSION['carrinho'])){
+        $list = [];
+          foreach($_SESSION['carrinho'] as $item){
+            $list[] = array($this->modelPackproduto->getPackprodutoById($item->getId_produto()),$item->getQuantidade());
+
+          }
+
+          return $list;
+
+      }else{
+        return '';
+      }
     }
 
 }

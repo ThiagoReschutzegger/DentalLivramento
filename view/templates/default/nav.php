@@ -1,4 +1,11 @@
-
+<?php
+  if(isset($_SESSION['carrinho']) && $data['itens'] != ''){
+    $count = 0;
+    foreach ($_SESSION['carrinho'] as $item){
+      $count += $item->getPrecoitem();
+    }
+  }
+?>
   <body class="body-wrapper version1">
 
     <!-- Preloader -->
@@ -53,35 +60,34 @@
                     </ul>
                   </li>-->
                   <li class="dropdown cart-dropdown">
-                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-shopping-cart"></i>$0</a>
+                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-shopping-cart"></i>R$ <?php echo (isset($_SESSION['carrinho']) && $data['itens'] != '')? number_format((float)$count, 2, ',', ''): "0,00" ?></a>
                     <ul class="dropdown-menu dropdown-menu-right">
-                      <li>Item(s) in your cart</li>
+                      <?php if(isset($_SESSION['carrinho']) && $data['itens'] != ''): ?>
+                      <li><?php echo count($data['itens']) > 1? "Itens" : "Item"?> em seu carrinho</li>
+                      <?php foreach($data['itens'] as $item): ?>
                       <li>
                         <a href="single-product.html">
                           <div class="media">
-                            <img class="media-left media-object" src="<?php echo $this->asset ?>img/home/cart-items/cart-item-01.jpg" alt="cart-Image">
+                            <img class="media-left media-object img-fluid" style="max-height:70px;max-width:80px;" src="<?php echo $item[0]->getImagem(); ?>" alt="cart-Image">
                             <div class="media-body">
-                              <h5 class="media-heading">INCIDIDUNT UT <br><span>2 X $199</span></h5>
+                              <h5 class="media-heading"><?php echo $item[0]->getNome(); ?></h5>
+                              <span><?php echo $item[0]->getEspecificacao(); ?></span>
+                              <br>
+                              <h5><span><?php echo $item[1]; ?> X R$ <?php echo $item[0]->getPreco(); ?></span></h5>
                             </div>
                           </div>
                         </a>
                       </li>
-                      <li>
-                        <a href="single-product.html">
-                          <div class="media">
-                            <img class="media-left media-object" src="<?php echo $this->asset ?>img/home/cart-items/cart-item-01.jpg" alt="cart-Image">
-                            <div class="media-body">
-                              <h5 class="media-heading">INCIDIDUNT UT <br><span>2 X $199</span></h5>
-                            </div>
-                          </div>
-                        </a>
-                      </li>
+                    <?php endforeach; ?>
                       <li>
                         <div class="btn-group" role="group" aria-label="...">
                           <button type="button" class="btn btn-default" onclick="location.href='<?php echo $this->base_url; ?>Home/viewCart';">Carrinho</button>
                           <button type="button" class="btn btn-default" onclick="location.href='<?php echo $this->base_url; ?>Home/step1';">Checkout</button>
                         </div>
                       </li>
+                    <?php else: ?>
+                      <li>Adicione itens ao seu carrinho!</li>
+                    <?php endif; ?>
                     </ul>
                   </li>
                 </ul>
@@ -243,7 +249,7 @@
               <div class="dropdown cart-dropdown">
                 <a href="javascript:void(0)" class="dropdown-toggle shop-cart" data-toggle="dropdown">
                   <i class="fa fa-shopping-cart"></i>
-                  <span class="badge">3</span>
+                  <span class="badge"><?php echo (isset($_SESSION['carrinho'])) ? count($_SESSION['carrinho']) : 0; ?></span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
                   <li>Item(s) in your cart</li>

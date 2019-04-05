@@ -201,11 +201,14 @@
 <script src="<?php echo $this->asset ?>plugins/countdown/jquery.syotimer.js"></script>
 <script src="<?php echo $this->asset ?>plugins/velocity/velocity.min.js"></script>
 <script src="<?php echo $this->asset ?>js/custom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js"></script>
 <script type="text/javascript">
     $( document ).ready(function() {
         $( "#teste" ).click(function() {
             $("#teste2").toggle();
         });
+        $('.ddd_tel').mask('(99) 99999-9999');
+        $('.cep').mask('99999-999');
     });
 </script>
 
