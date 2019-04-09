@@ -178,7 +178,7 @@
   <div class="container">
 
     <div class="page-header text-uppercase">
-      <h4 class="text-uppercase fonte-e-cor-top">Produtos em Destaque</h4>
+      <h4 class="text-uppercase fonte-e-cor-top">Destaques</h4>
     </div>
 
     <div class="row featuredProducts featuredProductsSlider margin-bottom mouse-grab">

@@ -8,6 +8,7 @@ class Home extends Controller{
     protected $modelDestaque;
     protected $modelSlider;
     protected $modelMarca;
+    protected $modelSubgrupo;
     protected $modelPackproduto;
     protected $modelCarrinho;
     protected $carrinho;
@@ -22,6 +23,7 @@ class Home extends Controller{
         $this->modelDestaque = new DestaqueModel();
         $this->modelSlider = new SliderModel();
         $this->modelMarca = new MarcaModel();
+        $this->modelSubgrupo = new SubgrupoModel();
         $this->modelCarrinho = new CarrinhoModel();
         $this->modelPackproduto = new PackprodutoModel();
         $this->modelItemcarrinho = new ItemcarrinhoModel();
@@ -41,7 +43,7 @@ class Home extends Controller{
         $data['slider'] = $this->modelSlider->getSlider();
         $data['marca'] = $this->modelMarca->getMarca();
         $data['itens'] = $this->getList();
-        $data['prod-destaq'] = $this->getSubgupoDestaque();
+        $data['prod-destaq'] = $this->modelSubgrupo->getSubgrupoDestaque();
 
         $this->view->load('header',$data);
         $this->view->load('nav-home',$data);
