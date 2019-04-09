@@ -41,6 +41,7 @@ class Home extends Controller{
         $data['slider'] = $this->modelSlider->getSlider();
         $data['marca'] = $this->modelMarca->getMarca();
         $data['itens'] = $this->getList();
+        $data['prod-destaq'] = $this->getSubgupoDestaque();
 
         $this->view->load('header',$data);
         $this->view->load('nav-home',$data);

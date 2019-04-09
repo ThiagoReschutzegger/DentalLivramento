@@ -20,6 +20,10 @@
     <link rel="stylesheet" type="text/css" href="<?php echo $this->asset ?>plugins/slick/slick.css" media="screen">
     <link rel="stylesheet" type="text/css" href="<?php echo $this->asset ?>plugins/slick/slick-theme.css" media="screen">
 
+    <link rel="stylesheet" href="<?php echo $this->asset ?>css/styles-nav.css">
+      <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+      <link rel="stylesheet" href="<?php echo $this->asset ?>js/nav.js">
+
     <!-- CUSTOM CSS -->
     <link href="<?php echo $this->asset ?>css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo $this->asset ?>css/<?php echo $data['estilo']->getLocal(); ?>" id="option_color">

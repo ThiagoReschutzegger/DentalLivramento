@@ -12,6 +12,16 @@ class SubgrupoModel extends Model {
         return $list;
     }
 
+    public function getSubgrupoDestaque() { //Edu
+        $list = [];
+        $sql = "SELECT * FROM subgrupo WHERE destaque = 1";
+        $consulta = $this->ExecuteQuery($sql, array());
+        foreach ($consulta as $subgrupo) {
+            $list[] = new Subgrupo($subgrupo['id_subgrupo'], $subgrupo['nome'], $subgrupo['descricao'], $subgrupo['imagem'], $subgrupo['destaque'], $subgrupo['id_grupo'], $subgrupo['id_marca']);
+        }
+        return $list;
+    }
+
     public function getIdBy($nome, $descricao, $imagem) {
         $sql = "SELECT * FROM subgrupo WHERE nome = :nome AND descricao = :descricao AND imagem = :imagem;";
         $subgrupo = $this->ExecuteQuery($sql, [':nome' => $nome, ':descricao' => $descricao, ':imagem' => $imagem ])[0];
