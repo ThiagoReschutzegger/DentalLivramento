@@ -11,6 +11,7 @@ class Home extends Controller{
     protected $modelSubgrupo;
     protected $modelPackproduto;
     protected $modelCarrinho;
+    protected $modelPedido;
     protected $carrinho;
     protected $login;
 
@@ -25,6 +26,7 @@ class Home extends Controller{
         $this->modelMarca = new MarcaModel();
         $this->modelSubgrupo = new SubgrupoModel();
         $this->modelCarrinho = new CarrinhoModel();
+        $this->modelPedido = new PedidoModel();
         $this->modelPackproduto = new PackprodutoModel();
         $this->modelItemcarrinho = new ItemcarrinhoModel();
         $this->login = new Login();
@@ -59,6 +61,7 @@ class Home extends Controller{
         $data['grupo'] = $this->modelGrupo->getGrupoById($pkpd->getId_grupo());
         $data['categoria'] = $this->modelCategoria->getCategoriaById($data['grupo']->getId_categoria());
         $data['marca'] = $this->modelMarca->getMarcaById($pkpd->getId_marca());
+        $data['itens'] = $this->getList();
 
         $preco_aux = [];
         $estoque_aux = [];
@@ -106,6 +109,7 @@ class Home extends Controller{
             }
           }
         }
+        $data['itens'] = $this->getList();
 
         $this->view->load('header',$data);
         $this->view->load('nav',$data);
@@ -117,9 +121,6 @@ class Home extends Controller{
         $data['estilo'] = $this->model->getEstiloAtual();
         $data['categoria'] = $this->modelCategoria->getCategoria();
         $data['grupo'] = $this->modelGrupo->getGrupo();
-        $data['destaque'] = $this->modelDestaque->getDestaque();
-        $data['slider'] = $this->modelSlider->getSlider();
-        $data['marca'] = $this->modelMarca->getMarca();
         $data['itens'] = $this->getList();
 
         if($deletar != -1){
@@ -144,9 +145,6 @@ class Home extends Controller{
         $data['estilo'] = $this->model->getEstiloAtual();
         $data['categoria'] = $this->modelCategoria->getCategoria();
         $data['grupo'] = $this->modelGrupo->getGrupo();
-        $data['destaque'] = $this->modelDestaque->getDestaque();
-        $data['slider'] = $this->modelSlider->getSlider();
-        $data['marca'] = $this->modelMarca->getMarca();
         $data['itens'] = $this->getList();
 
         if (filter_input(INPUT_POST, 'add')) {
@@ -160,7 +158,9 @@ class Home extends Controller{
           $mensagem = filter_input(INPUT_POST, 'mensagem', FILTER_SANITIZE_STRING);
 
           if ($nome && $email && $telefone) {
-            $dados = array($nome,$endereco,$cep,$cidade,$uf,$telefone,$email,$mensagem);
+            $dados = array("Nome"=>$nome,"Endereço"=>$endereco,"CEP"=>$cep,"Cidade"=>$cidade,"UF"=>$uf,"Telefone"=>$telefone,"Email"=>$email,"Mensagem"=>$mensagem);
+            if($dados["UF"] == "Selecione o Estado") $dados["UF"]='';
+
             $this->step2($dados);
             die;
           } else {
@@ -182,22 +182,8 @@ class Home extends Controller{
           $data['estilo'] = $this->model->getEstiloAtual();
           $data['categoria'] = $this->modelCategoria->getCategoria();
           $data['grupo'] = $this->modelGrupo->getGrupo();
-          $data['destaque'] = $this->modelDestaque->getDestaque();
-          $data['slider'] = $this->modelSlider->getSlider();
-          $data['marca'] = $this->modelMarca->getMarca();
           $data['itens'] = $this->getList();
-
-          if (filter_input(INPUT_POST, 'add')) {
-            $bool = $this->modelCarrinho->insertCarrinho();
-            if($bool){
-              $idcarrinho = $this->modelCarrinho->getLastIdInserted();
-
-              foreach($data['itens'] as $item){
-                $itemcarrinho = new ItemCarrinhoBanco(null,$item[0]->getId_produto(),$item[1],$idcarrinho);
-                $test = $this->modelItemcarrinho->insertItemcarrinho($itemcarrinho);
-              }
-            }
-          }
+          $data['dados'] = $dados;
 
           $this->view->load('header',$data);
           $this->view->load('nav',$data);
@@ -210,11 +196,60 @@ class Home extends Controller{
 
     public function step3(){ //Edu
         $data['estilo'] = $this->model->getEstiloAtual();
+        $data['itens'] = $this->getList();
 
         $this->view->load('header',$data);
         $this->view->load('nav',$data);
         $this->view->load('step-3', $data);
         $this->view->load('footer');
+    }
+
+    public function descartar(){ //Edu
+      session_destroy();
+      header('location:' . $this->config->base_url . 'Home/viewCart');
+    }
+
+    public function final($param){
+      $data['itens'] = $this->getList();
+
+      $array = explode(";", $param);
+
+      for($x=0;$x<8;$x++){
+        if($array[$x] == '0'){
+          $array[$x] = '';
+        }
+      }
+
+      $bool = $this->modelCarrinho->insertCarrinho();
+
+      if($bool){
+        $idcarrinho = $this->modelCarrinho->getLastIdInserted();
+
+        foreach($data['itens'] as $item){
+          $itemcarrinho = new ItemCarrinhoBanco(null,$item[0]->getId_produto(),$item[1],$idcarrinho);
+          $test = $this->modelItemcarrinho->insertItemcarrinho($itemcarrinho);
+        }
+
+        if(isset($_SESSION['carrinho']) && $data['itens'] != ''){
+          $count = 0;
+          foreach ($_SESSION['carrinho'] as $item){
+            $count += $item->getPrecoitem();
+          }
+        }
+
+
+
+        $pedido = new Pedido(null,$array[0],$array[1],$array[2],$array[3],$array[4],$array[5],$array[6],$array[7],$count,date("Y-m-d"),"NAO ENTREGUE",$idcarrinho);
+
+
+        $seila = $this->modelPedido->insertPedido($pedido);
+
+      }
+
+
+      session_destroy();
+      header('location:' . $this->config->base_url . 'Home/step3');
+      die;
     }
 
     private function getList(){

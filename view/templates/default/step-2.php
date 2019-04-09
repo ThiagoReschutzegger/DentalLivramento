@@ -5,7 +5,9 @@
       $count += $item->getPrecoitem();
     }
   }
+  //echo "<pre>";var_dump($data['dados']);echo "</pre>";die;
 ?>
+
 <!-- LIGHT SECTION -->
 <section class="lightSection clearfix pageHeader">
   <div class="container">
@@ -73,7 +75,9 @@
                       <td>
                         <span class="cartImage"><img class="img-fluid" style="max-height:120px;max-width:120px;" src="<?php echo $item[0]->getImagem(); ?>" alt="image"></span>
                       </td>
-                      <td class="font-table-cart"><?php echo $item[0]->getNome();?></td>
+                      <td class="font-table-cart"><?php echo $item[0]->getNome();?>
+                      <br><span style="font-size:11px;" ><?php echo $item[0]->getEspecificacao();?></span>
+                      </td>
                       <td class="font-table-cart"><center><b><?php echo $item[1]; ?></b></center></td>
                       <td class="font-table-cart">R$ <?php echo $item[0]->getPreco(); ?></td>
                     </tr>
@@ -88,11 +92,11 @@
             <div class="col-md-4">
               <h5>Dados Pessoais</h5>
               <address>
-                Guillermo das Neves <br>
-                Vasco Alves - 24 <br>
-                Santana do Livramento, RS <br>
-                (55) 80085 <br>
-                example78@gmail.com <br>
+                <?php
+                  foreach ($data['dados'] as $dado) {
+                      echo ($dado != '')? $dado."<br>" : '';
+                  }
+                ?>
                 <a href="<?php echo $this->base_url; ?>Home/step1" style="color: #343434"><b><i class="fa fa-reply" aria-hidden="true"></i> Editar</b></a>
               </address>
 
@@ -100,7 +104,7 @@
             <div class="col-md-4">
               <h5>Método de entrega</h5>
               <p>
-                <b>Retirada na Loja</b> <br>
+                <b><span class="badge" style='background-color:blue; font-size:125%;'>Retirada na Loja</span></b> <br>
                 Vasco Alves, nº 123 <br>
                 Santana do Livramento - RS
               </p>
@@ -114,12 +118,13 @@
           </div>
           <div class="well well-lg clearfix">
             <ul class="pager">
-              <li class="next"><a class="btn btn-primary btn-default float-right" href="<?php echo $this->base_url; ?>Home/step3">Finalizar Pedido <i class="fa fa-angle-right"></i></a></li>
+              <li class="next"><a class="btn btn-primary btn-default float-right" href="<?php echo $this->base_url; ?>Home/final/<?php foreach ($data['dados'] as $dado) {echo ($dado != '')? $dado : 0;echo ";";}?>">Finalizar Pedido <i class="fa fa-angle-right"></i></a></li>
             </ul>
           </div>
 
         </div>
       </div>
+      <br>
       <div class="col-md-4">
         <div class="summery-box">
           <h4>Dados do Pedido</h4>
