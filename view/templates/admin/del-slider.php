@@ -31,7 +31,7 @@
 
         <form method="post">
             <div class="form-group row">
-              <a class="btn btn-primary col-sm-4 offset-sm-2" style="margin-right: 10px;" href="<?php echo $this->base_url; ?>MarcaAdmin">Voltar</a>
+              <a class="btn btn-primary col-sm-4 offset-sm-2" style="margin-right: 10px;" href="<?php echo $this->base_url; ?>ProdutoAdmin/viewSubOf/<?php echo $slider[1]->getId_subgrupo(); ?>">Voltar</a>
               <input type="submit" name="del" value="Deletar" class="btn btn-danger col-sm-4 ">
             </div>
         </form>
