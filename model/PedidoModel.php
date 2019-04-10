@@ -4,24 +4,33 @@ class PedidoModel extends Model {
 
     public function getPedido() {
         $list = [];
-        $sql = "SELECT * FROM pedido";
+        $sql = "SELECT pedido.*, itemcarrinho.*, produto.* FROM pedido
+                JOIN carrinho ON pedido.id_carrinho = carrinho.id_carrinho
+                JOIN itemcarrinho ON carrinho.id_carrinho = itemcarrinho.id_carrinho
+                JOIN produto ON itemcarrinho.id_produto = produto.id_produto";
         $consulta = $this->ExecuteQuery($sql, array());
+      echo "<pre>";
+        var_dump($consulta);die;
+
         foreach ($consulta as $linha) {
-            $list[] = new Pedido($linha['id_carrinho'],
-                                $linha['nome'],
-                                $linha['endereco'],
-                                $linha['cep'],
-                                $linha['cidade'],
-                                $linha['uf'],
-                                $linha['telefone'],
-                                $linha['email'],
-                                $linha['mensagem'],
-                                $linha['precototal'],
-                                $linha['data'],
-                                $linha['status'],
-                                $linha['id_carrinho']);
+
+          $list[] = new Pedido($linha['id_pedido'],
+                              $linha['nome'],
+                              $linha['endereco'],
+                              $linha['cep'],
+                              $linha['cidade'],
+                              $linha['uf'],
+                              $linha['telefone'],
+                              $linha['email'],
+                              $linha['mensagem'],
+                              $linha['precototal'],
+                              $linha['data'],
+                              $linha['status'],
+                              $linha['id_carrinho']);
         }
-        return $list;
+        //echo "<pre>";
+        //var_dump($list);die;
+        //return $list;
     }
 
     public function getPedidoPendente() {

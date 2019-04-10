@@ -10,6 +10,10 @@ class PedidoAdmin extends Admin {
     }
 
     public function index() {
+
+      $teste = $this->model->getPedido();
+      echo "<pre>";var_dump($teste);die;
+
       $data['pedidop'] = $this->model->getPedidoPendente();//proprio nome ja diz
       $data['pedidoc'] = $this->model->getPedidoConcluido(); //pega só 10
       //tem q fazer os join fudido
