@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 21-Mar-2019 às 21:18
+-- Generation Time: 10-Abr-2019 às 19:33
 -- Versão do servidor: 10.1.30-MariaDB
 -- PHP Version: 7.2.2
 
@@ -31,6 +31,57 @@ SET time_zone = "+00:00";
 CREATE TABLE `carrinho` (
   `id_carrinho` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `carrinho`
+--
+
+INSERT INTO `carrinho` (`id_carrinho`) VALUES
+(11),
+(12),
+(13),
+(14),
+(15),
+(16),
+(17),
+(18),
+(19),
+(20),
+(21),
+(22),
+(23),
+(24),
+(25),
+(26),
+(27),
+(28),
+(29),
+(30),
+(31),
+(32),
+(33),
+(34),
+(35),
+(36),
+(37),
+(38),
+(39),
+(40),
+(41),
+(42),
+(43),
+(44),
+(45),
+(46),
+(47),
+(48),
+(49),
+(50),
+(51),
+(52),
+(53),
+(54),
+(55);
 
 -- --------------------------------------------------------
 
@@ -140,9 +191,81 @@ CREATE TABLE `itemcarrinho` (
   `id_itemcarrinho` int(11) NOT NULL,
   `id_produto` int(11) NOT NULL,
   `quantidade` int(11) NOT NULL,
-  `precoitem` float NOT NULL,
   `id_carrinho` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `itemcarrinho`
+--
+
+INSERT INTO `itemcarrinho` (`id_itemcarrinho`, `id_produto`, `quantidade`, `id_carrinho`) VALUES
+(1, 3, 6, 25),
+(2, 4, 3, 25),
+(3, 5, 9, 25),
+(4, 3, 6, 26),
+(5, 4, 3, 26),
+(6, 5, 9, 26),
+(7, 3, 6, 27),
+(8, 4, 3, 27),
+(9, 5, 9, 27),
+(10, 3, 6, 28),
+(11, 4, 3, 28),
+(12, 5, 9, 28),
+(13, 3, 6, 29),
+(14, 4, 3, 29),
+(15, 5, 9, 29),
+(16, 3, 6, 30),
+(17, 4, 3, 30),
+(18, 3, 6, 31),
+(19, 4, 3, 31),
+(20, 3, 6, 32),
+(21, 4, 3, 32),
+(22, 3, 6, 33),
+(23, 4, 3, 33),
+(24, 3, 6, 34),
+(25, 4, 3, 34),
+(26, 3, 6, 35),
+(27, 4, 3, 35),
+(28, 3, 6, 36),
+(29, 4, 3, 36),
+(30, 3, 6, 37),
+(31, 4, 3, 37),
+(32, 3, 6, 38),
+(33, 4, 3, 38),
+(34, 3, 6, 39),
+(35, 4, 3, 39),
+(36, 3, 6, 40),
+(37, 4, 3, 40),
+(38, 3, 6, 41),
+(39, 4, 3, 41),
+(40, 3, 6, 42),
+(41, 4, 3, 42),
+(42, 3, 6, 43),
+(43, 4, 3, 43),
+(44, 3, 6, 44),
+(45, 4, 3, 44),
+(46, 3, 6, 45),
+(47, 4, 3, 45),
+(48, 3, 6, 46),
+(49, 4, 3, 46),
+(50, 3, 6, 47),
+(51, 4, 3, 47),
+(52, 3, 6, 48),
+(53, 4, 3, 48),
+(54, 3, 6, 49),
+(55, 4, 3, 49),
+(56, 3, 6, 50),
+(57, 4, 3, 50),
+(58, 3, 6, 51),
+(59, 4, 3, 51),
+(60, 3, 6, 52),
+(61, 4, 3, 52),
+(62, 3, 6, 53),
+(63, 4, 3, 53),
+(64, 3, 6, 54),
+(65, 4, 3, 54),
+(66, 8, 4, 55),
+(67, 4, 3, 55);
 
 -- --------------------------------------------------------
 
@@ -182,10 +305,18 @@ CREATE TABLE `pedido` (
   `email` varchar(100) DEFAULT NULL,
   `mensagem` text,
   `precototal` float NOT NULL,
-  `data` int(11) NOT NULL,
-  `status` enum('0','1') NOT NULL,
+  `data` date NOT NULL,
+  `status` enum('INCONCLUSO','NAO ENTREGUE','ENTREGUE') NOT NULL,
   `id_carrinho` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `pedido`
+--
+
+INSERT INTO `pedido` (`id_pedido`, `nome`, `endereco`, `cep`, `cidade`, `uf`, `telefone`, `email`, `mensagem`, `precototal`, `data`, `status`, `id_carrinho`) VALUES
+(1, 'Thiago Reschützegger', '', '97574-240', '', 'Am', '(23) 56435-4656', 'webforntier@gmail.com', '', 455.4, '2019-04-10', 'NAO ENTREGUE', 53),
+(3, 'Eduardo Maciel', 'mano seila', '97574-273', 'Santana do Livramento', 'Al', '(12) 32449-8989', 'webforntier@gmail.com', 'haha mt bom o site', 491.8, '2019-04-10', 'NAO ENTREGUE', 55);
 
 -- --------------------------------------------------------
 
@@ -214,7 +345,8 @@ INSERT INTO `produto` (`id_produto`, `barcode`, `preco`, `estoque`, `especificac
 (5, '43682339', '40.60', 34, 'Verde com bolinhas pretas', 3),
 (6, '436576854', '85.00', 56, 'Alicate 053 Meia Cana', 4),
 (7, '2354326', '85.00', 85, 'ALICATE 001 NANCE', 4),
-(8, '2356456', '85.00', 45, 'ALICATE 074 YOUNG', 4);
+(8, '2356456', '85.00', 45, 'ALICATE 074 YOUNG', 4),
+(9, '3255614', '85.00', 10, 'Alicate 053 Meia Cana', 4);
 
 -- --------------------------------------------------------
 
@@ -229,15 +361,6 @@ CREATE TABLE `slider` (
   `fundo` varchar(5000) DEFAULT NULL,
   `status` enum('1','0') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `slider`
---
-
-INSERT INTO `slider` (`id_slider`, `id_subgrupo`, `imagem`, `fundo`, `status`) VALUES
-(2, 3, 'https://2.bp.blogspot.com/-Cb7NZAenJA4/VR3Y-FZnpdI/AAAAAAAAbps/9ND-JUqQF_I/s1600/Girafa.png', 'https://static.todamateria.com.br/upload/54/e2/54e2921595b9c-savanas.jpg', '1'),
-(3, 2, 'http://www.stickpng.com/assets/images/5897a333cba9841eabab613e.png', '', '1'),
-(6, 1, 'http://4.bp.blogspot.com/-VOg1Fxz_aDk/VUaul7ThU5I/AAAAAAAAFV8/0VmFpaypg7k/s1600/gatito.png', 'https://www.casaparaviver.com.br/wp-content/uploads/2017/10/brinquedo-gato1.jpeg', '1');
 
 -- --------------------------------------------------------
 
@@ -379,7 +502,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT for table `carrinho`
 --
 ALTER TABLE `carrinho`
-  MODIFY `id_carrinho` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_carrinho` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `categoria`
@@ -409,7 +532,7 @@ ALTER TABLE `grupo`
 -- AUTO_INCREMENT for table `itemcarrinho`
 --
 ALTER TABLE `itemcarrinho`
-  MODIFY `id_itemcarrinho` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_itemcarrinho` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT for table `marca`
@@ -421,19 +544,19 @@ ALTER TABLE `marca`
 -- AUTO_INCREMENT for table `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `produto`
 --
 ALTER TABLE `produto`
-  MODIFY `id_produto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_produto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `slider`
 --
 ALTER TABLE `slider`
-  MODIFY `id_slider` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_slider` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `subgrupo`
