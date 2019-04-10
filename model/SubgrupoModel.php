@@ -105,6 +105,22 @@ class SubgrupoModel extends Model {
         return $list;
     }
 
+    public function removeDestaque($id) { //EDU
+        $sql = "UPDATE subgrupo SET destaque = 0 WHERE id_subgrupo = :id";
+        if ($this->ExecuteCommand($sql, [':id' => $id])) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public function addDestaque($id) { //EDU
+        $sql = "UPDATE subgrupo SET destaque = 1 WHERE id_subgrupo = :id";
+        if ($this->ExecuteCommand($sql, [':id' => $id])) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 
 }

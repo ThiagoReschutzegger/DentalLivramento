@@ -28,9 +28,9 @@
                         <br>
 
                         <?php if($boola): ?>
-                        <a href="<?php echo $this->base_url;?>ProdutoAdmin/deleteSliderBySubId/<?php echo $subgrupo->getId_subgrupo() ?>"><button class='btn btn-outline-danger' style="font-size:20px; font-weight:normal"><i class="fa fa-star"></i>&nbsp&nbspExcluir dos destaques</button></a>
+                        <a href="<?php echo $this->base_url;?>ProdutoAdmin/deleteDestaqueProd/<?php echo $subgrupo->getId_subgrupo() ?>"><button class='btn btn-outline-danger' style="font-size:20px; font-weight:normal"><i class="fa fa-star"></i>&nbsp&nbspExcluir dos destaques</button></a>
                         <?php else:?>
-                        <a href="<?php echo $this->base_url;?>ProdutoAdmin/addSlider/<?php echo $subgrupo->getId_subgrupo() ?>"><button class='btn btn-outline-success' style="font-size:20px; font-weight:normal"><i class="fa fa-star"></i>&nbsp&nbspAdicionar aos Destaques</button></a>
+                        <a href="<?php echo $this->base_url;?>ProdutoAdmin/addDestaqueProd/<?php echo $subgrupo->getId_subgrupo() ?>"><button class='btn btn-outline-success' style="font-size:20px; font-weight:normal"><i class="fa fa-star"></i>&nbsp&nbspAdicionar aos Destaques</button></a>
                         <?php endif;?>
                         <br>
                         <img class="image-fluid border border-light rounded shadow p-3 mb-5 bg-white" style="margin:15px;max-width:300px" src="<?php echo $subgrupo->getImagem(); ?>">

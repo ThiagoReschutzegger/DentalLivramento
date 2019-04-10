@@ -448,51 +448,14 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
     $this->view->load('footer');
   }
 
-  public function deleteDestaqueProd($id){ // DELETAR subgrupo destacado com o id do subgrupo . Edu FALTA TERMINAR
-
-    $data['prod-destaq'] = $this->modelSubgrupo->getSubgrupoById($id);
-
-    if (filter_input(INPUT_POST, 'del')) {
+  public function deleteDestaqueProd($id){ // DELETAR subgrupo destacado com o id do subgrupo . Edu
       $this->modelSubgrupo->removeDestaque($id);
       $this->viewSubOf($id);
-      return true;
+  }
+
+  public function addDestaqueProd($id){ // Adicionar Destaque ao subgrupo que veio o id. Edu
+    $this->modelSubgrupo->addDestaque($id);
+    $this->viewSubOf($id);
     }
-
-    $this->view->load('header');
-    $this->view->load('nav');
-    $this->view->load('del-slider',$data['slider']);
-    $this->view->load('footer');
-  }
-
-  public function addDestaqueProd($id){ // Adicionar Destaque ao subgrupo que veio o id. Edu FALTA TERMINAR
-    $data['msg'] = '';
-    $data['sub'] = $this->modelSubgrupo->getSubgrupoById($id);
-
-    if (filter_input(INPUT_POST, 'add')) {
-          $nome = $data['sub']->getNome();
-          $imagem = filter_input(INPUT_POST, 'imagem', FILTER_SANITIZE_STRING);
-          $fundo = filter_input(INPUT_POST, 'fundo', FILTER_SANITIZE_STRING);
-          $descricao = $data['sub']->getDescricao();
-
-          if ($nome && $imagem && $fundo && $descricao) {
-              $slider = new Slider(0,$data['sub']->getId_subgrupo(), $imagem, $fundo, 1);
-              if ($this->modelSlider->insertSlider($slider)) {
-                   $data['msg'] = 'Adicionado com Sucesso!';
-                   $this->index();
-                   die;
-              } else {
-                  $data['msg'] = 'Erro!';
-                  }
-          } else {
-               $data['msg'] = 'Preencha todos os Campos!';
-
-          }
-      }
-
-    $this->view->load('header');
-    $this->view->load('nav');
-    $this->view->load('add-slider',$data);
-    $this->view->load('footer');
-  }
 
 }
