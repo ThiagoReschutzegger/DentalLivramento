@@ -118,7 +118,7 @@
           </div>
           <div class="well well-lg clearfix">
             <ul class="pager">
-              <li class="next"><a class="btn btn-primary btn-default float-right" href="<?php echo $this->base_url; ?>Home/final/<?php foreach ($data['dados'] as $dado) {echo ($dado != '')? $dado : 0;echo ";";}?>">Finalizar Pedido <i class="fa fa-angle-right"></i></a></li>
+              <li class="next"><a class="btn btn-primary btn-default float-right" href="<?php echo $this->base_url; ?>Home/finalProd/<?php foreach ($data['dados'] as $dado) {echo ($dado != '')? $dado : 0;echo ";";}?>">Finalizar Pedido <i class="fa fa-angle-right"></i></a></li>
             </ul>
           </div>
 
