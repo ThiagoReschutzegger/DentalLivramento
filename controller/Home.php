@@ -209,7 +209,7 @@ class Home extends Controller{
       header('location:' . $this->config->base_url . 'Home/viewCart');
     }
 
-    public function final($param){
+    public function finalProd($param){
       $data['itens'] = $this->getList();
 
       $array = explode(";", $param);

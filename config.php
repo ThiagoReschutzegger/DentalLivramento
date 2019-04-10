@@ -11,7 +11,7 @@ $config->asset = $config->base_url . 'view/templates/';
 $config->template = 'default';
 //FTP: senha nome
 //Database
-if ($_SERVER['HTTP_HOST'] == "localhost") {
+if ($_SERVER['HTTP_HOST'] == "localhost" || $_SERVER['HTTP_HOST'] == "127.0.0.1") {
     $config->dbuser = 'root'; //nomedoaluno
     $config->dbpassword = ''; //senha
     $config->dbname = 'dentallivramento'; //nomedobanco

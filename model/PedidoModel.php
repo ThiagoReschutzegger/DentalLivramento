@@ -4,21 +4,32 @@ class PedidoModel extends Model {
 
     public function getPedido() {
         $list = [];
-        $sql = "SELECT pedido.*, itemcarrinho.*, produto.* FROM pedido
+        $list1 = [];
+
+        $sql = "SELECT pedido.*, itemcarrinho.*, produto.*, subgrupo.* FROM pedido
                 JOIN carrinho ON pedido.id_carrinho = carrinho.id_carrinho
                 JOIN itemcarrinho ON carrinho.id_carrinho = itemcarrinho.id_carrinho
-                JOIN produto ON itemcarrinho.id_produto = produto.id_produto";
+                JOIN produto ON itemcarrinho.id_produto = produto.id_produto
+                JOIN subgrupo ON produto.id_subgrupo = subgrupo.id_subgrupo";
         $consulta = $this->ExecuteQuery($sql, array());
-        //echo "<pre>";
-        //var_dump($consulta);die;
-
+         // echo "<pre>";
+         // var_dump($consulta);die;
+         echo "<pre>";
         foreach ($consulta as $linha) {
-
-          $list[] = new Pedido($linha['id_pedido'],$linha['nome'],$linha['endereco'],$linha['cep'],$linha['cidade'],$linha['uf'],$linha['telefone'],
-                              $linha['email'],$linha['mensagem'],$linha['precototal'],$linha['data'],$linha['status'],$linha['id_carrinho']);
+          $list1[] = array('id_pedido' => $linha['id_pedido'],'produto' => new Packproduto($linha['id_produto'], $linha['barcode'], $linha['preco'], $linha['estoque'], $linha['especificacao'], $linha['id_subgrupo'], $linha['nome'], $linha['descricao'], $linha['imagem'], $linha['destaque'], $linha['id_grupo'], $linha['id_marca']), 'quantidade' => $linha['quantidade']);
         }
-        //echo "<pre>";
-        //var_dump($list);die;
+        print_r($list1);
+        die;
+        foreach ($consulta as $linha) {
+          $listaux = [];
+
+        //  $list[] = array(new Pedido($linha['id_pedido'],$linha['nome'],$linha['endereco'],$linha['cep'],$linha['cidade'],$linha['uf'],$linha['telefone'],
+                            //  $linha['email'],$linha['mensagem'],$linha['precototal'],$linha['data'],$linha['status'],$linha['id_carrinho']), $listaux);
+          //var_dump($listaux);
+          //unset($listaux);
+        }
+        die;
+
         //return $list;
     }
 

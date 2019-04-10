@@ -12,7 +12,7 @@ class PedidoAdmin extends Admin {
     public function index() {
 
       $teste = $this->model->getPedido();
-      echo "<pre>";var_dump($teste);die;
+      echo "<pre>";print_r($teste);die;
 
       $data['pedidop'] = $this->model->getPedidoPendente();//proprio nome ja diz
       $data['pedidoc'] = $this->model->getPedidoConcluido(); //pega só 10
