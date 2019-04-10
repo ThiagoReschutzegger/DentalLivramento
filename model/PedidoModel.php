@@ -9,24 +9,13 @@ class PedidoModel extends Model {
                 JOIN itemcarrinho ON carrinho.id_carrinho = itemcarrinho.id_carrinho
                 JOIN produto ON itemcarrinho.id_produto = produto.id_produto";
         $consulta = $this->ExecuteQuery($sql, array());
-      echo "<pre>";
-        var_dump($consulta);die;
+        //echo "<pre>";
+        //var_dump($consulta);die;
 
         foreach ($consulta as $linha) {
 
-          $list[] = new Pedido($linha['id_pedido'],
-                              $linha['nome'],
-                              $linha['endereco'],
-                              $linha['cep'],
-                              $linha['cidade'],
-                              $linha['uf'],
-                              $linha['telefone'],
-                              $linha['email'],
-                              $linha['mensagem'],
-                              $linha['precototal'],
-                              $linha['data'],
-                              $linha['status'],
-                              $linha['id_carrinho']);
+          $list[] = new Pedido($linha['id_pedido'],$linha['nome'],$linha['endereco'],$linha['cep'],$linha['cidade'],$linha['uf'],$linha['telefone'],
+                              $linha['email'],$linha['mensagem'],$linha['precototal'],$linha['data'],$linha['status'],$linha['id_carrinho']);
         }
         //echo "<pre>";
         //var_dump($list);die;
