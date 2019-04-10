@@ -7,7 +7,7 @@ class DestaqueModel extends Model {
         $sql = "SELECT * FROM destaque";
         $consulta = $this->ExecuteQuery($sql, array());
         foreach ($consulta as $linha) {
-            $list[] = new Destaque($linha['id_destaque'],$linha['nome'],$linha['id_categoria']);
+            $list[] = new Destaque($linha['id_destaque'],$linha['nome'],$linha['imagem'],$linha['id_categoria']);
         }
         return $list;
     }
@@ -16,12 +16,12 @@ class DestaqueModel extends Model {
         $sql = "SELECT * FROM destaque WHERE id_destaque=:id;";
         $consulta = $this->ExecuteQuery($sql, [':id' => $id])[0];
         $destaque = $this->ExecuteQuery($sql, [':id' => $id])[0];
-            return new Destaque( $destaque['id_destaque'],$destaque['nome'],$destaque['id_categoria']);
+            return new Destaque( $destaque['id_destaque'],$destaque['nome'],$destaque['imagem'],$destaque['id_categoria']);
     }
 
     public function insertDestaque($destaque) {
-        $sql = "INSERT INTO destaque(nome, id_categoria) VALUES(:nome, :id_categoria)";
-        if ($this->ExecuteCommand($sql,[':nome'=>$destaque->getNome(),':id_categoria'=>$destaque->getId_categoria()])){
+        $sql = "INSERT INTO destaque(nome, imagem, id_categoria) VALUES(:nome, :imagem, :id_categoria)";
+        if ($this->ExecuteCommand($sql,[':nome'=>$destaque->getNome(),':imagem'=>$destaque->getImagem(),':id_categoria'=>$destaque->getId_categoria()])){
             return true;
         } else {
             return false;
@@ -38,8 +38,8 @@ class DestaqueModel extends Model {
     }
 
     public function updateDestaque($destaque) {
-        $sql = "UPDATE destaque SET nome = :nome, id_categoria = :id_categoria WHERE id_destaque = :id";
-        $param = [':id'=>$destaque->getId_destaque(),':nome'=>$destaque->getNome(),':id_categoria'=>$destaque->getId_categoria()];
+        $sql = "UPDATE destaque SET nome = :nome, imagem = :imagem, id_categoria = :id_categoria WHERE id_destaque = :id";
+        $param = [':id'=>$destaque->getId_destaque(),':nome'=>$destaque->getNome(),':imagem'=>$destaque->getImagem(),':id_categoria'=>$destaque->getId_categoria()];
         if ($this->ExecuteCommand($sql,$param)) {
             return true;
         } else {

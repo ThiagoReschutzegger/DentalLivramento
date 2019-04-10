@@ -217,9 +217,9 @@
                  foreach ($data['categoria'] as $categoria):
                     if($destaque->getId_categoria() == $categoria->getId_categoria()){
                       echo "
-                      <li data-transition='slidehorizontal' data-slotamount='5' data-masterspeed='700' data-title='Slide 1' onclick='linkSlider(".$categoria->getId_categoria().")' >
+                      <li data-transition='slidehorizontal' data-slotamount='5 data-masterspeed='700' data-title='Slide 1' onclick='linkSlider(".$destaque->getId_categoria().")' >
 
-                        <img src='".$categoria->getImagem()."' alt='slidebg1' data-bgfit='cover' data-bgposition='center center' data-bgrepeat='no-repeat'>
+                        <img src='".$destaque->getImagem()."' alt='slidebg1' data-bgfit='cover' data-bgposition='center center' data-bgrepeat='no-repeat'>
                         <div class='slider-caption slider-captionV4'>
                           <div  class='tp-caption rs-caption-2 sft'
                             data-hoffset='0'

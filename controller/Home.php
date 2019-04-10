@@ -62,6 +62,7 @@ class Home extends Controller{
         $data['categoria'] = $this->modelCategoria->getCategoriaById($data['grupo']->getId_categoria());
         $data['marca'] = $this->modelMarca->getMarcaById($pkpd->getId_marca());
         $data['itens'] = $this->getList();
+        $data['prod-destaq'] = $this->modelSubgrupo->getSubgrupoDestaque();
 
         $preco_aux = [];
         $estoque_aux = [];

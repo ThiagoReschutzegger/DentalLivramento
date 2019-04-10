@@ -183,83 +183,28 @@ endforeach;
           </div>
 
 
-          <div class="page-header">
-            <h4>Related Products</h4>
+          <div class="page-header text-uppercase">
+            <h4 class="text-uppercase fonte-e-cor-top">Destaques</h4>
           </div>
-          <div class="row productsContent">
 
-            <div class="col-md-3 col-12 ">
-              <div class="productBox">
-                <div class="productImage clearfix">
-                  <img src="<?php echo $this->asset;?>img/products/products-01.jpg" alt="products-img">
-                  <div class="productMasking">
-                    <ul class="list-inline btn-group" role="group">
-                      <li><a data-toggle="modal" href=".login-modal" class="btn btn-default"><i class="fa fa-heart-o"></i></a></li>
-                      <li><a href="cart-page.html" class="btn btn-default"><i class="fa fa-shopping-basket"></i></a></li>
-                      <li><a class="btn btn-default" data-toggle="modal" href=".quick-view" ><i class="fa fa-eye"></i></a></li>
-                    </ul>
+          <div class="row featuredProducts featuredProductsSlider margin-bottom mouse-grab">
+            <?php foreach($data['prod-destaq'] as $destaque): ?>
+                <div class="slide col-md-3">
+                  <div class="productImage clearfix">
+                    <img src="<?php echo $destaque->getImagem(); ?>">
+                    <div class="productMasking">
+                      <ul class="list-inline btn-group" role="group">
+                        <li><a href="<?php echo $this->base_url; ?>Home/viewProduto/<?php echo $destaque->getId_subgrupo(); ?>" class="btn btn-default"><i class="fa fa-eye"></i></a></li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="productCaption clearfix">
+                    <a href="<?php echo $this->base_url; ?>Home/viewProduto/<?php echo $destaque->getId_subgrupo(); ?>">
+                      <h4><?php echo $destaque->getNome(); ?></h4>
+                    </a>
                   </div>
                 </div>
-                <div class="productCaption clearfix">
-                 <h5>Nike Sportswear</h5>
-                 <h3>$199</h3>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3 col-12 ">
-              <div class="productBox">
-                <div class="productImage clearfix">
-                  <img src="<?php echo $this->asset;?>img/products/products-02.jpg" alt="products-img">
-                  <div class="productMasking">
-                    <ul class="list-inline btn-group" role="group">
-                      <li><a data-toggle="modal" href=".login-modal" class="btn btn-default"><i class="fa fa-heart-o"></i></a></li>
-                      <li><a href="cart-page.html" class="btn btn-default"><i class="fa fa-shopping-basket"></i></a></li>
-                      <li><a class="btn btn-default" data-toggle="modal" href=".quick-view" ><i class="fa fa-eye"></i></a></li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="productCaption clearfix">
-                 <h5>Dip Dyed Sweater</h5>
-                 <h3>$249</h3>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3 col-12 ">
-              <div class="productBox">
-                <div class="productImage clearfix">
-                  <img src="<?php echo $this->asset;?>img/products/products-03.jpg" alt="products-img">
-                  <div class="productMasking">
-                    <ul class="list-inline btn-group" role="group">
-                      <li><a data-toggle="modal" href=".login-modal" class="btn btn-default"><i class="fa fa-heart-o"></i></a></li>
-                      <li><a href="cart-page.html" class="btn btn-default"><i class="fa fa-shopping-basket"></i></a></li>
-                      <li><a class="btn btn-default" data-toggle="modal" href=".quick-view" ><i class="fa fa-eye"></i></a></li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="productCaption clearfix">
-                 <h5>Scarf Ring Corner</h5>
-                 <h3>$179</h3>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3 col-12 ">
-              <div class="productBox">
-                <div class="productImage clearfix">
-                  <img src="<?php echo $this->asset;?>img/products/products-04.jpg" alt="products-img">
-                  <div class="productMasking">
-                    <ul class="list-inline btn-group" role="group">
-                      <li><a data-toggle="modal" href=".login-modal" class="btn btn-default"><i class="fa fa-heart-o"></i></a></li>
-                      <li><a href="cart-page.html" class="btn btn-default"><i class="fa fa-shopping-basket"></i></a></li>
-                      <li><a class="btn btn-default" data-toggle="modal" href=".quick-view" ><i class="fa fa-eye"></i></a></li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="productCaption clearfix">
-                 <h5>Sun Buddies</h5>
-                 <h3>$149</h3>
-                </div>
-              </div>
-            </div>
+            <?php endforeach; ?>
           </div>
         </div>
       </section>

@@ -25,6 +25,12 @@
           </div>
         </div>
         <div class="line"></div>
+        <div class="form-group row">
+          <label class="col-sm-3 form-control-label text-right">Link:</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" name="imagem" value="<?php echo $destaque->getImagem(); ?>"><small class="help-block-none">Cole aqui o link da imagem. (sempre terminado em .jpg .png ou outros tipos de imagem)</small>
+          </div>
+        </div>
 
         <div class="form-group row">
           <label class="col-sm-3 form-control-label text-right">Selecione a Categoria:</label>
