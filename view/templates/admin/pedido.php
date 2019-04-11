@@ -84,7 +84,7 @@
   <div class="col-lg-12">
       <div class="card">
         <div class="card-header d-flex align-items-center" style="background-color:#2ecc71;overflow:hidden;">
-          <h3 class="h4"><span style="color:white">Pedidos pendentes</span></h3>
+          <h3 class="h4"><span style="color:white">Pedidos Conclusos</span></h3>
         </div>
 
         <?php foreach($data['pedidop'] as $pedido): ?>

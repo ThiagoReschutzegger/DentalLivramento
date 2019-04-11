@@ -51,7 +51,7 @@
       <div class="header clearfix headerV3">
 
         <!-- TOPBAR -->
-        <div class="topBar">
+        <!-- <div class="topBar">
           <div class="container">
             <div class="row">
               <div class="col-md-6 d-none d-md-block">
