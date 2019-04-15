@@ -188,7 +188,7 @@
               <img src="<?php echo $destaque->getImagem(); ?>">
               <div class="productMasking">
                 <ul class="list-inline btn-group" role="group">
-                  <li><a href="<?php echo $this->base_url; ?>Home/viewProduto/<?php echo $destaque->getId_subgrupo(); ?>" class="btn btn-default"><i class="fa fa-eye"></i></a></li>
+                  <li><a href="<?php echo $this->base_url; ?>Home/viewProduto/<?php echo $destaque->getId_subgrupo(); ?>" class="btn btn-lg" style="font-size: 20px;"><i class="fa fa-eye"></i></a></li>
                 </ul>
               </div>
             </div>

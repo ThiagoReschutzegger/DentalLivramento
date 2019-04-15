@@ -253,7 +253,7 @@ class Home extends Controller{
       die;
     }
 
-    private function getList(){
+    public function getList(){
       if(isset($_SESSION['carrinho'])){
         $list = [];
           foreach($_SESSION['carrinho'] as $item){

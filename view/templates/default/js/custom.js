@@ -162,7 +162,7 @@ jQuery(document).ready(function() {
 				breakpoint: 480,
 				settings: {
 					slidesToShow: 1,
-					slidesToScroll: 1					
+					slidesToScroll: 1
 				}
 			}
 		]
@@ -200,12 +200,12 @@ jQuery(document).ready(function() {
 				breakpoint: 670,
 				settings: {
 					slidesToShow: 2,
-					slidesToScroll: 2					
+					slidesToScroll: 2
 				}
 			}
 		]
 	});
-	
+
 	$('.featuredCollectionSlider').slick({
 		slidesToShow: 2,
 		slidesToScroll: 2,
@@ -219,21 +219,21 @@ jQuery(document).ready(function() {
 				breakpoint: 480,
 				settings: {
 					slidesToShow: 1,
-					slidesToScroll: 1					
+					slidesToScroll: 1
 				}
 			},
 			{
 				breakpoint: 670,
 				settings: {
 					slidesToShow: 1,
-					slidesToScroll: 1					
+					slidesToScroll: 1
 				}
 			},
 			{
 				breakpoint: 768,
 				settings: {
 					slidesToShow: 2,
-					slidesToScroll: 2					
+					slidesToScroll: 2
 				}
 			}
 		]
@@ -252,7 +252,7 @@ jQuery(document).ready(function() {
 				breakpoint: 670,
 				settings: {
 					slidesToShow: 1,
-					slidesToScroll: 1					
+					slidesToScroll: 1
 				}
 			}
 		]
@@ -271,7 +271,7 @@ jQuery(document).ready(function() {
 				breakpoint: 480,
 				settings: {
 					autoplay: true,
-					arrows: false					
+					arrows: false
 				}
 			}
 		]
@@ -380,7 +380,7 @@ jQuery(document).ready(function() {
 	});
 	//============================== SELECT BOX =========================
 	$('.select-drop').selectbox();
-	
+
 	//============================== SIDE NAV MENU TOGGLE =========================
 	// $('.side-nav li a').click(function() {
 	// 	$(this).find('i').toggleClass('fa fa-minus fa fa-plus');
@@ -408,24 +408,6 @@ jQuery(document).ready(function() {
         $button.parent().find('.quantity').val(newVal);
         e.preventDefault();
     });
-
-	//============================== PRICE SLIDER RANGER =========================
-	var minimum = 20;
-	var maximum = 300;
-	
-	$( '#price-range' ).slider({
-		range: true,
-		min: minimum,
-		max: maximum,
-		values: [ minimum, maximum ],
-		slide: function( event, ui ) {
-			$( '#price-amount-1' ).val( '$' + ui.values[ 0 ] );
-			$( '#price-amount-2' ).val( '$' + ui.values[ 1 ] );
-		}
-	});
-	
-	$( '#price-amount-1' ).val( '$' + $( '#price-range' ).slider( 'values', 0 ));
-	$( '#price-amount-2' ).val( '$' + $( '#price-range' ).slider( 'values', 1 ));
 
 	//============================== PRODUCT SINGLE SLIDER =========================
 	(function ($) {
@@ -462,7 +444,7 @@ jQuery(document).ready(function() {
 		$(this).replaceWith(video);
 	});
 
-	
+
 	//============================== ACCORDION OR COLLAPSE ICON CHANGE =========================
 	var allIcons = $('#faqAccordion .panel-heading i.fa');
 	$('#faqAccordion .panel-heading').click(function () {
@@ -497,4 +479,3 @@ jQuery(document).ready(function() {
 	$('[data-toggle="tooltip"]').tooltip();
 
 });
-

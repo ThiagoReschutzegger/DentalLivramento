@@ -6386,12 +6386,23 @@ body.bodyColor.container {
 
 /*=== 7.3 CART PAGE HEADER ===*/
 .pageHeaderImage {
+  position: relative;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
   height: auto;
-  height: 200px;
   background-image: url(../img/about-us/brush-bg.jpg);
+  height: 200px;
+}
+
+.pageHeaderImage::before {
+  content: "";
+  position: absolute;
+  filter: brightness(50%);
+}
+
+.img-adapted-inside{
+  position: relative;
 }
 
 .pageHeaderImage .tableBlock {
