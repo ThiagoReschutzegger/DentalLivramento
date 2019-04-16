@@ -7,8 +7,8 @@ $ids_aux = []; //pra nao repetir os subgrupos na hora de listar la
 <script type="text/javascript">
 jQuery(document).ready(function(){
 //============================== PRICE SLIDER RANGER =========================
-var minimum = <?php echo $data['preco_min']; ?>;
-var maximum = <?php echo $data['preco_max']; ?> + 1;
+var minimum = <?php echo floor($data['preco_min']); ?>;
+var maximum = <?php echo floor($data['preco_max']); ?> + 1;
 
 $( '#price-range' ).slider({
   range: true,
@@ -97,22 +97,25 @@ $( '#price-amount-2' ).val( 'R$' + $( '#price-range' ).slider( 'values', 1 ));
             </div>
           </div>
         </div>
+        <form method="post">
         <div class="panel panel-default priceRange">
           <div class="panel-heading">Filtrar por preço</div>
           <div class="panel-body clearfix">
             <div class="price-slider-inner">
+
               <span class="amount-wrapper">
                 Preço:<br>
-                <input type="text" id="price-amount-1" readonly>
+                <input type="text" name="preco-min" id="price-amount-1" readonly>
                 <strong>-</strong>
-                <input type="text" id="price-amount-2" readonly>
+                <input type="text" name="preco-max" id="price-amount-2" readonly>
               </span>
               <div id="price-range"></div>
             </div>
-            <input class="btn-default" type="submit" name="filtro-preco" value="Filtrar">
+            <input class="btn-default" type="submit" name="filtrar" value="Filtrar">
              <!-- <span class="priceLabel">Price: <strong>$12 - $30</strong></span>-->
           </div>
         </div>
+        </form>
       </div>
       <div class="col-lg-9 col-md-8">
         <div class="row filterArea">

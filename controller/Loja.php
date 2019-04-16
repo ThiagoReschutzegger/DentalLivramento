@@ -67,6 +67,13 @@ class Loja extends Controller{
         $data['preco_min'] = min($preco_aux);
         $data['preco_max'] = max($preco_aux);
 
+        if (filter_input(INPUT_POST, 'filtrar')) {
+          $min = filter_input(INPUT_POST, 'preco-min', FILTER_SANITIZE_STRING);
+          $max = filter_input(INPUT_POST, 'preco-max', FILTER_SANITIZE_STRING);
+          echo $min."<br>".$max;
+          die;
+        }
+
         $data['marca'] = $this->modelMarca->getMarca(); //será? filtro por marca tb?
         $this->view->load('header',$data);
         $this->view->load('nav',$data);

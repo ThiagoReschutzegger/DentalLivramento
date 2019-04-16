@@ -172,7 +172,7 @@
                     <ul class="dropdown-menu">
                         <?php foreach($data['grupo'] as $grupo):
                           if($grupo->getId_categoria() == $categoria->getId_categoria()){
-                            echo '<li><a href="'.$this->base_url.'Home/viewGrupo/'.$grupo->getId_grupo().'">'.$grupo->getNome().'</a></li>';
+                            echo '<li><a href="'.$this->base_url.'Loja/view/'.$grupo->getId_grupo().'">'.$grupo->getNome().'</a></li>';
                           }
                         endforeach; ?>
 
