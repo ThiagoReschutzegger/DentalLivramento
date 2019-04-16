@@ -43,7 +43,8 @@ class Loja extends Controller{
       header('location:' . $this->config->base_url);
     }
 
-    public function view($id_grupo){ //Edu
+    public function view($id_grupo = null){ //Edu
+      if($id_grupo == null) header('location:' . $this->config->base_url); //contra espetinhos
         $data['estilo'] = $this->model->getEstiloAtual();
         $data['grupo'] = $this->modelGrupo->getGrupo();
         $data['grupo-atual'] = $this->modelGrupo->getGrupoById($id_grupo);
@@ -52,10 +53,10 @@ class Loja extends Controller{
         $data['itens'] = $this->father->getList();
         $data['packproduto'] = $this->modelPackproduto->getPackprodutoByGrupo($id_grupo);
 
-        if(empty($data['packproduto'])){
+        if(empty($data['packproduto'])){ //caso não tenha nenhum prod no grupo, gambiarra.com
         $data['packproduto'] = 'password';
         }else{
-          $preco_aux = [];
+          $preco_aux = []; //array onde tem todos os preços dos produtos que estão sendo exibidos
           foreach ($data['packproduto'] as $produtos){ //gambiarra pra pegar o menor preço de cada produto
             $preco_aux[$produtos->getId_subgrupo()] = number_format((float)$produtos->getPreco(), 2);
             if(empty($data[$produtos->getId_subgrupo()])) $data[$produtos->getId_subgrupo()] = $preco_aux[$produtos->getId_subgrupo()];
@@ -74,7 +75,7 @@ class Loja extends Controller{
           die;
         }
 
-        $data['marca'] = $this->modelMarca->getMarca(); //será? filtro por marca tb?
+        // $data['marca'] = $this->modelMarca->getMarca(); //será? filtro por marca tb?
         $this->view->load('header',$data);
         $this->view->load('nav',$data);
         $this->view->load('shopping', $data);

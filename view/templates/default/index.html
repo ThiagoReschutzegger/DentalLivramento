@@ -2,6 +2,16 @@
 <html lang="en">
   <head>
 
+    <style>
+      .title-categoria{
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 12px;
+        color: #252525;
+        float: left;
+      }
+    </style>
+
     <!-- SITE TITTLE -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -174,14 +184,17 @@
                   <ul class="dropdown-menu row">
                     <li class="col-md-3 col-12">
                       <ul class="list-unstyled">
-                        <li>Products Grid View</li>
-                        <li class=""><a href="product-grid-left-sidebar.html">Products Sidebar Left</a></li>
-                        <li class=""><a href="product-grid-right-sidebar.html">Products Sidebar Right</a></li>
-                        <li class=""><a href="product-grid-3-col-filter.html">Products 3 Columns V1</a></li>
-                        <li class=""><a href="product-grid-3-col.html">Products 3 Columns V2</a></li>
-                        <li class=""><a href="product-grid-4-col.html">Products 4 Columns</a></li>
+                        <li style="display: none;"></li>
+                        <li><a class="title-categoria" href="javascript:;" data-toggle="collapse" aria-expanded="true" data-target="#women">Women <i class="fa fa-plus"></i></a></li>
+                        <li><ul id="women" class="collapse collapseItem show list-unstyled" style="padding-top:0;">
+                            <li style="display: none;"></li>
+                            <li><a href="#">Accessories</a></li>
+                            <li><a href="#">Bag</a></li>
+                            <li><a href="#">Cloth</a></li>
+                        </ul></li>
                       </ul>
                     </li>
+
                     <li class="col-md-3 col-12">
                       <ul class="list-unstyled">
                         <li>Products List View</li>
@@ -437,7 +450,7 @@
               <li data-transition="slidehorizontal" data-slotamount="5" data-masterspeed="700" data-title="Slide 3">
                   <img src="img/home/banner-slider/slider-bg.jpg" alt="slidebg1" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat">
                   <div class="slider-caption slider-captionV1 container">
-  
+
                     <div class="tp-caption rs-caption-1 sft start"
                       data-hoffset="0"
                       data-x="450"
@@ -448,7 +461,7 @@
                       data-endspeed="300" >
                       <img src="img/home/banner-slider/shoe1.png" alt="slider-image" style="width: 781px; height: 416px;">
                     </div>
-  
+
                     <div class="tp-caption rs-caption-2 sft"
                       data-hoffset="0"
                       data-y="100"
@@ -459,7 +472,7 @@
                       data-endspeed="300">
                       Canvas Sneaker
                     </div>
-  
+
                     <div class="tp-caption rs-caption-3 sft"
                       data-hoffset="0"
                       data-y="175"
@@ -495,11 +508,11 @@
       <!-- MAIN CONTENT SECTION -->
       <section class="mainContent clearfix">
         <div class="container">
-          
+
           <div class="page-header">
             <h4>Featured Collection</h4>
           </div>
-          
+
           <div class="row featuredCollection margin-bottom">
             <div class="col-md-4 col-12">
               <div class="thumbnail" onclick="location.href='single-product.html';">
@@ -527,7 +540,7 @@
                     <a href="product-grid-left-sidebar.html" class="btn viewBtn">View Products</a>
                   </div>
                 </div>
-               
+
               </div>
             </div>
             <div class="col-md-4 col-12">
@@ -542,15 +555,15 @@
                     <a href="product-grid-left-sidebar.html" class="btn viewBtn">View Products</a>
                   </div>
                 </div>
-                
+
               </div>
             </div>
           </div>
-          
+
           <div class="page-header">
             <h4>Featured Products</h4>
           </div>
-  
+
           <div class="row featuredProducts featuredProductsSlider margin-bottom">
             <div class="slide col-md-3">
               <div class="productImage clearfix">
@@ -697,7 +710,7 @@
               </div>
             </div>
           </div>
-           
+
           <div class="page-header">
             <h4>Latest Articles</h4>
           </div>
@@ -992,7 +1005,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<script src="plugins/jquery/jquery.min.js"></script>
 		<script src="plugins/jquery/jquery-migrate-3.0.0.min.js"></script>
 		<script src="plugins/jquery-ui/jquery-ui.js"></script>
@@ -1011,5 +1024,3 @@
 
 	</body>
 </html>
-
-     

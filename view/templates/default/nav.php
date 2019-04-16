@@ -133,40 +133,24 @@
                   </ul>
                 </li>
                 <li class="nav-item dropdown megaDropMenu ">
-                  <a href="javascript:void(0)" class="dropdown-toggle nav-link" data-toggle="dropdown" data-hover="dropdown" data-delay="300" data-close-others="true" aria-expanded="false">Shop</b></a>
+                  <a href="javascript:void(0)" class="dropdown-toggle nav-link" data-toggle="dropdown" data-hover="dropdown" data-delay="300" data-close-others="true" aria-expanded="false">Categorias</b></a>
                   <ul class="dropdown-menu row">
+                    <?php foreach($data['categoria'] as $categoria): ?>
                     <li class="col-md-3 col-12">
                       <ul class="list-unstyled">
-                        <li>Products Grid View</li>
-                        <li class=""><a href="<?php echo $this->asset ?>product-grid-left-sidebar.html">Products Sidebar Left</a></li>
-                        <li class=""><a href="<?php echo $this->asset ?>product-grid-right-sidebar.html">Products Sidebar Right</a></li>
-                        <li class=""><a href="<?php echo $this->asset ?>product-grid-3-col-filter.html">Products 3 Columns V1</a></li>
-                        <li class=""><a href="<?php echo $this->asset ?>product-grid-3-col.html">Products 3 Columns V2</a></li>
-                        <li class=""><a href="<?php echo $this->asset ?>product-grid-4-col.html">Products 4 Columns</a></li>
+                        <li style="display: none;"></li>
+                        <li><a class="title-categoria" href="javascript:;" data-toggle="collapse" aria-expanded="false" data-target="#<?php echo $categoria->getId_categoria(); ?>"><?php echo $categoria->getNome(); ?> <i class="fa fa-plus"></i></a></li>
+                        <li><ul id="<?php echo $categoria->getId_categoria(); ?>" class="collapse collapseItem list-unstyled" style="padding-top:0;">
+                          <li style="display: none;"></li>
+                          <?php foreach($data['grupo'] as $grupo):
+                            if($grupo->getId_categoria() == $categoria->getId_categoria()):
+                          ?>
+                            <li><a href="<?php echo $this->base_url; ?>Loja/view/<?php echo $grupo->getId_grupo(); ?>"><?php echo $grupo->getNome(); ?></a></li>
+                          <?php endif; endforeach; ?>
+                        </ul></li>
                       </ul>
                     </li>
-                    <li class="col-md-3 col-12">
-                      <ul class="list-unstyled">
-                        <li>Products List View</li>
-                        <li class=""><a href="<?php echo $this->asset ?>product-list-left-sidebar.html">Products Sidebar Left</a></li>
-                        <li class=""><a href="<?php echo $this->asset ?>product-list-right-sidebar.html">Products Sidebar Right</a></li>
-                        <li class="listHeading">Others</li>
-                        <li class=""><a href="<?php echo $this->asset ?>single-product.html">Single Product</a></li>
-                        <li class=""><a href="<?php echo $this->asset ?>cart-page.html">Cart Page</a></li>
-                      </ul>
-                    </li>
-                    <li class="col-md-3 col-12">
-                      <ul class="list-unstyled">
-                        <li>Checkout</li>
-                        <li class=""><a href="<?php echo $this->asset ?>checkout-step-1.html">Step 1 - Shipping</a></li>
-                        <li class=""><a href="<?php echo $this->asset ?>checkout-step-2.html">Step 2 - Payment</a></li>
-                        <li class=""><a href="<?php echo $this->asset ?>checkout-step-3.html">Step 3 - Review</a></li>
-                        <li class=""><a href="<?php echo $this->asset ?>checkout-step-4.html">Step 4 - Complete</a></li>
-                      </ul>
-                    </li>
-                    <li class="col-md-3 col-12">
-                      <a href="#" class="menu-photo"><img src="<?php echo $this->asset ?>img/menu-photo.jpg" alt="menu-img"></a>
-                    </li>
+                  <?php endforeach; ?>
                   </ul>
                 </li>
                 <li class="nav-item dropdown ">

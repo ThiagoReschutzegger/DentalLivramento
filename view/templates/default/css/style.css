@@ -82,6 +82,14 @@ html, * {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.title-categoria{
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  font-size: 12px !important;
+  color: #252525 !important;
+  float: left !important;
+}
+
 body {
   font-family: 'Oxygen', sans-serif;
   font-size: 12px;
