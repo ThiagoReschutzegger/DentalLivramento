@@ -1,6 +1,7 @@
 <?php
 $cat_atual = $data['categoria-atual'][0];
 $gp_atual = $data['grupo-atual'];
+$ids_aux = [];
 ?>
 <script type="text/javascript">
 jQuery(document).ready(function(){
@@ -139,7 +140,9 @@ $( '#price-amount-2' ).val( 'R$' + $( '#price-range' ).slider( 'values', 1 ));
               </div>
             </div>
           <?php else:
-           foreach ($data['packproduto'] as $produtos): ?>
+           foreach ($data['packproduto'] as $produtos):
+             if(in_array($produtos->getId_subgrupo(), $ids_aux)) continue; else $ids_aux[] = $produtos->getId_subgrupo();
+             ?>
               <div class="col-md-6 col-lg-4">
                 <div class="productBox">
                   <div class="productImage clearfix">
