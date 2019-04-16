@@ -1,13 +1,14 @@
 <?php
 $cat_atual = $data['categoria-atual'][0];
 $gp_atual = $data['grupo-atual'];
-$ids_aux = [];
+$ids_aux = []; //pra nao repetir os subgrupos na hora de listar la
+
 ?>
 <script type="text/javascript">
 jQuery(document).ready(function(){
 //============================== PRICE SLIDER RANGER =========================
-var minimum = 20;
-var maximum = 300;
+var minimum = <?php echo $data['preco_min']; ?>;
+var maximum = <?php echo $data['preco_max']; ?> + 1;
 
 $( '#price-range' ).slider({
   range: true,
@@ -157,7 +158,7 @@ $( '#price-amount-2' ).val( 'R$' + $( '#price-range' ).slider( 'values', 1 ));
                     <a href="single-product.html">
                       <h5><?php echo $produtos->getNome(); ?></h5>
                     </a>
-                    <h3>R$ <?php echo $produtos->getPreco(); ?></h3>
+                    <h3>R$ <?php echo $data[$produtos->getId_subgrupo()]; ?></h3>
                   </div>
                 </div>
               </div>

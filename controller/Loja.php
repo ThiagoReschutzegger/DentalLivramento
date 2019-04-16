@@ -54,10 +54,20 @@ class Loja extends Controller{
 
         if(empty($data['packproduto'])){
         $data['packproduto'] = 'password';
-        }
+        }else{
+          $preco_aux = [];
+          foreach ($data['packproduto'] as $produtos){ //gambiarra pra pegar o menor preço de cada produto
+            $preco_aux[$produtos->getId_subgrupo()] = number_format((float)$produtos->getPreco(), 2);
+            if(empty($data[$produtos->getId_subgrupo()])) $data[$produtos->getId_subgrupo()] = $preco_aux[$produtos->getId_subgrupo()];
+            if($preco_aux[$produtos->getId_subgrupo()] < $data[$produtos->getId_subgrupo()]){
+              $data[$produtos->getId_subgrupo()] = $preco_aux[$produtos->getId_subgrupo()];
+            }
+          }
+          }
+        $data['preco_min'] = min($preco_aux);
+        $data['preco_max'] = max($preco_aux);
 
         $data['marca'] = $this->modelMarca->getMarca(); //será? filtro por marca tb?
-
         $this->view->load('header',$data);
         $this->view->load('nav',$data);
         $this->view->load('shopping', $data);
