@@ -65,6 +65,9 @@ class Loja extends Controller{
             }
           }
           }
+          if(empty($preco_aux)){ //caso não tenha nenhum prod no grupo, gambiarra.com
+          $preco_aux[] = 0;
+          }
         $data['preco_min'] = min($preco_aux);
         $data['preco_max'] = max($preco_aux);
 

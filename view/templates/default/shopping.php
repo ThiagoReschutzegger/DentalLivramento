@@ -70,8 +70,8 @@ $( '#price-amount-2' ).val( 'R$' + $( '#price-range' ).slider( 'values', 1 ));
             <div class="collapse navbar-collapse navbar-ex1-collapse navbar-side-collapse">
               <ul class="nav navbar-nav side-nav">
                 <li>
-                  <a href="javascript:;" data-toggle="collapse" aria-expanded="true" data-target="#<?php echo $cat_atual->getId_categoria();?>"><?php echo $cat_atual->getNome();?><i class="fa fa-plus"></i></a>
-                  <ul id="<?php echo $cat_atual->getId_categoria();?>" class="collapse collapseItem show">
+                  <a href="javascript:;" data-toggle="collapse" aria-expanded="true" data-target="#menu_side<?php echo $cat_atual->getId_categoria();?>"><?php echo $cat_atual->getNome();?><i class="fa fa-plus"></i></a>
+                  <ul id="menu_side<?php echo $cat_atual->getId_categoria();?>" class="collapse collapseItem show">
                     <?php foreach ($data['grupo'] as $linha):
                       if($linha->getId_categoria() == $cat_atual->getId_categoria()):
                     ?>
@@ -83,8 +83,8 @@ $( '#price-amount-2' ).val( 'R$' + $( '#price-range' ).slider( 'values', 1 ));
                     if($categorias->getId_categoria() == $cat_atual->getId_categoria()) continue;
                 ?>
                     <li>
-                      <a href="javascript:;" data-toggle="collapse" aria-expanded="false" data-target="#<?php echo $categorias->getId_categoria();?>"><?php echo $categorias->getNome(); ?><i class="fa fa-plus"></i></a>
-                      <ul id="<?php echo $categorias->getId_categoria();?>" class="collapse collapseItem">
+                      <a href="javascript:;" data-toggle="collapse" aria-expanded="false" data-target="#menu_side<?php echo $categorias->getId_categoria();?>"><?php echo $categorias->getNome(); ?><i class="fa fa-plus"></i></a>
+                      <ul id="menu_side<?php echo $categorias->getId_categoria();?>" class="collapse collapseItem">
                         <?php foreach ($data['grupo'] as $linha):
                           if($linha->getId_categoria() == $categorias->getId_categoria()):
                         ?>
