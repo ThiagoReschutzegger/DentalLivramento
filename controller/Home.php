@@ -58,11 +58,13 @@ class Home extends Controller{
         $data['estilo'] = $this->model->getEstiloAtual();
         $data['packproduto'] = $this->modelPackproduto->getPackprodutoBySubgrupo($id);
         $pkpd = $data['packproduto'][0];
-        $data['grupo'] = $this->modelGrupo->getGrupoById($pkpd->getId_grupo());
-        $data['categoria'] = $this->modelCategoria->getCategoriaById($data['grupo']->getId_categoria());
+        $data['grupo-prod'] = $this->modelGrupo->getGrupoById($pkpd->getId_grupo());
+        $data['categoria-prod'] = $this->modelCategoria->getCategoriaById($data['grupo-prod']->getId_categoria());
         $data['marca'] = $this->modelMarca->getMarcaById($pkpd->getId_marca());
         $data['itens'] = $this->getList();
         $data['prod-destaq'] = $this->modelSubgrupo->getSubgrupoDestaque();
+        $data['categoria'] = $this->modelCategoria->getCategoria();
+        $data['grupo'] = $this->modelGrupo->getGrupo();
 
         $preco_aux = [];
         $estoque_aux = [];
@@ -197,6 +199,8 @@ class Home extends Controller{
 
     public function step3(){ //Edu
         $data['estilo'] = $this->model->getEstiloAtual();
+        $data['categoria'] = $this->modelCategoria->getCategoria();
+        $data['grupo'] = $this->modelGrupo->getGrupo();
         $data['itens'] = $this->getList();
 
         $this->view->load('header',$data);

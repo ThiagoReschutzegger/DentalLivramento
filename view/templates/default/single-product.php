@@ -1,7 +1,7 @@
 <?php
 $produto  = $data['packproduto'][0];
-$grupo = $data['grupo'];
-$categoria = $data['categoria'];
+$grupo = $data['grupo-prod'];
+$categoria = $data['categoria-prod'];
 $marca = $data['marca'];
 
 $espec_aux = [];
@@ -34,13 +34,13 @@ endforeach;
                   <a href="<?php echo $this->base_url; ?>">Home</a>
                 </li>
                 <li>
-                  <a href="<?php echo $this->base_url; ?>Home/viewCategoria/<?php echo $categoria->getId_categoria(); ?>">
+                  <a href="<?php echo $this->base_url; ?>Loja/view/<?php echo $grupo->getId_grupo(); ?>">
                     <?php echo $categoria->getNome(); ?>
                   </a>
                 </li>
                 <li class="active">
-                  <a href="<?php echo $this->base_url; ?>Home/viewGrupo/<?php echo $grupo->getId_grupo(); ?>">
-                    <?php echo $grupo->getNome(); ?>
+                  <a href="<?php echo $this->base_url; ?>Loja/view/<?php echo $grupo->getId_grupo(); ?>">
+                    <b><?php echo $grupo->getNome(); ?></b>
                   </a>
                 </li>
               </ol>
@@ -92,7 +92,7 @@ endforeach;
                 </div>
                 <div class="media-body">
                   <ul class="list-inline">
-                    <li><a href="<?php echo $this->base_url; ?>Home/viewGrupo/<?php echo $grupo->getId_grupo(); ?>"><i class="fa fa-reply" aria-hidden="true"></i>Continuar Comprando</a></li>
+                    <li><a href="<?php echo $this->base_url; ?>Loja/view/<?php echo $grupo->getId_grupo(); ?>"><i class="fa fa-reply" aria-hidden="true"></i>Continuar Comprando</a></li>
                   </ul>
                   <h2><?php echo $produto->getNome(); ?></h2>
                   <h3 style="margin-bottom:10px;">

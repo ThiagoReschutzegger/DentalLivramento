@@ -47,18 +47,19 @@
               </div>
               <div class="col-md-6 col-12">
                 <ul class="list-inline float-right top-right">
-                  <!--<li class="account-login"><span><a data-toggle="modal" href='.login-modal'>Log in</a><small>or</small><a data-toggle="modal" href='#signup'>Create an account</a></span></li>
                   <li class="searchBox">
                     <a href="#"><i class="fa fa-search"></i></a>
                     <ul class="dropdown-menu dropdown-menu-right">
                       <li>
+                        <form method="post">
                         <span class="input-group">
-                          <input type="text" class="form-control" placeholder="Search…" aria-describedby="basic-addon2">
-                          <button type="submit" class="input-group-addon">Submit</button>
+                            <input type="text" class="form-control" placeholder="Pesquisar…" name="pesquisar" aria-describedby="basic-addon2">
+                            <input type="submit" class="input-group-addon" name="vai" value="Vai" />
                         </span>
+                        </form>
                       </li>
                     </ul>
-                  </li>-->
+                  </li>
                   <li class="dropdown cart-dropdown">
                     <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-shopping-cart"></i>R$ <?php echo (isset($_SESSION['carrinho']) && $data['itens'] != '')? number_format((float)$count, 2, ',', ''): "0,00" ?></a>
                     <ul class="dropdown-menu dropdown-menu-right">
@@ -102,7 +103,7 @@
             <!-- Brand and toggle get grouped for better mobile display -->
 
             <a class="navbar-brand" href="<?php echo $this->base_url ?>Home">
-              <center><img class="logo-pl logo-nav image-fluid" src="<?php echo $this->asset ?>img/DentalLivramentoLogoFinal.png" style="max-height:50px"></center>
+              <center><img class="logo-pl logo-nav image-fluid" src="<?php echo $this->asset ?>img/DentalLivramentoLogoFinal.png"></center>
               <!--<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="166px" height="31px">
              <path class="logo-pl" fill-rule="evenodd"  fill="rgb(71, 186, 193)"
               d="M157.432,17.855 L157.573,15.904 L166.011,15.904 L166.011,27.436 C164.581,28.174 163.195,28.687 161.853,28.974 C160.511,29.261 158.921,29.404 157.081,29.404 C155.487,29.404 154.019,29.179 152.678,28.728 C151.336,28.277 150.178,27.646 149.206,26.838 C148.233,26.029 147.410,25.066 146.736,23.946 C146.062,22.827 145.558,21.597 145.224,20.255 C144.890,18.913 144.723,17.492 144.723,15.992 C144.723,13.355 145.216,11.021 146.200,8.987 C147.184,6.954 148.652,5.346 150.603,4.162 C152.554,2.979 154.866,2.387 157.538,2.387 C160.467,2.387 163.069,3.061 165.343,4.408 L164.341,6.219 C163.380,5.633 162.293,5.161 161.080,4.804 C159.867,4.446 158.692,4.268 157.555,4.268 C155.844,4.268 154.318,4.572 152.976,5.182 C151.634,5.791 150.548,6.632 149.716,7.704 C148.883,8.776 148.254,10.010 147.826,11.404 C147.398,12.799 147.184,14.316 147.184,15.957 C147.184,17.703 147.401,19.279 147.835,20.686 C148.268,22.092 148.919,23.308 149.786,24.333 C150.653,25.359 151.766,26.150 153.126,26.706 C154.485,27.263 156.055,27.541 157.837,27.541 C159.676,27.541 161.704,27.102 163.919,26.223 L163.919,17.855 L157.432,17.855 ZM137.244,20.123 L126.398,20.123 L122.917,29.000 L120.685,29.000 L130.898,2.844 L133.060,2.844 L142.904,29.000 L140.583,29.000 L137.244,20.123 ZM131.953,5.111 C131.812,5.627 131.349,6.998 130.564,9.225 C129.779,11.451 129.029,13.549 128.314,15.518 L127.259,18.471 L136.435,18.471 C133.798,10.901 132.304,6.447 131.953,5.111 ZM118.250,17.398 C119.223,18.594 119.709,20.006 119.709,21.635 C119.709,23.944 118.977,25.748 117.512,27.049 C116.047,28.350 113.797,29.000 110.762,29.000 L101.902,29.000 L101.902,2.844 L109.039,2.844 C112.285,2.844 114.655,3.383 116.149,4.461 C117.644,5.539 118.391,7.180 118.391,9.383 C118.391,9.641 118.388,9.834 118.382,9.963 C118.376,10.092 118.350,10.347 118.303,10.728 C118.256,11.108 118.183,11.428 118.083,11.686 C117.983,11.943 117.828,12.263 117.617,12.644 C117.406,13.025 117.151,13.355 116.853,13.637 C116.554,13.918 116.164,14.202 115.684,14.489 C115.203,14.777 114.658,15.014 114.049,15.201 C115.877,15.471 117.277,16.203 118.250,17.398 ZM114.357,13.540 C114.901,13.183 115.312,12.673 115.587,12.011 C115.862,11.349 116.000,10.525 116.000,9.541 C116.000,7.713 115.435,6.445 114.304,5.735 C113.173,5.026 111.383,4.672 108.934,4.672 L104.152,4.672 L104.152,14.498 L110.147,14.498 C111.072,14.498 111.869,14.428 112.537,14.287 C113.205,14.146 113.812,13.898 114.357,13.540 ZM109.162,16.221 L104.152,16.221 L104.152,27.242 L110.182,27.242 C114.928,27.242 117.301,25.373 117.301,21.635 C117.301,19.608 116.644,18.198 115.332,17.407 C114.020,16.616 111.963,16.221 109.162,16.221 Z"/>
@@ -122,15 +123,8 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
               <ul class="nav navbar-nav ml-auto">
-                <li class="nav-item dropdown  active ">
-                  <a href="javascript:void(0)" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home</a>
-                  <ul class="dropdown-menu dropdown-menu-left">
-                    <li class="active"><a href="<?php echo $this->asset ?>index.html">Home Default</a></li>
-                    <li><a href="<?php echo $this->asset ?>index-v2.html">Home Classic</a></li>
-                    <li><a href="<?php echo $this->asset ?>index-v3.html">Home Deals</a></li>
-                    <li><a href="<?php echo $this->asset ?>index-v4.html">Home Mega</a></li>
-                    <li><a href="<?php echo $this->asset ?>index-v5.html">Home Onepage</a></li>
-                  </ul>
+                <li class="nav-item active">
+                  <a href="<?php echo $this->base_url; ?>" class="nav-link" role="button" aria-haspopup="true">Home</a>
                 </li>
                 <li class="nav-item dropdown megaDropMenu ">
                   <a href="javascript:void(0)" class="dropdown-toggle nav-link" data-toggle="dropdown" data-hover="dropdown" data-delay="300" data-close-others="true" aria-expanded="false">Categorias</b></a>
@@ -153,79 +147,8 @@
                   <?php endforeach; ?>
                   </ul>
                 </li>
-                <li class="nav-item dropdown ">
-                  <a href="javascript:void(0)" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">pages</a>
-                  <ul class="dropdown-menu dropdown-menu-left">
-                    <li class=""><a href="<?php echo $this->asset ?>about-us.html">About Us</a></li>
-                    <li class=""><a href="<?php echo $this->asset ?>signup.html">Register</a></li>
-                    <li class=""><a href="<?php echo $this->asset ?>signup-login.html">Register or Login</a></li>
-                    <li class=""><a href="<?php echo $this->asset ?>login.html">Login</a></li>
-                    <li class=""><a href="<?php echo $this->asset ?>lost-password.html">Password Recovery</a></li>
-                    <li class=""><a href="<?php echo $this->asset ?>privacy-policy.html">Privacy Policy</a></li>
-                    <li class=""><a href="<?php echo $this->asset ?>terms-and-conditions.html">Terms &amp; Conditions</a></li>
-                    <li><a href="<?php echo $this->asset ?>404.html">404 Not Found</a></li>
-                    <li><a href="<?php echo $this->asset ?>coming-soon.html">Coming Soon</a></li>
-                  </ul>
-                </li>
-                <li class="nav-item dropdown ">
-                  <a href="javascript:void(0)" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">blog</a>
-                  <ul class="dropdown-menu dropdown-menu-right">
-                    <li class=""><a href="<?php echo $this->asset ?>blog-right-sidebar.html">Right Sidebar</a></li>
-                    <li class=""><a href="<?php echo $this->asset ?>blog-left-sidebar.html">Left Sidebar</a></li>
-                    <li class=""><a href="<?php echo $this->asset ?>blog-fullwidth.html">Full Width</a></li>
-                    <li class=""><a href="<?php echo $this->asset ?>blog-single-fullwidth.html">Single Post</a></li>
-                    <li class=""><a href="<?php echo $this->asset ?>blog-single-right-sidebar.html">Single Right Sidebar</a></li>
-                    <li class=""><a href="<?php echo $this->asset ?>blog-single-left-sidebar.html">Single Left Sidebar</a></li>
-                  </ul>
-                </li>
-                <li class="nav-item dropdown ">
-                  <a href="javascript:void(0)" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account</a>
-                  <ul class="dropdown-menu dropdown-menu-right">
-                    <li class=""><a href="<?php echo $this->asset ?>account-dashboard.html">Dashboard</a></li>
-                    <li class=""><a href="<?php echo $this->asset ?>account-profile.html">Profile</a></li>
-                    <li class=""><a href="<?php echo $this->asset ?>account-all-orders.html">All Orders</a></li>
-                    <li class=""><a href="<?php echo $this->asset ?>account-single-order.html">Single Order</a></li>
-                    <li class=""><a href="<?php echo $this->asset ?>account-wishlist.html">Wishlist</a></li>
-                    <li class=""><a href="<?php echo $this->asset ?>account-address.html">Address</a></li>
-                  </ul>
-                </li>
-                <li class="nav-item dropdown megaDropMenu ">
-                  <a href="javascript:void(0)" class="dropdown-toggle nav-link" data-toggle="dropdown" data-hover="dropdown" data-delay="300" data-close-others="true" aria-expanded="false">Components</b></a>
-                  <ul class="dropdown-menu row">
-                    <li class="col-md-4 col-12">
-                      <ul class="list-unstyled">
-                        <li>Basic Elements</li>
-                        <li class=""><a href="<?php echo $this->asset ?>basic-accordions.html">Accordions</a></li>
-                        <li class=""><a href="<?php echo $this->asset ?>basic-alert.html">Alert</a></li>
-                        <li class=""><a href="<?php echo $this->asset ?>basic-badge.html">Badge</a></li>
-                        <li class=""><a href="<?php echo $this->asset ?>basic-buttons.html">Buttons </a></li>
-                        <li class=""><a href="<?php echo $this->asset ?>basic-buttons-group.html">Button Group</a></li>
-                        <li class=""><a href="<?php echo $this->asset ?>basic-card.html">Cards</a></li>
-                      </ul>
-                    </li>
-                    <li class="col-md-4 col-12">
-                      <ul class="list-unstyled">
-                        <li>Basic Elements</li>
-                        <li class=""><a href="<?php echo $this->asset ?>basic-countdown.html">Countdown </a></li>
-                        <li class=""><a href="<?php echo $this->asset ?>basic-divider.html">Divider </a></li>
-                        <li class=""><a href="<?php echo $this->asset ?>basic-forms.html">Forms</a></li>
-                        <li class=""><a href="<?php echo $this->asset ?>basic-heading.html">Heading </a></li>
-                        <li class=""><a href="<?php echo $this->asset ?>basic-icon-style.html">Icon Style </a></li>
-                        <li class=""><a href="<?php echo $this->asset ?>basic-iconset.html">Iconset (Font Awesome)</a></li>
-                      </ul>
-                    </li>
-                    <li class="col-md-4 col-12">
-                      <ul class="list-unstyled">
-                        <li>Basic Elements</li>
-                        <li class=""><a href="<?php echo $this->asset ?>basic-modal.html">Modal </a></li>
-                        <li class=""><a href="<?php echo $this->asset ?>basic-progressbar.html">Progressbar</a></li>
-                        <li class=""><a href="<?php echo $this->asset ?>basic-tables.html">Tables </a></li>
-                        <li class=""><a href="<?php echo $this->asset ?>basic-tabs.html">Tabs</a></li>
-                        <li class=""><a href="<?php echo $this->asset ?>basic-typography.html">Typography </a></li>
-                        <li class=""><a href="<?php echo $this->asset ?>basic-video.html">Video </a></li>
-                      </ul>
-                    </li>
-                  </ul>
+                <li class="nav-item">
+                  <a href="<?php echo $this->base_url; ?>" class="nav-link" role="button" aria-haspopup="true">Contato</a>
                 </li>
               </ul>
             </div><!-- /.navbar-collapse -->

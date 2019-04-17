@@ -158,7 +158,7 @@ $( '#price-amount-2' ).val( 'R$' + $( '#price-range' ).slider( 'values', 1 ));
                     </div>
                   </div>
                   <div class="productCaption clearfix">
-                    <a href="single-product.html">
+                    <a href="<?php echo $this->base_url; ?>Home/viewProduto/<?php echo $produtos->getId_subgrupo(); ?>">
                       <h5><?php echo $produtos->getNome(); ?></h5>
                     </a>
                     <h3>R$ <?php echo $data[$produtos->getId_subgrupo()]; ?></h3>
