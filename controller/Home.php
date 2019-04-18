@@ -48,7 +48,7 @@ class Home extends Controller{
         $data['prod-destaq'] = $this->modelSubgrupo->getSubgrupoDestaque();
 
         $this->view->load('header',$data);
-        $this->view->load('nav-home',$data);
+        $this->view->load('nav',$data);
         $this->view->load('index', $data);
         $this->view->load('footer');
 

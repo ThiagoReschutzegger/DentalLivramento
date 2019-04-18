@@ -24,6 +24,24 @@
     font-size: 120% !important;
   }
 }
+@media (max-width: 700px) {
+  .modalBar{
+    width: 100% !important;
+  }
+  .modalBig{
+    display: none;
+  }
+  .modal-body{
+    padding-right: 15px !important;
+  }
+  .menuBar{
+    display: none;
+  }
+  .sectionPadding{
+    padding-top: 45px;
+  }
+}
+
 
 input[type=number]::-webkit-outer-spin-button,
 input[type=number]::-webkit-inner-spin-button {
@@ -43,4 +61,8 @@ input:invalid{
 *::selection {
     background: lightblue;
     color: #343434;
+}
+
+.modalBar{
+  width: 50%;
 }

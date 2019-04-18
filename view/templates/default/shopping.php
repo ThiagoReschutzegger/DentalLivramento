@@ -60,11 +60,11 @@ $( '#price-amount-2' ).val( 'R$' + $( '#price-range' ).slider( 'values', 1 ));
 </section>
 
 <!-- MAIN CONTENT SECTION -->
-<section class="mainContent clearfix productsContent">
+<section class="mainContent clearfix productsContent sectionPadding">
   <div class="container">
     <div class="row">
       <div class="col-lg-3 col-md-4 sideBar">
-        <div class="panel panel-default">
+        <div class="panel panel-default menuBar">
           <div class="panel-heading">Categorias</div>
           <div class="panel-body">
             <div class="collapse navbar-collapse navbar-ex1-collapse navbar-side-collapse">
@@ -97,25 +97,12 @@ $( '#price-amount-2' ).val( 'R$' + $( '#price-range' ).slider( 'values', 1 ));
             </div>
           </div>
         </div>
-        <form method="post">
-        <div class="panel panel-default priceRange">
-          <div class="panel-heading">Filtrar por preço</div>
-          <div class="panel-body clearfix">
-            <div class="price-slider-inner">
-
-              <span class="amount-wrapper">
-                Preço:<br>
-                <input type="text" name="preco-min" id="price-amount-1" readonly>
-                <strong>-</strong>
-                <input type="text" name="preco-max" id="price-amount-2" readonly>
-              </span>
-              <div id="price-range"></div>
-            </div>
-            <input class="btn-default" type="submit" name="filtrar" value="Filtrar">
-             <!-- <span class="priceLabel">Price: <strong>$12 - $30</strong></span>-->
+        <div class="row">
+          <div class="col-2"></div>
+          <div class="col-8">
+            <a data-toggle="modal" href=".quick-view-drone"  class="btn btn-primary btn-block" style="display: inline-block;">Filtrar</a>
           </div>
-        </div>
-        </form>
+        </div><br><br>
       </div>
       <div class="col-lg-9 col-md-8">
         <div class="row filterArea">
@@ -171,3 +158,39 @@ $( '#price-amount-2' ).val( 'R$' + $( '#price-range' ).slider( 'values', 1 ));
     </div>
   </div>
 </section>
+
+<!-- PORDUCT QUICK VIEW MODAL  -->
+<div class="modal fade quick-view-drone" tabindex="-1" role="dialog">
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-body">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <div class="media flex-wrap">
+        <div class="media-body row">
+          <div class="modalBig" style="width:25% !important;"></div>
+          <div class="sideBar modalBar">
+            <form method="post">
+            <div class="panel panel-default priceRange">
+              <div class="panel-heading">Filtrar por preço</div>
+              <div class="panel-body clearfix" style="height: 115px;">
+                <div class="price-slider-inner">
+                  <span class="amount-wrapper">
+                    Preço:<br>
+                    <input type="text" name="preco-min" id="price-amount-1" readonly>
+                    <strong>-</strong>
+                    <input type="text" name="preco-max" id="price-amount-2" readonly>
+                  </span>
+                  <div id="price-range"></div>
+                </div>
+                <input class="btn-default" type="submit" name="filtrar" value="Filtrar">
+                 <!-- <span class="priceLabel">Price: <strong>$12 - $30</strong></span>-->
+              </div>
+            </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
