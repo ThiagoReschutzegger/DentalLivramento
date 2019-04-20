@@ -6761,7 +6761,7 @@ body.bodyColor.container {
 .priceRange .price-slider-inner .amount-wrapper input {
   background-color: transparent;
   border: 0;
-  width: 28%;
+  width: 45px;
   font-size: 14px;
   color: #252525;
   font-weight: 700;
