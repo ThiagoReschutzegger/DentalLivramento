@@ -58,4 +58,24 @@ class PackprodutoModel extends Model {
         return $list;
     }
 
+
+    public function filtroPackproduto($preco_min,$preco_max,$marca_id,$ordem,$grupo_id,$categoria_id){
+
+      $base_str = "SELECT produto.id_produto, produto.barcode, produto.preco, produto.estoque, produto.especificacao, produto.id_subgrupo, subgrupo.nome, subgrupo.descricao, subgrupo.imagem,subgrupo.destaque, subgrupo.id_grupo, subgrupo.id_marca FROM produto JOIN subgrupo ON produto.id_subgrupo=subgrupo.id_subgrupo ";
+
+      $preco_str = "WHERE preco > ".$preco_min." AND preco < ".$preco_max;
+
+      echo $base_str.$preco_str;
+      die;
+
+      $consulta = $this->ExecuteQuery($sql, array());
+      foreach ($consulta as $linha) {
+          $list[] = new Packproduto($linha['id_packproduto'], $linha['barcode'], $linha['preco'], $linha['nome'], $linha['estoque'], $linha['imagem'], $linha['descricao'], $linha['destaque'], $linha['tipo'], $linha['id_grupo'], $linha['id_marca']);
+      }
+
+    }
+
+
+
+
 }

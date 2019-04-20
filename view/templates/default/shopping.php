@@ -206,7 +206,7 @@ $( '#price-amount-2' ).val( 'R$' + $( '#price-range' ).slider( 'values', 1 ));
                         <option>Selecione a marca</option>
                         <?php $ids_aux = []; $ids_aux[] = 0; ?>
                         <?php foreach ($data['marca'] as $marca):
-                          if(in_array($marca->getId_marca(), $ids_aux)) continue; 
+                          if(in_array($marca->getId_marca(), $ids_aux)) continue;
                         ?>
                           <option value="<?php echo $marca->getId_marca(); ?>"><?php echo $marca->getNome(); ?></option>
                         <?php $ids_aux[] = $marca->getId_marca(); endforeach; ?>
