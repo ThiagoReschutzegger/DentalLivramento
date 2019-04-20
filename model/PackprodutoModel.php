@@ -84,12 +84,16 @@ class PackprodutoModel extends Model {
       }
 
 
+
       $sql = $base_str.$preco_str.$marca_str.$grupo_str.$ordem_str;
+
+      //echo"<pre>";var_dump($sql);die;
 
       $consulta = $this->ExecuteQuery($sql, array());
       foreach ($consulta as $linha) {
-          $list[] = new Packproduto($linha['id_packproduto'], $linha['barcode'], $linha['preco'], $linha['nome'], $linha['estoque'], $linha['imagem'], $linha['descricao'], $linha['destaque'], $linha['tipo'], $linha['id_grupo'], $linha['id_marca']);
+            $list[] = new Packproduto($linha['id_produto'], $linha['barcode'], $linha['preco'], $linha['estoque'], $linha['especificacao'], $linha['id_subgrupo'], $linha['nome'], $linha['descricao'], $linha['imagem'], $linha['destaque'], $linha['id_grupo'], $linha['id_marca']);
       }
+      return $list;
 
     }
 

@@ -57,7 +57,7 @@ class Loja extends Controller{
         $data['itens'] = $this->father->getList();
 
         if (filter_input(INPUT_POST, 'filter1') || filter_input(INPUT_POST, 'filter2')) {
-
+        //  die;
           $preco_min = preg_replace("/[^0-9]/", "", filter_input(INPUT_POST, 'preco-min', FILTER_SANITIZE_STRING));
           $preco_max = preg_replace("/[^0-9]/", "", filter_input(INPUT_POST, 'preco-max', FILTER_SANITIZE_STRING));
           $marca_id = filter_input(INPUT_POST, 'marca', FILTER_SANITIZE_STRING);
