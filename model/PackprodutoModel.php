@@ -63,10 +63,28 @@ class PackprodutoModel extends Model {
 
       $base_str = "SELECT produto.id_produto, produto.barcode, produto.preco, produto.estoque, produto.especificacao, produto.id_subgrupo, subgrupo.nome, subgrupo.descricao, subgrupo.imagem,subgrupo.destaque, subgrupo.id_grupo, subgrupo.id_marca FROM produto JOIN subgrupo ON produto.id_subgrupo=subgrupo.id_subgrupo ";
 
-      $preco_str = "WHERE preco > ".$preco_min." AND preco < ".$preco_max;
+      $preco_str = "WHERE produto.preco > ".$preco_min." AND produto.preco < ".$preco_max." ";
 
-      echo $base_str.$preco_str;
-      die;
+      if($marca_id == 0){
+        $marca_str = '';
+      }else{
+        $marca_str = "AND subgrupo.id_marca = ".$marca_id." ";
+      }
+
+      $grupo_str = "AND subgrupo.id_grupo = ".$grupo_id." ";
+
+      if($ordem == "alfa"){
+        $ordem_str = "ORDER BY subgrupo.nome asc";
+      }else if ($ordem == "maior"){
+        $ordem_str = "ORDER BY produto.preco asc";
+      }else if ($ordem == "menor"){
+        $ordem_str = "ORDER BY subgrupo.nome desc";
+      }else{
+        $ordem_str = "";
+      }
+
+
+      $sql = $base_str.$preco_str.$marca_str.$grupo_str.$ordem_str;
 
       $consulta = $this->ExecuteQuery($sql, array());
       foreach ($consulta as $linha) {

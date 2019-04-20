@@ -56,7 +56,7 @@ class Loja extends Controller{
         $data['categoria-atual'] = $this->modelCategoria->getCategoriaByGrupoId($id_grupo);
         $data['itens'] = $this->father->getList();
 
-        if (filter_input(INPUT_POST, 'filtrar') || filter_input(INPUT_POST, 'filter2')) {
+        if (filter_input(INPUT_POST, 'filter1') || filter_input(INPUT_POST, 'filter2')) {
 
           $preco_min = preg_replace("/[^0-9]/", "", filter_input(INPUT_POST, 'preco-min', FILTER_SANITIZE_STRING));
           $preco_max = preg_replace("/[^0-9]/", "", filter_input(INPUT_POST, 'preco-max', FILTER_SANITIZE_STRING));
