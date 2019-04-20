@@ -69,28 +69,6 @@ ul.nav-tabs .nav-item .nav-link.active, .category-content {
   fill: #00bafa;
 }
 
-@media (min-width: 770px) {
-    .logo-nav{
-        width: 300px;
-        height: auto;
-        padding-top: 0;
-    }
-}
-@media (max-width: 1000px) {
-    .logo-nav{
-        width:200px;
-        height: auto;
-        padding-top: 0;
-    }
-}
-@media (max-width: 300px) {
-    .logo-nav{
-        width:150px;
-        height: auto;
-        padding-top: 0;
-    }
-}
-
 @font-face {
   font-family: GothicBold;
   src: url(../plugins/fonts/GothicBold.ttf);
