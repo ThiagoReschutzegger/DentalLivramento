@@ -173,6 +173,219 @@
   </div>
 </div>
 
+<!-- CONTENT SECTION -->
+<section class="content clearfix">
+  <div class="container">
+
+    <!-- FEATURE COLLECTION SECTION -->
+    <div class="row featuredCollection version2 version3">
+      <div class="col-md-6 col-12">
+        <div class="slide">
+          <div class="productImage productImage1">
+          </div>
+          <div class="productCaption clearfix text-right">
+            <h3><a href="single-product.html">women’s Shoes</a></h3>
+            <p>Lorem ipsum dolor sit ameit</p>
+            <a href="single-product.html" class="btn btn-border">Shop Now</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-12">
+        <div class="slide">
+          <div class="productImage productImage2">
+          </div>
+          <div class="productCaption clearfix text-right">
+            <h3><a href="single-product.html">Headphone wifi</a></h3>
+            <p>Lorem ipsum dolor sit ameit</p>
+            <a href="single-product.html" class="btn btn-border">Shop Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CATEGORY SECTION -->
+    <div class="categorySection">
+      <div class="row">
+        <div class="col-md-6 col-12">
+          <div class="category-content">
+            <div class="category-top d-flex justify-content-between">
+              <div class="category-menu text-center">
+                <h2 class="category-title">Men’s Clothing</h2>
+                <ul>
+                  <li><a href="product-grid-left-sidebar.html">Down Jackets</a></li>
+                  <li><a href="product-grid-left-sidebar.html">T Shirts</a></li>
+                  <li><a href="product-grid-left-sidebar.html">Jeans</a></li>
+                  <li><a href="product-grid-left-sidebar.html">Casual Pants</a></li>
+                  <li><a href="product-grid-left-sidebar.html">Sunglasses</a></li>
+                  <li><a href="product-grid-left-sidebar.html">Hoodies</a></li>
+                </ul>
+              </div>
+              <div class="category-Slider">
+                <div class="categorySlider">
+                  <div class="item">
+                    <img src="<?php echo $this->asset ?>img/home/category/category-img3.jpg" alt="Image">
+                  </div>
+                  <div class="item">
+                    <img src="<?php echo $this->asset ?>img/home/category/category-img3.jpg" alt="Image">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="category-bottom d-md-flex justify-content-md-between">
+              <div class="imageBox">
+                <div class="productImage clearfix">
+                  <a href="single-product.html">
+                    <img src="<?php echo $this->asset ?>img/home/category/category-img6.jpg" alt="Image">
+                  </a>
+                  <div class="productMasking">
+                    <ul class="list-inline btn-group" role="group">
+                      <li><a class="btn btn-default btn-wishlist"><i class="fa fa-heart-o"></i></a></li>
+                      <li><a href="javascript:void(0)" class="btn btn-default" data-toast data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Product" data-toast-message="successfuly added to cart!"><i class="fa fa-shopping-basket"></i></a></li>
+                      <li><a data-toggle="modal" href=".quick-view" class="btn btn-default"><i class="fa fa-eye"></i></a></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="productCaption clearfix">
+                  <h5><a href="single-product.html">Nike Sportswear</a></h5>
+                  <h3>$199</h3>
+                </div>
+              </div>
+              <div class="imageBox">
+                <div class="productImage clearfix">
+                  <a href="single-product.html">
+                    <img src="<?php echo $this->asset ?>img/home/category/category-img7.jpg" alt="Image">
+                  </a>
+                  <span class="sticker">50% off</span>
+                  <div class="productMasking">
+                    <ul class="list-inline btn-group" role="group">
+                      <li><a class="btn btn-default btn-wishlist"><i class="fa fa-heart-o"></i></a></li>
+                      <li><a href="javascript:void(0)" class="btn btn-default" data-toast data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Product" data-toast-message="successfuly added to cart!"><i class="fa fa-shopping-basket"></i></a></li>
+                      <li><a data-toggle="modal" href=".quick-view" class="btn btn-default"><i class="fa fa-eye"></i></a></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="productCaption clearfix">
+                  <h5><a href="single-product.html">Nike Sportswear</a></h5>
+                  <h3>$199</h3>
+                </div>
+              </div>
+              <div class="imageBox">
+                <div class="productImage clearfix">
+                  <a href="single-product.html">
+                    <img src="<?php echo $this->asset ?>img/home/category/category-img8.jpg" alt="Image">
+                  </a>
+                  <div class="productMasking">
+                    <ul class="list-inline btn-group" role="group">
+                      <li><a class="btn btn-default btn-wishlist"><i class="fa fa-heart-o"></i></a></li>
+                      <li><a href="javascript:void(0)" class="btn btn-default" data-toast data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Product" data-toast-message="successfuly added to cart!"><i class="fa fa-shopping-basket"></i></a></li>
+                      <li><a data-toggle="modal" href=".quick-view" class="btn btn-default"><i class="fa fa-eye"></i></a></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="productCaption clearfix">
+                  <h5><a href="single-product.html">Nike Sportswear</a></h5>
+                  <h3>$199</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-12">
+          <div class="category-content">
+            <div class="category-top d-flex justify-content-between">
+              <div class="category-menu text-center">
+                <h2 class="category-title">woMen’s Clothing</h2>
+                <ul>
+                  <li><a href="product-grid-left-sidebar.html">Casual Dresses</a></li>
+                  <li><a href="product-grid-left-sidebar.html">Sweaters</a></li>
+                  <li><a href="product-grid-left-sidebar.html">Coats & Jackets</a></li>
+                  <li><a href="product-grid-left-sidebar.html">Cosmetic</a></li>
+                  <li><a href="product-grid-left-sidebar.html">T Shirts</a></li>
+                  <li><a href="product-grid-left-sidebar.html">Shoes</a></li>
+                </ul>
+              </div>
+              <div class="category-Slider">
+                <div class="categorySlider">
+                  <div class="item">
+                    <img src="<?php echo $this->asset ?>img/home/category/category-img2.jpg" alt="Image">
+                  </div>
+                  <div class="item">
+                    <img src="<?php echo $this->asset ?>img/home/category/category-img2.jpg" alt="Image">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="category-bottom d-md-flex justify-content-md-between">
+              <div class="imageBox">
+                <div class="productImage clearfix">
+                  <a href="single-product.html">
+                    <img src="<?php echo $this->asset ?>img/home/category/category-img9.jpg" alt="Image">
+                  </a>
+                  <span class="sticker">50% off</span>
+                  <div class="productMasking">
+                    <ul class="list-inline btn-group" role="group">
+                      <li><a class="btn btn-default btn-wishlist"><i class="fa fa-heart-o"></i></a></li>
+                      <li><a href="javascript:void(0)" class="btn btn-default" data-toast data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Product" data-toast-message="successfuly added to cart!"><i class="fa fa-shopping-basket"></i></a></li>
+                      <li><a data-toggle="modal" href=".quick-view" class="btn btn-default"><i class="fa fa-eye"></i></a></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="productCaption clearfix">
+                  <h5><a href="single-product.html">Nike Sportswear</a></h5>
+                  <h3>$199</h3>
+                </div>
+              </div>
+              <div class="imageBox">
+                <div class="productImage clearfix">
+                  <a href="single-product.html">
+                    <img src="<?php echo $this->asset ?>img/home/category/category-img10.jpg" alt="Image">
+                  </a>
+                  <div class="productMasking">
+                    <ul class="list-inline btn-group" role="group">
+                      <li><a class="btn btn-default btn-wishlist"><i class="fa fa-heart-o"></i></a></li>
+                      <li><a href="javascript:void(0)" class="btn btn-default" data-toast data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Product" data-toast-message="successfuly added to cart!"><i class="fa fa-shopping-basket"></i></a></li>
+                      <li><a data-toggle="modal" href=".quick-view" class="btn btn-default"><i class="fa fa-eye"></i></a></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="productCaption clearfix">
+                  <h5><a href="single-product.html">Nike Sportswear</a></h5>
+                  <h3>$199</h3>
+                </div>
+              </div>
+              <div class="imageBox">
+                <div class="productImage clearfix">
+                  <a href="single-product.html">
+                    <img src="<?php echo $this->asset ?>img/home/category/category-img11.jpg" alt="Image">
+                  </a>
+                  <div class="productMasking">
+                    <ul class="list-inline btn-group" role="group">
+                      <li><a class="btn btn-default btn-wishlist"><i class="fa fa-heart-o"></i></a></li>
+                      <li><a href="javascript:void(0)" class="btn btn-default" data-toast data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Product" data-toast-message="successfuly added to cart!"><i class="fa fa-shopping-basket"></i></a></li>
+                      <li><a data-toggle="modal" href=".quick-view" class="btn btn-default"><i class="fa fa-eye"></i></a></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="productCaption clearfix">
+                  <h5><a href="single-product.html">Nike Sportswear</a></h5>
+                  <h3>$199</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- MAIN CONTENT SECTION -->
 <section class="mainContent clearfix">
   <div class="container">
