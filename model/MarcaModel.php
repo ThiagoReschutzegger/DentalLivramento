@@ -58,4 +58,28 @@ class MarcaModel extends Model {
         return $list;
     }
 
+    public function getMarcaByProduto($ids) {
+        $list = [];
+        $num = count($ids);
+        $i = 1;
+        $comando = [];
+        $sql = "SELECT marca.* FROM subgrupo JOIN marca ON subgrupo.id_marca=marca.id_marca WHERE";
+        foreach ($ids as $id_subgrupo) {
+          $comando[] = " id_subgrupo = ".$id_subgrupo;
+        }
+        while ($i <= $num){
+          $sql = $sql.$comando[$i-1];
+          if($i < $num){
+            $sql = $sql.' OR ';
+          }
+          $i++;
+        }
+        $query = $this->ExecuteQuery($sql, array());
+        foreach ($query as $linha) {
+            $list[] = new Marca($linha['id_marca'], $linha['nome'], $linha['imagem']);
+        }
+        //echo 'Mok';
+        return $list;
+    }
+
 }

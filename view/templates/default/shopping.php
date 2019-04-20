@@ -166,7 +166,8 @@ $( '#price-amount-2' ).val( 'R$' + $( '#price-range' ).slider( 'values', 1 ));
     <div class="modal-body">
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
       <div class="media flex-wrap">
-        <div class="media-body row">
+        <div class="media-body">
+          <div class="row">
           <div class="modalBig" style="width:25% !important;"></div>
           <div class="sideBar modalBar">
             <form method="post">
@@ -189,6 +190,36 @@ $( '#price-amount-2' ).val( 'R$' + $( '#price-range' ).slider( 'values', 1 ));
             </form>
           </div>
         </div>
+
+        <div class="row">
+          <div class="modalBig" style="width:25% !important;"></div>
+          <div class="sideBar modalBar">
+            <form method="post">
+            <div class="panel panel-default priceRange">
+              <div class="panel-heading">Filtrar por Marca</div>
+              <div class="panel-body clearfix" style="height: 115px;">
+                <div class="form-group">
+                  <label for="">Selecione a Marca: </label>
+                  <div class="form-group row">
+                    <div class="quick-drop col-12 selectOptions ">
+                      <select name="marca" class="form-control select-drop">
+                        <option>Selecione a marca</option>
+                        <?php $ids_aux = []; $ids_aux[] = 0; ?>
+                        <?php foreach ($data['marca'] as $marca):
+                          if(in_array($marca->getId_marca(), $ids_aux)) continue; 
+                        ?>
+                          <option value="<?php echo $marca->getId_marca(); ?>"><?php echo $marca->getNome(); ?></option>
+                        <?php $ids_aux[] = $marca->getId_marca(); endforeach; ?>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </form>
+          </div>
+        </div>
+      </div>
       </div>
     </div>
   </div>

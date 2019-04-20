@@ -55,21 +55,28 @@ class Loja extends Controller{
 
         if(empty($data['packproduto'])){ //caso não tenha nenhum prod no grupo, gambiarra.com
         $data['packproduto'] = 'password';
+        $ids[] = 0;
+        $data['marca'] = null;
         }else{
           $preco_aux = []; //array onde tem todos os preços dos produtos que estão sendo exibidos
+          $ids = [];
           foreach ($data['packproduto'] as $produtos){ //gambiarra pra pegar o menor preço de cada produto
             $preco_aux[$produtos->getId_subgrupo()] = number_format((float)$produtos->getPreco(), 2);
+            $ids[] = $produtos->getId_subgrupo();
             if(empty($data[$produtos->getId_subgrupo()])) $data[$produtos->getId_subgrupo()] = $preco_aux[$produtos->getId_subgrupo()];
             if($preco_aux[$produtos->getId_subgrupo()] < $data[$produtos->getId_subgrupo()]){
               $data[$produtos->getId_subgrupo()] = $preco_aux[$produtos->getId_subgrupo()];
             }
           }
+          $data['marca'] = $this->modelMarca->getMarcaByProduto($ids);
           }
           if(empty($preco_aux)){ //caso não tenha nenhum prod no grupo, gambiarra.com
           $preco_aux[] = 0;
           }
         $data['preco_min'] = min($preco_aux);
         $data['preco_max'] = max($preco_aux);
+
+        $ids = array_unique($ids);
 
         if (filter_input(INPUT_POST, 'filtrar')) {
           $min = filter_input(INPUT_POST, 'preco-min', FILTER_SANITIZE_STRING);
@@ -78,12 +85,10 @@ class Loja extends Controller{
           die;
         }
 
-        // $data['marca'] = $this->modelMarca->getMarca(); //será? filtro por marca tb?
         $this->view->load('header',$data);
         $this->view->load('nav',$data);
         $this->view->load('shopping', $data);
         $this->view->load('footer');
-
     }
 
 }
