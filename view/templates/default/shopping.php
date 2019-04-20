@@ -58,7 +58,7 @@ $( '#price-amount-2' ).val( 'R$' + $( '#price-range' ).slider( 'values', 1 ));
     </div>
   </div>
 </section>
-
+<form method="post">
 <!-- MAIN CONTENT SECTION -->
 <section class="mainContent clearfix productsContent sectionPadding">
   <div class="container">
@@ -106,17 +106,17 @@ $( '#price-amount-2' ).val( 'R$' + $( '#price-range' ).slider( 'values', 1 ));
       </div>
       <div class="col-lg-9 col-md-8">
         <div class="row filterArea">
-          <div class="col-6">
+          <div class="col-5 Vizualizando">
             <span style="color: gray; padding-top: 5px;">Vizualizando 12 de X produtos:</span>
           </div>
-          <div class="col-6">
-            <div class="float-right">
+          <div class="col-md-7 col-sm-12">
+            <div class="float-right select-shop">
             <select name="guiest_id1" id="guiest_id1" class="select-drop">
-              <option value="0">Ordem Alfabética</option>
-              <option value="1">Preço Maior</option>
-              <option value="1">Preço Menor</option>
-              <option value="2">Mais Novo </option>
-            </select>
+              <option value="new">Mais Novo </option>
+              <option value="alfa">Ordem Alfabética</option>
+              <option value="maior">Preço Maior</option>
+              <option value="menor">Preço Menor</option>
+            </select><button class="btn btn-primary" type="submit" name="filter2" style="height: 35px;"><i class="fa fa-send"></i></button>
           </div>
           </div>
 
@@ -170,12 +170,11 @@ $( '#price-amount-2' ).val( 'R$' + $( '#price-range' ).slider( 'values', 1 ));
           <div class="row">
           <div class="modalBig" style="width:25% !important;"></div>
           <div class="sideBar modalBar">
-            <form method="post">
             <div class="panel panel-default priceRange">
               <div class="panel-heading">Filtrar por preço</div>
               <div class="panel-body clearfix" style="height: 115px;">
                 <div class="price-slider-inner">
-                  <span class="amount-wrapper">
+                  <span class="amount-wrapper" style="right: inherit;">
                     Preço:<br>
                     <input type="text" name="preco-min" id="price-amount-1" readonly>
                     <strong>-</strong>
@@ -183,27 +182,23 @@ $( '#price-amount-2' ).val( 'R$' + $( '#price-range' ).slider( 'values', 1 ));
                   </span>
                   <div id="price-range"></div>
                 </div>
-                <input class="btn-default" type="submit" name="filtrar" value="Filtrar">
-                 <!-- <span class="priceLabel">Price: <strong>$12 - $30</strong></span>-->
               </div>
             </div>
-            </form>
           </div>
         </div>
 
         <div class="row">
           <div class="modalBig" style="width:25% !important;"></div>
           <div class="sideBar modalBar">
-            <form method="post">
             <div class="panel panel-default priceRange">
               <div class="panel-heading">Filtrar por Marca</div>
-              <div class="panel-body clearfix" style="height: 115px;">
+              <div class="panel-body clearfix" style="height: 120px;">
                 <div class="form-group">
                   <label for="">Selecione a Marca: </label>
                   <div class="form-group row">
                     <div class="quick-drop col-12 selectOptions ">
                       <select name="marca" class="form-control select-drop">
-                        <option>Selecione a marca</option>
+                        <option value="0">Selecione a marca</option>
                         <?php $ids_aux = []; $ids_aux[] = 0; ?>
                         <?php foreach ($data['marca'] as $marca):
                           if(in_array($marca->getId_marca(), $ids_aux)) continue;
@@ -216,6 +211,7 @@ $( '#price-amount-2' ).val( 'R$' + $( '#price-range' ).slider( 'values', 1 ));
                 </div>
               </div>
             </div>
+            <input class="btn btn-primary" type="submit" name="filter1" value="Filtrar">
             </form>
           </div>
         </div>

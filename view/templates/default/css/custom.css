@@ -23,6 +23,12 @@
   .list-unstyled li{
     font-size: 120% !important;
   }
+  .Vizualizando{
+    display: none;
+  }
+  .select-shop{
+    float: left !important;
+  }
 }
 @media (max-width: 700px) {
   .modalBar{
