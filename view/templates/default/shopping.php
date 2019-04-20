@@ -29,12 +29,15 @@ $( '#price-amount-2' ).val( 'R$' + $( '#price-range' ).slider( 'values', 1 ));
 <style type="text/css" scoped>
 .pageHeaderImage{
   position: relative;
-  background-image: url(<?php echo $cat_atual->getImagem();?>) !important;
-  filter: brightness(50%);
-}
-.pageHeaderImage::before{ /* tentar colocar somente o fundo da seção com o filtro, background-image com filtro css, sla meu */
-  background-image: url(<?php echo $cat_atual->getImagem();?>) !important;
-  filter: brightness(50%);
+  background:
+      linear-gradient(
+        rgba(0, 186, 250, 0.5), /*0, 150, 185, 0.5 */
+        rgba(0, 220, 255, 0.5)  /*0, 220, 255, 0.5*/
+        ),
+      url("<?php echo $cat_atual->getImagem();?>") ;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 </style>
 
@@ -102,6 +105,12 @@ $( '#price-amount-2' ).val( 'R$' + $( '#price-range' ).slider( 'values', 1 ));
           <div class="col-8">
             <a data-toggle="modal" href=".quick-view-drone"  class="btn btn-primary btn-block" style="display: inline-block;">Filtrar</a>
           </div>
+        </div><br>
+        <div class="row">
+          <div class="col-2"></div>
+          <div class="col-8">
+            <a href="<?php echo $this->base_url; ?>Loja/view/<?php echo $gp_atual->getId_grupo(); ?>"  class="btn btn-info-outlined btn-sm btn-block" style="display: inline-block;">Redefiinr</a>
+          </div>
         </div><br><br>
       </div>
       <div class="col-lg-9 col-md-8">
@@ -116,7 +125,7 @@ $( '#price-amount-2' ).val( 'R$' + $( '#price-range' ).slider( 'values', 1 ));
               <option value="alfa">Ordem Alfabética</option>
               <option value="maior">Preço Maior</option>
               <option value="menor">Preço Menor</option>
-            </select><button class="btn btn-primary" type="submit" name="filter2" style="height: 35px;"><i class="fa fa-send"></i></button>
+            </select><input class="btn btn-primary" type="submit" name="filter1" value="Go!" style="height: 35px; line-height: 0px;"/>
           </div>
           </div>
 

@@ -27,7 +27,8 @@
     display: none;
   }
   .select-shop{
-    float: left !important;
+    float: none !important;
+    padding-left: 12%;
   }
 }
 @media (max-width: 700px) {

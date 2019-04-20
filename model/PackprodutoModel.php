@@ -76,9 +76,11 @@ class PackprodutoModel extends Model {
       if($ordem == "alfa"){
         $ordem_str = "ORDER BY subgrupo.nome asc";
       }else if ($ordem == "maior"){
-        $ordem_str = "ORDER BY produto.preco asc";
+        $ordem_str = "ORDER BY produto.preco desc";
       }else if ($ordem == "menor"){
-        $ordem_str = "ORDER BY subgrupo.nome desc";
+        $ordem_str = "ORDER BY produto.preco asc";
+      }else if ($ordem == "new"){
+        $ordem_str = "ORDER BY subgrupo.id_subgrupo desc";
       }else{
         $ordem_str = "";
       }

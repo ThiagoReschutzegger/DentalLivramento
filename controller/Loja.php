@@ -56,12 +56,12 @@ class Loja extends Controller{
         $data['categoria-atual'] = $this->modelCategoria->getCategoriaByGrupoId($id_grupo);
         $data['itens'] = $this->father->getList();
 
-        if (filter_input(INPUT_POST, 'filter1') || filter_input(INPUT_POST, 'filter2')) {
-        //  die;
+        if (filter_input(INPUT_POST, 'filter1')) {
+
           $preco_min = preg_replace("/[^0-9]/", "", filter_input(INPUT_POST, 'preco-min', FILTER_SANITIZE_STRING));
           $preco_max = preg_replace("/[^0-9]/", "", filter_input(INPUT_POST, 'preco-max', FILTER_SANITIZE_STRING));
           $marca_id = filter_input(INPUT_POST, 'marca', FILTER_SANITIZE_STRING);
-          $ordem = filter_input(INPUT_POST, 'ordem', FILTER_SANITIZE_STRING);
+          $ordem = filter_input(INPUT_POST, 'guiest_id1', FILTER_SANITIZE_STRING);
           $categoria_id = $this->modelCategoria->getCategoriaByGrupoId($id_grupo);
 
           $data['packproduto'] = $this->modelPackproduto->filtroPackproduto($preco_min,$preco_max,$marca_id,$ordem,$id_grupo,$categoria_id);
