@@ -77,8 +77,8 @@ class Loja extends Controller{
           $preco_aux = []; //array onde tem todos os preços dos produtos que estão sendo exibidos
           $ids = [];
           foreach ($data['packproduto'] as $produtos){ //gambiarra pra pegar o menor preço de cada produto
-            $preco_aux[$produtos->getId_subgrupo()] = number_format((int)str_replace(',', '', $produtos->getPreco()), 2);
-            var_dump($preco_aux);die;
+            $preco_aux[$produtos->getId_subgrupo()] = number_format($produtos->getPreco(), 2);
+
             $ids[] = $produtos->getId_subgrupo();
             if(empty($data[$produtos->getId_subgrupo()])) $data[$produtos->getId_subgrupo()] = $preco_aux[$produtos->getId_subgrupo()];
             if($preco_aux[$produtos->getId_subgrupo()] < $data[$produtos->getId_subgrupo()]){
@@ -90,8 +90,9 @@ class Loja extends Controller{
           if(empty($preco_aux)){ //caso não tenha nenhum prod no grupo, gambiarra.com
           $preco_aux[] = 0;
           }
-        $data['preco_min'] = (int)min($preco_aux);
-        $data['preco_max'] = (int)max($preco_aux);
+
+        $data['preco_min'] = (int)str_replace(',', '', min($preco_aux));
+        $data['preco_max'] = (int)str_replace(',', '', max($preco_aux));
 
         $ids = array_unique($ids);
 
