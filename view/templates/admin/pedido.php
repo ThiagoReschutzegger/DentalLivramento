@@ -53,12 +53,12 @@
               <tbody>
                 <?php foreach($pedido[1] as $k): ?>
                   <tr>
+                    <td><?php echo $k["produto"]->getBarcode(); ?></td>
                     <td>
                       <?php echo $k["produto"]->getNome(); ?>
                       <br>
                       <i class='fa fa-arrow-right'></i>&nbsp<?php echo $k["produto"]->getEspecificacao(); ?>
                     </td>
-                    <td><?php echo $k["produto"]->getBarcode(); ?></td>
                     <td><?php echo $k["quantidade"] ?></td>
                     <td><?php echo $k["produto"]->getPreco() ?></td>
                     <td><?php echo $k["quantidade"]*$k["produto"]->getPreco() ?></td>
@@ -87,7 +87,7 @@
           <h3 class="h4"><span style="color:white">Pedidos Conclusos</span></h3>
         </div>
 
-        <?php foreach($data['pedidop'] as $pedido): ?>
+        <?php foreach($data['pedidoc'] as $pedido): ?>
         <div class="card-body" style="margin-bottom:-20px;overflow:hidden;">
           <div class="card-header d-flex align-items-center" style="background-color:#b2bec3;overflow:hidden;">
             <h3 class="h4"><span style="color:white">Pedido feito dia &nbsp<?php echo date("d/m/Y", strtotime($pedido[0]->getData()));?>&nbsp por &nbsp<?php echo $pedido[0]->getNome();?></span></h3>

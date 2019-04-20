@@ -368,22 +368,29 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
             foreach ($linhas as $row){
               $divisao = explode("|",$row);
 
-              $barcode = $divisao[0];
-              $preco = $divisao[1];
-              $estoque = $divisao[2];
+              $codigo = $divisao[0];
 
-              $verificacao = $this->model->updateByTxt($barcode,$preco,$estoque,$barcode_array);
+              if($codigo === 'P'){
+                $barcode = $divisao[3];
+                $preco = $divisao[4];
+                $estoque = $divisao[7];
 
-              if($verificacao[0] == 1){
-                array_push($barcode_certo, $verificacao[1]);
-              }elseif($verificacao[0] == 3){
-                array_push($barcode_errado, $verificacao[1]);
-              }elseif($verificacao[0] == 2){
-                array_push($barcode_atualizado, $verificacao[1]);
+                $preco = ltrim($preco, '0');
+                $preco = (int)$preco;
+                $preco = number_format($preco/100,2,'.','');
+
+                $verificacao = $this->model->updateByTxt($barcode,$preco,$estoque,$barcode_array);
+
+                if($verificacao[0] == 1){
+                  array_push($barcode_certo, $verificacao[1]);
+                }elseif($verificacao[0] == 3){
+                  array_push($barcode_errado, $verificacao[1]);
+                }elseif($verificacao[0] == 2){
+                  array_push($barcode_atualizado, $verificacao[1]);
+                }
               }
+              $data['arrays'] = array($barcode_certo,$barcode_errado);
             }
-            $data['arrays'] = array($barcode_certo,$barcode_errado);
-
             //echo '<pre>';var_dump($barcode_certo);echo '</pre><br>';
             //echo '<pre>';var_dump($barcode_errado);echo '</pre>';
             //echo '<pre>';var_dump($barcode_atualizado);echo '</pre>';die;
