@@ -177,8 +177,7 @@ $( '#price-amount-2' ).val( 'R$' + $( '#price-range' ).slider( 'values', 1 ));
       <div class="media flex-wrap">
         <div class="media-body">
           <div class="row">
-          <div class="modalBig" style="width:25% !important;"></div>
-          <div class="sideBar modalBar">
+          <div class="sideBar modalBar" style="padding-top: 22px;">
             <div class="panel panel-default priceRange">
               <div class="panel-heading">Filtrar por preço</div>
               <div class="panel-body clearfix" style="height: 115px;">
@@ -197,7 +196,6 @@ $( '#price-amount-2' ).val( 'R$' + $( '#price-range' ).slider( 'values', 1 ));
         </div>
 
         <div class="row">
-          <div class="modalBig" style="width:25% !important;"></div>
           <div class="sideBar modalBar">
             <div class="panel panel-default priceRange">
               <div class="panel-heading">Filtrar por Marca</div>

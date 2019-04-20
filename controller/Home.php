@@ -70,7 +70,7 @@ class Home extends Controller{
         $estoque_aux = [];
         $id_aux = [];
         foreach ($data['packproduto'] as $produtos){
-          $preco_aux[] = number_format((float)$produtos->getPreco(), 2);
+          $preco_aux[] = (float)$produtos->getPreco();
           $estoque_aux[] = $produtos->getEstoque();
           $id_aux[] = $produtos->getId_produto();
         }
@@ -82,6 +82,8 @@ class Home extends Controller{
           $data['estoque-msg'] = 'color: #eabf38; border: 1px solid #eabf38;">Poucas unidades';
         }else if($estoque_total < 26){
           $data['estoque-msg'] = 'color: #f55c5d; border: 1px solid #f55c5d;">Últimas unidades';
+        }else if($estoque_total == 0){
+          $data['estoque-msg'] = 'color: #f55c5d; border: 1px solid #f55c5d;">Sem estoque';
         }
         $cart = [];
         $valor_carrinho = 0;

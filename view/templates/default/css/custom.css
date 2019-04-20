@@ -34,9 +34,7 @@
 @media (max-width: 700px) {
   .modalBar{
     width: 100% !important;
-  }
-  .modalBig{
-    display: none;
+    padding-top: 0px;
   }
   .modal-body{
     padding-right: 15px !important;
@@ -71,5 +69,5 @@ input:invalid{
 }
 
 .modalBar{
-  width: 50%;
+  width: 100%;
 }
