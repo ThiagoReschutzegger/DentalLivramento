@@ -76,11 +76,9 @@
                 </ul>
               </div>
             </div>
-            <div class="checkBtnArea">
-              <a href="<?php echo $this->base_url; ?>Home/step1" style="background-color:coral !important;border:coral !important;" class="btn btn-primary btn-default">checkout<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
-
-              <a href="<?php echo $this->base_url; ?>Home/descartar" style="background-color:#cf000f !important;border:#cf000f !important;margin-right:10px;" class="btn btn-primary btn-default">descartar<i class="fa fa-trash" aria-hidden="true"></i></a>
-
+            <div class="checkBtnArea text-right">
+              <a href="<?php echo $this->base_url; ?>Home/descartar" style="letter-spacing: 1px; font-weight: 700;" class="btn btn-danger-outlined btn-default">descartar&nbsp;&nbsp;<i class="fa fa-trash" aria-hidden="true"></i></a>
+              <a href="<?php echo $this->base_url; ?>Home/step1" style="letter-spacing: 1px; font-weight: 700;" class="btn btn-primary-outlined btn-default">checkout&nbsp;&nbsp;<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
             </div>
           </form>
         </div>

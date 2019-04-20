@@ -6117,13 +6117,13 @@ body.bodyColor.container {
 
 @media (min-width: 992px) {
   .quick-view .modal-dialog, .quick-view-drone .modal-dialog {
-    max-width: 950px;
+    max-width: 500px;
   }
 }
 
 @media (min-width: 1200px) {
   .quick-view .modal-dialog, .quick-view-drone .modal-dialog {
-    max-width: 1030px;
+    max-width: 500px;
   }
 }
 

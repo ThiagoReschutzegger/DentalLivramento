@@ -97,7 +97,7 @@ endforeach;
                   <h2><?php echo $produto->getNome(); ?></h2>
                   <h3 style="margin-bottom:10px;">
                     <small>a partir de: </small>
-                    R$<?php echo $data['preco-ate']; ?>
+                    R$<?php echo number_format((float)$data['preco-ate'], 2); ?>
                   </h3>
                   <span style="
                   background-color: transparent;
@@ -134,16 +134,21 @@ endforeach;
                              $var = false;
                              continue;
                           }
+                          //if($produtos->getEstoque()==0) continue;
                         ?>
                           <tr>
                             <td style="display: none;"></td>
-                  					<td><b>R$<span style="margin:2px"><?php echo $produtos->getPreco(); ?></span></b></td>
+                  					<td><b>R$<span style="margin:2px"><?php echo number_format((float)$produtos->getPreco(), 2) ?></span></b></td>
                   					<td><?php echo $produtos->getEspecificacao(); ?></td>
+                            <?php if ($produtos->getEstoque()==0): ?>
+                              <td>Indisponível no momento!</td>
+                            <?php else: ?>
                             <td class="count-input">
                               <a class="incr-btn" data-action="decrease" href="#"><i class="fa fa-minus"></i></a>
                                 <input class="quantity" name="espec<?php echo $produtos->getId_produto(); ?>" style="margin:0;" type="number" value="0" placeholder="Qtd." onkeypress="return isNumberKey(event)">
                               <a class="incr-btn" data-action="increase" href="#"><i class="fa fa-plus"></i></a>
                             </td>
+                            <?php endif;?>
                   				</tr>
                         <?php endforeach; ?>
                         <?php
