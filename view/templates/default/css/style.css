@@ -5283,7 +5283,7 @@ body.bodyColor.container {
 
 .footer .footerLink ul li {
   color: #acacac;
-  font-size: 12px;
+  font-size: 13px;
   line-height: 20px;
   padding-left: 5px;
   padding-right: 5px;
@@ -5502,7 +5502,7 @@ body.bodyColor.container {
 
 @media (min-width: 768px) {
   .copyRight p {
-    text-align: left;
+    text-align: right;
   }
 }
 
@@ -5524,7 +5524,7 @@ body.bodyColor.container {
 
 @media (min-width: 768px) {
   .copyRight ul {
-    text-align: right;
+    text-align: left;
   }
 }
 

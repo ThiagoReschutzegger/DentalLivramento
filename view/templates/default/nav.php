@@ -148,7 +148,7 @@
                   </ul>
                 </li>
                 <li class="nav-item">
-                  <a href="<?php echo $this->base_url; ?>" class="nav-link" role="button" aria-haspopup="true">Contato</a>
+                  <a href="#contato" class="nav-link" role="button" aria-haspopup="true">Contato</a>
                 </li>
               </ul>
             </div><!-- /.navbar-collapse -->
