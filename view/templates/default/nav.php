@@ -6,6 +6,15 @@
     }
   }
 ?>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $( "a.scrollLink" ).click(function( event ) {
+        event.preventDefault();
+        $("html, body").animate({ scrollTop: $($(this).attr("href")).offset().top }, 500);
+    });
+});
+</script>
   <body class="body-wrapper version1">
 
     <!-- Preloader -->
@@ -148,7 +157,7 @@
                   </ul>
                 </li>
                 <li class="nav-item">
-                  <a href="#contato" class="nav-link" role="button" aria-haspopup="true">Contato</a>
+                  <a href="#contato" class="nav-link scrollLink" role="button" aria-haspopup="true">Contato</a>
                 </li>
               </ul>
             </div><!-- /.navbar-collapse -->

@@ -62,7 +62,8 @@ class Controller {
                         if (method_exists($class, 'index')) {
                             $class->index();
                         } else {
-                            $this->view->index();
+                          $class = new $this->config->defaultClass;
+                          $class->error404();
                         }
                     }
                 }
@@ -71,7 +72,7 @@ class Controller {
 
         if (!$class) {
             $class = new $this->config->defaultClass;
-            $class->index();
+            $class->error404();
         }
     }
 
