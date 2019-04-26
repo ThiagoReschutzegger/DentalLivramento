@@ -112,4 +112,16 @@ class Loja extends Controller{
         $this->view->load('footer');
     }
 
+    public function search(){
+      $data['estilo'] = $this->model->getEstiloAtual();
+      $data['grupo'] = $this->modelGrupo->getGrupo();
+      $data['categoria'] = $this->modelCategoria->getCategoria();
+      $data['itens'] = $this->father->getList();
+      
+      $this->view->load('header',$data);
+      $this->view->load('nav',$data);
+      $this->view->load('pesquisa', $data);
+      $this->view->load('footer');
+    }
+
 }

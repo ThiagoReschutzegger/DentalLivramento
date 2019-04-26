@@ -54,6 +54,19 @@ class Home extends Controller{
 
     }
 
+    public function error404(){
+        $data['estilo'] = $this->model->getEstiloAtual();
+        $data['categoria'] = $this->modelCategoria->getCategoria();
+        $data['grupo'] = $this->modelGrupo->getGrupo();
+        $data['itens'] = $this->getList();
+
+        $this->view->load('header',$data);
+        $this->view->load('nav',$data);
+        $this->view->load('404', $data);
+        $this->view->load('footer');
+
+    }
+
     public function viewProduto($id){ //Edu
         $data['estilo'] = $this->model->getEstiloAtual();
         $data['packproduto'] = $this->modelPackproduto->getPackprodutoBySubgrupo($id);
