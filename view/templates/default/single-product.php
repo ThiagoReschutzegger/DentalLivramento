@@ -145,7 +145,7 @@ endforeach;
                             <?php else: ?>
                             <td class="count-input">
                               <a class="incr-btn" data-action="decrease" href="#"><i class="fa fa-minus"></i></a>
-                                <input class="quantity" name="espec<?php echo $produtos->getId_produto(); ?>" style="margin:0;" type="number" value="0" placeholder="Qtd." onkeypress="return isNumberKey(event)">
+                                <input class="quantity" name="espec<?php echo $produtos->getId_produto(); ?>" style="margin:0;" type="number" max="<?php echo $produtos->getEstoque()?>" value="0" placeholder="Qtd." onkeypress="return isNumberKey(event)">
                               <a class="incr-btn" data-action="increase" href="#"><i class="fa fa-plus"></i></a>
                             </td>
                             <?php endif;?>
