@@ -125,7 +125,7 @@ $( '#price-amount-2' ).val( 'R$' + $( '#price-range' ).slider( 'values', 1 ));
               <option value="alfa">Ordem Alfabética</option>
               <option value="maior">Preço Maior</option>
               <option value="menor">Preço Menor</option>
-            </select><input class="btn btn-primary" type="submit" name="filter1" value="Go!" style="height: 35px; line-height: 0px;"/>
+            </select><input class="btn btn-primary" type="submit" name="filter2" value="Go!" style="height: 35px; line-height: 0px;"/>
           </div>
           </div>
 

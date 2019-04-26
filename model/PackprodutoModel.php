@@ -73,18 +73,18 @@ class PackprodutoModel extends Model {
 
       $grupo_str = "AND subgrupo.id_grupo = ".$grupo_id." ";
 
-      if($ordem == "alfa"){
-        $ordem_str = "ORDER BY subgrupo.nome asc";
-      }else if ($ordem == "maior"){
-        $ordem_str = "ORDER BY produto.preco desc";
-      }else if ($ordem == "menor"){
-        $ordem_str = "ORDER BY produto.preco asc";
-      }else if ($ordem == "new"){
-        $ordem_str = "ORDER BY subgrupo.id_subgrupo desc";
-      }else{
-        $ordem_str = "";
-      }
-
+      // if($ordem == "alfa"){
+      //   $ordem_str = "ORDER BY subgrupo.nome asc";
+      // }else if ($ordem == "maior"){
+      //   $ordem_str = "ORDER BY produto.preco desc";
+      // }else if ($ordem == "menor"){
+      //   $ordem_str = "ORDER BY produto.preco asc";
+      // }else if ($ordem == "new"){
+      //   $ordem_str = "ORDER BY subgrupo.id_subgrupo desc";
+      // }else{
+      //   $ordem_str = "";
+      // }
+      $ordem_str = "";
 
 
       $sql = $base_str.$preco_str.$marca_str.$grupo_str.$ordem_str;

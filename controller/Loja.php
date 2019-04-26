@@ -69,6 +69,23 @@ class Loja extends Controller{
           $data['packproduto'] = $this->modelPackproduto->getPackprodutoByGrupo($id_grupo);
         }
 
+        if (filter_input(INPUT_POST, 'filter2')) {
+          if(!empty($data['packproduto'])){
+            $ordem = filter_input(INPUT_POST, 'guiest_id1', FILTER_SANITIZE_STRING);
+
+            if($ordem == "alfa"){
+              // $ordem_str = "ORDER BY subgrupo.nome asc";
+              echo "<pre>";var_dump($data['packproduto']);die;
+            }else if ($ordem == "maior"){
+              $ordem_str = "ORDER BY produto.preco desc";
+            }else if ($ordem == "menor"){
+              $ordem_str = "ORDER BY produto.preco asc";
+            }else if ($ordem == "new"){
+              $ordem_str = "ORDER BY subgrupo.id_subgrupo desc";
+            }
+          }
+        }
+
         if(empty($data['packproduto'])){ //caso não tenha nenhum prod no grupo, gambiarra.com
         $data['packproduto'] = 'password';
         $ids[] = 0;
@@ -117,7 +134,7 @@ class Loja extends Controller{
       $data['grupo'] = $this->modelGrupo->getGrupo();
       $data['categoria'] = $this->modelCategoria->getCategoria();
       $data['itens'] = $this->father->getList();
-      
+
       $this->view->load('header',$data);
       $this->view->load('nav',$data);
       $this->view->load('pesquisa', $data);
