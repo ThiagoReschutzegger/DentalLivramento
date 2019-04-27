@@ -2,7 +2,7 @@
     <!-- Page Header-->
     <header class="page-header">
         <div class="container-fluid">
-            <h2 class="no-margin-bottom">Destaque Admin</h2>
+            <h2 class="no-margin-bottom">Administrar Destaques</h2>
         </div>
     </header>
 <section class="dashboard-counts no-padding-bottom">
@@ -10,7 +10,7 @@
   <div class="col-lg-12">
       <div class="card">
         <div class="card-header d-flex align-items-center">
-          <h3 class="h4">Destaque a categoria para o 2º Slider</h3>
+          <h3 class="h4">Destaque o grupo para o 2º Slider</h3>
         </div>
         <div class="card-body">
           <div class="table-responsive">
@@ -19,7 +19,7 @@
                 <tr>
                   <th>Id</th>
                   <th>Nome</th>
-                  <th>Categoria Destacada</th>
+                  <th>Grupo Destacado</th>
                   <th>Ações</th>
                 </tr>
               </thead>
@@ -29,9 +29,9 @@
                   <th scope="row"><?php echo $destaque->getId_destaque(); ?></th>
                   <td><?php echo $destaque->getNome(); ?></td>
                   <td><?php
-                        foreach ($data['categoria'] as $categoria):
-                            if($destaque->getId_categoria() == $categoria->getId_categoria()){
-                                echo $categoria->getNome();
+                        foreach ($data['grupo'] as $grupo):
+                            if($destaque->getId_grupo() == $grupo->getId_grupo()){
+                                echo $grupo->getNome();
                             }
                         endforeach;
                       ?></td>

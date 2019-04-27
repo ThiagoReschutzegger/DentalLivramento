@@ -416,7 +416,7 @@
 
     <script>
     function linkSlider(id) {
-        window.location.href=<?php echo $this->base_url; ?>+'Home/viewCategoria/'+id;
+        window.location.href=<?php echo $this->base_url; ?>+'Loja/view/'+id;
     };
     </script>
     <!-- BANNER -->
@@ -427,10 +427,10 @@
             <div class="fullscreenbanner">
               <ul>
                 <?php foreach ($data['destaque'] as $destaque):
-                 foreach ($data['categoria'] as $categoria):
-                    if($destaque->getId_categoria() == $categoria->getId_categoria()){
+                 foreach ($data['grupo'] as $grupo):
+                    if($destaque->getId_grupo() == $grupo->getId_grupo()){
                       echo "
-                      <li data-transition='slidehorizontal' data-slotamount='5 data-masterspeed='700' data-title='Slide 1' onclick='linkSlider(".$destaque->getId_categoria().")' >
+                      <li data-transition='slidehorizontal' data-slotamount='5' data-masterspeed='700' data-title='Slide 1' onclick='linkSlider(".$destaque->getId_grupo().")' >
 
                         <img src='".$destaque->getImagem()."' alt='slidebg1' data-bgfit='cover' data-bgposition='center center' data-bgrepeat='no-repeat'>
                         <div class='slider-caption slider-captionV4'>

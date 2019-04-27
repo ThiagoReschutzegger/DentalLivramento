@@ -12,6 +12,7 @@ class Home extends Controller{
     protected $modelPackproduto;
     protected $modelCarrinho;
     protected $modelPedido;
+    protected $modelMensagem;
     protected $carrinho;
     protected $login;
 
@@ -29,6 +30,7 @@ class Home extends Controller{
         $this->modelPedido = new PedidoModel();
         $this->modelPackproduto = new PackprodutoModel();
         $this->modelItemcarrinho = new ItemcarrinhoModel();
+        $this->modelMensagem = new MensagemModel();
         $this->login = new Login();
         // session_destroy();die;
         if(isset($_SESSION['carrinho'])){
@@ -224,6 +226,44 @@ class Home extends Controller{
         $this->view->load('footer');
     }
 
+    public function addMensagem() { //Edu
+      if (filter_input(INPUT_POST, 'enviar-msg')) {
+        $email = filter_input(INPUT_POST, 'email-msg', FILTER_SANITIZE_STRING);
+        $msg = filter_input(INPUT_POST, 'mensagem-msg', FILTER_SANITIZE_STRING);
+        date_default_timezone_set('America/Sao_Paulo');
+        $mensagem = new Mensagem(null,$email,$msg,date("Y-m-d"));
+        if ($this->modelMensagem->insertMensagem($mensagem)) {
+          $this->MensagemEnviada();
+          return true;
+        }else{
+          $this->MensagemErro();
+          return true;
+        }
+      }
+    }
+    public function MensagemEnviada(){ //Edu
+        $data['estilo'] = $this->model->getEstiloAtual();
+        $data['categoria'] = $this->modelCategoria->getCategoria();
+        $data['grupo'] = $this->modelGrupo->getGrupo();
+        $data['itens'] = $this->getList();
+
+        $this->view->load('header',$data);
+        $this->view->load('nav',$data);
+        $this->view->load('mensagem-ok', $data);
+        $this->view->load('footer');
+    }
+    public function MensagemErro(){ //Edu
+        $data['estilo'] = $this->model->getEstiloAtual();
+        $data['categoria'] = $this->modelCategoria->getCategoria();
+        $data['grupo'] = $this->modelGrupo->getGrupo();
+        $data['itens'] = $this->getList();
+
+        $this->view->load('header',$data);
+        $this->view->load('nav',$data);
+        $this->view->load('mensagem-erro', $data);
+        $this->view->load('footer');
+    }
+
     public function descartar(){ //Edu
       session_destroy();
       header('location:' . $this->config->base_url . 'Home/viewCart');
@@ -258,7 +298,7 @@ class Home extends Controller{
         }
 
 
-
+        date_default_timezone_set('America/Sao_Paulo');
         $pedido = new Pedido(null,$array[0],$array[1],$array[2],$array[3],$array[4],$array[5],$array[6],$array[7],$count,date("Y-m-d"),"NAO ENTREGUE",$idcarrinho);
 
 

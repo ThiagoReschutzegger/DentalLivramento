@@ -30,7 +30,7 @@
         </div>
 
         <div class="form-group row">
-          <label class="col-sm-3 form-control-label text-right">Selecione a Categoria:</label>
+          <label class="col-sm-3 form-control-label text-right">Selecione o Grupo:</label>
           <div class="col-sm-8">
             <div class="input-group">
                 <div class="input-group-prepend">
@@ -38,13 +38,13 @@
                   <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">
                     <a disabled="true" class="dropdown-item">Selecionar</a>
                     <div class="dropdown-divider"></div>
-                    <a href="<?php echo $this->base_url; ?>CategoriaAdmin/addCategoria" target="_blank" class="dropdown-item">Adicionar</a>
+                    <a href="<?php echo $this->base_url; ?>GrupoAdmin/addGrupo" target="_blank" class="dropdown-item">Adicionar</a>
                   </div>
                 </div>
-            <select class="form-control" name="id_categoria">
+            <select class="form-control" name="id_grupo">
               <option selected="selected" disabled="true">Selecione:</option>
-              <?php foreach( $data['categoria'] as $categoria ): ?>
-                  <option value="<?php echo $categoria->getId_categoria(); ?>" ><?php echo $categoria->getNome(); ?></option>
+              <?php foreach( $data['grupo'] as $grupo ): ?>
+                  <option value="<?php echo $grupo->getId_grupo(); ?>" ><?php echo $grupo->getNome(); ?></option>
               <?php endforeach; ?>
             </select>
           </div>

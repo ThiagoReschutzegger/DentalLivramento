@@ -7,12 +7,12 @@ class DestaqueAdmin extends Admin {
     public function __construct() {
         parent::__construct();
         $this->model = new DestaqueModel();
-        $this->modelCategoria = new CategoriaModel();
+        $this->modelGrupo = new GrupoModel();
     }
 
     public function index() {
       $data['destaque'] = $this->model->getDestaque();
-      $data['categoria'] = $this->modelCategoria->getCategoria();
+      $data['grupo'] = $this->modelGrupo->getGrupo();
       $this->view->load('header');
       $this->view->load('nav');
       $this->view->load('destaque', $data);
@@ -24,10 +24,10 @@ class DestaqueAdmin extends Admin {
       if (filter_input(INPUT_POST, 'add')) {
         $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
         $imagem = filter_input(INPUT_POST, 'imagem', FILTER_SANITIZE_STRING);
-        $id_categoria = filter_input(INPUT_POST, 'id_categoria', FILTER_SANITIZE_STRING);
+        $id_grupo = filter_input(INPUT_POST, 'id_grupo', FILTER_SANITIZE_STRING);
 
-            if ($nome && $imagem && $id_categoria) {
-                $destaque = new Destaque(null,$nome, $imagem, $id_categoria);
+            if ($nome && $imagem && $id_grupo) {
+                $destaque = new Destaque(null,$nome, $imagem, $id_grupo);
                 if ($this->model->insertDestaque($destaque)) {
                       $data['msg'] = 'Adicionado com Sucesso!';
                 } else {
@@ -38,7 +38,7 @@ class DestaqueAdmin extends Admin {
 
             }
         }
-      $data['categoria'] = $this->modelCategoria->getCategoria();
+      $data['grupo'] = $this->modelGrupo->getGrupo();
       $this->view->load('header');
       $this->view->load('nav');
       $this->view->load('add-destaque', $data);
@@ -64,10 +64,10 @@ class DestaqueAdmin extends Admin {
         $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_STRING);
         $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
         $imagem = filter_input(INPUT_POST, 'imagem', FILTER_SANITIZE_STRING);
-        $id_categoria = filter_input(INPUT_POST, 'id_categoria', FILTER_SANITIZE_STRING);
+        $id_grupo = filter_input(INPUT_POST, 'id_grupo', FILTER_SANITIZE_STRING);
 
-        if ($id && $nome && $imagem && $id_categoria) {
-            $destaque = new Destaque($id,$nome,$imagem,$id_categoria);
+        if ($id && $nome && $imagem && $id_grupo) {
+            $destaque = new Destaque($id,$nome,$imagem,$id_grupo);
             if ($this->model->updateDestaque($destaque)) {
                 $this->index();
                 return true;
@@ -80,7 +80,7 @@ class DestaqueAdmin extends Admin {
         }
       }
       $data['destaque'] = $this->model->getDestaqueById($ident);
-      $data['categoria'] = $this->modelCategoria->getCategoria();
+      $data['grupo'] = $this->modelGrupo->getGrupo();
       $this->view->load('header');
       $this->view->load('nav');
       $this->view->load('upd-destaque', $data);

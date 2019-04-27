@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 10-Abr-2019 às 23:21
+-- Generation Time: 27-Abr-2019 às 03:09
 -- Versão do servidor: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
@@ -81,7 +81,9 @@ INSERT INTO `carrinho` (`id_carrinho`) VALUES
 (52),
 (53),
 (54),
-(55);
+(55),
+(56),
+(57);
 
 -- --------------------------------------------------------
 
@@ -115,16 +117,16 @@ CREATE TABLE `destaque` (
   `id_destaque` int(11) NOT NULL,
   `nome` varchar(100) NOT NULL,
   `imagem` varchar(5000) NOT NULL,
-  `id_categoria` int(11) NOT NULL
+  `id_grupo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `destaque`
 --
 
-INSERT INTO `destaque` (`id_destaque`, `nome`, `imagem`, `id_categoria`) VALUES
-(1, 'Promoção Especial Dia dos Pais Dental', 'https://thirdforcenews.org.uk/images/uploads/articles/214331/web_dad_helping_children_do_homework.jpg', 6),
-(2, 'Produtos para exército', 'https://cdn1.theweek.co.uk/sites/theweek/files/2017/12/bw-british_army_cut.jpg', 7);
+INSERT INTO `destaque` (`id_destaque`, `nome`, `imagem`, `id_grupo`) VALUES
+(1, 'Promoção Especial Dia dos Pais Dental', 'https://thirdforcenews.org.uk/images/uploads/articles/214331/web_dad_helping_children_do_homework.jpg', 15),
+(3, 'Promo teste surpresa', 'https://lh3.googleusercontent.com/JfmPqZCVQmMHvNTh5Wt0c_cnB2dR-j8vT3ryGvCgRkrWY3c5UJjRB70IgOPVEKDv-8cHaYzvCSZDhTpJXxKkAYtR6QINe0LgdT8sXIcabyAeseOqq3ly6EAsjinKrgUWH6BUTqayZrczVfMnGmGBIjVLq8V75qgBFvHEl8Q2oyrzo4odxJJjlq92M5HrcV318ZPjQ662CiP7lca_g769POhUyxHw4e5blbD6WskFljtkjA14x3PKPGrGCcPD4bbg44x1DCOAItXknHbpV-wESEiHJbaPU9Hlo1FcOK2o-2upHg3Cy96NjBmVSzaPVLTb6O22KLmJXBoxMXYTbO53YPVduOFnJy0dGiOmSrDIutfoB21l0yMxPBtbDYigbm1rHUcvfQHE-ciw5qLXAwb9K1yqz0warp_HtcL3CEzi_SRSQ286Yo7UZcccDAlB2buwK9o3IbYuDSC7hP3yukSFmb7nRGBFqjg5chBTVSrLBKokeOuYIuvHbbzzfGaiwifPdqp6bQy7DGJkMR0WoVFefR5eN4cH9f9DZcbzNRe1bwIxoC5K1HaR9mx9p0uoF97BS9h4QT4jBM12rFxXty72xrS2nTJ9MepwKt-FqqcWK1x5qIC-Mt-c3-cijmiQ2QkWi1m30uXtPUxyD0b5lZHecl8=w956-h500-no', 30);
 
 -- --------------------------------------------------------
 
@@ -181,7 +183,7 @@ INSERT INTO `grupo` (`id_grupo`, `nome`, `id_categoria`) VALUES
 (27, 'Arcos de Niti Superelástico', 7),
 (28, 'Arcos de Niti Termoativado', 7),
 (29, 'Arcos Estéticos', 7),
-(30, 'Bandas Inferiores com Tubos', 7);
+(30, 'Bandas Inferiores com Tubos', 8);
 
 -- --------------------------------------------------------
 
@@ -267,7 +269,10 @@ INSERT INTO `itemcarrinho` (`id_itemcarrinho`, `id_produto`, `quantidade`, `id_c
 (64, 3, 6, 54),
 (65, 4, 3, 54),
 (66, 8, 4, 55),
-(67, 4, 3, 55);
+(67, 4, 3, 55),
+(68, 8, 1, 56),
+(69, 2, 1, 56),
+(70, 3, 1, 57);
 
 -- --------------------------------------------------------
 
@@ -289,6 +294,26 @@ INSERT INTO `marca` (`id_marca`, `nome`, `imagem`) VALUES
 (1, 'Marca de Teste', 'https://vandal-us.s3.amazonaws.com/spree/products/49846/original/open-uri20181203-14-1jczs.jpg'),
 (2, 'Puma', 'http://pluspng.com/img-png/puma-png-puma-png-240.png'),
 (3, 'qwert', 'https://logodownload.org/wp-content/uploads/2014/04/nike-logo-1.png');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `mensagem`
+--
+
+CREATE TABLE `mensagem` (
+  `id_mensagem` int(11) NOT NULL,
+  `email` varchar(200) NOT NULL,
+  `mensagem` text NOT NULL,
+  `data` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `mensagem`
+--
+
+INSERT INTO `mensagem` (`id_mensagem`, `email`, `mensagem`, `data`) VALUES
+(3, 'dudumaciel2011@hotmail.com', 'que top boi', '2019-04-26');
 
 -- --------------------------------------------------------
 
@@ -318,7 +343,9 @@ CREATE TABLE `pedido` (
 
 INSERT INTO `pedido` (`id_pedido`, `nome`, `endereco`, `cep`, `cidade`, `uf`, `telefone`, `email`, `mensagem`, `precototal`, `data`, `status`, `id_carrinho`) VALUES
 (1, 'Thiago Reschützegger', '', '97574-240', '', 'Am', '(23) 56435-4656', 'webforntier@gmail.com', '', 455.4, '2019-04-10', 'NAO ENTREGUE', 53),
-(3, 'Eduardo Maciel', 'mano seila', '97574-273', 'Santana do Livramento', 'Al', '(12) 32449-8989', 'webforntier@gmail.com', 'haha mt bom o site', 491.8, '2019-04-10', 'NAO ENTREGUE', 55);
+(3, 'Eduardo Maciel', 'mano seila', '97574-273', 'Santana do Livramento', 'Al', '(12) 32449-8989', 'webforntier@gmail.com', 'haha mt bom o site', 491.8, '2019-04-10', 'ENTREGUE', 55),
+(4, 'qwert', 'rya', '97575-160', 'Sant\'Ana do Livramento', 'Ri', '(12) 31231-2312', 'dudumaciel2011@hotmail.com', 'oiiiiii', 124.9, '2019-04-11', 'ENTREGUE', 56),
+(5, 'edu', 'rua tal', '97575-160', 'Sant\'Ana do Livramento', 'Ri', '(55) 98468-1929', 'dudumaciel2011@hotmail.com', 'no aguardo da minha compra!', 50.6, '2019-04-18', 'NAO ENTREGUE', 57);
 
 -- --------------------------------------------------------
 
@@ -342,8 +369,8 @@ CREATE TABLE `produto` (
 INSERT INTO `produto` (`id_produto`, `barcode`, `preco`, `estoque`, `especificacao`, `id_subgrupo`) VALUES
 (1, '33287500', '57.90', 38, 'Azul de Tamanho numero 25 e Superior', 1),
 (2, '44445555', '39.90', 34, 'Azul e tamanho 12', 2),
-(3, '43682337', '50.60', 23, 'Amarelo com bolinhas marrons', 3),
-(4, '43682338', '50.60', 31, 'Azul com bolinhas marrons', 3),
+(3, '43682337', '1253.00', 23, 'Amarelo com bolinhas marrons', 3),
+(4, '43682338', '50.60', 0, 'Azul com bolinhas marrons', 3),
 (5, '43682339', '40.60', 34, 'Verde com bolinhas pretas', 3),
 (6, '436576854', '85.00', 56, 'Alicate 053 Meia Cana', 4),
 (7, '2354326', '85.00', 85, 'ALICATE 001 NANCE', 4),
@@ -462,6 +489,12 @@ ALTER TABLE `marca`
   ADD PRIMARY KEY (`id_marca`);
 
 --
+-- Indexes for table `mensagem`
+--
+ALTER TABLE `mensagem`
+  ADD PRIMARY KEY (`id_mensagem`);
+
+--
 -- Indexes for table `pedido`
 --
 ALTER TABLE `pedido`
@@ -504,7 +537,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT for table `carrinho`
 --
 ALTER TABLE `carrinho`
-  MODIFY `id_carrinho` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id_carrinho` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 --
 -- AUTO_INCREMENT for table `categoria`
 --
@@ -514,7 +547,7 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT for table `destaque`
 --
 ALTER TABLE `destaque`
-  MODIFY `id_destaque` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_destaque` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `estilo`
 --
@@ -529,17 +562,22 @@ ALTER TABLE `grupo`
 -- AUTO_INCREMENT for table `itemcarrinho`
 --
 ALTER TABLE `itemcarrinho`
-  MODIFY `id_itemcarrinho` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `id_itemcarrinho` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 --
 -- AUTO_INCREMENT for table `marca`
 --
 ALTER TABLE `marca`
   MODIFY `id_marca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
+-- AUTO_INCREMENT for table `mensagem`
+--
+ALTER TABLE `mensagem`
+  MODIFY `id_mensagem` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
 -- AUTO_INCREMENT for table `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `produto`
 --

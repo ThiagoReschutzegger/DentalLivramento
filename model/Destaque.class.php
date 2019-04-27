@@ -5,13 +5,13 @@ class Destaque {
     public $id_destaque;
     public $nome;
     public $imagem;
-    public $id_categoria;
+    public $id_grupo;
 
-    function __construct($id_destaque, $nome, $imagem, $id_categoria) {
+    function __construct($id_destaque, $nome, $imagem, $id_grupo) {
         $this->id_destaque = $id_destaque;
         $this->nome = $nome;
         $this->imagem = $imagem;
-        $this->id_categoria = $id_categoria;
+        $this->id_grupo = $id_grupo;
     }
 
     function getId_destaque() {
@@ -26,8 +26,8 @@ class Destaque {
         return $this->imagem;
     }
 
-    function getId_categoria() {
-        return $this->id_categoria;
+    function getId_grupo() {
+        return $this->id_grupo;
     }
 
     function setId_destaque($id_destaque) {
@@ -42,8 +42,8 @@ class Destaque {
         $this->imagem = $imagem;
     }
 
-    function setId_categoria($id_categoria) {
-        $this->id_categoria = $id_categoria;
+    function setId_grupo($id_grupo) {
+        $this->id_grupo = $id_grupo;
     }
 
 }

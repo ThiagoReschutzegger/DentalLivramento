@@ -59,21 +59,25 @@ class Controller {
                             $class->$method();
                         }
                     } else {
-                        if (method_exists($class, 'index')) {
-                            $class->index();
-                        } else {
+                        if($method == null){
+                          $class->index();
+                        }else{
                           $class = new $this->config->defaultClass;
                           $class->error404();
                         }
                     }
                 }
+            }else{
+              $class = new $this->config->defaultClass;
+              $class->error404();
             }
         }
 
         if (!$class) {
-            $class = new $this->config->defaultClass;
-            $class->error404();
+          $class = new $this->config->defaultClass;
+          $class->index();
         }
+
     }
 
     public function reload(){
