@@ -71,8 +71,8 @@
                                               <tr>
                                                   <td><center><img height="100" src="<?php echo $produto->getImagem(); ?>"></center></td>
                                           <td><?php echo $produto->getBarcode(); ?></td>
-                                          <td><?php echo substr($produto->getNome(), 0, 45) . "..."; ?></td>
-                                          <td><?php echo substr($produto->getEspecificacao(), 0, 45) . "..."; ?></td>
+                                          <td><?php echo mb_substr($produto->getNome(), 0, 45, 'UTF-8') . "..."; ?></td>
+                                          <td><?php echo mb_substr($produto->getEspecificacao(), 0, 45, 'UTF-8') . "..."; ?></td>
                                           <td>
                                           <center><a href="<?php echo $this->base_url ?>ProdutoAdmin/viewProduto/<?php echo $produto->getId_produto(); ?>"><button type="button" class="btn btn-secondary btn-block"><i class="fa fa-eye"></i></button></a></center>
                                           </td>
@@ -106,7 +106,7 @@
                                               <tr>
                                                   <td><center><img height="100" src="<?php echo $produto->getImagem(); ?>"></center></td>
                                           <td><?php echo $produto->getNome(); ?></td>
-                                          <td><?php echo substr($produto->getDescricao(), 0, 45) . "<br>".substr($produto->getDescricao(), 46, 90)."..."; ?></td>
+                                          <td><?php echo mb_substr($produto->getDescricao(), 0, 45, 'UTF-8') . "<br>".mb_substr($produto->getDescricao(), 46, 90, 'UTF-8')."..."; ?></td>
                                           <td><?php echo $produto->getId_marca(); ?></td>
                                           <td>
                                           <center><a href="<?php echo $this->base_url ?>ProdutoAdmin/viewSubOf/<?php echo $produto->getId_subgrupo(); ?>"><button type="button" class="btn btn-secondary btn-block"><i class="fa fa-eye"></i></button></a></center>

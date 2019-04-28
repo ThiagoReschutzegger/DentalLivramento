@@ -109,7 +109,7 @@ $( '#price-amount-2' ).val( 'R$' + $( '#price-range' ).slider( 'values', 1 ));
         <div class="row">
           <div class="col-2"></div>
           <div class="col-8">
-            <a href="<?php echo $this->base_url; ?>Loja/view/<?php echo $gp_atual->getId_grupo(); ?>"  class="btn btn-info-outlined btn-sm btn-block" style="display: inline-block;">Redefiinr</a>
+            <a href="<?php echo $this->base_url; ?>Loja/view/<?php echo $gp_atual->getId_grupo(); ?>"  class="btn btn-inverse-outlined btn-sm btn-block" style="display: inline-block;">Redefiinr</a>
           </div>
         </div><br><br>
       </div>

@@ -60,6 +60,7 @@ class Loja extends Controller{
 
           $preco_min = preg_replace("/[^0-9]/", "", filter_input(INPUT_POST, 'preco-min', FILTER_SANITIZE_STRING));
           $preco_max = preg_replace("/[^0-9]/", "", filter_input(INPUT_POST, 'preco-max', FILTER_SANITIZE_STRING));
+          if($preco_min == $preco_max) $preco_min = $preco_min -1; $preco_max = $preco_max +1;
           $marca_id = filter_input(INPUT_POST, 'marca', FILTER_SANITIZE_STRING);
           $ordem = filter_input(INPUT_POST, 'guiest_id1', FILTER_SANITIZE_STRING);
           $categoria_id = $this->modelCategoria->getCategoriaByGrupoId($id_grupo);
@@ -92,15 +93,17 @@ class Loja extends Controller{
         $data['marca'] = null;
         }else{
           $preco_aux = []; //array onde tem todos os preços dos produtos que estão sendo exibidos
+          $todos_precos = [];
           $ids = [];
           foreach ($data['packproduto'] as $produtos){ //gambiarra pra pegar o menor preço de cada produto
             $preco_aux[$produtos->getId_subgrupo()] = number_format($produtos->getPreco(), 2);
             $preco_aux[$produtos->getId_subgrupo()] = str_replace(',', '', $preco_aux[$produtos->getId_subgrupo()]);
             $ids[] = $produtos->getId_subgrupo();
-            if(empty($data[$produtos->getId_subgrupo()])) $data[$produtos->getId_subgrupo()] = $preco_aux[$produtos->getId_subgrupo()];
+            if(!isset($data[$produtos->getId_subgrupo()])) $data[$produtos->getId_subgrupo()] = $preco_aux[$produtos->getId_subgrupo()];
             if($preco_aux[$produtos->getId_subgrupo()] < $data[$produtos->getId_subgrupo()]){
               $data[$produtos->getId_subgrupo()] = $preco_aux[$produtos->getId_subgrupo()];
             }
+            $todos_precos[] = (int)$data[$produtos->getId_subgrupo()];
           }
           $data['marca'] = $this->modelMarca->getMarcaByProduto($ids);
           }
@@ -108,9 +111,9 @@ class Loja extends Controller{
           $preco_aux[] = 0;
           }
 
-        $data['preco_min'] = (int)min($preco_aux);
+        $data['preco_min'] = (int)min($todos_precos);
 
-        $data['preco_max'] = (int)max($preco_aux);
+        $data['preco_max'] = (int)max($todos_precos);
 
         $ids = array_unique($ids);
 
@@ -122,18 +125,53 @@ class Loja extends Controller{
         // }
 
 
-
         $this->view->load('header',$data);
         $this->view->load('nav',$data);
         $this->view->load('shopping', $data);
         $this->view->load('footer');
     }
 
-    public function search(){
+    public function search(){ //Edu
       $data['estilo'] = $this->model->getEstiloAtual();
       $data['grupo'] = $this->modelGrupo->getGrupo();
       $data['categoria'] = $this->modelCategoria->getCategoria();
       $data['itens'] = $this->father->getList();
+      $data['packproduto'] = '';
+      $data['texto'] = '';
+
+      if (filter_input(INPUT_POST, 'pesquisar')) {
+        $texto = filter_input(INPUT_POST, 'texto-psq', FILTER_SANITIZE_STRING);
+        if ($this->modelPackproduto->searchPackprodutoForDefault($texto)) {
+          $data['packproduto'] = $this->modelPackproduto->searchPackprodutoForDefault($texto);
+          $data['texto'] = $texto;
+
+          if(empty($data['packproduto'])){ //caso não tenha nenhum prod no grupo, gambiarra.com
+          $data['packproduto'] = 'password';
+          }else{
+            $preco_aux = []; //array onde tem todos os preços dos produtos que estão sendo exibidos
+            foreach ($data['packproduto'] as $produtos){ //gambiarra pra pegar o menor preço de cada produto
+              $preco_aux[$produtos->getId_subgrupo()] = number_format($produtos->getPreco(), 2);
+              $preco_aux[$produtos->getId_subgrupo()] = str_replace(',', '', $preco_aux[$produtos->getId_subgrupo()]);
+              if(!isset($data[$produtos->getId_subgrupo()])){
+                $data[$produtos->getId_subgrupo()] = $preco_aux[$produtos->getId_subgrupo()];
+              }
+              if($preco_aux[$produtos->getId_subgrupo()] < $data[$produtos->getId_subgrupo()]){
+                $data[$produtos->getId_subgrupo()] = $preco_aux[$produtos->getId_subgrupo()];
+              }
+            }
+            }
+            if(empty($preco_aux)){ //caso não tenha nenhum prod no grupo, gambiarra.com
+            $preco_aux[] = 0;
+            }
+
+        }else{
+          $data['packproduto'] = 'password';
+          $data['texto'] = $texto;
+        }
+      }
+
+
+      //echo '<pre>'; var_dump($data); echo '</pre>'; die;
 
       $this->view->load('header',$data);
       $this->view->load('nav',$data);

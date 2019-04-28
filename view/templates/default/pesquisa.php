@@ -8,8 +8,8 @@
           <h2>Área de pesquisa</h2>
           <div class="">
             <form method="post">
-              <input name="texto-psq" type="text" class="form-control" placeholder="Sua pesquisa..." aria-describedby="basic-addon2">
-              <input type="submit" name="enviar-msg" value="Pesquisar" class="btn order-btn" id="basic-addon12">
+              <input name="texto-psq" type="text" class="form-control" placeholder="Sua pesquisa..." aria-describedby="basic-addon2" <?php if(!$data['texto']=='') echo'value="'.$data['texto'].'"'; ?>>
+              <input type="submit" name="pesquisar" value="Pesquisar" class="btn order-btn" id="basic-addon12">
             </form>
           </div>
         </div>
@@ -19,44 +19,38 @@
 </div>
 <div class="container">
 <div class="row productListSingle">
-
-  <div class="col-sm-12">
+  <?php if($data['packproduto'] == 'password'):?>
+    <div class="col-sm-12">
+      <div class="media flex-wrap productBox">
+        <div class="media-body">
+          <h4 class="media-heading">Não foi encontrado nenhum produto com este nome!</h4>
+        </div>
+      </div>
+    </div>
+  <?php else:
+    $ids_aux = [];
+   foreach ($data['packproduto'] as $produtos):
+     if(in_array($produtos->getId_subgrupo(), $ids_aux)) continue; else $ids_aux[] = $produtos->getId_subgrupo();
+     ?>
+  <div class="col-sm-6">
     <div class="media flex-wrap productBox">
       <div class="media-left">
-        <a href="">
+        <a href="<?php echo $this->base_url; ?>Home/viewProduto/<?php echo $produtos->getId_subgrupo(); ?>">
         <div class="productImage clearfix">
-          <img src="<?php echo $this->asset;?>img/products/products-03.jpg" alt="products-img">
+          <img src="<?php echo $produtos->getImagem(); ?>" alt="products-img">
           <div class="productMasking">
           </div>
         </div>
       </a>
       </div>
       <div class="media-body">
-        <h4 class="media-heading"><a href="single-product.html">Dip Dyed Sweater</a></h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        <h3>$249</h3>
+        <h4 class="media-heading"><a href="<?php echo $this->base_url; ?>Home/viewProduto/<?php echo $produtos->getId_subgrupo(); ?>"><?php echo $produtos->getNome(); ?></a></h4>
+        <p><?php echo mb_substr($produtos->getDescricao(), 0, 100, 'UTF-8')."...";  ?></p>
+        <h3>R$ <?php echo $data[$produtos->getId_subgrupo()]; ?></h3>
       </div>
     </div>
   </div>
-
-  <div class="col-sm-12">
-    <div class="media flex-wrap productBox">
-      <div class="media-left">
-        <a href="">
-        <div class="productImage clearfix">
-          <img src="<?php echo $this->asset;?>img/products/products-08.jpg" alt="products-img">
-          <div class="productMasking">
-          </div>
-        </div>
-      </a>
-      </div>
-      <div class="media-body">
-        <h4 class="media-heading"><a href="single-product.html">Dip Dyed Sweater</a></h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        <h3>$249</h3>
-      </div>
-    </div>
-  </div>
+<?php endforeach; endif; ?>
 </div>
 </div>
 

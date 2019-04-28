@@ -99,7 +99,17 @@ class PackprodutoModel extends Model {
 
     }
 
+    public function searchPackprodutoForDefault($texto) {
+        $list = [];
+        $sql = "SELECT DISTINCT produto.id_produto, produto.barcode, produto.preco, produto.estoque, produto.especificacao, produto.id_subgrupo, subgrupo.nome, subgrupo.descricao, subgrupo.imagem, subgrupo.destaque, subgrupo.id_grupo, subgrupo.id_marca
+                FROM subgrupo JOIN produto ON produto.id_subgrupo=subgrupo.id_subgrupo WHERE UPPER(subgrupo.nome) like '%{$texto}%'";
+        $consulta = $this->ExecuteQuery($sql, array());
 
+        foreach ($consulta as $linha) {
+          $list[] = new Packproduto($linha['id_produto'], $linha['barcode'], $linha['preco'], $linha['estoque'], $linha['especificacao'], $linha['id_subgrupo'], $linha['nome'], $linha['descricao'], $linha['imagem'], $linha['destaque'], $linha['id_grupo'], $linha['id_marca']);
+        }
+        return $list;
+    }
 
 
 }

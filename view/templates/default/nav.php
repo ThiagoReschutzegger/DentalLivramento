@@ -60,10 +60,10 @@ $(document).ready(function(){
                     <a href="#"><i class="fa fa-search"></i></a>
                     <ul class="dropdown-menu dropdown-menu-right">
                       <li>
-                        <form method="post">
+                        <form method="post" action="<?php echo $this->base_url; ?>Loja/search">
                         <span class="input-group">
-                            <input type="text" class="form-control" placeholder="Pesquisar…" name="pesquisar" aria-describedby="basic-addon2">
-                            <input type="submit" class="input-group-addon" name="vai" value="Vai" />
+                            <input type="text" class="form-control" placeholder="Pesquisar…" name="texto-psq" aria-describedby="basic-addon2">
+                            <input type="submit" class="input-group-addon" name="pesquisar" value="Vai" />
                         </span>
                         </form>
                       </li>
