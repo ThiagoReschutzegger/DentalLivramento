@@ -44,9 +44,25 @@ class Loja extends Controller{
     }
 
     public function view($id_grupo = null){ //Edu
-      // $string = explode(".",$id_grupo);
-      // $id_grupo = $string[0];
-      // $paginador = $string[1];
+      $string = explode(".",$id_grupo);
+      $id_grupo = $string[0];
+      if(!isset($string[1])){
+          $paginador = 1;
+      }else{
+        $paginador = $string[1];
+      }
+
+
+      //
+      // $total = $this->model->totalImagens();
+      //   $data['total'] = ceil($total/12);
+      //   $data['pag'] = $paginador;
+      //
+      //   $data['galeria'] = $this->model->getImagemPaginador($paginador);
+
+
+
+
       if($id_grupo == null) header('location:' . $this->config->base_url); //contra espetinhos
 
         $data['estilo'] = $this->model->getEstiloAtual();
@@ -65,9 +81,10 @@ class Loja extends Controller{
           $ordem = filter_input(INPUT_POST, 'guiest_id1', FILTER_SANITIZE_STRING);
           $categoria_id = $this->modelCategoria->getCategoriaByGrupoId($id_grupo);
 
-          $data['packproduto'] = $this->modelPackproduto->filtroPackproduto($preco_min,$preco_max,$marca_id,$ordem,$id_grupo,$categoria_id);
+          $data['packproduto'] = $this->modelPackproduto->filtroPackproduto($preco_min,$preco_max,$marca_id,$ordem,$id_grupo,$categoria_id,$paginador);
         }else{
-          $data['packproduto'] = $this->modelPackproduto->getPackprodutoByGrupo($id_grupo);
+          $data['packproduto'] = $this->modelPackproduto->getPackprodutoByGrupo($id_grupo,$paginador);
+          //echo "<pre>";var_dump($data['packproduto']);die;
         }
 
         if (filter_input(INPUT_POST, 'filter2')) {
@@ -91,6 +108,7 @@ class Loja extends Controller{
         $data['packproduto'] = 'password';
         $ids[] = 0;
         $data['marca'] = null;
+        $data['total'] = 0;
         }else{
           $preco_aux = []; //array onde tem todos os preços dos produtos que estão sendo exibidos
           $todos_precos = [];
@@ -106,6 +124,25 @@ class Loja extends Controller{
             $todos_precos[] = (int)$data[$produtos->getId_subgrupo()];
           }
           $data['marca'] = $this->modelMarca->getMarcaByProduto($ids);
+
+          $count = 0;
+          $ids_aux = [];
+          foreach($data['packproduto'] as $produtos){
+            // echo "s";
+
+            if(in_array($produtos->getId_subgrupo(), $ids_aux)){
+              // echo "k";
+              $count=$count+1;
+                continue;
+            } else {
+              // echo "r";
+
+              $ids_aux[] = $produtos->getId_subgrupo();
+            }
+          }
+          $total = count($data['packproduto'])-$count;
+          $data['total'] = ceil($total/12);
+
           }
           if(empty($preco_aux)){ //caso não tenha nenhum prod no grupo, gambiarra.com
           $preco_aux[] = 0;
@@ -123,6 +160,10 @@ class Loja extends Controller{
         //   echo $min."<br>".$max;
         //   die;
         // }
+        
+
+        $data['pag'] = $paginador;
+
 
 
         $this->view->load('header',$data);
