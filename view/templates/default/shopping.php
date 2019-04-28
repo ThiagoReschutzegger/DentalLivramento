@@ -163,6 +163,16 @@ $( '#price-amount-2' ).val( 'R$' + $( '#price-range' ).slider( 'values', 1 ));
               </div>
         <?php endforeach; endif; ?>
         </div>
+        <center><div class="btn-group row" role="group" aria-label="Basic example"><center>
+    		  <button type="button" class="btn btn-primary-outlined" style="margin-top: 10px;">1</button>
+    		  <button type="button" class="btn btn-primary-outlined" style="margin-top: 10px;">2</button>
+          <button type="button" class="btn btn-primary-outlined" style="margin-top: 10px;">3</button>
+          <button type="button" class="btn btn-primary-outlined" style="margin-top: 10px;">4</button>
+          <button type="button" class="btn btn-primary-outlined" style="margin-top: 10px;">5</button>
+          <button type="button" class="btn btn-primary-outlined" style="margin-top: 10px;">6</button>
+          <button type="button" class="btn btn-primary-outlined" style="margin-top: 10px;">7</button>
+    		  <button type="button" class="btn btn-primary-outlined" style="margin-top: 10px;">8</button>
+    		</center></div></center>
       </div>
     </div>
   </div>
