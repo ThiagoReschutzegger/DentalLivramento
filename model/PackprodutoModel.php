@@ -39,6 +39,16 @@ class PackprodutoModel extends Model {
         return $list;
     }
 
+    public function getPackprodutoByGrupoV2($id,$paginador) { //vei, não altera a outra função, sipa pode da merda
+        $list = [];
+        $sql = "SELECT DISTINCT produto.id_produto, produto.barcode, produto.preco, produto.estoque, produto.especificacao, produto.id_subgrupo, subgrupo.nome, subgrupo.descricao, subgrupo.imagem,subgrupo.destaque, subgrupo.id_grupo, subgrupo.id_marca from produto join subgrupo on produto.id_subgrupo=subgrupo.id_subgrupo where subgrupo.id_grupo = :id GROUP BY subgrupo.id_subgrupo";
+        $consulta = $this->ExecuteQuery($sql, [':id' => $id]);
+        foreach ($consulta as $linha) {
+            $list[] = new Packproduto($linha['id_produto'], $linha['barcode'], $linha['preco'], $linha['estoque'], $linha['especificacao'], $linha['id_subgrupo'], $linha['nome'], $linha['descricao'], $linha['imagem'], $linha['destaque'], $linha['id_grupo'], $linha['id_marca']);
+        }
+        return $list;
+    }
+
     public function searchPackproduto($nome, $codigo) {
         $list = [];
 
