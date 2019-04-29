@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 27-Abr-2019 às 03:09
+-- Generation Time: 29-Abr-2019 às 03:07
 -- Versão do servidor: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
@@ -370,12 +370,25 @@ INSERT INTO `produto` (`id_produto`, `barcode`, `preco`, `estoque`, `especificac
 (1, '33287500', '57.90', 38, 'Azul de Tamanho numero 25 e Superior', 1),
 (2, '44445555', '39.90', 34, 'Azul e tamanho 12', 2),
 (3, '43682337', '1253.00', 23, 'Amarelo com bolinhas marrons', 3),
-(4, '43682338', '50.60', 0, 'Azul com bolinhas marrons', 3),
-(5, '43682339', '40.60', 34, 'Verde com bolinhas pretas', 3),
-(6, '436576854', '85.00', 56, 'Alicate 053 Meia Cana', 4),
+(4, '43682338', '35.60', 0, 'Azul com bolinhas marrons', 3),
+(5, '43682339', '50.60', 34, 'Verde com bolinhas pretas', 3),
+(6, '436576854', '86.00', 56, 'Alicate 053 Meia Cana', 4),
 (7, '2354326', '85.00', 85, 'ALICATE 001 NANCE', 4),
-(8, '2356456', '85.00', 45, 'ALICATE 074 YOUNG', 4),
-(9, '3255614', '85.00', 10, 'Alicate 053 Meia Cana', 4);
+(8, '2356456', '84.30', 45, 'ALICATE 074 YOUNG', 4),
+(9, '3255614', '84.55', 10, 'Alicate 053 Meia Cana', 4),
+(10, '124125212', '32', 12, 'tam único', 5),
+(11, '7654323263542', '12.50', 123, 'tam único', 6),
+(12, '5678843232', '40.50', 3, 'tam único', 7),
+(13, '25232654612511', '22.20', 5, 'tam único', 8),
+(15, '17127371887', '200', 1, 'tam único', 10),
+(16, '11123', '400', 123, 'tam único', 11),
+(17, '114442', '100', 21, 'tam único', 12),
+(18, '199999124', '300', 3, 'tam único', 13),
+(19, '1445532', '42', 5, 'tam único', 14),
+(20, '123447754', '150', 21, 'tam único', 15),
+(21, '23772377234232', '432', 3, 'tam único', 16),
+(22, '1415112412', '12.50', 21, 'tam único', 17),
+(23, '444442', '1234', 123, 'tam único', 18);
 
 -- --------------------------------------------------------
 
@@ -415,7 +428,20 @@ INSERT INTO `subgrupo` (`id_subgrupo`, `nome`, `descricao`, `imagem`, `destaque`
 (1, 'Elástico Dental para Gatos', 'O melhor elástico dental para gatos disponibilizado pela marca Puma', 'https://meusanimais.com.br/wp-content/uploads/2015/03/chocalho-gato.jpg', '1', 15, 2),
 (2, 'Elástico Dental para Cavalos', 'O melhor elastico', 'https://ae01.alicdn.com/kf/HTB1ebTLodfJ8KJjy0Feq6xKEXXaG/100-cm-USB-Cobrado-Decora-o-Tubos-Luminosos-LED-Rabos-de-Cavalo-Rabo-de-Cavalo-Equita.jpg_640x640.jpg', '1', 15, 3),
 (3, 'Elástico Dental para Girafas', 'No entanto, não podemos esquecer que a execução dos pontos do programa assume importantes posições no estabelecimento dos índices pretendidos. Caros amigos, o comprometimento entre as equipes ainda não demonstrou convincentemente que vai participar na mudança do impacto na agilidade decisória. Do mesmo modo, a valorização de fatores subjetivos nos obriga à análise das condições inegavelmente apropriadas. Nunca é demais lembrar o peso e o significado destes problemas, uma vez que a necessidade de renovação processual desafia a capacidade de equalização das posturas dos órgãos dirigentes com relação às suas atribuições. Assim mesmo, o início da atividade geral de formação de atitudes pode nos levar a considerar a reestruturação das diretrizes de desenvolvimento para o futuro. ', 'https://abrilsuperinteressante.files.wordpress.com/2016/09/super_imggirafa.jpg', '1', 15, 2),
-(4, 'ICE', 'Produto sem descrição.', 'http://www.dentallivramento.com.br/fotos/7898475422716.jpg', '1', 22, 1);
+(4, 'ICE', 'Produto sem descrição.', 'http://www.dentallivramento.com.br/fotos/7898475422716.jpg', '1', 22, 1),
+(5, 'Produto 1', 'Produto sem descrição.', 'http://topdownleansystems.com/wordpress/wp-content/uploads/2012/05/retalon_inventory_management.jpg', '0', 19, 1),
+(6, 'Produto 2', 'Produto sem descrição.', 'https://medias2.prestastore.com/663731-pbig/product-stock-realtime.jpg', '0', 19, 1),
+(7, 'Produto 3', 'Produto sem descrição.', 'https://st.depositphotos.com/1031343/4546/v/950/depositphotos_45463921-stock-illustration-new-product-stamp.jpg', '0', 19, 1),
+(8, 'Produto 4', 'Produto sem descrição.', 'https://thumbs.dreamstime.com/z/approved-rejected-boxes-mean-product-testing-meaning-quality-control-38160069.jpg', '0', 19, 1),
+(10, 'Produto 5', 'Produto sem descrição.', 'http://content.woodz.com.br/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/r/e/relogio-de-madeira-woodz-montana-light.png', '0', 19, 2),
+(11, 'Produto 6', 'Produto sem descrição.', 'https://imgcentauro-a.akamaihd.net/900x900/889779M8/relogio-com-gps-tomtom-runner-3-img.jpg', '0', 19, 2),
+(12, 'Produto 7', 'Produto sem descrição.', 'http://pontocom.com/image/cache/data/products/relogios/relogios-feminino/relogio-feminino-tommy-hilfiger-1781385-verso-1000x1000.jpg', '0', 19, 2),
+(13, 'Produto 8', 'Produto sem descrição.', 'http://www.secomrelogios.com.br/media/product/f31/relogio-masculino-dourado-x-games-xmgs1004-d2kx-46d.jpg', '0', 19, 2),
+(14, 'Produto 9', 'Produto sem descrição.', 'https://static.zattini.com.br/produtos/relogio-technos-pulseira-de-aco/70/F61-0258-070/F61-0258-070_zoom1.jpg', '0', 19, 2),
+(15, 'Produto 10', 'Produto sem descrição.', 'http://www.pontocom.com/image/cache/data/products/relogios/relogios-masculino/relogio-masculino-tommy-hilfiger-fitz-1790969-frente-1000x1000.JPG', '0', 19, 1),
+(16, 'Produto 11', 'Produto sem descrição.', 'https://sapling-inc.com/wp-content/gallery/sbp-series/Sapling-254-Wall-Mount-Green.jpg', '0', 19, 1),
+(17, 'Produto 12', 'Produto sem descrição.', 'https://w1.ezcdn.com.br/elister/fotos/zoom/381fz1/relogio-technos-masculino-performance-skydiver-t205ff-1p.jpg', '0', 19, 2),
+(18, 'Produto 13', 'Produto sem descrição.', 'https://http2.mlstatic.com/relogio-masculino-luxo-inox-automatico-esqueletizado-432-D_NQ_NP_994192-MLB25574035089_052017-F.jpg', '0', 19, 2);
 
 -- --------------------------------------------------------
 
@@ -437,7 +463,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id_user`, `nome`, `login`, `senha`, `email`, `dtupdate`) VALUES
-(1, 'admin', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin@admin.com', '2018-11-18 01:19:48');
+(2, 'dental', 'dental', 'cde512dfb6937975382bb78607a1b2ec', 'dental@gmail.com', '2019-04-27 15:00:00');
 
 --
 -- Indexes for dumped tables
@@ -582,7 +608,7 @@ ALTER TABLE `pedido`
 -- AUTO_INCREMENT for table `produto`
 --
 ALTER TABLE `produto`
-  MODIFY `id_produto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_produto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
 -- AUTO_INCREMENT for table `slider`
 --
@@ -592,12 +618,12 @@ ALTER TABLE `slider`
 -- AUTO_INCREMENT for table `subgrupo`
 --
 ALTER TABLE `subgrupo`
-  MODIFY `id_subgrupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_subgrupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_user` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_user` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- Constraints for dumped tables
 --
