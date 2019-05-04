@@ -61,9 +61,9 @@ jQuery(document).ready(function(){
 			'use strict';
 	          $(this).addClass('show');
 	      }),
-	    $('.nav .dropdown').on('mouseleave', function() {
+	    $('.navbar').on('mouseleave', function() {
 			'use strict';
-	          $(this).removeClass('show');
+	          $('.nav .dropdown').removeClass('show');
 	      });
 	  }
 
