@@ -34,6 +34,21 @@
     padding-top: 4%;
     height: 200px;
     }
+  .box-v2 h4{
+    font-size: 15px !important;
+  }
+
+  .box-v2 i{
+    font-size: 40px !important;
+  }
+
+  .box-v2 span{
+    font-size: 10px !important;
+  }
+  .featuredProducts{
+    margin-bottom: 0px !important;
+  }
+
 }
 @media (max-width: 700px) {
   .modalBar{

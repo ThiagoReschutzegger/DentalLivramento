@@ -177,42 +177,10 @@
 <section class="mainContent clearfix">
   <div class="container">
 
-    <!-- FEATURE -->
-    <div class="row features">
-      <div class="col-md-4 col-6">
-        <div class="box text-center box-v2">
-          <i class="fa fa-building" aria-hidden="true"></i>
-          <h4>A Empresa </h4>
-          <span>Aqui na <b>Dental Livramento</b> nossos clientes vêm em primeiro lugar!
-            Possuímos diversas especialidades, equipamentos e materiais de última geração, além do atendimento capacitado.
-          </span>
-        </div>
-      </div>
-      <div class="col-md-4 col-6">
-        <div class="box text-center box-v2">
-          <i class="fa fa-flag" aria-hidden="true"></i>
-          <h4>As melhores Marcas</h4><br>
-          <span>Temos as marcas mais renomadas e conhecidas do mercado.
-                Confira nossos produtos e escolha a sua!<br><br>
-          </span>
-        </div>
-      </div>
-      <div class="col-md-4 col-6">
-        <div class="box text-center box-v2">
-          <i class="fa fa-desktop" aria-hidden="true"></i>
-          <h4>Cara nova</h4>
-          <span>A <b>Dental Livramento</b> está sempre pensando em você, por isso está de
-                de cara nova, para proporcinar a você uma experiência ainda melhor!<br>
-                Aproveite e explore as novas facilidades!
-          </span>
-        </div>
-      </div>
-    </div>
-
+<?php if (count($data['prod-destaq'])>3): ?>
     <div class="page-header text-uppercase">
       <h4 class="text-uppercase fonte-e-cor-top">Destaques</h4>
-    </div>
-
+    </div>  
     <div class="row featuredProducts featuredProductsSlider margin-bottom mouse-grab">
       <?php foreach($data['prod-destaq'] as $destaque): ?>
           <div class="slide col-md-3">
@@ -231,6 +199,39 @@
             </div>
           </div>
       <?php endforeach; ?>
+    </div>
+  <?php endif; ?>
+
+    <!-- FEATURE -->
+    <div class="row features">
+      <div class="col-md-4 col-12">
+        <div class="box text-center box-v2">
+          <i class="fa fa-building" aria-hidden="true"></i>
+          <h4>A Empresa </h4>
+          <span>Aqui na <b>Dental Livramento</b> nossos clientes vêm em primeiro lugar!
+            Possuímos diversas especialidades, equipamentos e materiais de última geração, além do atendimento capacitado.
+          </span>
+        </div>
+      </div>
+      <div class="col-md-4 col-12">
+        <div class="box text-center box-v2">
+          <i class="fa fa-flag" aria-hidden="true"></i>
+          <h4>As melhores Marcas</h4><br>
+          <span>Temos as marcas mais renomadas e conhecidas do mercado.
+                Confira nossos produtos e escolha a sua!<br><br>
+          </span>
+        </div>
+      </div>
+      <div class="col-md-4 col-12">
+        <div class="box text-center box-v2">
+          <i class="fa fa-desktop" aria-hidden="true"></i>
+          <h4>Cara nova</h4>
+          <span>A <b>Dental Livramento</b> está sempre pensando em você, por isso está de
+                de cara nova, para proporcinar a você uma experiência ainda melhor!<br>
+                Aproveite e explore as novas facilidades!
+          </span>
+        </div>
+      </div>
     </div>
 
     <script>
