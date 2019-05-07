@@ -160,7 +160,7 @@ class Loja extends Controller{
         //   echo $min."<br>".$max;
         //   die;
         // }
-        
+
 
         $data['pag'] = $paginador;
 

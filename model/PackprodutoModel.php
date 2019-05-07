@@ -31,13 +31,39 @@ class PackprodutoModel extends Model {
     public function getPackprodutoByGrupo($id,$paginador) { //pega pelo id do grupo
         $list = [];
         $offset = ($paginador * 12) - 12;
-        $sql = "SELECT produto.id_produto, produto.barcode, produto.preco, produto.estoque, produto.especificacao, produto.id_subgrupo, subgrupo.nome, subgrupo.descricao, subgrupo.imagem,subgrupo.destaque, subgrupo.id_grupo, subgrupo.id_marca from produto join subgrupo on produto.id_subgrupo=subgrupo.id_subgrupo where subgrupo.id_grupo = :id ORDER BY subgrupo.id_subgrupo DESC";
+        $sql = "SELECT produto.id_produto, produto.barcode, produto.preco, produto.estoque, produto.especificacao, produto.id_subgrupo, subgrupo.nome, subgrupo.descricao, subgrupo.imagem,subgrupo.destaque, subgrupo.id_grupo, subgrupo.id_marca from produto join subgrupo on produto.id_subgrupo=subgrupo.id_subgrupo where subgrupo.id_grupo = :id ORDER BY produto.id_subgrupo DESC";
         //limit 12 offset {$offset}
         $consulta = $this->ExecuteQuery($sql, [':id' => $id]);
         foreach ($consulta as $linha) {
             $list[] = new Packproduto($linha['id_produto'], $linha['barcode'], $linha['preco'], $linha['estoque'], $linha['especificacao'], $linha['id_subgrupo'], $linha['nome'], $linha['descricao'], $linha['imagem'], $linha['destaque'], $linha['id_grupo'], $linha['id_marca']);
         }
-        return $list;
+        if(count($list)>12){
+          $list_paginada = [];
+          $ponto =0;
+          $i = 1;
+          $excedente = count($list) - (12*$paginador);
+          $resto = 12;
+          if($excedente < 0){
+            $resto = $excedente+12;
+            $ponto = 12*($paginador-1);
+          }
+          $ids = [];
+          foreach ($list as $linha) {
+            if(in_array($linha->getId_subgrupo(), $ids)){
+              $resto++;
+              continue;
+            }else{
+              $ids[] = $linha->getId_subgrupo();
+            }
+          }
+          while ($i <= $resto) {
+            $list_paginada[] = $list[$i-1+$ponto];
+            $i++;
+          }
+          return $list_paginada;
+        }else{
+          return $list;
+        }
     }
 
     public function getPackprodutoByGrupoV2($id,$paginador) { //vei, não altera a outra função, sipa pode da merda
