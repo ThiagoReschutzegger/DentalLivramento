@@ -30,14 +30,19 @@ class PackprodutoModel extends Model {
 
     public function getPackprodutoByGrupo($id,$paginador) { //pega pelo id do grupo
         $list = [];
+        $ids_prod = [];
         $offset = ($paginador * 12) - 12;
         $sql = "SELECT produto.id_produto, produto.barcode, produto.preco, produto.estoque, produto.especificacao, produto.id_subgrupo, subgrupo.nome, subgrupo.descricao, subgrupo.imagem,subgrupo.destaque, subgrupo.id_grupo, subgrupo.id_marca from produto join subgrupo on produto.id_subgrupo=subgrupo.id_subgrupo where subgrupo.id_grupo = :id ORDER BY produto.id_subgrupo DESC";
         //limit 12 offset {$offset}
         $consulta = $this->ExecuteQuery($sql, [':id' => $id]);
         foreach ($consulta as $linha) {
             $list[] = new Packproduto($linha['id_produto'], $linha['barcode'], $linha['preco'], $linha['estoque'], $linha['especificacao'], $linha['id_subgrupo'], $linha['nome'], $linha['descricao'], $linha['imagem'], $linha['destaque'], $linha['id_grupo'], $linha['id_marca']);
+            $ids_prod[] = $linha['id_subgrupo'];
         }
+        $ids_prod = array_unique($ids_prod);
+        $total_prod = count($ids_prod);
         if(count($list)>12){
+          $paginador_max = ceil(count($list)/12);
           $list_paginada = [];
           $ponto =0;
           $i = 1;
@@ -60,9 +65,10 @@ class PackprodutoModel extends Model {
             $list_paginada[] = $list[$i-1+$ponto];
             $i++;
           }
-          return $list_paginada;
+          return array($paginador_max, $list_paginada, $total_prod);
         }else{
-          return $list;
+          $paginador_max = 1;
+          return array($paginador_max, $list, $total_prod);
         }
     }
 

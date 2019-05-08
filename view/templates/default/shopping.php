@@ -116,7 +116,11 @@ $( '#price-amount-2' ).val( 'R$' + $( '#price-range' ).slider( 'values', 1 ));
       <div class="col-lg-9 col-md-8">
         <div class="row filterArea">
           <div class="col-5 Vizualizando">
-            <span style="color: gray; padding-top: 5px;">Vizualizando 12 de X produtos:</span>
+            <span style="color: gray; padding-top: 5px;">Vizualizando
+              <?php if($data['total_prod'] < 12) echo $data['total_prod']; else echo  $data['total_prod_atual']; ?>
+               de
+                <?php echo $data['total_prod'];?>
+                produtos:</span>
           </div>
           <div class="col-md-7 col-sm-12">
             <div class="float-right select-shop">
@@ -163,16 +167,14 @@ $( '#price-amount-2' ).val( 'R$' + $( '#price-range' ).slider( 'values', 1 ));
               </div>
         <?php endforeach; endif; ?>
         </div>
-        <center><div class="btn-group row" role="group" aria-label="Basic example"><center>
-    		  <button type="button" class="btn btn-primary-outlined" style="margin-top: 10px;">1</button>
-    		  <button type="button" class="btn btn-primary-outlined" style="margin-top: 10px;">2</button>
-          <button type="button" class="btn btn-primary-outlined" style="margin-top: 10px;">3</button>
-          <button type="button" class="btn btn-primary-outlined" style="margin-top: 10px;">4</button>
-          <button type="button" class="btn btn-primary-outlined" style="margin-top: 10px;">5</button>
-          <button type="button" class="btn btn-primary-outlined" style="margin-top: 10px;">6</button>
-          <button type="button" class="btn btn-primary-outlined" style="margin-top: 10px;">7</button>
-    		  <button type="button" class="btn btn-primary-outlined" style="margin-top: 10px;">8</button>
-    		</center></div></center>
+        <center><div class="btn-group row" role="group" aria-label="Basic example" style="margin:0"><center>
+          <?php if ($data['paginador_atual'] > 1 ): ?>
+            <a href="<?php echo $this->base_url; ?>Loja/view/<?php echo $gp_atual->getId_grupo();?>.<?php echo $data['paginador_atual']-1;?>" class="btn btn-primary-outlined" style="margin-top: 10px;">Anterior</a>
+          <?php endif; ?>
+          <?php if ($data['paginador_atual'] < $data['paginador_max'] ): ?>
+            <a href="<?php echo $this->base_url; ?>Loja/view/<?php echo $gp_atual->getId_grupo();?>.<?php echo $data['paginador_atual']+1;?>" class="btn btn-primary-outlined" style="margin-top: 10px;">Próxima</a>
+          <?php endif; ?>
+        </center></div></center>
       </div>
     </div>
   </div>

@@ -81,10 +81,27 @@ class Loja extends Controller{
           $ordem = filter_input(INPUT_POST, 'guiest_id1', FILTER_SANITIZE_STRING);
           $categoria_id = $this->modelCategoria->getCategoriaByGrupoId($id_grupo);
 
-          $data['packproduto'] = $this->modelPackproduto->filtroPackproduto($preco_min,$preco_max,$marca_id,$ordem,$id_grupo,$categoria_id,$paginador);
+          $data['packproduto'] = $this->modelPackproduto->filtroPackproduto($preco_min,$preco_max,$marca_id,$ordem,$id_grupo,$categoria_id,$paginador)[1];
+
+          $data['paginador_max'] = $this->modelPackproduto->filtroPackproduto($preco_min,$preco_max,$marca_id,$ordem,$id_grupo,$categoria_id,$paginador)[0];
+          $data['paginador_atual'] = $paginador;
+
+          $data['total_prod'] = $this->modelPackproduto->filtroPackproduto($preco_min,$preco_max,$marca_id,$ordem,$id_grupo,$categoria_id,$paginador)[2];
+
         }else{
-          $data['packproduto'] = $this->modelPackproduto->getPackprodutoByGrupo($id_grupo,$paginador);
+          $data['packproduto'] = $this->modelPackproduto->getPackprodutoByGrupo($id_grupo,$paginador)[1];
+
+          $data['paginador_max'] = $this->modelPackproduto->getPackprodutoByGrupo($id_grupo,$paginador)[0];
+          $data['paginador_atual'] = $paginador;
+
+          $data['total_prod'] = $this->modelPackproduto->getPackprodutoByGrupo($id_grupo,$paginador)[2];
+          $data['total_prod_atual'] = count($this->modelPackproduto->getPackprodutoByGrupo($id_grupo,$paginador)[1]);
+
           //echo "<pre>";var_dump($data['packproduto']);die;
+        }
+
+        if (filter_input(INPUT_POST, 'filter2')) {
+
         }
 
         if (filter_input(INPUT_POST, 'filter2')) {
