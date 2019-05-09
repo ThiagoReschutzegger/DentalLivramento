@@ -126,6 +126,8 @@ class Loja extends Controller{
         $ids[] = 0;
         $data['marca'] = null;
         $data['total'] = 0;
+        $todos_precos = [];
+        $todos_precos[] = 0;
         }else{
           $preco_aux = []; //array onde tem todos os preços dos produtos que estão sendo exibidos
           $todos_precos = [];

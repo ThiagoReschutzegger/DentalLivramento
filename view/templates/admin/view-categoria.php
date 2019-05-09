@@ -16,14 +16,8 @@
                         <br>
                           <h1><span class='text-blue'><?php echo $categoria->getNome(); ?></span></h1>
                           <br>
-                          <p class="row">Descrição:
-                            <a href="<?php echo $this->base_url; ?>GrupoAdmin">
-                              <span class='text-blue' style='margin-left: 10px'>
-                              <?php echo $categoria->getDescricao(); ?>
-                            </span>
-                           </a>
-                          </p>
-                          <p class="row">Grupos da Categoria:
+                          <p class="row">*A imagem será utilizada no fundo da vizualização dos grupos desta categoria no site.</p>
+                          <p class="row"><b>Grupos da Categoria:</b>
                             <a href="<?php echo $this->base_url; ?>GrupoAdmin">
                               <span class='text-blue' style='margin-left: 10px'>
                               <?php

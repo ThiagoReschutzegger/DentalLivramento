@@ -22,7 +22,7 @@ class CategoriaAdmin extends Admin {
       $data['msg'] = '';
       if (filter_input(INPUT_POST, 'add')) {
         $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
-        $descricao = filter_input(INPUT_POST, 'descricao', FILTER_SANITIZE_STRING);
+        $descricao = '..';
         $imagem = filter_input(INPUT_POST, 'imagem', FILTER_SANITIZE_STRING);
 
             if ($nome && $descricao && $imagem) {
@@ -70,7 +70,7 @@ class CategoriaAdmin extends Admin {
       if (filter_input(INPUT_POST, 'upd')) {
         $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_STRING);
         $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
-        $descricao = filter_input(INPUT_POST, 'descricao', FILTER_SANITIZE_STRING);
+        $descricao = '..';
         $imagem = filter_input(INPUT_POST, 'imagem', FILTER_SANITIZE_STRING);
         if ($id && $nome && $descricao && $imagem) {
             $categoria = new Categoria($id,$nome,$descricao,$imagem);

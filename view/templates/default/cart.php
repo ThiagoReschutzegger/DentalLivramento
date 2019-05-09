@@ -78,7 +78,7 @@
             </div>
             <div class="checkBtnArea text-right">
               <a href="<?php echo $this->base_url; ?>Home/descartar" style="letter-spacing: 1px; font-weight: 700;" class="btn btn-danger-outlined btn-default">descartar&nbsp;&nbsp;<i class="fa fa-trash" aria-hidden="true"></i></a>
-              <a href="<?php echo $this->base_url; ?>Home/step1" style="letter-spacing: 1px; font-weight: 700;" class="btn btn-primary-outlined btn-default">checkout&nbsp;&nbsp;<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+              <a href="<?php echo $this->base_url; ?>Home/step1" style="letter-spacing: 1px; font-weight: 700;" class="btn btn-primary-outlined btn-default btn-finalizar">finalizar&nbsp;&nbsp;<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
             </div>
           </form>
         </div>

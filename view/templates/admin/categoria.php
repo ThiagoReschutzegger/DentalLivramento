@@ -18,7 +18,6 @@
               <thead>
                 <tr>
                   <th>Nome da Categoria</th>
-                  <th>Descrição</th>
                   <th>Link da imagem</th>
                   <th>Ações</th>
                 </tr>
@@ -27,7 +26,6 @@
                 <?php foreach ($data as $categoria): ?>
                 <tr>
                   <td><?php echo $categoria->getNome(); ?></td>
-                  <td><?php echo substr($categoria->getDescricao(), 0, 45) . "..."; ?></td>
                   <td><a target="_blank" href='<?php echo $categoria->getImagem(); ?>'><img src="<?php echo $categoria->getImagem(); ?>" height="65px" /></a></td>
                   <td>
                     <a class="btn btn-secondary" style="font-size: 15px;" href="<?php echo $this->base_url; ?>CategoriaAdmin/viewCategoria/<?php echo $categoria->getId_categoria(); ?>">

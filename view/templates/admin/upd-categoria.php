@@ -23,13 +23,7 @@
           </div>
         </div>
         <div class="line"></div>
-        <div class="form-group row">
-          <label class="col-sm-3 form-control-label text-right">Descrição:</label>
-          <div class="col-sm-8">
-            <textarea class="form-control" name="descricao"><?php echo $categoria->getDescricao(); ?></textarea>
-          </div>
-        </div>
-        <div class="line"></div>
+        
         <div class="form-group row">
           <label class="col-sm-3 form-control-label text-right">Link:</label>
           <div class="col-sm-8">

@@ -113,3 +113,9 @@ input[type=number] {
   border: 3px solid #e4e4e4;
   transition: all 0.3s ease;
 }
+
+@media (max-width: 400px) {
+    .btn-finalizar{
+        margin-top: 10px;
+    }
+}
