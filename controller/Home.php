@@ -227,9 +227,9 @@ class Home extends Controller{
     }
 
     public function addMensagem() { //Edu
-      if (filter_input(INPUT_POST, 'enviar-msg')) {
-        $email = filter_input(INPUT_POST, 'email-msg', FILTER_SANITIZE_STRING);
-        $msg = filter_input(INPUT_POST, 'mensagem-msg', FILTER_SANITIZE_STRING);
+      if (filter_input(INPUT_GET, 'enviar-msg')) {
+        $email = filter_input(INPUT_GET, 'email-msg', FILTER_SANITIZE_STRING);
+        $msg = filter_input(INPUT_GET, 'mensagem-msg', FILTER_SANITIZE_STRING);
         date_default_timezone_set('America/Sao_Paulo');
         $mensagem = new Mensagem(null,$email,$msg,date("Y-m-d"));
         if ($this->modelMensagem->insertMensagem($mensagem)) {

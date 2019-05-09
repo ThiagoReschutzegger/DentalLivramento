@@ -103,11 +103,8 @@ class PackprodutoModel extends Model {
     }
 
 
-    public function filtroPackproduto($preco_min,$preco_max,$marca_id,$ordem,$grupo_id,$categoria_id,$paginador){
-      $offset = ($paginador * 12) - 12;
+    public function filtroPackproduto($marca_id,$ordem,$grupo_id,$paginador){
       $base_str = "SELECT produto.id_produto, produto.barcode, produto.preco, produto.estoque, produto.especificacao, produto.id_subgrupo, subgrupo.nome, subgrupo.descricao, subgrupo.imagem,subgrupo.destaque, subgrupo.id_grupo, subgrupo.id_marca FROM produto JOIN subgrupo ON produto.id_subgrupo=subgrupo.id_subgrupo ";
-
-      $preco_str = "WHERE produto.preco > ".$preco_min." AND produto.preco < ".$preco_max." ";
 
       if($marca_id == 0){
         $marca_str = '';
@@ -117,30 +114,62 @@ class PackprodutoModel extends Model {
 
       $grupo_str = "AND subgrupo.id_grupo = ".$grupo_id." ";
 
-      // if($ordem == "alfa"){
-      //   $ordem_str = "ORDER BY subgrupo.nome asc";
-      // }else if ($ordem == "maior"){
-      //   $ordem_str = "ORDER BY produto.preco desc";
-      // }else if ($ordem == "menor"){
-      //   $ordem_str = "ORDER BY produto.preco asc";
-      // }else if ($ordem == "new"){
-      //   $ordem_str = "ORDER BY subgrupo.id_subgrupo desc";
-      // }else{
-      //   $ordem_str = "";
-      // }
-      $ordem_str = "";
+       if($ordem == "alfa"){
+         $ordem_str = "ORDER BY subgrupo.nome asc";
+       }else if ($ordem == "maior"){
+         $ordem_str = "ORDER BY produto.preco desc";
+       }else if ($ordem == "menor"){
+         $ordem_str = "ORDER BY produto.preco asc";
+       }else if ($ordem == "new"){
+         $ordem_str = "ORDER BY subgrupo.id_subgrupo desc";
+       }else{
+         $ordem_str = "";
+       }
 
 
-      $sql = $base_str.$preco_str.$marca_str.$grupo_str.$ordem_str." LIMIT 12 offset {$offset}";
+      $sql = $base_str.$marca_str.$grupo_str.$ordem_str;
 
       //echo"<pre>";var_dump($sql);die;
 
+      $list = [];
+      $ids_prod = [];
+
       $consulta = $this->ExecuteQuery($sql, array());
       foreach ($consulta as $linha) {
-            $list[] = new Packproduto($linha['id_produto'], $linha['barcode'], $linha['preco'], $linha['estoque'], $linha['especificacao'], $linha['id_subgrupo'], $linha['nome'], $linha['descricao'], $linha['imagem'], $linha['destaque'], $linha['id_grupo'], $linha['id_marca']);
+          $list[] = new Packproduto($linha['id_produto'], $linha['barcode'], $linha['preco'], $linha['estoque'], $linha['especificacao'], $linha['id_subgrupo'], $linha['nome'], $linha['descricao'], $linha['imagem'], $linha['destaque'], $linha['id_grupo'], $linha['id_marca']);
+          $ids_prod[] = $linha['id_subgrupo'];
       }
-      return $list;
-
+      $ids_prod = array_unique($ids_prod);
+      $total_prod = count($ids_prod);
+      if(count($list)>12){
+        $paginador_max = ceil(count($list)/12);
+        $list_paginada = [];
+        $ponto =0;
+        $i = 1;
+        $excedente = count($list) - (12*$paginador);
+        $resto = 12;
+        if($excedente < 0){
+          $resto = $excedente+12;
+          $ponto = 12*($paginador-1);
+        }
+        $ids = [];
+        foreach ($list as $linha) {
+          if(in_array($linha->getId_subgrupo(), $ids)){
+            $resto++;
+            continue;
+          }else{
+            $ids[] = $linha->getId_subgrupo();
+          }
+        }
+        while ($i <= $resto) {
+          $list_paginada[] = $list[$i-1+$ponto];
+          $i++;
+        }
+        return array($paginador_max, $list_paginada, $total_prod);
+      }else{
+        $paginador_max = 1;
+        return array($paginador_max, $list, $total_prod);
+      }
     }
 
     public function searchPackprodutoForDefault($texto) {

@@ -1,8 +1,8 @@
 <?php
 $cat_atual = $data['categoria-atual'][0];
 $gp_atual = $data['grupo-atual'];
-$ids_aux = []; //pra nao repetir os subgrupos na hora de listar la
-
+$ids_prod = []; //pra nao repetir os subgrupos na hora de listar la
+$ids_prod[] = 0;
 ?>
 <script type="text/javascript">
 jQuery(document).ready(function(){
@@ -66,8 +66,9 @@ $( '#price-amount-2' ).val( 'R$' + $( '#price-range' ).slider( 'values', 1 ));
 <section class="mainContent clearfix productsContent sectionPadding">
   <div class="container">
     <div class="row">
-      <div class="col-lg-3 col-md-4 sideBar">
-        <div class="panel panel-default menuBar">
+      <div class="col-lg-3 col-md-4">
+        <div class="sideBar menuBar">
+        <div class="panel panel-default">
           <div class="panel-heading">Categorias</div>
           <div class="panel-body">
             <div class="collapse navbar-collapse navbar-ex1-collapse navbar-side-collapse">
@@ -100,18 +101,50 @@ $( '#price-amount-2' ).val( 'R$' + $( '#price-range' ).slider( 'values', 1 ));
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-2"></div>
-          <div class="col-8">
-            <a data-toggle="modal" href=".quick-view-drone"  class="btn btn-primary btn-block" style="display: inline-block;">Filtrar</a>
+        </div>
+
+        <div class="sideBar">
+          <div class="panel panel-default">
+            <div class="panel-heading">Filtrar por Marca</div>
+            <div class="panel-body clearfix">
+              <label for="">Selecione a Marca: </label>
+              <?php if($data['packproduto'] == 'password'):?>
+                <p>Nenhum produto!</p>
+              <?php else:?>
+              <div class="collapse navbar-collapse navbar-ex1-collapse navbar-side-collapse">
+              <ul class="nav navbar-nav side-nav">
+                <li>
+                  <ul class="collapse collapseItem show">
+                    <?php $ids_aux = []; $ids_aux[] = 0; ?>
+                    <?php if ($data['link'] == 0):
+                      foreach ($data['marca'] as $marca):
+                      if(in_array($marca->getId_marca(), $ids_aux)) continue;
+                    ?>
+                      <li><a href="<?php echo $this->base_url."Loja/view/".$gp_atual->getId_grupo().".1.".$marca->getId_marca();?>" ><i class="fa fa-caret-right" aria-hidden="true"></i><?php echo $marca->getNome(); ?></a></li> <!--  if($linha->getId_grupo() == $gp_atual->getId_grupo()) echo "style='font-weight: bold !important; text-decoration: underline !important;'"; -->
+                    <?php $ids_aux[] = $marca->getId_marca(); endforeach;
+                      else:
+                        foreach ($data['marca'] as $marca):
+                          if($data['link'] == $marca->getId_marca()): ?>
+                            <li><a disabled="true" ><b><u><i class="fa fa-caret-right" aria-hidden="true"></i><?php echo $marca->getNome(); ?></u></b></a></li>
+                            <li><small>Esta marca está selecionada.<br>Redefina caso queira outra.</small></li>
+                    <?php endif; break; endforeach; endif; ?>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          <?php endif;?>
+            </div>
           </div>
-        </div><br>
+        </div>
+
         <div class="row">
           <div class="col-2"></div>
           <div class="col-8">
             <a href="<?php echo $this->base_url; ?>Loja/view/<?php echo $gp_atual->getId_grupo(); ?>"  class="btn btn-inverse-outlined btn-sm btn-block" style="display: inline-block;">Redefiinr</a>
           </div>
         </div><br><br>
+
+
       </div>
       <div class="col-lg-9 col-md-8">
         <div class="row filterArea">
@@ -129,7 +162,7 @@ $( '#price-amount-2' ).val( 'R$' + $( '#price-range' ).slider( 'values', 1 ));
               <option value="alfa">Ordem Alfabética</option>
               <option value="maior">Preço Maior</option>
               <option value="menor">Preço Menor</option>
-            </select><input class="btn btn-primary" type="submit" name="filter2" value="Go!" style="height: 35px; line-height: 0px;"/>
+            </select><input class="btn btn-primary" type="submit" name="filter" value="Go!" style="height: 35px; line-height: 0px;"/>
           </div>
           </div>
 
@@ -145,7 +178,7 @@ $( '#price-amount-2' ).val( 'R$' + $( '#price-range' ).slider( 'values', 1 ));
             </div>
           <?php else:
            foreach ($data['packproduto'] as $produtos):
-             if(in_array($produtos->getId_subgrupo(), $ids_aux)) continue; else $ids_aux[] = $produtos->getId_subgrupo();
+             if(in_array($produtos->getId_subgrupo(), $ids_prod)) continue; else $ids_prod[] = $produtos->getId_subgrupo();
              ?>
               <div class="col-md-6 col-lg-4">
                 <div class="productBox">
@@ -169,74 +202,13 @@ $( '#price-amount-2' ).val( 'R$' + $( '#price-range' ).slider( 'values', 1 ));
         </div>
         <center><div class="btn-group row" role="group" aria-label="Basic example" style="margin:0"><center>
           <?php if ($data['paginador_atual'] > 1 ): ?>
-            <a href="<?php echo $this->base_url; ?>Loja/view/<?php echo $gp_atual->getId_grupo();?>.<?php echo $data['paginador_atual']-1;?>" class="btn btn-primary-outlined" style="margin-top: 10px;">Anterior</a>
+            <a href="<?php echo $this->base_url; ?>Loja/view/<?php echo $gp_atual->getId_grupo();?>.<?php echo $data['paginador_atual']-1; if($data['link'] != 0) echo ".".$data['link']; ?>" class="btn btn-primary-outlined" style="margin-top: 10px;">Anterior</a>
           <?php endif; ?>
           <?php if ($data['paginador_atual'] < $data['paginador_max'] ): ?>
-            <a href="<?php echo $this->base_url; ?>Loja/view/<?php echo $gp_atual->getId_grupo();?>.<?php echo $data['paginador_atual']+1;?>" class="btn btn-primary-outlined" style="margin-top: 10px;">Próxima</a>
+            <a href="<?php echo $this->base_url; ?>Loja/view/<?php echo $gp_atual->getId_grupo();?>.<?php echo $data['paginador_atual']+1; if($data['link'] != 0) echo ".".$data['link']; ?>" class="btn btn-primary-outlined" style="margin-top: 10px;">Próxima</a>
           <?php endif; ?>
         </center></div></center>
       </div>
     </div>
   </div>
 </section>
-
-<!-- PORDUCT QUICK VIEW MODAL  -->
-<div class="modal fade quick-view-drone" tabindex="-1" role="dialog">
-<div class="modal-dialog">
-  <div class="modal-content">
-    <div class="modal-body">
-      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-      <div class="media flex-wrap">
-        <div class="media-body">
-          <div class="row">
-          <div class="sideBar modalBar" style="padding-top: 22px;">
-            <div class="panel panel-default priceRange">
-              <div class="panel-heading">Filtrar por preço</div>
-              <div class="panel-body clearfix" style="height: 115px;">
-                <div class="price-slider-inner">
-                  <span class="amount-wrapper" style="right: inherit;">
-                    Preço:<br>
-                    <input type="text" name="preco-min" id="price-amount-1" readonly>
-                    <strong>-</strong>
-                    <input type="text" name="preco-max" id="price-amount-2" readonly>
-                  </span>
-                  <div id="price-range"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="sideBar modalBar">
-            <div class="panel panel-default priceRange">
-              <div class="panel-heading">Filtrar por Marca</div>
-              <div class="panel-body clearfix" style="height: 120px;">
-                <div class="form-group">
-                  <label for="">Selecione a Marca: </label>
-                  <div class="form-group row">
-                    <div class="quick-drop col-12 selectOptions ">
-                      <select name="marca" class="form-control select-drop">
-                        <option value="0">Selecione a marca</option>
-                        <?php $ids_aux = []; $ids_aux[] = 0; ?>
-                        <?php foreach ($data['marca'] as $marca):
-                          if(in_array($marca->getId_marca(), $ids_aux)) continue;
-                        ?>
-                          <option value="<?php echo $marca->getId_marca(); ?>"><?php echo $marca->getNome(); ?></option>
-                        <?php $ids_aux[] = $marca->getId_marca(); endforeach; ?>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <input class="btn btn-primary" type="submit" name="filter1" value="Filtrar">
-            </form>
-          </div>
-        </div>
-      </div>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
