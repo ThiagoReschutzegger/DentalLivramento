@@ -105,7 +105,7 @@
               <h5>Método de entrega</h5>
               <p>
                 <b><span class="badge" style='background-color:blue; font-size:125%;'>Retirada na Loja</span></b> <br>
-                Vasco Alves, nº 123 <br>
+                Vasco Alves, nº 1273 <br>
                 Santana do Livramento - RS
               </p>
             </div>

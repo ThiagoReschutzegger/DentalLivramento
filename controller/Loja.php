@@ -82,6 +82,7 @@ class Loja extends Controller{
           $data['total_prod'] = $this->modelPackproduto->filtroPackproduto($marca_id,$ordem,$id_grupo,$paginador)[2];
           $data['total_prod_atual'] = count( $this->modelPackproduto->filtroPackproduto($marca_id,$ordem,$id_grupo,$paginador)[1]);
 
+          $data['ordem'] = $this->modelPackproduto->filtroPackproduto($marca_id,$ordem,$id_grupo,$paginador)[3];
 
         }else {
           $data['link'] = 0;
@@ -92,6 +93,8 @@ class Loja extends Controller{
 
           $data['total_prod'] = $this->modelPackproduto->getPackprodutoByGrupo($id_grupo,$paginador)[2];
           $data['total_prod_atual'] = count($this->modelPackproduto->getPackprodutoByGrupo($id_grupo,$paginador)[1]);
+
+          $data['ordem'] = "new";
 
           //echo "<pre>";var_dump($data['packproduto']);die;
         }
@@ -155,10 +158,12 @@ class Loja extends Controller{
         //   die;
         // }
 
-
-        $data['pag'] = $paginador;
-
-
+        if (filter_input(INPUT_POST, 'enviar-msg')) {
+          $email = filter_input(INPUT_POST, 'email-msg', FILTER_SANITIZE_STRING);
+          $msg = filter_input(INPUT_POST, 'mensagem-msg', FILTER_SANITIZE_STRING);
+          $this->father->addMensagem($email, $msg);
+          return true;
+        }
 
         $this->view->load('header',$data);
         $this->view->load('nav',$data);

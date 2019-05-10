@@ -146,4 +146,38 @@ class PedidoModel extends Model {
         }
     }
 
+    public function getPedidoById($id) {
+        $sql = "SELECT * FROM pedido WHERE id_pedido=:id;";
+        $linha2 = $this->ExecuteQuery($sql, [':id' => $id])[0];
+            return new Pedido($linha2['id_pedido'],$linha2['nome'],$linha2['endereco'],$linha2['cep'],$linha2['cidade'],$linha2['uf'],$linha2['telefone'],
+                                       $linha2['email'],$linha2['mensagem'],$linha2['precototal'],$linha2['data'],$linha2['status'],$linha2['id_carrinho']);
+    }
+
+    public  function removePedido($id) {
+       $sql = "DELETE FROM pedido WHERE id_pedido = :id";
+       if ($this->ExecuteCommand($sql, [':id'=>$id])) {
+           return true;
+       } else {
+           return false;
+       }
+   }
+
+   public  function removePedido_2($id) {
+      $sql = "DELETE FROM itemcarrinho WHERE id_carrinho = :id";
+      if ($this->ExecuteCommand($sql, [':id'=>$id])) {
+          return true;
+      } else {
+          return false;
+      }
+  }
+
+  public  function removePedido_3($id) {
+     $sql = "DELETE FROM carrinho WHERE id_carrinho = :id";
+     if ($this->ExecuteCommand($sql, [':id'=>$id])) {
+         return true;
+     } else {
+         return false;
+     }
+ }
+
 }

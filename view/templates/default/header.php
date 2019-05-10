@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Dental Livramento</title>
 
+    <meta name="theme-color" content="#00bafa" />
+
     <!-- PLUGINS CSS STYLE -->
     <link href="<?php echo $this->asset ?>plugins/jquery-ui/jquery-ui.css" rel="stylesheet">
     <link href="<?php echo $this->asset ?>plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">

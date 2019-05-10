@@ -177,7 +177,7 @@ class Home extends Controller{
           $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING);
           $mensagem = filter_input(INPUT_POST, 'mensagem', FILTER_SANITIZE_STRING);
 
-          if ($nome && $email && $telefone) {
+          if ($nome && $telefone) {
             $dados = array("Nome"=>$nome,"Endereço"=>$endereco,"CEP"=>$cep,"Cidade"=>$cidade,"UF"=>$uf,"Telefone"=>$telefone,"Email"=>$email,"Mensagem"=>$mensagem);
             if($dados["UF"] == "Selecione o Estado") $dados["UF"]='';
 
@@ -226,19 +226,26 @@ class Home extends Controller{
         $this->view->load('footer');
     }
 
-    public function addMensagem() { //Edu
-      if (filter_input(INPUT_GET, 'enviar-msg')) {
-        $email = filter_input(INPUT_GET, 'email-msg', FILTER_SANITIZE_STRING);
-        $msg = filter_input(INPUT_GET, 'mensagem-msg', FILTER_SANITIZE_STRING);
-        date_default_timezone_set('America/Sao_Paulo');
-        $mensagem = new Mensagem(null,$email,$msg,date("Y-m-d"));
-        if ($this->modelMensagem->insertMensagem($mensagem)) {
+    public function addMensagem($email=null,$msg=null) { //Edu
+
+      if (filter_input(INPUT_POST, 'enviar-msg') || isset($email) || isset($msg)) {
+        if(!isset($email) || !isset($msg)){
+          $email = filter_input(INPUT_POST, 'email-msg', FILTER_SANITIZE_STRING);
+          $msg = filter_input(INPUT_POST, 'mensagem-msg', FILTER_SANITIZE_STRING);
+        }
+        if ($email && $msg) {
+          date_default_timezone_set('America/Sao_Paulo');
+          $mensagem = new Mensagem(null,$email,$msg,date("Y-m-d"));
+          $this->modelMensagem->insertMensagem($mensagem);
           $this->MensagemEnviada();
           return true;
         }else{
           $this->MensagemErro();
           return true;
         }
+      }else{
+        $this->MensagemErro();
+        return true;
       }
     }
     public function MensagemEnviada(){ //Edu

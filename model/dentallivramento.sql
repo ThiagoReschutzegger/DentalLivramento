@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 29-Abr-2019 às 03:07
+-- Generation Time: 10-Maio-2019 às 16:43
 -- Versão do servidor: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
@@ -105,7 +105,7 @@ CREATE TABLE `categoria` (
 INSERT INTO `categoria` (`id_categoria`, `nome`, `descricao`, `imagem`) VALUES
 (6, 'Equipamentos', 'Equipamentos e acessórios odontológicos para o seu consultório disponíveis para venda.', 'https://conteudo.imguol.com.br/blogs/125/files/2016/10/utensilios-e-equipamentos-de-dentista-odontologia-broca-espatula-1452201753205_1920x1127.jpg'),
 (7, 'Ortodontia', 'A categoria não possui descrição.', 'https://www.sindicatometal.org.br/wp-content/uploads/2018/02/ortodontia-e1517842522535-860x450_c.png'),
-(8, 'Dentística', 'A categoria não possui descrição.', 'http://funbeo.com.br/wp-content/uploads/2017/07/Odontologia-Este%CC%81tica-825x510.jpg');
+(8, 'Dentística', '..', 'http://funbeo.com.br/wp-content/uploads/2017/07/Odontologia-Este%CC%81tica-825x510.jpg');
 
 -- --------------------------------------------------------
 
@@ -344,7 +344,6 @@ CREATE TABLE `pedido` (
 INSERT INTO `pedido` (`id_pedido`, `nome`, `endereco`, `cep`, `cidade`, `uf`, `telefone`, `email`, `mensagem`, `precototal`, `data`, `status`, `id_carrinho`) VALUES
 (1, 'Thiago Reschützegger', '', '97574-240', '', 'Am', '(23) 56435-4656', 'webforntier@gmail.com', '', 455.4, '2019-04-10', 'NAO ENTREGUE', 53),
 (3, 'Eduardo Maciel', 'mano seila', '97574-273', 'Santana do Livramento', 'Al', '(12) 32449-8989', 'webforntier@gmail.com', 'haha mt bom o site', 491.8, '2019-04-10', 'ENTREGUE', 55),
-(4, 'qwert', 'rya', '97575-160', 'Sant\'Ana do Livramento', 'Ri', '(12) 31231-2312', 'dudumaciel2011@hotmail.com', 'oiiiiii', 124.9, '2019-04-11', 'ENTREGUE', 56),
 (5, 'edu', 'rua tal', '97575-160', 'Sant\'Ana do Livramento', 'Ri', '(55) 98468-1929', 'dudumaciel2011@hotmail.com', 'no aguardo da minha compra!', 50.6, '2019-04-18', 'NAO ENTREGUE', 57);
 
 -- --------------------------------------------------------
@@ -383,7 +382,7 @@ INSERT INTO `produto` (`id_produto`, `barcode`, `preco`, `estoque`, `especificac
 (15, '17127371887', '200', 1, 'tam único', 10),
 (16, '11123', '400', 123, 'tam único', 11),
 (17, '114442', '100', 21, 'tam único', 12),
-(18, '199999124', '300', 3, 'tam único', 13),
+(18, '199999124', '300', 0, 'tam único', 13),
 (19, '1445532', '42', 5, 'tam único', 14),
 (20, '123447754', '150', 21, 'tam único', 15),
 (21, '23772377234232', '432', 3, 'tam único', 16),
@@ -425,22 +424,22 @@ CREATE TABLE `subgrupo` (
 --
 
 INSERT INTO `subgrupo` (`id_subgrupo`, `nome`, `descricao`, `imagem`, `destaque`, `id_grupo`, `id_marca`) VALUES
-(1, 'Elástico Dental para Gatos', 'O melhor elástico dental para gatos disponibilizado pela marca Puma', 'https://meusanimais.com.br/wp-content/uploads/2015/03/chocalho-gato.jpg', '1', 15, 2),
-(2, 'Elástico Dental para Cavalos', 'O melhor elastico', 'https://ae01.alicdn.com/kf/HTB1ebTLodfJ8KJjy0Feq6xKEXXaG/100-cm-USB-Cobrado-Decora-o-Tubos-Luminosos-LED-Rabos-de-Cavalo-Rabo-de-Cavalo-Equita.jpg_640x640.jpg', '1', 15, 3),
-(3, 'Elástico Dental para Girafas', 'No entanto, não podemos esquecer que a execução dos pontos do programa assume importantes posições no estabelecimento dos índices pretendidos. Caros amigos, o comprometimento entre as equipes ainda não demonstrou convincentemente que vai participar na mudança do impacto na agilidade decisória. Do mesmo modo, a valorização de fatores subjetivos nos obriga à análise das condições inegavelmente apropriadas. Nunca é demais lembrar o peso e o significado destes problemas, uma vez que a necessidade de renovação processual desafia a capacidade de equalização das posturas dos órgãos dirigentes com relação às suas atribuições. Assim mesmo, o início da atividade geral de formação de atitudes pode nos levar a considerar a reestruturação das diretrizes de desenvolvimento para o futuro. ', 'https://abrilsuperinteressante.files.wordpress.com/2016/09/super_imggirafa.jpg', '1', 15, 2),
-(4, 'ICE', 'Produto sem descrição.', 'http://www.dentallivramento.com.br/fotos/7898475422716.jpg', '1', 22, 1),
+(1, 'Elástico Dental para Gatos', 'O melhor elástico dental para gatos disponibilizado pela marca Puma', 'https://meusanimais.com.br/wp-content/uploads/2015/03/chocalho-gato.jpg', '', 15, 2),
+(2, 'Elástico Dental para Cavalos', 'O melhor elastico', 'https://ae01.alicdn.com/kf/HTB1ebTLodfJ8KJjy0Feq6xKEXXaG/100-cm-USB-Cobrado-Decora-o-Tubos-Luminosos-LED-Rabos-de-Cavalo-Rabo-de-Cavalo-Equita.jpg_640x640.jpg', '', 15, 3),
+(3, 'Elástico Dental para Girafas', 'No entanto, não podemos esquecer que a execução dos pontos do programa assume importantes posições no estabelecimento dos índices pretendidos. Caros amigos, o comprometimento entre as equipes ainda não demonstrou convincentemente que vai participar na mudança do impacto na agilidade decisória. Do mesmo modo, a valorização de fatores subjetivos nos obriga à análise das condições inegavelmente apropriadas. Nunca é demais lembrar o peso e o significado destes problemas, uma vez que a necessidade de renovação processual desafia a capacidade de equalização das posturas dos órgãos dirigentes com relação às suas atribuições. Assim mesmo, o início da atividade geral de formação de atitudes pode nos levar a considerar a reestruturação das diretrizes de desenvolvimento para o futuro. ', 'https://abrilsuperinteressante.files.wordpress.com/2016/09/super_imggirafa.jpg', '', 15, 2),
+(4, 'ICE', 'Produto sem descrição.', 'http://www.dentallivramento.com.br/fotos/7898475422716.jpg', '', 22, 1),
 (5, 'Produto 1', 'Produto sem descrição.', 'http://topdownleansystems.com/wordpress/wp-content/uploads/2012/05/retalon_inventory_management.jpg', '0', 19, 1),
 (6, 'Produto 2', 'Produto sem descrição.', 'https://medias2.prestastore.com/663731-pbig/product-stock-realtime.jpg', '0', 19, 1),
 (7, 'Produto 3', 'Produto sem descrição.', 'https://st.depositphotos.com/1031343/4546/v/950/depositphotos_45463921-stock-illustration-new-product-stamp.jpg', '0', 19, 1),
 (8, 'Produto 4', 'Produto sem descrição.', 'https://thumbs.dreamstime.com/z/approved-rejected-boxes-mean-product-testing-meaning-quality-control-38160069.jpg', '0', 19, 1),
 (10, 'Produto 5', 'Produto sem descrição.', 'http://content.woodz.com.br/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/r/e/relogio-de-madeira-woodz-montana-light.png', '0', 19, 2),
-(11, 'Produto 6', 'Produto sem descrição.', 'https://imgcentauro-a.akamaihd.net/900x900/889779M8/relogio-com-gps-tomtom-runner-3-img.jpg', '0', 19, 2),
+(11, 'Produto 6', 'Produto sem descrição.', 'https://imgcentauro-a.akamaihd.net/900x900/889779M8/relogio-com-gps-tomtom-runner-3-img.jpg', '1', 19, 2),
 (12, 'Produto 7', 'Produto sem descrição.', 'http://pontocom.com/image/cache/data/products/relogios/relogios-feminino/relogio-feminino-tommy-hilfiger-1781385-verso-1000x1000.jpg', '0', 19, 2),
-(13, 'Produto 8', 'Produto sem descrição.', 'http://www.secomrelogios.com.br/media/product/f31/relogio-masculino-dourado-x-games-xmgs1004-d2kx-46d.jpg', '0', 19, 2),
-(14, 'Produto 9', 'Produto sem descrição.', 'https://static.zattini.com.br/produtos/relogio-technos-pulseira-de-aco/70/F61-0258-070/F61-0258-070_zoom1.jpg', '0', 19, 2),
-(15, 'Produto 10', 'Produto sem descrição.', 'http://www.pontocom.com/image/cache/data/products/relogios/relogios-masculino/relogio-masculino-tommy-hilfiger-fitz-1790969-frente-1000x1000.JPG', '0', 19, 1),
+(13, 'Produto 8', 'Produto sem descrição.', 'http://www.secomrelogios.com.br/media/product/f31/relogio-masculino-dourado-x-games-xmgs1004-d2kx-46d.jpg', '1', 19, 2),
+(14, 'Produto 9', 'Produto sem descrição.', 'https://static.zattini.com.br/produtos/relogio-technos-pulseira-de-aco/70/F61-0258-070/F61-0258-070_zoom1.jpg', '1', 19, 2),
+(15, 'Produto 10', 'Produto sem descrição.', 'http://www.pontocom.com/image/cache/data/products/relogios/relogios-masculino/relogio-masculino-tommy-hilfiger-fitz-1790969-frente-1000x1000.JPG', '1', 19, 1),
 (16, 'Produto 11', 'Produto sem descrição.', 'https://sapling-inc.com/wp-content/gallery/sbp-series/Sapling-254-Wall-Mount-Green.jpg', '0', 19, 1),
-(17, 'Produto 12', 'Produto sem descrição.', 'https://w1.ezcdn.com.br/elister/fotos/zoom/381fz1/relogio-technos-masculino-performance-skydiver-t205ff-1p.jpg', '0', 19, 2),
+(17, 'Produto 12', 'Produto sem descrição.', 'https://w1.ezcdn.com.br/elister/fotos/zoom/381fz1/relogio-technos-masculino-performance-skydiver-t205ff-1p.jpg', '1', 19, 2),
 (18, 'Produto 13', 'Produto sem descrição.', 'https://http2.mlstatic.com/relogio-masculino-luxo-inox-automatico-esqueletizado-432-D_NQ_NP_994192-MLB25574035089_052017-F.jpg', '0', 19, 2);
 
 -- --------------------------------------------------------
@@ -563,12 +562,12 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT for table `carrinho`
 --
 ALTER TABLE `carrinho`
-  MODIFY `id_carrinho` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id_carrinho` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 --
 -- AUTO_INCREMENT for table `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `destaque`
 --
@@ -583,12 +582,12 @@ ALTER TABLE `estilo`
 -- AUTO_INCREMENT for table `grupo`
 --
 ALTER TABLE `grupo`
-  MODIFY `id_grupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id_grupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 --
 -- AUTO_INCREMENT for table `itemcarrinho`
 --
 ALTER TABLE `itemcarrinho`
-  MODIFY `id_itemcarrinho` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `id_itemcarrinho` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 --
 -- AUTO_INCREMENT for table `marca`
 --
@@ -598,12 +597,12 @@ ALTER TABLE `marca`
 -- AUTO_INCREMENT for table `mensagem`
 --
 ALTER TABLE `mensagem`
-  MODIFY `id_mensagem` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_mensagem` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `produto`
 --

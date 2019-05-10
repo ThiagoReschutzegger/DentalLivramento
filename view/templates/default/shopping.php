@@ -158,10 +158,10 @@ $( '#price-amount-2' ).val( 'R$' + $( '#price-range' ).slider( 'values', 1 ));
           <div class="col-md-7 col-sm-12">
             <div class="float-right select-shop">
             <select name="guiest_id1" id="guiest_id1" class="select-drop">
-              <option value="new">Mais Novo </option>
-              <option value="alfa">Ordem Alfabética</option>
-              <option value="maior">Preço Maior</option>
-              <option value="menor">Preço Menor</option>
+              <option <?php if($data['ordem'] == "new") echo "selected"; ?> value="new">Mais Novo </option>
+              <option <?php if($data['ordem'] == "alfa") echo "selected"; ?> value="alfa">Ordem Alfabética</option>
+              <option <?php if($data['ordem'] == "maior") echo "selected"; ?> value="maior">Preço Maior</option>
+              <option <?php if($data['ordem'] == "menor") echo "selected"; ?> value="menor">Preço Menor</option>
             </select><input class="btn btn-primary" type="submit" name="filter" value="Go!" style="height: 35px; line-height: 0px;"/>
           </div>
           </div>

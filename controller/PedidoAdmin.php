@@ -29,5 +29,17 @@ class PedidoAdmin extends Admin {
         $this->index();die;
     }
 
+    public function deletePedido($id) {
+      $pedido = $this->model->getPedidoById($id);
+      $id_cart = $pedido->getId_carrinho();
+
+      $this->model->removePedido($id);
+      $this->model->removePedido_2($id_cart);
+      $this->model->removePedido_3($id_cart);
+
+      $this->index();
+      return true;
+    }
+
 
 }

@@ -165,10 +165,10 @@ class PackprodutoModel extends Model {
           $list_paginada[] = $list[$i-1+$ponto];
           $i++;
         }
-        return array($paginador_max, $list_paginada, $total_prod);
+        return array($paginador_max, $list_paginada, $total_prod,$ordem);
       }else{
         $paginador_max = 1;
-        return array($paginador_max, $list, $total_prod);
+        return array($paginador_max, $list, $total_prod,$ordem);
       }
     }
 
