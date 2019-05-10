@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="<?php echo $this->asset ?>css/custom.css">
 
     <!-- Icons -->
-    <link rel="shortcut icon" href="<?php echo $this->asset ?>img/favicon.png">
+    <link rel="shortcut icon" href="<?php echo $this->asset ?>img/icon.ico">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

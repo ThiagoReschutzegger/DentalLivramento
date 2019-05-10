@@ -123,7 +123,7 @@ class PackprodutoModel extends Model {
        }else if ($ordem == "new"){
          $ordem_str = "ORDER BY subgrupo.id_subgrupo desc";
        }else{
-         $ordem_str = "";
+         $ordem_str = "ORDER BY subgrupo.id_subgrupo desc";
        }
 
 

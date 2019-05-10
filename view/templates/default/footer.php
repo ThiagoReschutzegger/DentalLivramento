@@ -12,7 +12,7 @@
     </h5>
     <ul class="list-unstyled text-left" style="color: #acacac; font-size: 1.2em;">
       <li>Rua Vasco Alves - 1273</li>
-      <li>S. do Livramento - RS</li>
+      <li>Sant'ana do Livramento - RS</li>
       <li>Brasil</li>
     </ul><br>
     <h5 style="color: #5f5f5f; font-size: 1.4em; padding-bottom: 10px; text-align: left;">Contatos</h5>
@@ -43,8 +43,8 @@
   <div class="footerLink">
     <h5 style="font-size: 18px;">Siga-nos</h5>
     <ul class="list-unstyled" style="letter-spacing: 2px;">
-      <li style="padding-top: 10px"><a href="#" style=" font-size: 1.5em;"><i class="fa fa-facebook-square"></i> FACEBOOK</a></li>
-      <li style="padding-top: 10px"><a href="#" style=" font-size: 1.5em;"><i class="fa fa-instagram"></i> INSTAGRAM</a></li>
+      <li style="padding-top: 10px"><a href="https://www.facebook.com/DentalLivramento/" target="_blank" style=" font-size: 1.5em;"><i class="fa fa-facebook-square"></i> FACEBOOK</a></li>
+      <li style="padding-top: 10px"><a href="https://www.instagram.com/dentallivramento/" target="_blank" style=" font-size: 1.5em;"><i class="fa fa-instagram"></i> INSTAGRAM</a></li>
     </ul>
   </div>
 </div>
@@ -57,7 +57,6 @@
               Estamos trabalhando para proporcionar a você uma ótima experiência.
           </li>
           <li style="padding-top: 5px; line-height: 21px">
-            <i class="fa fa-whatsapp"></i> (55) 9 8468-1929 <b>ou</b><br>
             <a href="mailto:contato.webfrontier@gmail.com"><i class="fa fa-envelope"></i> contato.webfrontier@gmail.com</a>
           </li>
       </ul>

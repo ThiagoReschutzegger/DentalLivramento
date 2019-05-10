@@ -118,4 +118,10 @@ input[type=number] {
     .btn-finalizar{
         margin-top: 10px;
     }
+
+    .img-slider{
+      height: auto !important;
+      width: 120px !important;
+      margin-top: 50px !important;
+    }
 }

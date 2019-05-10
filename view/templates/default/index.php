@@ -15,7 +15,7 @@
               data-start="1500"
               data-easing="Back.easeInOut"
               data-endspeed="300" >
-              <img src="<?php echo $this->asset ?>img/home/banner-slider/DentalLivramentoLogo.png" alt="slider-image img-fluid" style=" height: auto; margin-top: 10px;">
+              <img src="<?php echo $this->asset ?>img/logo-dental-square.png" alt="slider-image img-fluid" class="img-slider" style=" height: auto; width: 70%; margin-top: 100px;">
             </div>
 
             <div class="tp-caption rs-caption-2 sft fonte-e-cor-top"
@@ -39,7 +39,7 @@
               data-endspeed="300"
               data-endeasing="Power1.easeIn"
               data-captionhidden="off">
-              <small>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque convallis turpis pharetra pretium nec eu sem.</small>
+              <small>Os melhores produtos da fornteira você encontra aqui.<br>Conheça nossa Loja Virtual, agora com mais facilidades, ainda mais perto de você! </small>
             </div>
             <!--<div class="tp-caption rs-caption-4 sft"
               data-hoffset="0"
@@ -180,7 +180,7 @@
 <?php if (count($data['prod-destaq'])>3): ?>
     <div class="page-header text-uppercase">
       <h4 class="text-uppercase fonte-e-cor-top">Destaques</h4>
-    </div>  
+    </div>
     <div class="row featuredProducts featuredProductsSlider margin-bottom mouse-grab">
       <?php foreach($data['prod-destaq'] as $destaque): ?>
           <div class="slide col-md-3">

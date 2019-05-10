@@ -20,7 +20,7 @@
     <!-- Custom stylesheet - for your changes-->
     <link rel="stylesheet" href="<?php echo $this->asset; ?>css/custom.css">
     <!-- Favicon-->
-    <link rel="shortcut icon" href="<?php echo $this->asset; ?>img/favicon.ico">
+    <link rel="shortcut icon" href="<?php echo $this->asset ?>img/icon.ico">
     <!-- Tweaks for older IEs--><!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
