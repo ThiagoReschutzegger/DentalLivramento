@@ -1,5 +1,5 @@
 <?php
-
+error_reporting(E_ERROR);
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -33,7 +33,7 @@ class Email {
 
     //Classe configurada para enviar email através de conta do Google e PHPMailer
     //put your code here
-    private $de = 'thiagoreschutzegger@gmail.com';
+    private $de = 'serjaoberranteiro666@gmail.com';
     private $decontato;
     private $para;
     private $assunto;
@@ -62,6 +62,7 @@ class Email {
         $mail = new PHPMailer;
 //Tell PHPMailer to use SMTP
         $mail->isSMTP();
+        $mail->CharSet = 'utf8';
 //Enable SMTP debugging
 // 0 = off (for production use)
 // 1 = client messages
@@ -86,17 +87,19 @@ class Email {
     )
 );
 //Username to use for SMTP authentication - use full email address for gmail
-        $mail->Username = "thiagoreschutzegger@gmail.com";
+        $mail->Username = "serjaoberranteiro666@gmail.com";
 //Password to use for SMTP authentication
-        $mail->Password = "thimben10";
+        $mail->Password = "miawraw1231";
 //Set who the message is to be sent from
-        $mail->setFrom($this->de, 'Admin');
+        $mail->setFrom($this->de, 'Dental Livramento - Equipe ao Cliente');
 //Set an alternative reply-to address
         $mail->addReplyTo($this->decontato, $this->decontato);
 //Set who the message is to be sent to
-        $mail->addAddress($this->para, 'Contato');
+        $mail->addAddress($this->para, 'resposta automática');
 //Set the subject line
         $mail->Subject = $this->assunto;
+
+        $mail->IsHTML(true);
 //Read an HTML message body from an external file, convert referenced images to embedded,
 //convert HTML into a basic plain-text alternative body
         $mail->msgHTML($this->mensagem, __DIR__);
@@ -119,7 +122,7 @@ class Email {
 
 
     }
-    
+
     //Section 2: IMAP
 //IMAP commands requires the PHP IMAP Extension, found at: https://php.net/manual/en/imap.setup.php
 //Function to call which uses the PHP imap_*() functions to save messages: https://php.net/manual/en/book.imap.php
