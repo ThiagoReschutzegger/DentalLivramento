@@ -187,11 +187,10 @@ endforeach;
             </div>
           </div>
 
-
+<?php if (count($data['prod-destaq'])>3): ?>
           <div class="page-header text-uppercase">
             <h4 class="text-uppercase fonte-e-cor-top">Destaques</h4>
           </div>
-
           <div class="row featuredProducts featuredProductsSlider margin-bottom mouse-grab">
             <?php foreach($data['prod-destaq'] as $destaque): ?>
                 <div class="slide col-md-3">
@@ -211,5 +210,6 @@ endforeach;
                 </div>
             <?php endforeach; ?>
           </div>
+<?php endif; ?>
         </div>
       </section>

@@ -529,7 +529,7 @@ class Home extends Controller{
       $template_guillermo_msgnew = '';
 
       //enquanto nao vem parametros:
-      $acao = 'pedido'; //pedido ou msg, PRA TESTAR COLOCA teste !!!!
+      $acao = 'teste'; //pedido ou msg, PRA TESTAR COLOCA teste !!!!
       $email = ''; //email do cliente
 
       //variaveis fixas
@@ -559,7 +559,7 @@ class Home extends Controller{
       }
 
       if($acao == 'teste'){
-        $email = new Email('dudumaciel2011@hotmail.com','serjaoberranteiro666@gmail.com','Teste php mailer',$template_cliente,null);
+        $email = new Email('dudumaciel2011@hotmail.com','serjaoberranteiro666@gmail.com','Teste php mailer html 2',$template_cliente,null);
         $email->send();
       }
     }

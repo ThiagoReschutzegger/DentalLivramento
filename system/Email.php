@@ -102,7 +102,7 @@ class Email {
         $mail->IsHTML(true);
 //Read an HTML message body from an external file, convert referenced images to embedded,
 //convert HTML into a basic plain-text alternative body
-        $mail->msgHTML($this->mensagem, __DIR__);
+        $mail->msgHTML($this->mensagem);
 //Replace the plain text body with one created manually
         $mail->AltBody = $this->mensagem;
 //Attach an image file
