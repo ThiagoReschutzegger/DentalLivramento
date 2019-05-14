@@ -9,11 +9,18 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
+
     $( "a.scrollLink" ).click(function( event ) {
         event.preventDefault();
         $("html, body").animate({ scrollTop: $($(this).attr("href")).offset().top }, 500);
     });
-    $('#blockclick').click(false);
+
+    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+     console.log("Get outta here");
+   }else{
+     $('#blockclick').click(false);
+   }
+
 });
 </script>
   <body class="body-wrapper version1">
