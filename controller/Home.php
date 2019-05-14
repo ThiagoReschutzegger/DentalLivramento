@@ -49,11 +49,13 @@ class Home extends Controller{
         $data['marca'] = $this->modelMarca->getMarca();
         $data['itens'] = $this->getList();
         $data['prod-destaq'] = $this->modelSubgrupo->getSubgrupoDestaque();
+        $data['preloader'] = '1';
 
         $this->view->load('header',$data);
         $this->view->load('nav',$data);
         $this->view->load('index', $data);
         $this->view->load('footer');
+        $data['preloader'] = false;
 
     }
 
@@ -220,11 +222,12 @@ class Home extends Controller{
         $data['categoria'] = $this->modelCategoria->getCategoria();
         $data['grupo'] = $this->modelGrupo->getGrupo();
         $data['itens'] = $this->getList();
-
+        $data['preloader'] = '1';
         $this->view->load('header',$data);
         $this->view->load('nav',$data);
         $this->view->load('step-3', $data);
         $this->view->load('footer');
+        $data['preloader'] = null;
     }
 
     public function addMensagem($email=null,$msg=null) { //Edu
