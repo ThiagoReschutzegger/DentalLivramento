@@ -172,6 +172,7 @@ class Loja extends Controller{
     }
 
     public function search(){ //Edu
+      $data['preloader'] = '1';
       $data['estilo'] = $this->model->getEstiloAtual();
       $data['grupo'] = $this->modelGrupo->getGrupo();
       $data['categoria'] = $this->modelCategoria->getCategoria();
@@ -217,6 +218,7 @@ class Loja extends Controller{
       $this->view->load('nav',$data);
       $this->view->load('pesquisa', $data);
       $this->view->load('footer');
+      $data['preloader'] = null;
     }
 
 }

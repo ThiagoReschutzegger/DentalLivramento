@@ -13,11 +13,13 @@ $(document).ready(function(){
         event.preventDefault();
         $("html, body").animate({ scrollTop: $($(this).attr("href")).offset().top }, 500);
     });
+    $('#blockclick').click(false);
 });
 </script>
   <body class="body-wrapper version1">
 
     <!-- Preloader -->
+    <?php if(isset($data['preloader']) && $data['preloader']=="1"): ?>
     <div id="preloader" class="smooth-loader-wrapper">
       <div class="preloader_container">
         <div class="block"></div>
@@ -38,6 +40,7 @@ $(document).ready(function(){
         <div class="block"></div>
       </div>
     </div>
+    <?php endif;?>
 
     <div class="main-wrapper">
 
@@ -136,7 +139,7 @@ $(document).ready(function(){
                   <a href="<?php echo $this->base_url; ?>" class="nav-link" role="button" aria-haspopup="true">Home</a>
                 </li>
                 <li class="nav-item dropdown megaDropMenu ">
-                  <a href="javascript:void(0)" class="dropdown-toggle nav-link" data-toggle="dropdown" data-hover="dropdown" data-delay="300" data-close-others="true" aria-expanded="false">Categorias</b></a>
+                  <a href="javascript:void(0)" class="dropdown-toggle nav-link" data-toggle="dropdown" data-hover="dropdown" data-delay="300" data-close-others="true" aria-expanded="false" id="blockclick">Categorias</b></a>
                   <ul class="dropdown-menu row">
                     <?php foreach($data['categoria'] as $categoria): ?>
                     <li class="col-md-3 col-12">
