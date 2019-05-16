@@ -241,8 +241,10 @@ class Home extends Controller{
           date_default_timezone_set('America/Sao_Paulo');
           $mensagem = new Mensagem(null,$email,$msg,date("Y-m-d"));
           $this->modelMensagem->insertMensagem($mensagem);
-          $this->MensagemEnviada();
-          return true;
+          if($this->Mailer('mensagem')){
+            $this->MensagemEnviada();
+            return true;
+          }
         }else{
           $this->MensagemErro();
           return true;
@@ -319,8 +321,10 @@ class Home extends Controller{
 
 
       session_destroy();
-      header('location:' . $this->config->base_url . 'Home/step3');
-      die;
+      if($this->Mailer('pedido',$pedido->getEmail(),$pedido->getNome())){
+        header('location:' . $this->config->base_url . 'Home/step3');
+        die;
+      }
     }
 
     public function getList(){
@@ -338,16 +342,19 @@ class Home extends Controller{
       }
     }
 
-    public function Mailer(){ //param: acao, email, nome. Edu
-
+    public function Mailer($acao,$email = null, $nome = null){ //param: acao, email, nome. Edu
+      if(!$nome) $nome = '';
+      $titulo = '';
+      if($acao == 'mensagem') $titulo = 'Mensagens';
+      if($acao == 'pedido') $titulo = 'Pedidos';
       //Falta implementar o nome que vier, ai no meio
       //view/templates/Email/index
-      $template_cliente = '<html>
+
+      $base_html = '<html>
         <head>
           <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
           <style type="text/css">
-
             /* Default CSS */
             body,#body_style {margin: 0; padding: 0; background: #f1f1f1; color: #5b656e;}
             a {color: #09c;}
@@ -359,45 +366,34 @@ class Home extends Controller{
             h2 {font-size: 18px;}
             h3 {font-size: 16px;}
             p {margin: 0 0 1.6em 0;}
-
             /* Force Outlook to provide a "view in browser" menu link. */
             #outlook a {padding:0;}
-
             .topHeader{margin-top: 10px; margin-bottom: 10px;}
-
             /* Logo (branding) */
             .logoContainer {padding: 20px 0 10px 0px; width: 320px;}
             .logoContainer a {color: #ffffff;}
             .logo{width: 300px;}
-
             /* Whitespace (imageless spacer) */
             .whitespace {font-family: 0px; line-height: 0px;}
-
             /* Button */
             .buttonContainer {padding: 10px 20px 10px 20px;}
             .button {padding: 10px 5px 10px 5px; text-align: center; background-color: #00a0e3; border-radius: 4px;}
             .button a {color: #ffffff; text-decoration: none; display: block; text-transform: uppercase;}
-
             /* Featured content */
             .featuredHeader {background: #00a0e3;}
             #featuredImage img {display: block; margin: 0 auto;}
             .featuredTitle {color: #ffffff; font-size: 26px; padding: 0px 0px 10px 0px; font-weight: bold;}
             .featuredContent {color: #ffffff;}
-
             /* One horizontal section of content: e.g. */
             .section {padding: 20px 0px 0px 0px;}
             .sectionEven {background-color: #ffffff;padding: 30px 0px 30px 0px;}
-
             .sectionTitle, .sectionSubTitle{text-align: center;}
             .sectionTitle {font-size: 26px; padding: 0px 10px 10px 10px}
             .sectionSubTitle {padding: 0px 10px 20px 10px;}
-
             /* Footer and social media */
             .footNotes {padding: 0px 20px 0px 20px;}
             .footNotes a {color: #556270; font-size: 13px;}
             .socialMedia {background: #556270;}
-
-
             /* CSS for specific screen width(s) */
             @media only screen and (max-width: 480px) {
               body,table,td,p,a,li,blockquote {-webkit-text-size-adjust:none !important;}
@@ -411,10 +407,11 @@ class Home extends Controller{
                 body[yahoofix] .featuredContent {padding: 0px 10px 20px 10px;}
               }
           </style>
-        </head>
+        </head>';
+
+      $template_cliente = $base_html.'
         <body yahoofix>
           <span id="body_style" style="display:block">
-
             <!-- topHeader -->
             <table border="0" cellspacing="0" cellpadding="0" width="100%" summary="" class="topHeader">
               <tr>
@@ -434,7 +431,6 @@ class Home extends Controller{
               </tr>
             </table>
             <!-- End topHeader -->
-
             <!-- featuredHeader -->
             <table border="0" cellspacing="0" cellpadding="0" width="100%" summary="" class="featuredHeader">
               <tr>
@@ -450,7 +446,7 @@ class Home extends Controller{
                           </tr>
                           <tr>
                             <td class="featuredContent">
-                              Estamos cientes de seu pedido Cliente Sobrenome.<br>Estamos esperando você comparecer na nossa Loja para Finalizar sua compra!
+                              Estamos cientes de seu pedido '.$nome.'.<br>Estamos esperando você comparecer na nossa Loja para Finalizar sua compra!
                             </td>
                           </tr>
                         </table>
@@ -462,7 +458,6 @@ class Home extends Controller{
               </tr>
             </table>
             <!-- End featuredHeader -->
-
             <!-- Section -->
             <table border="0" cellpadding="0" cellspacing="0" width="100%" summary="">
               <tr>
@@ -481,9 +476,7 @@ class Home extends Controller{
                 </td>
               </tr>
             </table>
-
             <!-- End Section -->
-
             <!-- Social media -->
             <table border="0" cellspacing="0" cellpadding="0" width="100%" summary="" class="socialMedia">
               <tr><td class="whitespace" height="20">&nbsp;</td></tr>
@@ -492,10 +485,10 @@ class Home extends Controller{
                   <table border="0" cellspacing="0" cellpadding="0" width="120" align="center" summary="">
                     <tr>
                       <td align="center" width="32">
-                        <a href="https://www.twitter.com" title="Twitter"><img src="https://clipart.info/images/ccovers/1522452763logo-instagram-png-white.png" width="29" alt="Instagram" /></a>
+                        <a href="https://www.instagram.com/dentallivramento/" title="Twitter"><img src="https://clipart.info/images/ccovers/1522452763logo-instagram-png-white.png" width="29" alt="Instagram" /></a>
                       </td>
                       <td align="center" width="32">
-                        <a href="https://www.facebook.com" title="Facebook"><img src="https://lh3.googleusercontent.com/6vqCobn6AVRGBetzgmRfvJNQaEUpcARck-Xvt7em_5elsgq1FPlJgl_5LncBKL6B16v9wcrKEIeOBjCoHXuJjQlSAPjq0RBp4oAtuWhUBQMDWrb6apHRId26x4KnhqRcqidHDnNvfYHQXRwWe38TuNly9rbnIgEOxsneWfAZ6ZIR9gw6wZqqZcSM_j5wqDKsOTSSkxvHh4_8iu0PLD0Anw2OXCmHWGYqbPB9DKCJvWyO6J0IZRlcCPY7qQxSW5LWqMXhiSVy6Ycd49aelpTROoHzHz5lSupuoDicyMnQfW9Rb3b6ujUqfenE4SbCF59dTV_HCzkCntA5HaYhSLeSyfRcd6yiWhIV-cVB-DlmWayTwLm7Nhkgk-83C0VkTH-bE0zogBFJc-aCZWKJLA8_R2ZXbOnzuNVWesAwX6aPOXtjKHtlxFc7kPYKb0n7G26UE6q8MBXNcAZARnUE2vOc6b79mZvGu5x2x3LeSMTrbTzKRuNHGkL1y_Lol0mdyx0khc_thNEVamRu893k2ebrKjz3fZqQMRWxtshB57tH0dgJZpW_uhRbiha4gTNwhADnu-Ot9RgVMFdSOgK3z7zKm6yT2xNCW4Oke8lUiAMS0KT0V8CCDYElRMxkA3KVVsaPOtYIdFoJoCl_gzxVr-3-fz6z=s49-no" width="29" alt="Facebook" /></a>
+                        <a href="https://www.facebook.com/DentalLivramento/" title="Facebook"><img src="https://lh3.googleusercontent.com/6vqCobn6AVRGBetzgmRfvJNQaEUpcARck-Xvt7em_5elsgq1FPlJgl_5LncBKL6B16v9wcrKEIeOBjCoHXuJjQlSAPjq0RBp4oAtuWhUBQMDWrb6apHRId26x4KnhqRcqidHDnNvfYHQXRwWe38TuNly9rbnIgEOxsneWfAZ6ZIR9gw6wZqqZcSM_j5wqDKsOTSSkxvHh4_8iu0PLD0Anw2OXCmHWGYqbPB9DKCJvWyO6J0IZRlcCPY7qQxSW5LWqMXhiSVy6Ycd49aelpTROoHzHz5lSupuoDicyMnQfW9Rb3b6ujUqfenE4SbCF59dTV_HCzkCntA5HaYhSLeSyfRcd6yiWhIV-cVB-DlmWayTwLm7Nhkgk-83C0VkTH-bE0zogBFJc-aCZWKJLA8_R2ZXbOnzuNVWesAwX6aPOXtjKHtlxFc7kPYKb0n7G26UE6q8MBXNcAZARnUE2vOc6b79mZvGu5x2x3LeSMTrbTzKRuNHGkL1y_Lol0mdyx0khc_thNEVamRu893k2ebrKjz3fZqQMRWxtshB57tH0dgJZpW_uhRbiha4gTNwhADnu-Ot9RgVMFdSOgK3z7zKm6yT2xNCW4Oke8lUiAMS0KT0V8CCDYElRMxkA3KVVsaPOtYIdFoJoCl_gzxVr-3-fz6z=s49-no" width="29" alt="Facebook" /></a>
                       </td>
                     </tr>
                   </table>
@@ -504,7 +497,6 @@ class Home extends Controller{
               <tr><td class="whitespace" height="10">&nbsp;</td></tr>
             </table>
             <!-- End Social media -->
-
             <!-- FOOTER -->
             <table border="0" cellspacing="0" cellpadding="0" width="100%" summary="" class="footer">
               <tbody><tr><td class="whitespace" height="10">&nbsp;</td></tr>
@@ -527,43 +519,148 @@ class Home extends Controller{
       </html>
       ';
 
-      $template_guillermo_pedidonew = '';
+      $template_guillermo = $base_html.'
+        <body yahoofix>
+          <span id="body_style" style="display:block">
+            <!-- topHeader -->
+            <table border="0" cellspacing="0" cellpadding="0" width="100%" summary="" class="topHeader">
+              <tr>
+                <td>
+                  <!-- Logo (branding) -->
+                  <table border="0" cellspacing="0" cellpadding="0" width="640" align="center" summary="">
+                    <tr>
+                      <td class="logoContainer" align="center">
+                        <a href="/" title="Lorem logo">
+                          <img class="logo" src="https://lh3.googleusercontent.com/ngHU-7pNdMyMbI4AAX3lYWKDz_PHqx64oA0MF1IGyEXSPOXDAfjXbJtu48H7uvYfICJhKD2hmLALov0qQbxcpDOtzsJCgTsfzeUBij9mWJ2-5zo8Hj0JE6XSTGZq5AnSD4IKKxn5pVaC1MbmUX5nJSkSPaXy7wLhFUI1Q9Fd_B-mE_HiWk8FzbdsAbnNmsE7K3zitoAJC8Z-OH8tn4KiJe3hWReqBqQ3DNQWaXXch57GeTqb3bvRPQ1B9YMNJBe58TuBbJmZ20h8_PEc_CUZhFvdsYmS7ga5LSFlO9fnDCo2OuaOMuwJKhjbKQWsyE26dX699JAc3R8Tu2y_P7_xGHNGUM1cSK9myP9ri46LHzGjFXnwfP9AQeMAXqc4U1aBse7KRM2tHJmfulxeRpT3DL-XyOnzNgQaf9owlJ1HQU3WxLPBn4zNxQfSQqRVz0OuLspEKeJFvdGDvK7k__2UjqgOoFepnL17hRRaFCGuJlJ7X_7oexc6UUEd8r12lU6EkXZUC-hDusL3YRvYk2Jk5SMY2NJqrSigFslK8ZRwYmcWd9ACogMj5i9K7dglla9l7Pi1_aey-ZooPEmxv-_HdZTUTapJ4Q8Z3ZsbLiU8TkyqE1ir6a8TCrvvUdBKRDBcCDKOVCrKeB_GtjXFoRsCYEbu=w1326-h205-no" alt="logo" />
+                        </a>
+                      </td>
+                    </tr>
+                  </table>
+                  <!-- End Logo (branding) -->
+                </td>
+              </tr>
+            </table>
+            <!-- End topHeader -->
+            <!-- featuredHeader -->
+            <table border="0" cellspacing="0" cellpadding="0" width="100%" summary="" class="featuredHeader">
+              <tr>
+                <td class="section">
+                  <table border="0" cellspacing="0" cellpadding="0" width="640" align="center" summary="">
+                    <tr>
+                      <td class="column">
+                        <table border="0" cellspacing="0" cellpadding="0" width="395" summary="">
+                          <tr>
+                            <td class="featuredTitle">
+                              Você tem novos '.$titulo.'!
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="featuredContent">
+                              Pode ser que você tenha novos '.$titulo.'.<br>Acesse o site na sessão Admin e confira!
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                      <td id="featuredImage" class="column"><img src="https://lh3.googleusercontent.com/S-4XGyCtjdxf1sCXkRqNwaMh2wNxjXkVDa-1tt6QtDivFIpUzzTf2GRY4o2EwpWIz7LogKCqN1SFcE5KDBLWcOrlnTZ4Fl7WOON_Nv9cue21RgdbBlsKMki8RWWYQmYTOUbJ9EJEGLCXwmhU8FLgVTwsDnNjrEUINAFu83KKUd5BOBR7Kgyb7DVE4Xxe88QO2HMwz8HZNVYc6FObPwehrrYgNAr6azFpk2iUJSbzr1I96rr3OrLcVjwmeZxAWQ0JQb4F9Y7QO_FKVd9yaUe9ty0pe8fG0rkXHky3dlZ17dUvZB4_SjgX_ul3OwTamHcml2fTSDHZ-9SeuuDfS-AuJfi2qXqcnaQ1rbsCsCHn6O0ElAXAKPepWhYKips_QH3vj8lK4GQTAvBTIxyVhbzWzxFCEupikJ6j3Ft75_sT8GlsMEiHLr2LFqbIb-1l5h9lrXYkAEAmoPmBJD-C51A9D6ot87qW-eB6EWF_2BpH2p5k_2OLANdP5upEMTcIIopctmlkNI0mo48W-KILHBJuMJ7XbUPs2BLfjiWTJrcJjjgtOIVCpwqK6cSy9KFlKabeDrDWwZKm8cRLwcvgNTeGp_RzDwSPSeOKFPx5GqR91RCx8m7Q_AKMz0Pmmd-V95a2ME-rzCgpz2cZa3WtMGOlEs-j=w234-h203-no" width="234" alt="" /></td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+            <!-- End featuredHeader -->
+            <!-- Section -->
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" summary="">
+              <tr>
+                <td class="sectionEven">
+                  <table border="0" cellpadding="0" cellspacing="0" width="640" align="center" summary="">
+                    <tr>
+                      <td class="buttonContainer">
+                        <table border="0" cellpadding="0" cellspacing="0" summary="" width="30%" align="center">
+                          <tr><td class="button"><a href="http://www.dentallivramento.com.br/Admin" title="ipsum">acessar admin</a></td></tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+            <!-- End Section -->
+            <!-- Social media -->
+            <table border="0" cellspacing="0" cellpadding="0" width="100%" summary="" class="socialMedia">
+              <tr><td class="whitespace" height="20">&nbsp;</td></tr>
+              <tr>
+                <td>
+                  <table border="0" cellspacing="0" cellpadding="0" width="120" align="center" summary="">
+                    <tr>
+                      <td align="center" width="32">
+                        <a href="https://www.instagram.com/dentallivramento/" title="Twitter"><img src="https://clipart.info/images/ccovers/1522452763logo-instagram-png-white.png" width="29" alt="Instagram" /></a>
+                      </td>
+                      <td align="center" width="32">
+                        <a href="https://www.facebook.com/DentalLivramento/" title="Facebook"><img src="https://lh3.googleusercontent.com/6vqCobn6AVRGBetzgmRfvJNQaEUpcARck-Xvt7em_5elsgq1FPlJgl_5LncBKL6B16v9wcrKEIeOBjCoHXuJjQlSAPjq0RBp4oAtuWhUBQMDWrb6apHRId26x4KnhqRcqidHDnNvfYHQXRwWe38TuNly9rbnIgEOxsneWfAZ6ZIR9gw6wZqqZcSM_j5wqDKsOTSSkxvHh4_8iu0PLD0Anw2OXCmHWGYqbPB9DKCJvWyO6J0IZRlcCPY7qQxSW5LWqMXhiSVy6Ycd49aelpTROoHzHz5lSupuoDicyMnQfW9Rb3b6ujUqfenE4SbCF59dTV_HCzkCntA5HaYhSLeSyfRcd6yiWhIV-cVB-DlmWayTwLm7Nhkgk-83C0VkTH-bE0zogBFJc-aCZWKJLA8_R2ZXbOnzuNVWesAwX6aPOXtjKHtlxFc7kPYKb0n7G26UE6q8MBXNcAZARnUE2vOc6b79mZvGu5x2x3LeSMTrbTzKRuNHGkL1y_Lol0mdyx0khc_thNEVamRu893k2ebrKjz3fZqQMRWxtshB57tH0dgJZpW_uhRbiha4gTNwhADnu-Ot9RgVMFdSOgK3z7zKm6yT2xNCW4Oke8lUiAMS0KT0V8CCDYElRMxkA3KVVsaPOtYIdFoJoCl_gzxVr-3-fz6z=s49-no" width="29" alt="Facebook" /></a>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr><td class="whitespace" height="10">&nbsp;</td></tr>
+            </table>
+            <!-- End Social media -->
+            <!-- FOOTER -->
+            <table border="0" cellspacing="0" cellpadding="0" width="100%" summary="" class="footer">
+              <tbody><tr><td class="whitespace" height="10">&nbsp;</td></tr>
+              <tr>
+                <td>
+                  <table border="0" cellspacing="0" cellpadding="0" align="center" summary="">
+                    <tbody><tr>
+                      <td class="footNotes" align="center">
+                        <p title="Lorem" style="color: #556270; font-size: 13px;">Este é um email automático, não responda. Para entrar em contato utilize os meios disponíveis pelo site.</p>
+                      </td>
+                    </tr>
+                  </tbody></table>
+                </td>
+              </tr>
+              <tr><td class="whitespace" height="10">&nbsp;</td></tr>
+            </tbody></table>
+            <!-- END FOOTER -->
+          </span>
+        </body>
+      </html>
+';
 
-      $template_guillermo_msgnew = '';
 
       //enquanto nao vem parametros:
-      $acao = 'teste'; //pedido ou msg, PRA TESTAR COLOCA teste !!!!
-      $email = ''; //email do cliente
+      // $acao = 'teste'; //pedido ou msg, PRA TESTAR COLOCA teste !!!!
+      // $email = ''; //email do cliente
 
       //variaveis fixas
-      $email_envio = ''; //email para aparecer quem enviou, não necessariamente a conta de email que esta enviando / vai ser o email do site/hostinger
-      $email_guillermo = '';
+      $email_envio = 'serjaoberranteiro666@gmail.com'; //email para aparecer quem enviou, não necessariamente a conta de email que esta enviando / vai ser o email do site/hostinger
+      $email_guillermo = 'dudumaciel2011@hotmail.com';
 
       if($acao == 'pedido'){
         //avisando o cliente
         if($email != ''){ //se o cliente nao preencheu email, envia só p guillermito
-          echo "rsrs";
-          die;
           $assunto = 'Pedido Confirmado';
           $email = new Email($email,$email_envio,$assunto,$template_cliente,null);
           $email->send();
         }
 
         //avisando o guillermo
-        echo "kk"; die;
         date_default_timezone_set('America/Sao_Paulo');
         $assunto = 'Novo Pedido - '.date("d/m/Y");
-        $email = new Email($email_guillermo,$email_envio,$assunto,$template_guillermo_pedidonew,null);
-        $email->send();
+        $email = new Email($email_guillermo,$email_envio,$assunto,$template_guillermo,null);
+        if($email->send()) return true;
       }
 
       if($acao == 'mensagem'){
-
+        date_default_timezone_set('America/Sao_Paulo');
+        $assunto = 'Nova Mensagem - '.date("d/m/Y");
+        $email = new Email($email_guillermo,$email_envio,$assunto,$template_guillermo,null);
+        if($email->send()) return true;
       }
 
       if($acao == 'teste'){
         $email = new Email('dudumaciel2011@hotmail.com','serjaoberranteiro666@gmail.com','Teste php mailer html 2',$template_cliente,null);
-        $email->send();
+        if($email->send()) return true;
       }
     }
 

@@ -109,9 +109,11 @@ class Email {
         $mail->addAttachment('phpmailer/images/phpmailer_mini.png');
 //send the message, check for errors
         if (!$mail->send()) {
-            echo "<script>alert('Mensagem não enviada')</script>";
+            //echo "<script>alert('Mensagem não enviada')</script>";
+            return false;
         } else {
-            echo "<script>alert('Mensagem enviada com sucesso')</script>";
+            //echo "<script>alert('Mensagem enviada com sucesso')</script>";
+            return true;
             //Section 2: IMAP
             //Uncomment these to save your message in the 'Sent Mail' folder.
             #if (save_mail($mail)) {
