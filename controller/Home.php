@@ -421,7 +421,7 @@ class Home extends Controller{
                     <tr>
                       <td class="logoContainer" align="center">
                         <a href="/" title="Lorem logo">
-                          <img class="logo" src="https://lh3.googleusercontent.com/ngHU-7pNdMyMbI4AAX3lYWKDz_PHqx64oA0MF1IGyEXSPOXDAfjXbJtu48H7uvYfICJhKD2hmLALov0qQbxcpDOtzsJCgTsfzeUBij9mWJ2-5zo8Hj0JE6XSTGZq5AnSD4IKKxn5pVaC1MbmUX5nJSkSPaXy7wLhFUI1Q9Fd_B-mE_HiWk8FzbdsAbnNmsE7K3zitoAJC8Z-OH8tn4KiJe3hWReqBqQ3DNQWaXXch57GeTqb3bvRPQ1B9YMNJBe58TuBbJmZ20h8_PEc_CUZhFvdsYmS7ga5LSFlO9fnDCo2OuaOMuwJKhjbKQWsyE26dX699JAc3R8Tu2y_P7_xGHNGUM1cSK9myP9ri46LHzGjFXnwfP9AQeMAXqc4U1aBse7KRM2tHJmfulxeRpT3DL-XyOnzNgQaf9owlJ1HQU3WxLPBn4zNxQfSQqRVz0OuLspEKeJFvdGDvK7k__2UjqgOoFepnL17hRRaFCGuJlJ7X_7oexc6UUEd8r12lU6EkXZUC-hDusL3YRvYk2Jk5SMY2NJqrSigFslK8ZRwYmcWd9ACogMj5i9K7dglla9l7Pi1_aey-ZooPEmxv-_HdZTUTapJ4Q8Z3ZsbLiU8TkyqE1ir6a8TCrvvUdBKRDBcCDKOVCrKeB_GtjXFoRsCYEbu=w1326-h205-no" alt="logo" />
+                          <img class="logo" src="http://dentalbeta.tk/view/templates/default/img/DentalLivramentoLogoFinal.png" alt="logo" />
                         </a>
                       </td>
                     </tr>
@@ -451,7 +451,7 @@ class Home extends Controller{
                           </tr>
                         </table>
                       </td>
-                      <td id="featuredImage" class="column"><img src="https://lh3.googleusercontent.com/S-4XGyCtjdxf1sCXkRqNwaMh2wNxjXkVDa-1tt6QtDivFIpUzzTf2GRY4o2EwpWIz7LogKCqN1SFcE5KDBLWcOrlnTZ4Fl7WOON_Nv9cue21RgdbBlsKMki8RWWYQmYTOUbJ9EJEGLCXwmhU8FLgVTwsDnNjrEUINAFu83KKUd5BOBR7Kgyb7DVE4Xxe88QO2HMwz8HZNVYc6FObPwehrrYgNAr6azFpk2iUJSbzr1I96rr3OrLcVjwmeZxAWQ0JQb4F9Y7QO_FKVd9yaUe9ty0pe8fG0rkXHky3dlZ17dUvZB4_SjgX_ul3OwTamHcml2fTSDHZ-9SeuuDfS-AuJfi2qXqcnaQ1rbsCsCHn6O0ElAXAKPepWhYKips_QH3vj8lK4GQTAvBTIxyVhbzWzxFCEupikJ6j3Ft75_sT8GlsMEiHLr2LFqbIb-1l5h9lrXYkAEAmoPmBJD-C51A9D6ot87qW-eB6EWF_2BpH2p5k_2OLANdP5upEMTcIIopctmlkNI0mo48W-KILHBJuMJ7XbUPs2BLfjiWTJrcJjjgtOIVCpwqK6cSy9KFlKabeDrDWwZKm8cRLwcvgNTeGp_RzDwSPSeOKFPx5GqR91RCx8m7Q_AKMz0Pmmd-V95a2ME-rzCgpz2cZa3WtMGOlEs-j=w234-h203-no" width="234" alt="" /></td>
+                      <td id="featuredImage" class="column"><img src="https://previews.dropbox.com/p/thumb/AAaZm2eg_vGwROC1IwY-rz0KDZPYhLDtgZgJkqCesxuM9WOCHQdpvGN5iJ2ClUg-nhoIc-21BRSdIscW839CDc9JQ_B1uhlTup6vTkOGo3I0Sxr0GM898puv-8xZhYmQm0iZadp2qIb_bo_X4N2I-nN_1ydy7qFrzfvP9erCF0yZHUdGdbY_tr0vdwyxmz0OqPZbJU0mKzUsD-8pqBwSb8EgSvvgJIG-SNlyMfVUgu0KwIAYOGwmLGIBfxkbLLpzVeVte1Tm9IRkj9aoACr3qZvS6eMgZPPLAWOrULEh8C0udqnP3gNZe8jxAvMehZQ-grC8IFD_f0e_8e5d_57JiZil/p.png" width="234" alt="" /></td>
                     </tr>
                   </table>
                 </td>
@@ -488,7 +488,7 @@ class Home extends Controller{
                         <a href="https://www.instagram.com/dentallivramento/" title="Twitter"><img src="https://clipart.info/images/ccovers/1522452763logo-instagram-png-white.png" width="29" alt="Instagram" /></a>
                       </td>
                       <td align="center" width="32">
-                        <a href="https://www.facebook.com/DentalLivramento/" title="Facebook"><img src="https://lh3.googleusercontent.com/6vqCobn6AVRGBetzgmRfvJNQaEUpcARck-Xvt7em_5elsgq1FPlJgl_5LncBKL6B16v9wcrKEIeOBjCoHXuJjQlSAPjq0RBp4oAtuWhUBQMDWrb6apHRId26x4KnhqRcqidHDnNvfYHQXRwWe38TuNly9rbnIgEOxsneWfAZ6ZIR9gw6wZqqZcSM_j5wqDKsOTSSkxvHh4_8iu0PLD0Anw2OXCmHWGYqbPB9DKCJvWyO6J0IZRlcCPY7qQxSW5LWqMXhiSVy6Ycd49aelpTROoHzHz5lSupuoDicyMnQfW9Rb3b6ujUqfenE4SbCF59dTV_HCzkCntA5HaYhSLeSyfRcd6yiWhIV-cVB-DlmWayTwLm7Nhkgk-83C0VkTH-bE0zogBFJc-aCZWKJLA8_R2ZXbOnzuNVWesAwX6aPOXtjKHtlxFc7kPYKb0n7G26UE6q8MBXNcAZARnUE2vOc6b79mZvGu5x2x3LeSMTrbTzKRuNHGkL1y_Lol0mdyx0khc_thNEVamRu893k2ebrKjz3fZqQMRWxtshB57tH0dgJZpW_uhRbiha4gTNwhADnu-Ot9RgVMFdSOgK3z7zKm6yT2xNCW4Oke8lUiAMS0KT0V8CCDYElRMxkA3KVVsaPOtYIdFoJoCl_gzxVr-3-fz6z=s49-no" width="29" alt="Facebook" /></a>
+                        <a href="https://www.facebook.com/DentalLivramento/" title="Facebook"><img src="https://previews.dropbox.com/p/thumb/AAZ9L3b9jFJpYVOvxefJ1N8e5wotzU_ylLrHtWPIwhjbLVCx5BFunc1_4FxVnWn0Wo29WDLXG9ctfYJOXNdUonLoRumoZwcNabUi6Jetsb2K_oyQ6XdIsghTtz7D-0qRJ343DC_G27bx3QPzYEOHWHNLmpdP2vf9NKaxRNRA0BxOgGGJidsXGLIOKa91GmCCn977ayLRQtGHN4kg_6B_-se5sU3-FWSMTkuxx_LrVviKyy7Id1H3w4K0z7CmpHbw6jyN0xot9ksAMWJeBWUMnjSfq3W0uEl_A8OIcHvjlXrLj03x1kmbIHeM4wrxSbZE6_QlFk2nKEmKmEDm1J8utYMP/p.png" width="29" alt="Facebook" /></a>
                       </td>
                     </tr>
                   </table>
@@ -531,7 +531,7 @@ class Home extends Controller{
                     <tr>
                       <td class="logoContainer" align="center">
                         <a href="/" title="Lorem logo">
-                          <img class="logo" src="https://lh3.googleusercontent.com/ngHU-7pNdMyMbI4AAX3lYWKDz_PHqx64oA0MF1IGyEXSPOXDAfjXbJtu48H7uvYfICJhKD2hmLALov0qQbxcpDOtzsJCgTsfzeUBij9mWJ2-5zo8Hj0JE6XSTGZq5AnSD4IKKxn5pVaC1MbmUX5nJSkSPaXy7wLhFUI1Q9Fd_B-mE_HiWk8FzbdsAbnNmsE7K3zitoAJC8Z-OH8tn4KiJe3hWReqBqQ3DNQWaXXch57GeTqb3bvRPQ1B9YMNJBe58TuBbJmZ20h8_PEc_CUZhFvdsYmS7ga5LSFlO9fnDCo2OuaOMuwJKhjbKQWsyE26dX699JAc3R8Tu2y_P7_xGHNGUM1cSK9myP9ri46LHzGjFXnwfP9AQeMAXqc4U1aBse7KRM2tHJmfulxeRpT3DL-XyOnzNgQaf9owlJ1HQU3WxLPBn4zNxQfSQqRVz0OuLspEKeJFvdGDvK7k__2UjqgOoFepnL17hRRaFCGuJlJ7X_7oexc6UUEd8r12lU6EkXZUC-hDusL3YRvYk2Jk5SMY2NJqrSigFslK8ZRwYmcWd9ACogMj5i9K7dglla9l7Pi1_aey-ZooPEmxv-_HdZTUTapJ4Q8Z3ZsbLiU8TkyqE1ir6a8TCrvvUdBKRDBcCDKOVCrKeB_GtjXFoRsCYEbu=w1326-h205-no" alt="logo" />
+                          <img class="logo" src="https://https://previews.dropbox.com/p/thumb/AAZejuvfxZIo9_lmvvFjzEXQM2E8PWijdbvlXDgz9a8BA3bkqI4bUKr5g9PhTpBARh_mBTp9pELvBpFs7ra83KviFzka6C75F8vOTbCEpCEBM2tB5vX_6eHUgwwNIVEJ5Qe9rzZHZ9visoKO4VI4SAFG_JGlGcVneNSEP_1qnR38phvhB3Yr2WsfDYMg3LmP1DpZfEXquiQjLv4bKXSCbbCTv4qrVQL5dZ-tdtNJJ97IUTkS6AlMgHU5cNNU8BhtjiCUbPy8P_AkoWbU8jUtNEmHgliwB1KfPKAdDieizbGcOpKApBx07I2vxijN4YRGk7pMndFrysqIo1pmYI4XGU2A/p.png" alt="logo" />
                         </a>
                       </td>
                     </tr>
@@ -561,7 +561,7 @@ class Home extends Controller{
                           </tr>
                         </table>
                       </td>
-                      <td id="featuredImage" class="column"><img src="https://lh3.googleusercontent.com/S-4XGyCtjdxf1sCXkRqNwaMh2wNxjXkVDa-1tt6QtDivFIpUzzTf2GRY4o2EwpWIz7LogKCqN1SFcE5KDBLWcOrlnTZ4Fl7WOON_Nv9cue21RgdbBlsKMki8RWWYQmYTOUbJ9EJEGLCXwmhU8FLgVTwsDnNjrEUINAFu83KKUd5BOBR7Kgyb7DVE4Xxe88QO2HMwz8HZNVYc6FObPwehrrYgNAr6azFpk2iUJSbzr1I96rr3OrLcVjwmeZxAWQ0JQb4F9Y7QO_FKVd9yaUe9ty0pe8fG0rkXHky3dlZ17dUvZB4_SjgX_ul3OwTamHcml2fTSDHZ-9SeuuDfS-AuJfi2qXqcnaQ1rbsCsCHn6O0ElAXAKPepWhYKips_QH3vj8lK4GQTAvBTIxyVhbzWzxFCEupikJ6j3Ft75_sT8GlsMEiHLr2LFqbIb-1l5h9lrXYkAEAmoPmBJD-C51A9D6ot87qW-eB6EWF_2BpH2p5k_2OLANdP5upEMTcIIopctmlkNI0mo48W-KILHBJuMJ7XbUPs2BLfjiWTJrcJjjgtOIVCpwqK6cSy9KFlKabeDrDWwZKm8cRLwcvgNTeGp_RzDwSPSeOKFPx5GqR91RCx8m7Q_AKMz0Pmmd-V95a2ME-rzCgpz2cZa3WtMGOlEs-j=w234-h203-no" width="234" alt="" /></td>
+                      <td id="featuredImage" class="column"><img src="https://previews.dropbox.com/p/thumb/AAaZm2eg_vGwROC1IwY-rz0KDZPYhLDtgZgJkqCesxuM9WOCHQdpvGN5iJ2ClUg-nhoIc-21BRSdIscW839CDc9JQ_B1uhlTup6vTkOGo3I0Sxr0GM898puv-8xZhYmQm0iZadp2qIb_bo_X4N2I-nN_1ydy7qFrzfvP9erCF0yZHUdGdbY_tr0vdwyxmz0OqPZbJU0mKzUsD-8pqBwSb8EgSvvgJIG-SNlyMfVUgu0KwIAYOGwmLGIBfxkbLLpzVeVte1Tm9IRkj9aoACr3qZvS6eMgZPPLAWOrULEh8C0udqnP3gNZe8jxAvMehZQ-grC8IFD_f0e_8e5d_57JiZil/p.png" width="234" alt="" /></td>
                     </tr>
                   </table>
                 </td>
@@ -596,7 +596,7 @@ class Home extends Controller{
                         <a href="https://www.instagram.com/dentallivramento/" title="Twitter"><img src="https://clipart.info/images/ccovers/1522452763logo-instagram-png-white.png" width="29" alt="Instagram" /></a>
                       </td>
                       <td align="center" width="32">
-                        <a href="https://www.facebook.com/DentalLivramento/" title="Facebook"><img src="https://lh3.googleusercontent.com/6vqCobn6AVRGBetzgmRfvJNQaEUpcARck-Xvt7em_5elsgq1FPlJgl_5LncBKL6B16v9wcrKEIeOBjCoHXuJjQlSAPjq0RBp4oAtuWhUBQMDWrb6apHRId26x4KnhqRcqidHDnNvfYHQXRwWe38TuNly9rbnIgEOxsneWfAZ6ZIR9gw6wZqqZcSM_j5wqDKsOTSSkxvHh4_8iu0PLD0Anw2OXCmHWGYqbPB9DKCJvWyO6J0IZRlcCPY7qQxSW5LWqMXhiSVy6Ycd49aelpTROoHzHz5lSupuoDicyMnQfW9Rb3b6ujUqfenE4SbCF59dTV_HCzkCntA5HaYhSLeSyfRcd6yiWhIV-cVB-DlmWayTwLm7Nhkgk-83C0VkTH-bE0zogBFJc-aCZWKJLA8_R2ZXbOnzuNVWesAwX6aPOXtjKHtlxFc7kPYKb0n7G26UE6q8MBXNcAZARnUE2vOc6b79mZvGu5x2x3LeSMTrbTzKRuNHGkL1y_Lol0mdyx0khc_thNEVamRu893k2ebrKjz3fZqQMRWxtshB57tH0dgJZpW_uhRbiha4gTNwhADnu-Ot9RgVMFdSOgK3z7zKm6yT2xNCW4Oke8lUiAMS0KT0V8CCDYElRMxkA3KVVsaPOtYIdFoJoCl_gzxVr-3-fz6z=s49-no" width="29" alt="Facebook" /></a>
+                        <a href="https://www.facebook.com/DentalLivramento/" title="Facebook"><img src="https://previews.dropbox.com/p/thumb/AAZ9L3b9jFJpYVOvxefJ1N8e5wotzU_ylLrHtWPIwhjbLVCx5BFunc1_4FxVnWn0Wo29WDLXG9ctfYJOXNdUonLoRumoZwcNabUi6Jetsb2K_oyQ6XdIsghTtz7D-0qRJ343DC_G27bx3QPzYEOHWHNLmpdP2vf9NKaxRNRA0BxOgGGJidsXGLIOKa91GmCCn977ayLRQtGHN4kg_6B_-se5sU3-FWSMTkuxx_LrVviKyy7Id1H3w4K0z7CmpHbw6jyN0xot9ksAMWJeBWUMnjSfq3W0uEl_A8OIcHvjlXrLj03x1kmbIHeM4wrxSbZE6_QlFk2nKEmKmEDm1J8utYMP/p.png" width="29" alt="Facebook" /></a>
                       </td>
                     </tr>
                   </table>
@@ -630,7 +630,7 @@ class Home extends Controller{
 
       //enquanto nao vem parametros:
       // $acao = 'teste'; //pedido ou msg, PRA TESTAR COLOCA teste !!!!
-      // $email = ''; //email do cliente
+       //$email = ''; //email do cliente
 
       //variaveis fixas
       $email_envio = 'serjaoberranteiro666@gmail.com'; //email para aparecer quem enviou, não necessariamente a conta de email que esta enviando / vai ser o email do site/hostinger
@@ -659,7 +659,7 @@ class Home extends Controller{
       }
 
       if($acao == 'teste'){
-        $email = new Email('dudumaciel2011@hotmail.com','serjaoberranteiro666@gmail.com','Teste php mailer html 2',$template_cliente,null);
+        $email = new Email('dudumaciel2011@hotmail.com','serjaoberranteiro666@gmail.com','Teste com foto new',$template_cliente,null);
         if($email->send()) return true;
       }
     }

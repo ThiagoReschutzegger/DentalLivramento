@@ -116,7 +116,7 @@ $( '#price-amount-2' ).val( 'R$' + $( '#price-range' ).slider( 'values', 1 ));
                 <li>
                   <ul class="collapse collapseItem show">
                     <?php $ids_aux = []; $ids_aux[] = 0; ?>
-                    <?php if ($data['link'] == 0):
+                    <?php if ($data['link'] == '0.'.$data['ordem_atual']):
                       foreach ($data['marca'] as $marca):
                       if(in_array($marca->getId_marca(), $ids_aux)) continue;
                     ?>
@@ -124,7 +124,7 @@ $( '#price-amount-2' ).val( 'R$' + $( '#price-range' ).slider( 'values', 1 ));
                     <?php $ids_aux[] = $marca->getId_marca(); endforeach;
                       else:
                         foreach ($data['marca'] as $marca):
-                          if($data['link'] == $marca->getId_marca()): ?>
+                          if($data['link'] == $marca->getId_marca().'.'.$data['ordem_atual']): ?>
                             <li><a disabled="true" ><b><u><i class="fa fa-caret-right" aria-hidden="true"></i><?php echo $marca->getNome(); ?></u></b></a></li>
                             <li><small>Esta marca está selecionada.<br>Redefina caso queira outra.</small></li>
                     <?php endif; break; endforeach; endif; ?>
@@ -202,10 +202,10 @@ $( '#price-amount-2' ).val( 'R$' + $( '#price-range' ).slider( 'values', 1 ));
         </div>
         <center><div class="btn-group row" role="group" aria-label="Basic example" style="margin:0"><center>
           <?php if ($data['paginador_atual'] > 1 ): ?>
-            <a href="<?php echo $this->base_url; ?>Loja/view/<?php echo $gp_atual->getId_grupo();?>.<?php echo $data['paginador_atual']-1; if($data['link'] != 0) echo ".".$data['link']; ?>" class="btn btn-primary-outlined" style="margin-top: 10px;">Anterior</a>
+            <a href="<?php echo $this->base_url; ?>Loja/view/<?php echo $gp_atual->getId_grupo();?>.<?php echo $data['paginador_atual']-1; if($data['link'] != '') echo ".".$data['link']; ?>" class="btn btn-primary-outlined" style="margin-top: 10px;">Anterior</a>
           <?php endif; ?>
           <?php if ($data['paginador_atual'] < $data['paginador_max'] ): ?>
-            <a href="<?php echo $this->base_url; ?>Loja/view/<?php echo $gp_atual->getId_grupo();?>.<?php echo $data['paginador_atual']+1; if($data['link'] != 0) echo ".".$data['link']; ?>" class="btn btn-primary-outlined" style="margin-top: 10px;">Próxima</a>
+            <a href="<?php echo $this->base_url; ?>Loja/view/<?php echo $gp_atual->getId_grupo();?>.<?php echo $data['paginador_atual']+1; if($data['link'] != '') echo ".".$data['link']; ?>" class="btn btn-primary-outlined" style="margin-top: 10px;">Próxima</a>
           <?php endif; ?>
         </center></div></center>
       </div>

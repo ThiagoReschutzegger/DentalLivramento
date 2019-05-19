@@ -43,9 +43,9 @@ class Loja extends Controller{
       header('location:' . $this->config->base_url);
     }
 
-    public function view($id_grupo = null){ //Edu
+    public function view($param = null){ //Edu
 
-      $string = explode(".",$id_grupo);
+      $string = explode(".",$param);
       $id_grupo = $string[0];
       if(!isset($string[1]) || $string[1] == 0){
           $paginador = 1;
@@ -57,6 +57,11 @@ class Loja extends Controller{
       }else{
         $marca_id = $string[2];
       }
+      if(!isset($string[3])){
+          $ordem = '';
+      }else{
+        $ordem = $string[3];
+      }
 
       if($id_grupo == null) header('location:' . $this->config->base_url); //contra espetinhos
 
@@ -67,13 +72,12 @@ class Loja extends Controller{
         $data['categoria-atual'] = $this->modelCategoria->getCategoriaByGrupoId($id_grupo);
         $data['itens'] = $this->father->getList();
 
-        if (filter_input(INPUT_POST, 'filter') || $marca_id > 0) {
+        if (filter_input(INPUT_POST, 'filter') || $marca_id > 0 || $ordem != '') {
 
           if(filter_input(INPUT_POST, 'guiest_id1', FILTER_SANITIZE_STRING)){
             $ordem = filter_input(INPUT_POST, 'guiest_id1', FILTER_SANITIZE_STRING);
-          }else $ordem = "";
+          }
 
-          $data['link'] = $marca_id;
           $data['packproduto'] = $this->modelPackproduto->filtroPackproduto($marca_id,$ordem,$id_grupo,$paginador)[1];
 
           $data['paginador_max'] = $this->modelPackproduto->filtroPackproduto($marca_id,$ordem,$id_grupo,$paginador)[0];
@@ -85,7 +89,6 @@ class Loja extends Controller{
           $data['ordem'] = $this->modelPackproduto->filtroPackproduto($marca_id,$ordem,$id_grupo,$paginador)[3];
 
         }else {
-          $data['link'] = 0;
           $data['packproduto'] = $this->modelPackproduto->getPackprodutoByGrupo($id_grupo,$paginador)[1];
 
           $data['paginador_max'] = $this->modelPackproduto->getPackprodutoByGrupo($id_grupo,$paginador)[0];
@@ -98,6 +101,9 @@ class Loja extends Controller{
 
           //echo "<pre>";var_dump($data['packproduto']);die;
         }
+
+        $data['link'] = $marca_id.".".$ordem;
+        $data['ordem_atual'] = $ordem;
 
         if(empty($data['packproduto'])){ //caso não tenha nenhum prod no grupo, gambiarra.com
         $data['packproduto'] = 'password';
