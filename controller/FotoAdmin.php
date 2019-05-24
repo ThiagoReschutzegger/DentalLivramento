@@ -47,7 +47,7 @@ class FotoAdmin extends Admin  {
                 if (move_uploaded_file($tempname, $destino)) {
 
                    if ($this->model->insertFoto(new Foto($new_name))){
-                      header('location:' . $this->config->base_url.'AdminFotos');
+                      header('location:' . $this->config->base_url.'FotoAdmin');
                      return true;
                 } else {
                     $data['msg']='Erro ao cadastrar foto!';
