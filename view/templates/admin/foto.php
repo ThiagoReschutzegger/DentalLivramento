@@ -33,6 +33,14 @@ button {
 }
 </style>
 
+<script type="text/javascript">
+function copyInput(id) {
+  var copyText = document.getElementById("input"+id);
+  copyText.select();
+  document.execCommand("copy");
+}
+</script>
+
 <div class="content-inner">
     <!-- Page Header-->
     <header class="page-header">
@@ -46,9 +54,10 @@ button {
             <div class="row bg-white has-shadow">
               <div id="container"></div>
               <div id="images">
+                <div class="row"><!-- colocar row ou nao -->
                 <div class="item">
                   <center>
-                  <div class="item d-flex align-items-center" style="border: 0; padding: 80px; padding-bottom: 50px;">
+                  <div class="item d-flex align-items-center" style="border: 0; padding: 80px; padding-top: 50px;">
                     <a href="<?php echo $this->base_url; ?>FotoAdmin/addFoto">
                       <center>
                         <div class="icon bg-green" style="margin-top: 15px;"><i class="fa fa-plus"></i></div>
@@ -57,35 +66,20 @@ button {
                   </div>
                 </center>
                 </div>
+
                 <?php foreach ($data['fotos'] as $foto): ?>
                   <div class="box12 item" style="text-align: center;">
                       <img src="<?php echo $this->base_url; ?>view/images/<?php echo $foto->getSrc(); ?>">
                       <div class="box-content">
-                        <input type="text" class="title" value="<?php echo $this->base_url; ?>view/images/<?php echo $foto->getSrc(); ?>" id="input<?php echo $foto->getId_foto();?>" style="width: 100px; height: 20px; font-size: 10px"/>
+                        <input type="text" class="title" value="localhost<?php echo $this->base_url; ?>view/images/<?php echo $foto->getSrc(); ?>" id="input<?php echo $foto->getId_foto();?>" style="width: 100px; height: 20px; font-size: 10px"/>
                         <ul class="icons"><center>
-                            <li><a onclick="copyInput(<?php echo $foto->getId_foto();?>)"><i class="fa fa-copy"></i></a></li>
+                            <li><a onclick="copyInput('<?php echo $foto->getId_foto();?>')"><i class="fa fa-copy"></i></a></li>
                         </center></ul>
                       </div>
                   </div>
               <?php endforeach; ?>
             </div>
-
-            <script>
-            function copyInput(id) { //nao funciona, olhar console do navegador, sla
-            /* Get the text field */
-            alert(id);
-            var copyText = document.getElementById("input"+id));
-
-            /* Select the text field */
-            copyText.select();
-
-            /* Copy the text inside the text field */
-            document.execCommand("copy");
-
-            /* Alert the copied text */
-            alert("Copied the text: " + copyText.value);
-            }
-            </script>
+            </div>
 
             </div>
         </div>

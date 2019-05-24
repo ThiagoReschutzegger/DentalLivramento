@@ -5,7 +5,7 @@ class FotoModel extends Model {
     public function getFoto() {
 
         $list = [];
-        $sql = "SELECT * FROM foto";
+        $sql = "SELECT * FROM foto ORDER BY id_foto DESC";
         $consulta = $this->ExecuteQuery($sql, array());
         foreach ($consulta as $linha) {
             $list[] = new Foto($linha['src'],$linha['id_foto']);
