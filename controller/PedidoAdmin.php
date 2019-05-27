@@ -41,5 +41,51 @@ class PedidoAdmin extends Admin {
       return true;
     }
 
+    public function txtPedidoConcluido($id=1){
+
+      error_reporting(E_ERROR | E_PARSE);
+      //ignorar
+      $time1=date("Y-m-d H:i:s", time());
+      $time1_timezone=date_default_timezone_get();
+
+      date_default_timezone_set('UTC');
+      $time2=date("Y-m-d H:i:s", time());
+      $time2_timezone=date_default_timezone_get();
+
+      if ($time1!=$time2)
+      {
+        openlog('Arie',LOG_PERROR,LOG_LOCAL1);
+
+        syslog(LOG_ERR, "Time before setting timezone: [".$time1."]");
+        syslog(LOG_ERR, "Timezone is: [".$time1_timezone."]");
+        syslog(LOG_ERR, "Time after  setting timezone: [".$time2."]");
+        syslog(LOG_ERR, "Timezone is: [".$time2_timezone."]");
+      }
+      //ignorar
+
+      $data = date("d-m-Y");
+      $arquivo = $data."Pedido".$id.".txt";
+
+      $pedido = $this->model->getPedidoPorId2($id);
+
+      //echo "<pre>";print_r($pedido[0][1]);echo"kk";die;
+
+      $conteudo = "";
+
+      foreach ($pedido[0][1] as $produto) {
+        $conteudo .= $produto['produto']->getBarcode()."|".$produto['quantidade'].PHP_EOL;
+      }
+
+      file_put_contents($arquivo,$conteudo);
+
+      header('Content-Type: application/octet-stream');
+      header('Content-Disposition: attachment; filename='.basename($arquivo));
+      header('Expires: 0');
+      header('Cache-Control: must-revalidate');
+      header('Pragma: public');
+      header('Content-Length: ' . filesize($arquivo));
+      readfile($arquivo);
+
+    }
 
 }

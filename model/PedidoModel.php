@@ -54,6 +54,46 @@ class PedidoModel extends Model {
         return $ha;
     }
 
+    public function getPedidoPorId2($id) { // tive q criar outra pq ja existia uma q nao fazia o q eu queria THIAGO#
+
+        $list = [];
+        $list1 = [];
+
+        $sql = "SELECT pedido.*, itemcarrinho.*, produto.*, subgrupo.*, pedido.nome AS nomepedido
+                FROM pedido
+                JOIN carrinho ON pedido.id_carrinho = carrinho.id_carrinho
+                JOIN itemcarrinho ON carrinho.id_carrinho = itemcarrinho.id_carrinho
+                JOIN produto ON itemcarrinho.id_produto = produto.id_produto
+                JOIN subgrupo ON produto.id_subgrupo = subgrupo.id_subgrupo
+                WHERE pedido.id_pedido = {$id}
+                ORDER BY pedido.id_pedido DESC";
+
+        $consulta = $this->ExecuteQuery($sql, array());
+
+        foreach ($consulta as $linha) {
+          $list1[] = array('id_pedido' => $linha['id_pedido'],'produto' => new Packproduto($linha['id_produto'], $linha['barcode'], $linha['preco'], $linha['estoque'], $linha['especificacao'], $linha['id_subgrupo'], $linha['nome'], $linha['descricao'], $linha['imagem'], $linha['destaque'], $linha['id_grupo'], $linha['id_marca']), 'quantidade' => $linha['quantidade']);
+        }
+
+        $list1 = $this->group_by("id_pedido", $list1);
+
+        foreach($list1 as $prods){
+          //echo "1<br>";
+          //print_r( $prods[0]['id_pedido']);
+          foreach ($consulta as $linha2){
+            //echo "2<br>";
+            if($prods[0]['id_pedido'] == $linha2['id_pedido']){
+              //echo '3<br>';
+              $list[] = array(new Pedido($linha2['id_pedido'],$linha2['nomepedido'],$linha2['endereco'],$linha2['cep'],$linha2['cidade'],$linha2['uf'],$linha2['telefone'],
+                                         $linha2['email'],$linha2['mensagem'],$linha2['precototal'],$linha2['data'],$linha2['status'],$linha2['id_carrinho']), $prods);
+            }
+          }
+
+        }
+
+        $ha = array_unique($list, SORT_REGULAR);
+        return $ha;
+    }
+
     public function getPedidoPendente() {
       $list = [];
       $list1 = [];

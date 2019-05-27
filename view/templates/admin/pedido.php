@@ -148,6 +148,9 @@
                   <tr>
                     <td colspan='5'> <center><strong>PREÇO TOTAL: <?PHP echo $pedido[0]->getPrecototal()?></strong></center></td>
                   </tr>
+                  <tr>
+                      <td colspan="8"><center><a href="<?php echo $this->base_url; ?>PedidoAdmin/txtPedidoConcluido/<?php echo $pedido[0]->getId_pedido();?>"class="btn btn-info btn-lg btn-block">Baixar arquivo para sistema</a></center></td>
+                  </tr>
               </tbody>
             </table>
           </div>

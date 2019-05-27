@@ -26,7 +26,6 @@ $(document).ready(function(){
   <body class="body-wrapper version1">
 
     <!-- Preloader -->
-    <?php if(isset($data['preloader']) && $data['preloader']=="1"): ?>
     <div id="preloader" class="smooth-loader-wrapper">
       <div class="preloader_container">
         <div class="block"></div>
@@ -47,7 +46,6 @@ $(document).ready(function(){
         <div class="block"></div>
       </div>
     </div>
-    <?php endif;?>
 
     <div class="main-wrapper">
 
