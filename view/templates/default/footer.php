@@ -29,11 +29,11 @@
 <div class="row" style="margin-top: 30px">
 <div class="col-md-4 col-12">
   <div class="footerLink">
-    <h5 style="font-size: 18px;">Mande uma mensagem</h5>
+    <h5 style="font-size: 18px; margin-bottom: 20px;">Mande uma mensagem</h5>
     <div class="">
       <form method="post" action="<?php echo $this->base_url; ?>Home/addMensagem">
-        <input name="email-msg" type="email" class="form-control" placeholder="Seu e-mail">
-        <textarea name="mensagem-msg" class="form-control" placeholder="Escreva a mensagem aqui"></textarea>
+        <input name="email-msg" type="email" class="form-control" placeholder="Seu e-mail" style="background-color: #3b3b3b; color: white; border-color: #505050; margin-bottom: 15px;">
+        <textarea name="mensagem-msg" class="form-control" placeholder="Escreva a mensagem aqui" style="background-color: #3b3b3b; color: white; border-color: #505050; margin-bottom: 15px;"></textarea>
         <input type="submit" name="enviar-msg" value="Enviar" class="btn btn-primary-outlined">
       </form>
     </div>

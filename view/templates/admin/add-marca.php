@@ -27,6 +27,13 @@
             <input type="text" class="form-control" name="imagem"><small class="help-block-none">Cole aqui o link da imagem. (sempre terminado em .jpg .png ou outros tipos de imagem)</small>
           </div>
         </div>
+        <div class="line"></div>
+        <div class="form-group row">
+          <label class="col-sm-2 form-control-label text-right">Catálogo:</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" name="catalogo"><small class="help-block-none">Cole aqui o link do Catálogo.</small>
+          </div>
+        </div>
         <div class="form-group row">
           <input type="reset" class="btn btn-secondary col-sm-4 offset-sm-2" style="margin-right: 10px;" value="Limpar" />
           <input type="submit" class="btn btn-success col-sm-4 " value="Salvar" name="add" />

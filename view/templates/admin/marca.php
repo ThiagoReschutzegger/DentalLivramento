@@ -20,6 +20,7 @@
                     <th>Id</th>
                     <th>Nome - Marca</th>
                     <th>Link - imagem</th>
+                    <th>Catálogo</th>
                     <th>Ações</th>
                   </tr>
                 </thead>
@@ -30,9 +31,11 @@
                     <td><?php echo $marca->getNome(); ?></td>
                     <td><img src="<?php echo $marca->getImagem(); ?>" height="80px" /></td>
                     <td>
-                      <a class="btn btn-secondary" style="font-size: 15px;" href="<?php echo $this->base_url; ?>MarcaAdmin/viewMarca/<?php echo $marca->getId_marca(); ?>">
-                        <i class="fa fa-eye"></i>
+                      <a class="btn btn-success" style="font-size: 15px; margin-left: 15px;" target="_blank" href="<?php echo $marca->getCatalogo(); ?>">
+                        <i class="fa fa-paste"></i>
                       </a>
+                    </td>
+                    <td>
                       <a class="btn btn-info" style="font-size: 15px;" href="<?php echo $this->base_url; ?>MarcaAdmin/updateMarca/<?php echo $marca->getId_marca(); ?>">
                         <i class="fa fa-pencil"></i>
                       </a>

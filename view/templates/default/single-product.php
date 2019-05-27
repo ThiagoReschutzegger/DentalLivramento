@@ -92,7 +92,12 @@ endforeach;
                 </div>
                 <div class="media-body">
                   <ul class="list-inline">
-                    <li><a href="<?php echo $this->base_url; ?>Loja/view/<?php echo $grupo->getId_grupo(); ?>"><i class="fa fa-reply" aria-hidden="true"></i>Continuar Comprando</a></li>
+                    <li><a href="<?php echo $this->base_url; ?>Loja/view/<?php echo $grupo->getId_grupo(); ?>" style="line-height: 25px"><i class="fa fa-reply" aria-hidden="true"></i>Continuar Comprando</a></li>
+                    <li style="margin-right: 0px; float: right;">
+                      <a target="_blank" href="<?php echo $marca->getCatalogo(); ?>" class="btn btn-primary" style="font-size: 10px; line-height: 25px; height: 25px; color: white;">
+                        <i class="fa fa-file" aria-hidden="true"></i>&nbsp;Catálogo&nbsp;<?php echo $marca->getNome(); ?>
+                      </a>
+                    </li>
                   </ul>
                   <h2><?php echo $produto->getNome(); ?></h2>
                   <h3 style="margin-bottom:10px;">

@@ -22,9 +22,10 @@ class MarcaAdmin extends Admin {
       if (filter_input(INPUT_POST, 'add')) {
             $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
             $imagem = filter_input(INPUT_POST, 'imagem', FILTER_SANITIZE_STRING);
+            $catalogo = filter_input(INPUT_POST, 'catalogo', FILTER_SANITIZE_STRING);
 
             if ($nome && $imagem) {
-                $marca = new Marca(null,$nome,$imagem);
+                $marca = new Marca(null,$nome,$imagem,$catalogo);
                 if ($this->model->insertMarca($marca)) {
                      $data['msg'] = 'Adicionado com Sucesso!';
                 } else {
@@ -68,8 +69,9 @@ class MarcaAdmin extends Admin {
         $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_STRING);
         $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
         $imagem = filter_input(INPUT_POST, 'imagem', FILTER_SANITIZE_STRING);
+        $catalogo = filter_input(INPUT_POST, 'catalogo', FILTER_SANITIZE_STRING);
         if ($id && $nome && $imagem) {
-            $marca = new Marca($id,$nome,$imagem);
+            $marca = new Marca($id,$nome,$imagem,$catalogo);
             if ($this->model->updateMarca($marca)) {
                 $this->index();
                 return true;

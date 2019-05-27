@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 10-Maio-2019 às 16:43
+-- Generation Time: 27-Maio-2019 às 22:56
 -- Versão do servidor: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
@@ -83,7 +83,9 @@ INSERT INTO `carrinho` (`id_carrinho`) VALUES
 (54),
 (55),
 (56),
-(57);
+(57),
+(59),
+(62);
 
 -- --------------------------------------------------------
 
@@ -105,7 +107,8 @@ CREATE TABLE `categoria` (
 INSERT INTO `categoria` (`id_categoria`, `nome`, `descricao`, `imagem`) VALUES
 (6, 'Equipamentos', 'Equipamentos e acessórios odontológicos para o seu consultório disponíveis para venda.', 'https://conteudo.imguol.com.br/blogs/125/files/2016/10/utensilios-e-equipamentos-de-dentista-odontologia-broca-espatula-1452201753205_1920x1127.jpg'),
 (7, 'Ortodontia', 'A categoria não possui descrição.', 'https://www.sindicatometal.org.br/wp-content/uploads/2018/02/ortodontia-e1517842522535-860x450_c.png'),
-(8, 'Dentística', '..', 'http://funbeo.com.br/wp-content/uploads/2017/07/Odontologia-Este%CC%81tica-825x510.jpg');
+(8, 'Dentística', '..', 'http://funbeo.com.br/wp-content/uploads/2017/07/Odontologia-Este%CC%81tica-825x510.jpg'),
+(9, 'categoria nova', '..', 'https://lh3.googleusercontent.com/G6_qDR9TQ7rFdj9pNitNmQ21tueCu217P9OobfHDGouxLiozziqpMxG0qx4YQd2cZPLqZrFslakC7qqDVrET0k6IXFDuXoXQWEgG8zDsjM45tcoJLzZGvwT9dbkS_g-qiVE7W79sI0rWJkmV7sTLreAXDaGwc3X2rxhGt8gmvdXpmTsZKTaKmP3MmJt3K5qB6zW58Iynw0eDrekIW9Xt9ZpsN5qrEJdnSjFHy3s1KwfvRWpzu_9E2kpL722EfFurAAfiEOC0JBftjClcZsGMtjlQb0oItSKq6M6gqL_Jr8onEH_WxzqrNPTDrJh3qfnywvUhvsV9AnQuuJ1FQD3ZMuqeKZZEoYRaS766ORRa4Iun3Ngd7MZT-jxrOHV_7fpl52Y0NYuMDklUStuT4-WyPw0rsyUjt4OM2rWwWW0oKH4z7v3DozKY7S9qjkWORdOjL3Y3r_IiQkXmgYnLuUpH8KkOvkkBXp9NeWWGSQHwN90dLDBVsXiL55gZCaH2sfIFVsDuXWOQULAlOj25DG1tuy34V60Jc96AEjAVAMKdp0l2MXnjvpWGNPaED2N_8rlq7ixjDJ-0o1mkdSvAfse8pv0XAM-h7dbjD-UMN_fMPHFozZIvrG32VG5TAJo1cc39w67Xqi3BEMsTINcpMA_G-pA=w406-h213-no');
 
 -- --------------------------------------------------------
 
@@ -151,6 +154,35 @@ INSERT INTO `estilo` (`id_estilo`, `hexadecimal`, `local`, `nome`, `status`) VAL
 (2, '#FFB548', 'color-option2.css', 'Amarelo', 0),
 (3, '#F45C5D', 'color-option4.css', 'Vermelho', 0),
 (4, '#9B59B6', 'color-option1.css', 'Roxo', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `foto`
+--
+
+CREATE TABLE `foto` (
+  `id_foto` int(11) NOT NULL,
+  `src` varchar(2000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `foto`
+--
+
+INSERT INTO `foto` (`id_foto`, `src`) VALUES
+(1, 'menu-photo_1.jpg'),
+(2, 'menu-photo_2.jpg'),
+(4, 'bg-testimoni.jpg'),
+(5, 'about.png'),
+(6, 'bg-about.jpg'),
+(7, 'people-01.jpg'),
+(8, 'people-04.jpg'),
+(9, 'title-img.jpg'),
+(10, 'blog-small-03.jpg'),
+(11, 'blog-01.jpg'),
+(12, 'blog-03.jpg'),
+(13, 'featured-collection-02.jpg');
 
 -- --------------------------------------------------------
 
@@ -272,7 +304,8 @@ INSERT INTO `itemcarrinho` (`id_itemcarrinho`, `id_produto`, `quantidade`, `id_c
 (67, 4, 3, 55),
 (68, 8, 1, 56),
 (69, 2, 1, 56),
-(70, 3, 1, 57);
+(70, 3, 1, 57),
+(74, 5, 2, 62);
 
 -- --------------------------------------------------------
 
@@ -283,17 +316,18 @@ INSERT INTO `itemcarrinho` (`id_itemcarrinho`, `id_produto`, `quantidade`, `id_c
 CREATE TABLE `marca` (
   `id_marca` int(11) NOT NULL,
   `nome` varchar(100) NOT NULL,
-  `imagem` varchar(5000) NOT NULL
+  `imagem` varchar(5000) NOT NULL,
+  `catalogo` varchar(1000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `marca`
 --
 
-INSERT INTO `marca` (`id_marca`, `nome`, `imagem`) VALUES
-(1, 'Marca de Teste', 'https://vandal-us.s3.amazonaws.com/spree/products/49846/original/open-uri20181203-14-1jczs.jpg'),
-(2, 'Puma', 'http://pluspng.com/img-png/puma-png-puma-png-240.png'),
-(3, 'qwert', 'https://logodownload.org/wp-content/uploads/2014/04/nike-logo-1.png');
+INSERT INTO `marca` (`id_marca`, `nome`, `imagem`, `catalogo`) VALUES
+(1, 'Adidas', 'https://vandal-us.s3.amazonaws.com/spree/products/49846/original/open-uri20181203-14-1jczs.jpg', 'https://static.morelli.com.br/arquivos/midias/folhetos/br/Midia_284_4_1520622302610.pdf'),
+(2, 'Puma', 'http://pluspng.com/img-png/puma-png-puma-png-240.png', 'https://static.morelli.com.br/arquivos/midias/folhetos/br/Midia_284_4_1520622302610.pdf'),
+(3, 'qwert', 'https://logodownload.org/wp-content/uploads/2014/04/nike-logo-1.png', 'https://google.com.br');
 
 -- --------------------------------------------------------
 
@@ -313,7 +347,8 @@ CREATE TABLE `mensagem` (
 --
 
 INSERT INTO `mensagem` (`id_mensagem`, `email`, `mensagem`, `data`) VALUES
-(3, 'dudumaciel2011@hotmail.com', 'que top boi', '2019-04-26');
+(3, 'dudumaciel2011@hotmail.com', 'que top boi', '2019-04-26'),
+(4, 'dudumaciel2011@hotmail.com', 'gostaria de saber algo topperson', '2019-05-27');
 
 -- --------------------------------------------------------
 
@@ -342,9 +377,10 @@ CREATE TABLE `pedido` (
 --
 
 INSERT INTO `pedido` (`id_pedido`, `nome`, `endereco`, `cep`, `cidade`, `uf`, `telefone`, `email`, `mensagem`, `precototal`, `data`, `status`, `id_carrinho`) VALUES
-(1, 'Thiago Reschützegger', '', '97574-240', '', 'Am', '(23) 56435-4656', 'webforntier@gmail.com', '', 455.4, '2019-04-10', 'NAO ENTREGUE', 53),
+(1, 'Thiago Reschützegger', '', '97574-240', '', 'Am', '(23) 56435-4656', 'webforntier@gmail.com', '', 455.4, '2019-04-10', 'ENTREGUE', 53),
 (3, 'Eduardo Maciel', 'mano seila', '97574-273', 'Santana do Livramento', 'Al', '(12) 32449-8989', 'webforntier@gmail.com', 'haha mt bom o site', 491.8, '2019-04-10', 'ENTREGUE', 55),
-(5, 'edu', 'rua tal', '97575-160', 'Sant\'Ana do Livramento', 'Ri', '(55) 98468-1929', 'dudumaciel2011@hotmail.com', 'no aguardo da minha compra!', 50.6, '2019-04-18', 'NAO ENTREGUE', 57);
+(5, 'edu', 'rua tal', '97575-160', 'Sant\'Ana do Livramento', 'Ri', '(55) 98468-1929', 'dudumaciel2011@hotmail.com', 'no aguardo da minha compra!', 50.6, '2019-04-18', 'NAO ENTREGUE', 57),
+(9, 'elas', '', '', '', '', '(55) 98468-1929', 'dudumaciel2011@hotmail.com', '', 101.2, '2019-05-17', 'NAO ENTREGUE', 62);
 
 -- --------------------------------------------------------
 
@@ -355,7 +391,7 @@ INSERT INTO `pedido` (`id_pedido`, `nome`, `endereco`, `cep`, `cidade`, `uf`, `t
 CREATE TABLE `produto` (
   `id_produto` int(11) NOT NULL,
   `barcode` varchar(50) NOT NULL,
-  `preco` varchar(10) NOT NULL,
+  `preco` float NOT NULL,
   `estoque` int(11) NOT NULL,
   `especificacao` varchar(500) NOT NULL,
   `id_subgrupo` int(11) NOT NULL
@@ -366,28 +402,28 @@ CREATE TABLE `produto` (
 --
 
 INSERT INTO `produto` (`id_produto`, `barcode`, `preco`, `estoque`, `especificacao`, `id_subgrupo`) VALUES
-(1, '33287500', '57.90', 38, 'Azul de Tamanho numero 25 e Superior', 1),
-(2, '44445555', '39.90', 34, 'Azul e tamanho 12', 2),
-(3, '43682337', '1253.00', 23, 'Amarelo com bolinhas marrons', 3),
-(4, '43682338', '35.60', 0, 'Azul com bolinhas marrons', 3),
-(5, '43682339', '50.60', 34, 'Verde com bolinhas pretas', 3),
-(6, '436576854', '86.00', 56, 'Alicate 053 Meia Cana', 4),
-(7, '2354326', '85.00', 85, 'ALICATE 001 NANCE', 4),
-(8, '2356456', '84.30', 45, 'ALICATE 074 YOUNG', 4),
-(9, '3255614', '84.55', 10, 'Alicate 053 Meia Cana', 4),
-(10, '124125212', '32', 12, 'tam único', 5),
-(11, '7654323263542', '12.50', 123, 'tam único', 6),
-(12, '5678843232', '40.50', 3, 'tam único', 7),
-(13, '25232654612511', '22.20', 5, 'tam único', 8),
-(15, '17127371887', '200', 1, 'tam único', 10),
-(16, '11123', '400', 123, 'tam único', 11),
-(17, '114442', '100', 21, 'tam único', 12),
-(18, '199999124', '300', 0, 'tam único', 13),
-(19, '1445532', '42', 5, 'tam único', 14),
-(20, '123447754', '150', 21, 'tam único', 15),
-(21, '23772377234232', '432', 3, 'tam único', 16),
-(22, '1415112412', '12.50', 21, 'tam único', 17),
-(23, '444442', '1234', 123, 'tam único', 18);
+(1, '33287500', 57.9, 38, 'Azul de Tamanho numero 25 e Superior', 1),
+(2, '44445555', 39.9, 34, 'Azul e tamanho 12', 2),
+(3, '43682337', 1253, 23, 'Amarelo com bolinhas marrons', 3),
+(4, '43682338', 35.6, 0, 'Azul com bolinhas marrons', 3),
+(5, '43682339', 50.6, 34, 'Verde com bolinhas pretas', 3),
+(6, '436576854', 86, 56, 'Alicate 053 Meia Cana', 4),
+(7, '2354326', 85, 85, 'ALICATE 001 NANCE', 4),
+(8, '2356456', 84.3, 45, 'ALICATE 074 YOUNG', 4),
+(9, '3255614', 84.55, 10, 'Alicate 053 Meia Cana', 4),
+(10, '124125212', 32, 12, 'tam único', 5),
+(11, '7654323263542', 12.5, 123, 'tam único', 6),
+(12, '5678843232', 40.5, 3, 'tam único', 7),
+(13, '25232654612511', 22.2, 5, 'tam único', 8),
+(15, '17127371887', 200, 1, 'tam único', 10),
+(16, '11123', 400, 123, 'tam único', 11),
+(17, '114442', 100, 21, 'tam único', 12),
+(18, '199999124', 300, 0, 'tam único', 13),
+(19, '1445532', 42, 5, 'tam único', 14),
+(20, '123447754', 150, 21, 'tam único', 15),
+(21, '23772377234232', 432, 3, 'tam único', 16),
+(22, '1415112412', 12.5, 21, 'tam único', 17),
+(23, '444442', 1234, 123, 'tam único', 18);
 
 -- --------------------------------------------------------
 
@@ -493,6 +529,12 @@ ALTER TABLE `estilo`
   ADD PRIMARY KEY (`id_estilo`);
 
 --
+-- Indexes for table `foto`
+--
+ALTER TABLE `foto`
+  ADD PRIMARY KEY (`id_foto`);
+
+--
 -- Indexes for table `grupo`
 --
 ALTER TABLE `grupo`
@@ -562,7 +604,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT for table `carrinho`
 --
 ALTER TABLE `carrinho`
-  MODIFY `id_carrinho` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id_carrinho` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 --
 -- AUTO_INCREMENT for table `categoria`
 --
@@ -579,15 +621,20 @@ ALTER TABLE `destaque`
 ALTER TABLE `estilo`
   MODIFY `id_estilo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
+-- AUTO_INCREMENT for table `foto`
+--
+ALTER TABLE `foto`
+  MODIFY `id_foto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+--
 -- AUTO_INCREMENT for table `grupo`
 --
 ALTER TABLE `grupo`
-  MODIFY `id_grupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id_grupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 --
 -- AUTO_INCREMENT for table `itemcarrinho`
 --
 ALTER TABLE `itemcarrinho`
-  MODIFY `id_itemcarrinho` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+  MODIFY `id_itemcarrinho` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 --
 -- AUTO_INCREMENT for table `marca`
 --
@@ -597,12 +644,12 @@ ALTER TABLE `marca`
 -- AUTO_INCREMENT for table `mensagem`
 --
 ALTER TABLE `mensagem`
-  MODIFY `id_mensagem` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_mensagem` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `produto`
 --
