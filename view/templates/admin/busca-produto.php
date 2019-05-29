@@ -68,7 +68,7 @@
                                       </thead>
                                       <tbody>
                                           <?php foreach ($data['resultado'] as $produto): ?>
-                                              <tr>
+                                              <tr onclick="location.href='<?php echo $this->base_url ?>ProdutoAdmin/viewProduto/<?php echo $produto->getId_produto(); ?>';" style="cursor: pointer;">
                                                   <td><center><img height="100" src="<?php echo $produto->getImagem(); ?>"></center></td>
                                           <td><?php echo $produto->getBarcode(); ?></td>
                                           <td><?php echo mb_substr($produto->getNome(), 0, 45, 'UTF-8') . "..."; ?></td>
@@ -103,7 +103,7 @@
                                       </thead>
                                       <tbody>
                                           <?php foreach ($data['resultado'] as $produto): ?>
-                                              <tr>
+                                              <tr onclick="location.href='<?php echo $this->base_url ?>ProdutoAdmin/viewSubOf/<?php echo $produto->getId_subgrupo(); ?>';" style="cursor: pointer;">
                                                   <td><center><img height="100" src="<?php echo $produto->getImagem(); ?>"></center></td>
                                           <td><?php echo $produto->getNome(); ?></td>
                                           <td><?php echo mb_substr($produto->getDescricao(), 0, 45, 'UTF-8') . "<br>".mb_substr($produto->getDescricao(), 46, 90, 'UTF-8')."..."; ?></td>

@@ -182,14 +182,14 @@ $( '#price-amount-2' ).val( 'R$' + $( '#price-range' ).slider( 'values', 1 ));
              ?>
               <div class="col-md-6 col-lg-4">
                 <div class="productBox">
+
                   <div class="productImage clearfix">
                     <img src="<?php echo $produtos->getImagem(); ?>" alt="products-img">
-                    <div class="productMasking">
-                      <ul class="list-inline btn-group" role="group">
-                        <li><a href="<?php echo $this->base_url; ?>Home/viewProduto/<?php echo $produtos->getId_subgrupo(); ?>" class="btn btn-lg" style="font-size: 20px;"><i class="fa fa-eye"></i></a></li>
-                      </ul>
+                    <div class="productMasking" onclick="location.href='<?php echo $this->base_url; ?>Home/viewProduto/<?php echo $produtos->getId_subgrupo(); ?>';" style="cursor: pointer;">
                     </div>
+
                   </div>
+
                   <div class="productCaption clearfix">
                     <a href="<?php echo $this->base_url; ?>Home/viewProduto/<?php echo $produtos->getId_subgrupo(); ?>">
                       <h5><?php echo $produtos->getNome(); ?></h5>

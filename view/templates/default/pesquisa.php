@@ -43,8 +43,8 @@
         </div>
       </a>
       </div>
-      <div class="media-body">
-        <h4 class="media-heading"><a href="<?php echo $this->base_url; ?>Home/viewProduto/<?php echo $produtos->getId_subgrupo(); ?>"><?php echo $produtos->getNome(); ?></a></h4>
+      <div class="media-body" onclick="location.href='<?php echo $this->base_url; ?>Home/viewProduto/<?php echo $produtos->getId_subgrupo(); ?>';" style="cursor: pointer;">
+        <h4 class="media-heading"><?php echo $produtos->getNome(); ?></h4>
         <p><?php echo mb_substr($produtos->getDescricao(), 0, 100, 'UTF-8')."...";  ?></p>
         <h3>R$ <?php echo $data[$produtos->getId_subgrupo()]; ?></h3>
       </div>
