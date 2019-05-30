@@ -18,7 +18,7 @@
               <thead>
                 <tr>
                   <th>Id</th>
-                  <th>Nome</th>
+                  <th>Imagem</th>
                   <th>Grupo Destacado</th>
                   <th>Ações</th>
                 </tr>
@@ -27,7 +27,7 @@
                 <?php foreach ($data['destaque'] as $destaque): ?>
                 <tr>
                   <th scope="row"><?php echo $destaque->getId_destaque(); ?></th>
-                  <td><?php echo $destaque->getNome(); ?></td>
+                  <td><a href="<?php echo $destaque->getImagem(); ?>" target="_blank"><img src="<?php echo $destaque->getImagem(); ?>" height="100px"/></a></td>
                   <td><?php
                         foreach ($data['grupo'] as $grupo):
                             if($destaque->getId_grupo() == $grupo->getId_grupo()){

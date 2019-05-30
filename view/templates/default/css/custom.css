@@ -48,6 +48,9 @@
   .featuredProducts{
     margin-bottom: 0px !important;
   }
+  .boxes-index{
+    display: none;
+  }
 
 }
 @media (max-width: 700px) {

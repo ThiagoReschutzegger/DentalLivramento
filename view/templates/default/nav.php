@@ -141,7 +141,7 @@ $(document).ready(function(){
             <div class="collapse navbar-collapse navbar-ex1-collapse">
               <ul class="nav navbar-nav ml-auto">
                 <li class="nav-item">
-                  <a href="<?php echo $this->base_url; ?>" class="nav-link" role="button" aria-haspopup="true">Home</a>
+                  <a href="<?php echo $this->base_url; ?>Home" class="nav-link" role="button" aria-haspopup="true">Home</a>
                 </li>
                 <li class="nav-item dropdown megaDropMenu ">
                   <a href="javascript:void(0)" class="dropdown-toggle nav-link" data-toggle="dropdown" data-hover="dropdown" data-delay="300" data-close-others="true" aria-expanded="false" id="blockclick">Categorias</b></a>

@@ -3931,7 +3931,7 @@
 												apptxt = apptxt + '<source src="'+videoogv+'" type="video/ogg" />';
 												apptxt = apptxt + '</video>';
 											nextcaption.append(apptxt);*/
-											
+
 											if (nextcaption.data('videoposter')!=undefined)
 												if (nextcaption.data('videoposter') != undefined) apptxt = apptxt + 'poster="'+nextcaption.data('videoposter')+'">';
 												if (videowebm!=undefined && get_browser().toLowerCase()=="firefox") apptxt = apptxt + '<source src="'+videowebm+'" type="video/webm" />';
@@ -6263,5 +6263,3 @@ function revslider_showDoubleJqueryError(sliderID) {
 	errorMessage = "<span style='font-size:16px;color:#BC0C06;'>" + errorMessage + "</span>"
 		jQuery(sliderID).show().html(errorMessage);
 }
-
-

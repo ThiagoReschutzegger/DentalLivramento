@@ -7,9 +7,9 @@
     </div>
     <div class="card-body alert-danger">
         <div class="form-group row">
-          <label class="col-sm-2 form-control-label text-right">Nome</label>
+          <label class="col-sm-2 form-control-label text-right">Destaque:</label>
           <div class="col-sm-8">
-            <p><?php echo $destaque->getNome(); ?></p>
+            <img src="<?php echo $destaque->getImagem(); ?>" width="500px"/>
           </div>
         </div>
         <form method="post">

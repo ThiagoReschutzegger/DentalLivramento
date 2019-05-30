@@ -200,7 +200,7 @@
   <?php endif; ?>
 
     <!-- FEATURE -->
-    <div class="row features">
+    <div class="row features boxes-index">
       <div class="col-md-4 col-12">
         <div class="box text-center box-v2">
           <i class="fa fa-building" aria-hidden="true"></i>
@@ -236,6 +236,12 @@
         window.location.href=<?php echo $this->base_url; ?>+'Loja/view/'+id;
     };
     </script>
+
+    <style type="text/css" scoped>
+    .tparrows {
+	display: none !important;
+}
+    </style>
     <!-- BANNER -->
     <div class="container">
       <div class="row justify-content-md-end">
@@ -243,13 +249,15 @@
           <div class="fullscreenbanner-container bannerV4">
             <div class="fullscreenbanner">
               <ul>
-                <?php foreach ($data['destaque'] as $destaque):
+                <?php
+                $num = count($data['destaque']);
+                $i = 1;
+                foreach ($data['destaque'] as $destaque):
                  foreach ($data['grupo'] as $grupo):
-                    if($destaque->getId_grupo() == $grupo->getId_grupo()){
-                      echo "
-                      <li data-transition='slidehorizontal' data-slotamount='5' data-masterspeed='700' data-title='Slide 1' onclick='linkSlider(".$destaque->getId_grupo().")' >
+                    if($destaque->getId_grupo() == $grupo->getId_grupo()):?>
+                      <li data-transition='slidehorizontal' data-slotamount='5' data-masterspeed='700' data-title='Slide <?php echo $i; ?>' id="<?php echo $i; ?>" onclick='linkSlider(<?php echo $destaque->getId_grupo(); ?>)' data-plugin-options='{"gridwidth": 500, "gridheight": 500, "navigation": { "arrows": { "enable": false } }}' >
 
-                        <img src='".$destaque->getImagem()."' alt='slidebg1' data-bgfit='cover' data-bgposition='center center' data-bgrepeat='no-repeat'>
+                        <img src='<?php echo $destaque->getImagem(); ?>' alt='slidebg1' data-bgfit='cover' data-bgposition='center center' data-bgrepeat='no-repeat'>
                         <div class='slider-caption slider-captionV4'>
                           <div  class='tp-caption rs-caption-2 sft'
                             data-hoffset='0'
@@ -259,15 +267,36 @@
                             data-start='2000'
                             data-easing='Back.easeInOut'
                             data-endspeed='300'>
-                            <small>Destaque</small><br>
-                            <span style='text-shadow: 2px 2px rgba(255,255,255,0.8);'>".$destaque->getNome()."</span>
+                          </div> <div class="tp-caption rs-caption-3 sft"
+                            data-hoffset="0"
+                            data-x="85"
+                            data-y="240"
+                            data-speed="1000"
+                            data-start="3000"
+                            data-easing="Power4.easeOut"
+                            data-endspeed="300"
+                            data-endeasing="Power1.easeIn"
+                            data-captionhidden="off">
+                          </div>
+                          <div class="tp-caption rs-caption-4 sft"
+                            data-hoffset="0"
+                            data-x="85"
+                            data-y="300"
+                            data-speed="800"
+                            data-start="3500"
+                            data-easing="Power4.easeOut"
+                            data-endspeed="300"
+                            data-endeasing="Power1.easeIn"
+                            data-captionhidden="off">
                           </div>
                         </div>
 
-                      </li>";
-                    } endforeach;
+                      </li>
+                      <?php
+                      $i++;
+                    endif;
+                   endforeach;
                   endforeach;?>
-
               </ul>
             </div>
           </div>

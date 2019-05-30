@@ -22,12 +22,11 @@ class DestaqueAdmin extends Admin {
     public function addDestaque() {
       $data['msg'] = '';
       if (filter_input(INPUT_POST, 'add')) {
-        $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
         $imagem = filter_input(INPUT_POST, 'imagem', FILTER_SANITIZE_STRING);
         $id_grupo = filter_input(INPUT_POST, 'id_grupo', FILTER_SANITIZE_STRING);
 
-            if ($nome && $imagem && $id_grupo) {
-                $destaque = new Destaque(null,$nome, $imagem, $id_grupo);
+            if ($imagem && $id_grupo) {
+                $destaque = new Destaque(null,null, $imagem, $id_grupo);
                 if ($this->model->insertDestaque($destaque)) {
                       $data['msg'] = 'Adicionado com Sucesso!';
                 } else {
@@ -62,12 +61,11 @@ class DestaqueAdmin extends Admin {
       $data['msg'] = '';
       if (filter_input(INPUT_POST, 'upd')) {
         $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_STRING);
-        $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
         $imagem = filter_input(INPUT_POST, 'imagem', FILTER_SANITIZE_STRING);
         $id_grupo = filter_input(INPUT_POST, 'id_grupo', FILTER_SANITIZE_STRING);
 
-        if ($id && $nome && $imagem && $id_grupo) {
-            $destaque = new Destaque($id,$nome,$imagem,$id_grupo);
+        if ($id && $imagem && $id_grupo) {
+            $destaque = new Destaque($id,null,$imagem,$id_grupo);
             if ($this->model->updateDestaque($destaque)) {
                 $this->index();
                 return true;
