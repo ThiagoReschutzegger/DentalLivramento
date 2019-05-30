@@ -255,7 +255,7 @@
                 foreach ($data['destaque'] as $destaque):
                  foreach ($data['grupo'] as $grupo):
                     if($destaque->getId_grupo() == $grupo->getId_grupo()):?>
-                      <li data-transition='slidehorizontal' data-slotamount='5' data-masterspeed='700' data-title='Slide <?php echo $i; ?>' id="<?php echo $i; ?>" onclick='linkSlider(<?php echo $destaque->getId_grupo(); ?>)' data-plugin-options='{"gridwidth": 500, "gridheight": 500, "navigation": { "arrows": { "enable": false } }}' >
+                      <li data-transition='slidehorizontal' data-slotamount='5' data-masterspeed='700' data-title='Slide <?php echo $i; ?>' id="<?php echo $i; ?>" onclick='linkSlider(<?php echo $destaque->getId_grupo(); ?>)' data-plugin-options='{"gridwidth": 500, "gridheight": 500, "navigation": { "arrows": { "enable": false } }}' style="cursor: pointer;" >
 
                         <img src='<?php echo $destaque->getImagem(); ?>' alt='slidebg1' data-bgfit='cover' data-bgposition='center center' data-bgrepeat='no-repeat'>
                         <div class='slider-caption slider-captionV4'>

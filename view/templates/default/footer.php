@@ -24,7 +24,7 @@
   </div>
   </div>
 </div>
-<iframe class="row col-sm-12 col-md-8 heightiado" height="400px" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3423.6521422284904!2d-55.533062685275446!3d-30.89639078158046!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95a9fe58e6cd3433%3A0xc257b78d05c8810c!2sDental+LIvramento!5e0!3m2!1spt-BR!2sbr!4v1556052654093!5m2!1spt-BR!2sbr" frameborder="0" style="border:0; margin-left: 0vw;" allowfullscreen></iframe>
+<div class="row col-sm-12 col-md-8 heightiado" height="400px" style="border:0; margin-left: 0vw; background: url('<?php echo $this->asset; ?>img/maps.png'); background-size: cover; cursor: pointer;" onclick="location.href='https://goo.gl/maps/YXtkNTJjGjZsRFpM6';"></div>
 </div>
 <div class="row" style="margin-top: 30px">
 <div class="col-md-4 col-12">
