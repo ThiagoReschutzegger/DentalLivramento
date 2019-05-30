@@ -185,7 +185,7 @@ $( '#price-amount-2' ).val( 'R$' + $( '#price-range' ).slider( 'values', 1 ));
 
                   <div class="productImage clearfix">
                     <img src="<?php echo $produtos->getImagem(); ?>" alt="products-img">
-                    <div class="productMasking" onclick="location.href='<?php echo $this->base_url; ?>Home/viewProduto/<?php echo $produtos->getId_subgrupo(); ?>';" style="cursor: pointer;">
+                    <div class="productMasking" onclick="location.href='<?php echo $this->base_url; ?>Home/viewProduto/<?php echo $produtos->getId_subgrupo(); ?>';" style="cursor: pointer; background-color: inherit !important;">
                     </div>
 
                   </div>

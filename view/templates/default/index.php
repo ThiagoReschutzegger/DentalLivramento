@@ -186,10 +186,7 @@
           <div class="slide col-md-3">
             <div class="productImage clearfix">
               <img src="<?php echo $destaque->getImagem(); ?>">
-              <div class="productMasking">
-                <ul class="list-inline btn-group" role="group">
-                  <li><a href="<?php echo $this->base_url; ?>Home/viewProduto/<?php echo $destaque->getId_subgrupo(); ?>" class="btn btn-lg" style="font-size: 20px;"><i class="fa fa-eye"></i></a></li>
-                </ul>
+              <div class="productMasking" onclick="location.href='<?php echo $this->base_url; ?>Home/viewProduto/<?php echo $destaque->getId_subgrupo(); ?>';" style="cursor: pointer; background-color: inherit !important;">
               </div>
             </div>
             <div class="productCaption clearfix">
