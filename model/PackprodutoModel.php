@@ -41,26 +41,19 @@ class PackprodutoModel extends Model {
         }
         $ids_prod = array_unique($ids_prod);
         $total_prod = count($ids_prod);
-        if(count($list)>12){
-          $paginador_max = ceil(count($list)/12);
+        if($total_prod>12){
+          $paginador_max = ceil($total_prod/12);
           $list_paginada = [];
           $ponto =0;
           $i = 1;
+          $repetidos = count($list) - $total_prod;
           $excedente = count($list) - (12*$paginador);
           $resto = 12;
           if($excedente < 0){
             $resto = $excedente+12;
             $ponto = 12*($paginador-1);
           }
-          $ids = [];
-          foreach ($list as $linha) {
-            if(in_array($linha->getId_subgrupo(), $ids)){
-              $resto++;
-              continue;
-            }else{
-              $ids[] = $linha->getId_subgrupo();
-            }
-          }
+
           while ($i <= $resto) {
             $list_paginada[] = $list[$i-1+$ponto];
             $i++;

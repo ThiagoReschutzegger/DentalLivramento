@@ -95,7 +95,12 @@ class Loja extends Controller{
           $data['paginador_atual'] = $paginador;
 
           $data['total_prod'] = $this->modelPackproduto->getPackprodutoByGrupo($id_grupo,$paginador)[2];
-          $data['total_prod_atual'] = count($this->modelPackproduto->getPackprodutoByGrupo($id_grupo,$paginador)[1]);
+          $ids_prod = [];
+          foreach ($data['packproduto'] as $produtos){
+            if(in_array($produtos->getId_subgrupo(), $ids_prod)) continue; else $ids_prod[] = $produtos->getId_subgrupo();
+          }
+
+          $data['total_prod_atual'] = count($ids_prod);
 
           $data['ordem'] = "new";
 
