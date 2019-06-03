@@ -18,6 +18,7 @@ $(document).ready(function(){
     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
      console.log("Get outta here");
    }else{
+     $(".navbar").css('position', 'static', 'important');
      $('#blockclick').click(false);
    }
 
