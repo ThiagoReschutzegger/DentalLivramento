@@ -44,20 +44,53 @@ class PackprodutoModel extends Model {
         if($total_prod>12){
           $paginador_max = ceil($total_prod/12);
           $list_paginada = [];
-          $ponto =0;
-          $i = 1;
-          $repetidos = count($list) - $total_prod;
-          $excedente = count($list) - (12*$paginador);
-          $resto = 12;
-          if($excedente < 0){
-            $resto = $excedente+12;
-            $ponto = 12*($paginador-1);
+          $ponto =12*($paginador-1);
+          $resto = 12; // quantos registros serão exibidos na tela, sofre alterações no caminho... repetições, list com menos prod que 12,...
+
+          if($paginador == 1 && $total_prod < $resto) $resto = count($list);
+
+          if($ponto > $total_prod - $ponto && $total_prod - $ponto > 0 && $paginador > 1) $resto = $total_prod - $ponto;
+
+          $ids_aux = [];
+          if($paginador == 1) $aux = 0; else $aux = 1;
+          $i = $ponto + 12*$paginador - $aux;
+          if($i > count($list)) $i = count($list) - $aux;
+          $repetidos_atuais =0;
+
+          $prox_ponto = $ponto + 12;
+          if($i > $prox_ponto && $paginador < $paginador_max) $i = $prox_ponto;
+
+          while ($i >= $ponto) {
+            if(in_array($list[$i]->getId_subgrupo(), $ids_aux)) $repetidos_atuais++; else $ids_aux[] = $list[$i]->getId_subgrupo();
+            $i--;
           }
 
+          $repetidos_old = 0;
+          if($paginador > 1){
+            $ids_aux = [];
+            if($paginador == 2) $aux = 0; else $aux = 1;
+            $ponto_aux = $ponto - 12;
+            $i = $ponto_aux + 12*($paginador-1) - $aux;
+            if($i > count($list)) $i = count($list) - $aux;
+
+            $prox_ponto = $ponto;
+            if($i > $prox_ponto) $i = $prox_ponto;
+
+            while ($i >= $ponto_aux) {
+              if(in_array($list[$i]->getId_subgrupo(), $ids_aux)) $repetidos_old++; else $ids_aux[] = $list[$i]->getId_subgrupo();
+              $i--;
+            }
+          }
+
+          $resto = $resto + $repetidos_atuais;
+          $ponto = $ponto + $repetidos_old;
+
+          $i = 1;
           while ($i <= $resto) {
             $list_paginada[] = $list[$i-1+$ponto];
             $i++;
           }
+          //echo "<pre>";var_dump($list_paginada);echo "</pre>";die;
           return array($paginador_max, $list_paginada, $total_prod);
         }else{
           $paginador_max = 1;
@@ -134,30 +167,56 @@ class PackprodutoModel extends Model {
       }
       $ids_prod = array_unique($ids_prod);
       $total_prod = count($ids_prod);
-      if(count($list)>12){
-        $paginador_max = ceil(count($list)/12);
+      if($total_prod>12){
+        $paginador_max = ceil($total_prod/12);
         $list_paginada = [];
-        $ponto =0;
-        $i = 1;
-        $excedente = count($list) - (12*$paginador);
-        $resto = 12;
-        if($excedente < 0){
-          $resto = $excedente+12;
-          $ponto = 12*($paginador-1);
+        $ponto =12*($paginador-1);
+        $resto = 12; // quantos registros serão exibidos na tela, sofre alterações no caminho... repetições, list com menos prod que 12,...
+
+        if($paginador == 1 && $total_prod < $resto) $resto = count($list);
+
+        if($ponto > $total_prod - $ponto && $total_prod - $ponto > 0 && $paginador > 1) $resto = $total_prod - $ponto;
+
+        $ids_aux = [];
+        if($paginador == 1) $aux = 0; else $aux = 1;
+        $i = $ponto + 12*$paginador - $aux;
+        if($i > count($list)) $i = count($list) - $aux;
+        $repetidos_atuais =0;
+
+        $prox_ponto = $ponto + 12;
+        if($i > $prox_ponto && $paginador < $paginador_max) $i = $prox_ponto;
+
+        while ($i >= $ponto) {
+          if(in_array($list[$i]->getId_subgrupo(), $ids_aux)) $repetidos_atuais++; else $ids_aux[] = $list[$i]->getId_subgrupo();
+          $i--;
         }
-        $ids = [];
-        foreach ($list as $linha) {
-          if(in_array($linha->getId_subgrupo(), $ids)){
-            $resto++;
-            continue;
-          }else{
-            $ids[] = $linha->getId_subgrupo();
+
+        $repetidos_old = 0;
+        if($paginador > 1){
+          $ids_aux = [];
+          if($paginador == 2) $aux = 0; else $aux = 1;
+          $ponto_aux = $ponto - 12;
+          $i = $ponto_aux + 12*($paginador-1) - $aux;
+          if($i > count($list)) $i = count($list) - $aux;
+
+          $prox_ponto = $ponto;
+          if($i > $prox_ponto) $i = $prox_ponto;
+
+          while ($i >= $ponto_aux) {
+            if(in_array($list[$i]->getId_subgrupo(), $ids_aux)) $repetidos_old++; else $ids_aux[] = $list[$i]->getId_subgrupo();
+            $i--;
           }
         }
+
+        $resto = $resto + $repetidos_atuais;
+        $ponto = $ponto + $repetidos_old;
+
+        $i = 1;
         while ($i <= $resto) {
           $list_paginada[] = $list[$i-1+$ponto];
           $i++;
         }
+        //echo "<pre>";var_dump($list_paginada);echo "</pre>";die;
         return array($paginador_max, $list_paginada, $total_prod,$ordem);
       }else{
         $paginador_max = 1;
