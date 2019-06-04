@@ -1087,7 +1087,7 @@ body.loaded {
 
 @media (max-width: 479px) {
   .navbar-default .navbar-collapse {
-    max-height: 250px;
+    max-height: 80vh;
   }
 }
 
