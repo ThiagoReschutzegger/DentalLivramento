@@ -11,12 +11,12 @@
         <div class="card">
           <div class="card-header d-flex align-items-center">
             <h3 class="h4">
-              <a class="btn btn-secondary" data-toggle="collapse" href="#collapseExample<?php echo $categoria->getNome(); ?>" role="button" aria-expanded="false" aria-controls="collapseExample">
+              <a class="btn btn-info" data-toggle="collapse" href="#collapseExample<?php echo $categoria->getId_categoria(); ?>" role="button" aria-expanded="false" aria-controls="collapseExample">
                 <?php echo $categoria->getNome(); ?>
               </a>
             </h3>
           </div>
-          <div class="collapse" id="collapseExample<?php echo $categoria->getNome(); ?>">
+          <div class="collapse" id="collapseExample<?php echo $categoria->getId_categoria(); ?>">
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-striped table-hover">
