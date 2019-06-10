@@ -114,7 +114,47 @@ endforeach;
                   text-transform: uppercase;
                   <?php echo $data['estoque-msg'];?></span>
                   <hr>                                              <!-- " -->
-                  <p><?php echo $produto->getDescricao(); ?></p>
+                  <p><?php echo $produto->getDescricao(); ?>
+                  <?php if (count($data['packproduto']) == 1):
+                    $produtos = $data['packproduto'][0];
+                  ?>
+                  <br><?php echo $produtos->getEspecificacao(); ?></p>
+                  <div class="cartListInner">
+                  <div class="table-responsive">
+                    <form method="post">
+
+                    <table class="table">
+                      <thead>
+                          <tr>
+                            <th style="display: none;"></th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                      <tr style="border: 0;">
+                        <td style="display: none;"></td>
+                        <?php if ($produtos->getEstoque()==0): ?>
+                          <td>Indisponível no momento!</td>
+                        <?php else: ?>
+                        <td class="count-input" style="border: 0; padding-left: 0; color: #797979">
+                          <span class="quant-prod">Quantidade:&nbsp;&nbsp;</span>
+                          <a class="incr-btn" data-action="decrease" href="#"><i class="fa fa-minus"></i></a>
+                            <input class="quantity" name="espec<?php echo $produtos->getId_produto(); ?>" style="margin:0; width: 40px;" type="number" max="<?php echo $produtos->getEstoque()?>" value="0" placeholder="Qtd." onkeypress="return isNumberKey(event)">
+                          <a class="incr-btn" data-action="increase" href="#"><i class="fa fa-plus"></i></a>
+                        </td>
+                        <td class="count-input" style="border: 0; padding-left: 0; color: #797979">
+                          <div class="btn-area text-left" style="margin-bottom: 0;">
+                            <input type="submit" style="width: 220px;" name="add" class="btn btn-primary btn-default" value='Adicionar ao carrinho'/>
+                          </div>
+                        </td>
+                        <?php endif;?>
+                      </tr>
+                    </tbody>
+                  </table>
+              </form>
+                  </div>
+                </div>
+                  <?php else:?>
+                    </p>
                   <div class="cartListInner">
                   <div class="table-responsive">
                   <form method="post">
@@ -150,7 +190,7 @@ endforeach;
                             <?php else: ?>
                             <td class="count-input">
                               <a class="incr-btn" data-action="decrease" href="#"><i class="fa fa-minus"></i></a>
-                                <input class="quantity" name="espec<?php echo $produtos->getId_produto(); ?>" style="margin:0;" type="number" max="<?php echo $produtos->getEstoque()?>" value="0" placeholder="Qtd." onkeypress="return isNumberKey(event)">
+                                <input class="quantity" name="espec<?php echo $produtos->getId_produto(); ?>" style="margin:0; width: 40px;" type="number" max="<?php echo $produtos->getEstoque()?>" value="0" placeholder="Qtd." onkeypress="return isNumberKey(event)">
                               <a class="incr-btn" data-action="increase" href="#"><i class="fa fa-plus"></i></a>
                             </td>
                             <?php endif;?>
@@ -168,7 +208,7 @@ endforeach;
                           <td><?php echo $produtos->getEspecificacao(); ?></td>
                           <td class="count-input">
                             <a class="incr-btn" data-action="decrease" href="#"><i class="fa fa-minus"></i></a>
-                              <input class="quantity" name="espec<?php echo $produtos->getId_produto(); ?>" style="margin:0;" type="number" value="0" placeholder="Qtd." onkeypress="return isNumberKey(event)">
+                              <input class="quantity" name="espec<?php echo $produtos->getId_produto(); ?>" style="margin:0; width: 40px;" type="number" value="0" placeholder="Qtd." onkeypress="return isNumberKey(event)">
                             <a class="incr-btn" data-action="increase" href="#"><i class="fa fa-plus"></i></a>
                           </td>
                         </tr>
@@ -187,6 +227,7 @@ endforeach;
                 </form>
               </div>
                 </div>
+              <?php endif;?>
                 </div>
               </div>
             </div>
