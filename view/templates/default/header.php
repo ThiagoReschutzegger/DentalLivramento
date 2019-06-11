@@ -18,6 +18,7 @@
     <link href="<?php echo $this->asset ?>plugins/fancybox/jquery.fancybox.min.css" rel="stylesheet">
     <link href="<?php echo $this->asset ?>plugins/iziToast/css/iziToast.css" rel="stylesheet">
     <link href="<?php echo $this->asset ?>plugins/prismjs/prism.css" rel="stylesheet">
+    <link href="<?php echo $this->asset ?>plugins/slider-zoom/jquery.exzoom.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="<?php echo $this->asset ?>plugins/rs-plugin/css/settings.css" media="screen">
     <link rel="stylesheet" type="text/css" href="<?php echo $this->asset ?>plugins/slick/slick.css" media="screen">
     <link rel="stylesheet" type="text/css" href="<?php echo $this->asset ?>plugins/slick/slick-theme.css" media="screen">

@@ -55,7 +55,13 @@ endforeach;
           if (charCode > 31 && (charCode < 48 || charCode > 57))
               return false;
           return true;
-          }
+          };
+          $(function(){
+            $("#exzoom").exzoom({
+              "navBorder": 0,
+              "autoPlayTimeout": 4000
+            });
+          });
       </script>
 
       <!-- MAIN CONTENT SECTION -->
@@ -65,7 +71,7 @@ endforeach;
             <div class="col-md-12">
               <div class="media flex-wrap">
                 <div class="media-left productSlider">
-                  <div id="carousel" class="carousel slide" data-ride="carousel">
+                  <!-- <div id="carousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
                       <div class="carousel-item active" data-thumb="0">
                         <img style="height: 300px; width: auto;" src="<?php echo $produto->getImagem(); ?>">
@@ -88,6 +94,18 @@ endforeach;
                         <span class="glyphicon glyphicon-chevron-right"></span>
                       </a>
                     </div>
+                  </div> -->
+                  <div class="exzoom" id="exzoom">
+                      <!-- Images -->
+                      <div class="exzoom_img_box">
+                        <ul class='exzoom_img_ul'>
+                          <li><img src="<?php echo $produto->getImagem(); ?>"/></li>
+                          <li><img src="<?php echo $marca->getImagem(); ?>"/></li>
+                        </ul>
+                      </div>
+                      <!-- <a href="https://www.jqueryscript.net/tags.php?/Thumbnail/">Thumbnail</a> Nav-->
+                      <div class="exzoom_nav"></div>
+
                   </div>
                 </div>
                 <div class="media-body">
