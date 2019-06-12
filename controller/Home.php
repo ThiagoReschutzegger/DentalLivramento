@@ -51,6 +51,20 @@ class Home extends Controller{
         $data['prod-destaq'] = $this->modelSubgrupo->getSubgrupoDestaque();
         $data['preloader'] = '1';
 
+        if(!empty($data['slider'])){ //se vier algo no slider
+          foreach($data['slider'] as $slider){
+            $data['packproduto'] = $this->modelPackproduto->getPackprodutoBySubgrupo($slider->getId_subgrupo());
+            $precos = [];
+            foreach($data['packproduto'] as $linha){
+              $precos[] = $linha->getPreco();
+            }
+            $data['preco_min'.$slider->getId_slider()] = min($precos);
+            $data['nome'.$slider->getId_slider()] = $data['packproduto'][0]->getNome();
+            $data['descricao'.$slider->getId_slider()] = $data['packproduto'][0]->getDescricao();
+            $data['id_sub'.$slider->getId_slider()] = $data['packproduto'][0]->getId_subgrupo();
+          }
+        }
+
         $this->view->load('header',$data);
         $this->view->load('nav',$data);
         $this->view->load('index', $data);

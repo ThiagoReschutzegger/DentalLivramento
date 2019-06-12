@@ -434,7 +434,7 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
           $fundo = filter_input(INPUT_POST, 'fundo', FILTER_SANITIZE_STRING);
           $descricao = $data['sub']->getDescricao();
 
-          if ($nome && $imagem && $fundo && $descricao) {
+          if ($nome && $descricao) {
               $slider = new Slider(0,$data['sub']->getId_subgrupo(), $imagem, $fundo, 1);
               if ($this->modelSlider->insertSlider($slider)) {
                    $data['msg'] = 'Adicionado com Sucesso!';
@@ -443,9 +443,6 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
               } else {
                   $data['msg'] = 'Erro!';
                   }
-          } else {
-               $data['msg'] = 'Preencha todos os Campos!';
-
           }
       }
 

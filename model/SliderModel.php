@@ -4,10 +4,10 @@ class SliderModel extends Model {
 
     public function getSlider() {
         $slider = [];
-        $sql = "SELECT slider.id_slider, slider.id_subgrupo, slider.imagem, slider.fundo, slider.status,subgrupo.id_subgrupo, subgrupo.nome,subgrupo.descricao FROM slider JOIN subgrupo ON slider.id_subgrupo = subgrupo.id_subgrupo WHERE slider.status = 1;";
+        $sql = "SELECT * FROM slider";
         $consulta = $this->ExecuteQuery($sql, array());
         foreach ($consulta as $linha) {
-            $slider[] = array(new Slider($linha['id_slider'],$linha['id_subgrupo'],$linha['imagem'],$linha['fundo'],$linha['status']), new Subgrupo ($linha['id_subgrupo'],$linha['nome'],$linha['descricao'],null,null,null,null));
+            $slider[] = new Slider($linha['id_slider'],$linha['id_subgrupo'],$linha['imagem'],$linha['fundo'],$linha['status']);
         }
 
         //echo '<pre>';var_dump($slider);echo '</pre>';die;

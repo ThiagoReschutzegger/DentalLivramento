@@ -28,7 +28,7 @@
           </div>
         </div>
         <div class="line"></div>
-        <div class="form-group row">
+        <div class="form-group row" style="display:none;">
           <label class="col-sm-2 form-control-label text-right">Link da imagem principal:</label>
           <div class="col-sm-8">
           <input type="text" class="form-control" name="imagem"><small class="help-block-none">Cole aqui o link da imagem (sempre terminado em <i><b style="color:red">.png</b></i>). De preferência sem fundo, para melhor adaptação ao site</small>

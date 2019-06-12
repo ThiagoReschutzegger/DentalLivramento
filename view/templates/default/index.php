@@ -57,10 +57,8 @@
         </li>
         <?php $i = 0; ?>
         <?php foreach ($data['slider'] as $slider): ?>
-          <?php ++$i; ?>
-          <?php if($i % 2 != 0): ?>
             <li data-transition="slidehorizontal" data-slotamount="5" data-masterspeed="700"  data-title="Slide 2">
-            <img src="<?php echo $slider[0]->getFundo() == null || $slider[0]->getFundo() == ''? $this->asset."img/home/banner-slider/slider-bg0.jpg" : $slider[0]->getFundo() ; ?>" alt="slidebg" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat">
+            <img src="<?php if($slider->getFundo() != '') echo $slider->getFundo(); else echo $this->asset."img/home/banner-slider/slider-bg.jpg"; ?>" alt="slidebg" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat">
             <div class="slider-caption slider-captionV1 container">
               <div class="tp-caption rs-caption-1 sft start"
                 data-hoffset="0"
@@ -70,103 +68,47 @@
                 data-start="1500"
                 data-easing="Back.easeInOut"
                 data-endspeed="300">
-                <img src="<?php echo $slider[0]->getImagem() == null ? "" : $slider[0]->getImagem() ; ?>" alt="slider-image">
               </div>
 
               <div class="tp-caption rs-caption-2 sft "
                 data-hoffset="0"
                 data-y="100"
-                data-x="600"
+                data-x="100"
                 data-speed="800"
                 data-start="2000"
                 data-easing="Back.easeInOut"
                 data-endspeed="300">
-                <?php echo $slider[1]->getNome() ; ?>
+                <?php echo $data['nome'.$slider->getId_slider()]; ?>
               </div>
 
               <div class="tp-caption rs-caption-3 sft"
                 data-hoffset="0"
                 data-y="175"
-                data-x="600"
+                data-x="100"
                 data-speed="1000"
                 data-start="3000"
                 data-easing="Power4.easeOut"
                 data-endspeed="300"
                 data-endeasing="Power1.easeIn"
                 data-captionhidden="off">
-                Start From - $259.00 <br>
-                <small><?php echo substr($slider[1]->getDescricao(),0,150); if(strlen($slider[1]->getDescricao())>=150) echo "..."; ?></small><br>
+                <b>A partir de - R$<?php echo number_format((float)$data['preco_min'.$slider->getId_slider()], 2);?></b> <br>
+                <small><?php echo substr($data['descricao'.$slider->getId_slider()],0,150); if(strlen($data['descricao'.$slider->getId_slider()])>=150) echo "..."; ?></small><br>
               </div>
 
               <div class="tp-caption rs-caption-4 sft"
                 data-hoffset="0"
                 data-y="310"
-                data-x="600"
+                data-x="100"
                 data-speed="800"
                 data-start="3500"
                 data-easing="Power4.easeOut"
                 data-endspeed="300"
                 data-endeasing="Power1.easeIn"
                 data-captionhidden="off">
-                <span class="page-scroll"><a href="<?php echo $this->base_url; ?>viewSub/<?php echo $slider[1]->getId_subgrupo() ; ?>" class="btn primary-btn">Comprar<i class="fa fa-chevron-right"></i></a></span>
+                <span class="page-scroll"><a href="<?php echo $this->base_url; ?>Home/viewProduto/<?php echo $data['id_sub'.$slider->getId_slider()]; ?>" class="btn primary-btn">Comprar<i class="fa fa-chevron-right"></i></a></span>
               </div>
             </div>
           </li>
-          <?php elseif ($i % 2 == 0): ?>
-            <li data-transition="slidehorizontal" data-slotamount="5" data-masterspeed="700" data-title="Slide 3">
-            <img src="<?php echo $slider[0]->getFundo() == null || $slider[0]->getFundo() == ''? $this->asset."img/home/banner-slider/slider-bg0.jpg" : $slider[0]->getFundo() ; ?>" alt="slidebg1" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat">
-            <div class="slider-caption slider-captionV1 container">
-
-              <div class="tp-caption rs-caption-1 sft start"
-                data-hoffset="0"
-                data-x="450"
-                data-y="54"
-                data-speed="800"
-                data-start="1500"
-                data-easing="Back.easeInOut"
-                data-endspeed="300" >
-                <img src="<?php echo $slider[0]->getImagem() == null ? "" : $slider[0]->getImagem() ; ?>" alt="slider-image" style="width: 781px; height: 416px;">
-              </div>
-
-              <div class="tp-caption rs-caption-2 sft"
-                data-hoffset="0"
-                data-y="100"
-                data-x="[15,15,42,15]"
-                data-speed="800"
-                data-start="2000"
-                data-easing="Back.easeInOut"
-                data-endspeed="300">
-                <?php echo $slider[1]->getNome() ; ?>
-              </div>
-
-              <div class="tp-caption rs-caption-3 sft"
-                data-hoffset="0"
-                data-y="175"
-                data-x="[15,15,42,15]"
-                data-speed="1000"
-                data-start="3000"
-                data-easing="Power4.easeOut"
-                data-endspeed="300"
-                data-endeasing="Power1.easeIn"
-                data-captionhidden="off">
-                Start From - $259.00 <br>
-                <small><?php echo substr($slider[1]->getDescricao(),0,150); if(strlen($slider[1]->getDescricao())>=150) echo "..."; ?></small>
-              </div>
-              <div class="tp-caption rs-caption-4 sft"
-                data-hoffset="0"
-                data-y="310"
-                data-x="[15,15,42,15]"
-                data-speed="800"
-                data-start="3500"
-                data-easing="Power4.easeOut"
-                data-endspeed="300"
-                data-endeasing="Power1.easeIn"
-                data-captionhidden="off">
-                <span class="page-scroll"><a href="<?php echo $this->base_url; ?>viewSub/<?php echo $slider[1]->getId_subgrupo() ; ?>" class="btn primary-btn">Comprar<i class="fa fa-chevron-right"></i></a></span>
-              </div>
-            </div>
-          </li>
-          <?php endif;?>
         <?php endforeach; ?>
       </ul>
     </div>
