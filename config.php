@@ -14,7 +14,7 @@ $config->template = 'default';
 if ($_SERVER['HTTP_HOST'] == "localhost" || $_SERVER['HTTP_HOST'] == "127.0.0.1") {
     $config->dbuser = 'root'; //nomedoaluno
     $config->dbpassword = ''; //senha
-    $config->dbname = 'dadossite'; //nomedobanco
+    $config->dbname = 'dentallivramento'; //nomedobanco
     $config->dbhost = '127.0.0.1'; //servidor (127.0.0.1)
     $config->dbdrive = 'mysql';
 } else {
