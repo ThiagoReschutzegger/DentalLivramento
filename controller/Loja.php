@@ -96,6 +96,8 @@ class Loja extends Controller{
         }else {
           $data['packproduto'] = $this->modelPackproduto->getPackprodutoByGrupo($id_grupo,$paginador)[1];
 
+          // echo '<pre>';var_dump($data['packproduto']);echo '</pre>';die;
+
           $data['paginador_max'] = $this->modelPackproduto->getPackprodutoByGrupo($id_grupo,$paginador)[0];
           $data['paginador_atual'] = $paginador;
 

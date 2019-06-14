@@ -51,36 +51,47 @@ class PackprodutoModel extends Model {
 
           if($ponto > $total_prod - $ponto && $total_prod - $ponto > 0 && $paginador > 1) $resto = $total_prod - $ponto;
 
-          $ids_aux = [];
-          if($paginador == 1) $aux = 0; else $aux = 1;
-          $i = $ponto + 12*$paginador - $aux;
-          if($i > count($list)) $i = count($list) - $aux;
-          $repetidos_atuais =0;
-
-          $prox_ponto = $ponto + 12;
-          if($i > $prox_ponto && $paginador < $paginador_max) $i = $prox_ponto;
-
-          while ($i >= $ponto) {
-            if(in_array($list[$i]->getId_subgrupo(), $ids_aux)) $repetidos_atuais++; else $ids_aux[] = $list[$i]->getId_subgrupo();
-            $i--;
-          }
-
           $repetidos_old = 0;
           if($paginador > 1){
             $ids_aux = [];
             if($paginador == 2) $aux = 0; else $aux = 1;
             $ponto_aux = $ponto - 12;
-            $i = $ponto_aux + 12*($paginador-1) - $aux;
+            $i = $ponto_aux + 12*($paginador-1) - $aux;//12
             if($i > count($list)) $i = count($list) - $aux;
 
             $prox_ponto = $ponto;
             if($i > $prox_ponto) $i = $prox_ponto;
 
-            while ($i >= $ponto_aux) {
-              if(in_array($list[$i]->getId_subgrupo(), $ids_aux)) $repetidos_old++; else $ids_aux[] = $list[$i]->getId_subgrupo();
-              $i--;
-            }
+            $x = 0;
+            foreach($list as $list_2):
+              if($x != $ponto_aux){ $x++; continue;} else{
+                if($i+1 <= count(array_unique($ids_aux))){
+                  continue;
+                }else{
+                  if(in_array($list_2->getId_subgrupo(), $ids_aux)) $repetidos_old++; else $ids_aux[] = $list_2->getId_subgrupo();
+                }
+              }
+            endforeach;
           }
+
+          $ids_aux = [];
+          $i = $resto;
+          $repetidos_atuais =0;
+          $prox_ponto = $ponto + 12; //12
+
+          // echo count($list);die;
+
+          $x = 0;
+          foreach($list as $list_2):
+            if($x != $ponto+$repetidos_old){$x++; continue;} else{
+              if($i+1 <= count(array_unique($ids_aux))){
+                continue;
+              }else{
+                if(in_array($list_2->getId_subgrupo(), $ids_aux)) $repetidos_atuais++; else $ids_aux[] = $list_2->getId_subgrupo();
+              }
+            }
+          endforeach;
+
 
           $resto = $resto + $repetidos_atuais;
           $ponto = $ponto + $repetidos_old;
