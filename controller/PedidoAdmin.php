@@ -81,11 +81,11 @@ class PedidoAdmin extends Admin {
       header('Content-Type: application/octet-stream');
       header('Content-Disposition: attachment; filename='.basename($arquivo));
       header('Expires: 0');
-      header('Cache-Control: must-revalidate');
+      header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
       header('Pragma: public');
       header('Content-Length: ' . filesize($arquivo));
-      readfile($arquivo);
-
+      readfile($arquivo); 
+      unlink($arquivo);
     }
 
 }
