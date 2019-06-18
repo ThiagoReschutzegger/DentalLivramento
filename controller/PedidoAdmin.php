@@ -73,7 +73,7 @@ class PedidoAdmin extends Admin {
       $conteudo = "";
 
       foreach ($pedido[0][1] as $produto) {
-        $conteudo .= $produto['produto']->getBarcode()."|".$produto['quantidade'].PHP_EOL;
+        $conteudo .= $produto['produto']->getBarcode()."|".$produto['quantidade']/*.PHP_EOL*/."\r\n";
       }
 
       file_put_contents($arquivo,$conteudo);
@@ -84,7 +84,7 @@ class PedidoAdmin extends Admin {
       header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
       header('Pragma: public');
       header('Content-Length: ' . filesize($arquivo));
-      readfile($arquivo); 
+      readfile($arquivo);
       unlink($arquivo);
     }
 
