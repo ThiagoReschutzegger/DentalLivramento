@@ -6160,7 +6160,6 @@ body.bodyColor.container {
 
 .quick-view .modal-dialog .modal-content .modal-body .media, .quick-view-drone .modal-dialog .modal-content .modal-body .media {
   margin-top: 0;
-  margin-right: 20px;
 }
 
 @media (min-width: 992px) {

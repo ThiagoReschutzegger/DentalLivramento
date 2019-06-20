@@ -39,16 +39,24 @@
     </div>
   </div>
 </div>
-<div class="col-md-4 col-12">
+<div class="col-md-3 col-lg-2 col-12">
   <div class="footerLink">
     <h5 style="font-size: 18px;">Siga-nos</h5>
     <ul class="list-unstyled" style="letter-spacing: 2px;">
-      <li style="padding-top: 10px"><a href="https://www.facebook.com/DentalLivramento/" target="_blank" style=" font-size: 1.5em;"><i class="fa fa-facebook-square"></i> FACEBOOK</a></li>
-      <li style="padding-top: 10px"><a href="https://www.instagram.com/dentallivramento/" target="_blank" style=" font-size: 1.5em;"><i class="fa fa-instagram"></i> INSTAGRAM</a></li>
+      <li style="padding-top: 10px"><a href="https://www.facebook.com/DentalLivramento/" target="_blank" style=" font-size: 1.2em;"><i class="fa fa-facebook-square"></i> FACEBOOK</a></li>
+      <li style="padding-top: 10px"><a href="https://www.instagram.com/dentallivramento/" target="_blank" style=" font-size: 1.2em;"><i class="fa fa-instagram"></i> INSTAGRAM</a></li>
     </ul>
   </div>
 </div>
-<div class="col-md-4 col-md-offset-3 col-sm-3">
+<div class="col-md-2 col-12">
+  <div class="footerLink">
+    <h5 style="font-size: 18px;">A empresa</h5>
+    <div class="footerLink" style="padding-top: 10px;">
+      <a data-toggle="modal" href=".view-Empresa"  class="btn btn-primary-outlined" style="font-size: 1em; width: 90px; padding: 0;">Saiba mais</a>
+    </div>
+  </div>
+</div>
+<div class="col-md-3 col-lg-4 col-sm-3">
   <div class="footerLink">
     <h5 style="font-size: 18px;">Algum erro?</h5>
       <ul class="list-unstyled" style="color: #acacac; font-size: 1.2em;">
@@ -83,6 +91,52 @@
 </div>
 </div>
 </div>
+</div>
+</div>
+
+<!-- PORDUCT QUICK VIEW MODAL -->
+<div class="modal fade quick-view-drone view-Empresa" tabindex="-1" role="dialog">
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-body">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <div class="media flex-wrap">
+        <div class="media-body">
+          <!-- FEATURE -->
+          <div class="row features boxes-index">
+            <div class="col-12">
+              <div class="box text-center box-v2" style="border: solid 1px; border-color: #f5f5f5; background-color: #fff; margin-top: 20px;">
+                <i class="fa fa-building" aria-hidden="true"></i>
+                <h4>A Empresa </h4>
+                <span>Aqui na <b>Dental Livramento</b> nossos clientes vêm em primeiro lugar!
+                  Possuímos diversas especialidades, equipamentos e materiais de última geração, além do atendimento capacitado.
+                </span>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="box text-center box-v2" style="border: solid 1px; border-color: #f5f5f5; background-color: #fff;">
+                <i class="fa fa-flag" aria-hidden="true"></i>
+                <h4>As melhores Marcas</h4><br>
+                <span>Temos as marcas mais renomadas e conhecidas do mercado.
+                      Confira nossos produtos e escolha a sua!<br><br>
+                </span>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="box text-center box-v2" style="border: solid 1px; border-color: #f5f5f5; background-color: #fff;">
+                <i class="fa fa-desktop" aria-hidden="true"></i>
+                <h4>Cara nova</h4>
+                <span>A <b>Dental Livramento</b> está sempre pensando em você, por isso está de
+                      de cara nova, para proporcinar a você uma experiência ainda melhor!<br>
+                      Aproveite e explore as novas facilidades!
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 </div>
 
