@@ -245,19 +245,22 @@
         </div>
       </div>
     </div>
+
     <div class="container">
       <div class="row justify-content-md-end">
         <div class="col-sm-12 ml-auto bannercontainer ">
           <div class="fullscreenbanner-container bannerV4">
             <div class="fullscreenbanner">
               <ul>
-                <script>
-                  var element = document.getElementsByClassName("eapps-widget-toolbar");
-                  element.style.opacity = "null"
-                </script>
-                <script src="https://apps.elfsight.com/p/platform.js" defer></script>
-                <div class="elfsight-app-6ccede56-e350-4e60-948a-8e96edcd0eb0"></div>
-
+                <script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script><iframe src="//lightwidget.com/widgets/9dd0a7f3fb2458b1baa16527e4c4e5fe.html" scrolling="no" allowtransparency="true" class="lightwidget-widget" style="width:100%;border:0;overflow:hidden;"></iframe>
+              </ul>
+              <ul>
+                <br>
+                <center>
+                <div class="btn-group" role="group" aria-label="Basic example">
+              	  <button type="button" class="btn btn-info btn-rounded btn-lg">VISITE NOSSO INSTAGRAM</button>
+              	</div>
+                </center>
               </ul>
             </div>
           </div>
