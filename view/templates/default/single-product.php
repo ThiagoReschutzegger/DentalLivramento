@@ -62,6 +62,17 @@ endforeach;
               "autoPlayTimeout": 4000
             });
           });
+          function readMore() {
+            var dots = document.getElementById("dots");
+            var moreText = document.getElementById("more");
+            var btnText = document.getElementById("read");
+            var pre = document.getElementById("pre");
+
+            dots.style.display = "none";
+            btnText.style.display = "none";
+            pre.style.display = "none";
+            moreText.style.display = "inline";
+          };
       </script>
 
       <!-- MAIN CONTENT SECTION -->
@@ -71,30 +82,6 @@ endforeach;
             <div class="col-md-12">
               <div class="media flex-wrap">
                 <div class="media-left productSlider">
-                  <!-- <div id="carousel" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner">
-                      <div class="carousel-item active" data-thumb="0">
-                        <img style="height: 300px; width: auto;" src="<?php echo $produto->getImagem(); ?>">
-                      </div>
-                      <div class="carousel-item" data-thumb="1">
-                        <img style="height: 300px; width: auto;" src="<?php echo $marca->getImagem(); ?>">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="clearfix">
-                    <div id="thumbcarousel" class="carousel slide" data-interval="false">
-                      <div class="carousel-inner">
-                          <div data-target="#carousel" data-slide-to="0" class="thumb"><img src="<?php echo $produto->getImagem(); ?>"></div>
-                          <div data-target="#carousel" data-slide-to="1" class="thumb"><img src="<?php echo $marca->getImagem(); ?>"></div>
-                      </div>
-                      <a class="left carousel-control" href="#thumbcarousel" role="button" data-slide="prev">
-                        <span class="glyphicon glyphicon-chevron-left"></span>
-                      </a>
-                      <a class="right carousel-control" href="#thumbcarousel" role="button" data-slide="next">
-                        <span class="glyphicon glyphicon-chevron-right"></span>
-                      </a>
-                    </div>
-                  </div> -->
                   <div class="exzoom" id="exzoom">
                       <!-- Images -->
                       <div class="exzoom_img_box">
@@ -103,9 +90,7 @@ endforeach;
                           <li><img src="<?php echo $marca->getImagem(); ?>"/></li>
                         </ul>
                       </div>
-                      <!-- <a href="https://www.jqueryscript.net/tags.php?/Thumbnail/">Thumbnail</a> Nav-->
                       <div class="exzoom_nav"></div>
-
                   </div>
                 </div>
                 <div class="media-body">
@@ -132,7 +117,15 @@ endforeach;
                   text-transform: uppercase;
                   <?php echo $data['estoque-msg'];?></span>
                   <hr>                                              <!-- " -->
-                  <p><?php echo $produto->getDescricao(); ?>
+                  <p>
+                    <?php if(mb_strlen($produto->getDescricao()) > 150):?>
+                    <span id="pre"><?php echo mb_substr($produto->getDescricao(), 0, 150, 'UTF-8'); ?></span>
+                    <span id="dots">...</span>
+                    <span id="more" style="display: none;"><?php echo $produto->getDescricao(); ?></span>
+                    <span onclick="readMore()" id="read" style="cursor: pointer; color: #00bafa;"><b>Ler mais</b></span>
+                    <?php else:
+                        echo $produto->getDescricao();
+                      endif; ?>
                   <?php if (count($data['packproduto']) == 1):
                     $produtos = $data['packproduto'][0];
                   ?>
