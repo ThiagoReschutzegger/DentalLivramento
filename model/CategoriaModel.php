@@ -4,7 +4,7 @@ class CategoriaModel extends Model {
 
     public function getCategoria() {
         $list = [];
-        $sql = "SELECT * FROM categoria";
+        $sql = "SELECT * FROM categoria ORDER BY nome asc";
         $consulta = $this->ExecuteQuery($sql, array());
         foreach ($consulta as $linha) {
             $list[] = new Categoria($linha['id_categoria'],$linha['nome'],$linha['descricao'],$linha['imagem']);

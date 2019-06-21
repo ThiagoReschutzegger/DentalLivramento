@@ -4,7 +4,7 @@ class GrupoModel extends Model {
 
     public function getGrupo() {
         $list = [];
-        $sql = "SELECT * FROM grupo";
+        $sql = "SELECT * FROM grupo ORDER BY nome asc";
         $consulta = $this->ExecuteQuery($sql, array());
         foreach ($consulta as $linha) {
             $list[] = new Grupo($linha['id_grupo'],$linha['nome'],$linha['id_categoria']);
