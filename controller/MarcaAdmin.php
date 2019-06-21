@@ -23,9 +23,10 @@ class MarcaAdmin extends Admin {
             $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
             $imagem = filter_input(INPUT_POST, 'imagem', FILTER_SANITIZE_STRING);
             $catalogo = filter_input(INPUT_POST, 'catalogo', FILTER_SANITIZE_STRING);
+            $slider = filter_input(INPUT_POST, 'slider', FILTER_SANITIZE_STRING);
 
             if ($nome && $imagem) {
-                $marca = new Marca(null,$nome,$imagem,$catalogo);
+                $marca = new Marca(null,$nome,$imagem,$catalogo,$slider);
                 if ($this->model->insertMarca($marca)) {
                      $data['msg'] = 'Adicionado com Sucesso!';
                 } else {
@@ -70,8 +71,10 @@ class MarcaAdmin extends Admin {
         $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
         $imagem = filter_input(INPUT_POST, 'imagem', FILTER_SANITIZE_STRING);
         $catalogo = filter_input(INPUT_POST, 'catalogo', FILTER_SANITIZE_STRING);
+        $slider = filter_input(INPUT_POST, 'slider', FILTER_SANITIZE_STRING);
+
         if ($id && $nome && $imagem) {
-            $marca = new Marca($id,$nome,$imagem,$catalogo);
+            $marca = new Marca($id,$nome,$imagem,$catalogo,$slider);
             if ($this->model->updateMarca($marca)) {
                 $this->index();
                 return true;
@@ -80,6 +83,7 @@ class MarcaAdmin extends Admin {
               return true;
                 }
         } else {
+          echo $slider;
              $data['msg'] = 'Preencha todos os Campos!';
         }
       }

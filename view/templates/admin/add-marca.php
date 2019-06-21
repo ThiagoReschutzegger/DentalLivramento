@@ -34,6 +34,20 @@
             <input type="text" class="form-control" name="catalogo"><small class="help-block-none">Cole aqui o link do Catálogo.</small>
           </div>
         </div>
+        <div class="line"></div>
+        <div class="form-group row">
+          <label class="col-sm-2 form-control-label text-right">Deseja exibir no Slider de Marcas:</label>
+          <div class="col-sm-8">
+            <div class="i-checks">
+              <input id="sim" type="radio" checked value="1" name="slider" class="radio-template">
+              <label for="sim">Sim</label>
+            </div>
+            <div class="i-checks">
+              <input id="nao" type="radio" value="0" name="slider" class="radio-template">
+              <label for="nao">Não</label>
+            </div>
+          </div>
+        </div>
         <div class="form-group row">
           <input type="reset" class="btn btn-secondary col-sm-4 offset-sm-2" style="margin-right: 10px;" value="Limpar" />
           <input type="submit" class="btn btn-success col-sm-4 " value="Salvar" name="add" />

@@ -41,18 +41,6 @@
               data-captionhidden="off">
               <small>Os melhores produtos da fornteira você encontra aqui.<br>Conheça nossa Loja Virtual, agora com mais facilidades, ainda mais perto de você! </small>
             </div>
-            <!--<div class="tp-caption rs-caption-4 sft"
-              data-hoffset="0"
-              data-y="310"
-              data-x="[15,15,42,15]"
-              data-speed="800"
-              data-start="3500"
-              data-easing="Power4.easeOut"
-              data-endspeed="300"
-              data-endeasing="Power1.easeIn"
-              data-captionhidden="off">
-              <span class="page-scroll"><a href="#" class="btn primary-btn">Buy Now<i class="fa fa-chevron-right"></i></a></span>
-            </div>-->
           </div>
         </li>
         <?php $i = 0; ?>
@@ -237,60 +225,6 @@
         </div>
       </div>
     </div>
-
-    <!--<div class="page-header">
-      <h4>Latest Articles</h4>
-    </div>
-    <div class="row latestArticles">
-      <div class="col-md-4">
-        <div class="thumbnail">
-          <a href="<?php //echo $this->asset ?>blog-single-right-sidebar.html">
-            <img src="<?php //echo $this->asset ?>img/home/articles/articles-01.jpg" alt="article-image">
-          </a>
-          <div class="date-holder">
-            <p>08</p>
-            <span>NOV</span>
-          </div>
-          <h5><a href="<?php //echo $this->asset ?>blog-single-right-sidebar.html">Leo Vitae Nibh Malesuada.</a></h5>
-          <span class="meta"> by <a class="pr-1" href="#">Abdus</a> / <a class="pl-1" href="<?php //echo $this->asset ?>blog-single-right-sidebar.html">5 Comments</a></span>
-          <div class="caption">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque convallis nulla sed turpis pharetra pretium nec eu sem.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="thumbnail">
-          <a href="<?php //echo $this->asset ?>blog-single-right-sidebar.html">
-            <img src="<?php //echo $this->asset ?>img/home/articles/articles-02.jpg" alt="article-image">
-          </a>
-          <div class="date-holder">
-            <p>29</p>
-            <span>OCT</span>
-          </div>
-          <h5><a href="<?php //echo $this->asset ?>blog-single-right-sidebar.html">Malesuada Pulvinar Quis Fring.</a></h5>
-          <span class="meta"> by <a class="pr-1" href="#">Abdus</a> / <a class="pl-1" href="<?php //echo $this->asset ?>blog-single-right-sidebar.html">4 Comments</a></span>
-          <div class="caption">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque convallis nulla sed turpis pharetra pretium nec eu sem.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="thumbnail">
-          <a href="blog-single-right-sidebar.html">
-            <img src="<?php //echo $this->asset ?>img/home/articles/articles-03.jpg" alt="article-image">
-          </a>
-          <div class="date-holder">
-            <p>15</p>
-            <span>Sep</span>
-          </div>
-          <h5><a href="<?php //echo $this->asset ?>blog-single-right-sidebar.html">Proin Lectus Sed Tincidunt Auctor.</a></h5>
-          <span class="meta"> by <a class="pr-1" href="#">Abdus</a> / <a class="pl-1" href="<?php //echo $this->asset ?>blog-single-right-sidebar.html">3 Comments</a></span>
-          <div class="caption">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque convallis nulla sed turpis pharetra pretium nec eu sem.</p>
-          </div>
-        </div>
-      </div>
-    </div>-->
   </div>
 </section>
 
@@ -298,13 +232,15 @@
 <section class="lightSection clearfix mouse-grab" style='filter:grayscale(100%);'>
   <div class="container">
     <div class="owl-carousel partnersLogoSlider">
-      <?php foreach ($data['marca'] as $marca) :?>
+      <?php foreach ($data['marca'] as $marca) :
+        if($marca->getSlider() == 0): continue; else:
+      ?>
       <div class="slide">
         <div class="partnersLogo clearfix">
           <img src="<?php echo $marca->getImagem(); ?>" height="60px" alt="partner-img">
         </div>
       </div>
-    <?php endforeach; ?>
+    <?php endif; endforeach; ?>
     </div>
   </div>
 </section>
