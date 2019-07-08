@@ -24,7 +24,7 @@
   </div>
   </div>
 </div>
-<div class="row col-sm-12 col-md-8 heightiado" height="400px" style="border:0; margin-left: 0vw; background: url('<?php echo $this->asset; ?>img/maps.png'); background-size: cover; cursor: pointer;" onclick="location.href='https://goo.gl/maps/YXtkNTJjGjZsRFpM6';"></div>
+<div class="row col-sm-12 col-md-8 heightiado" height="400px" style="border:0; margin-left: 0vw; background: url('<?php echo $this->asset; ?>img/maps.png'); background-size: cover; cursor: pointer;" onclick="window.open('https://goo.gl/maps/YXtkNTJjGjZsRFpM6');"></div>
 </div>
 <div class="row" style="margin-top: 30px">
 <div class="col-md-4 col-12">
