@@ -462,4 +462,203 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
     $this->viewSubOf($id);
     }
 
+
+
+
+
+
+
+    // A partir daqui é a segunda parte do projeto. Dia 31/07/2019.
+
+    public function importaProdutosRP(){
+      if(filter_input(INPUT_POST, 'add')){
+              $src = $_FILES['arquivo']['tmp_name'];
+              $name = $_FILES['arquivo']['name'];
+              if($src){
+
+                $handle = fopen($src, 'r'); //LEITURA DO ARQUIVO
+                $content = fread($handle,filesize($src)); // NÃO SEI, MAS FUNCIONA
+                $linhas = explode(" ",$content)[0];
+                $linhas = explode("\n",$content); // EXPLODE AS LINHAS E COLOCA ELAS EM ARRAY $linhas
+
+                $barcode_errado = array(); // ISSO É PRA NOTIFICAR CADASTROS QUE DERAM ERRADO
+                $barcode_certo = array(); // ISSO É PRA NOTIFICAR CADASTROS QUE DERAM CERTO (NÃO MUITO ÚTIL)
+                $barcode_atualizado = array();
+
+                $barcode_array = $this->model->getAllBarcodes(); // PEGA TODOS OS BARCODES PR VER SE ALGUM DELES JA EXISTE (array normal)
+                $marcas_array = $this->modelMarca->getAllMarcas(); // PEGA TODOS OS ID E NOMES DE MARCAS PRA FAZER AQUELA COMPARACAO (array de array)
+                $categorias_array = $this->modelCategoria->getAllCategorias(); // PEGA TODOS OS ID E NOMES DE CATEGORIAS PRA FAZER AQUELA COMPARACAO (array de array)
+                $grupos_array = $this->modelGrupo->getAllGrupos();
+                $subgrupos_array = $this->modelSubgrupo->getAllSubgrupos();
+
+                foreach ($linhas as $row){
+                  $divisao = explode("\t",$row); // SEPARA TODOS OS DADOS EM UM ARRAY
+
+                  $marca = $this->tratamentoMarca($divisao[4],$marcas_array); // ARRUMA E SUBSTITUI O NOME DA MARCA PELO ID DA MESMA
+                  $categoria = $this->tratamentoCategoria($divisao[7],$categorias_array); // ARRUMA E SUBSTITUI O NOME DA MARCA PELO ID DA MESMA
+                  $preco = $this->tratamentoPreco($divisao[2]); // ARRUMA E SUBSTITUI O NOME DA MARCA PELO ID DA MESMA
+                  $estoque = $this->tratamentoEstoque($divisao[3]); // ARRUMA E SUBSTITUI O NOME DA MARCA PELO ID DA MESMA
+                  $grupo = $this->tratamentoGrupo($divisao[5],$categoria[0],$grupos_array); // ARRUMA E SUBSTITUI O NOME DA MARCA PELO ID DA MESMA
+                  $subgrupo = $this->tratamentoSubrupo($divisao[6],$grupo[0],$marca[0],$subgrupos_array); // ARRUMA E SUBSTITUI O NOME DA MARCA PELO ID DA MESMA
+
+                  $divisao[4] = $marca[0]; // TROCANDO NOME DA MARCA PELO ID
+                  $divisao[7] = $categoria[0]; // TROCANDO NOME DA CATEGORIA PELO ID
+                  $divisao[2] = $preco; // FLOATANDO O preco
+                  $divisao[3] = $estoque; // INTANDO O estoque
+                  $divisao[5] = $grupo[0]; // TROCANDO NOME DO GRUPO PELO ID
+                  $divisao[6] = $subgrupo[0]; // TROCANDO NOME DO GRUPO PELO ID
+
+                  echo '<pre>';print_r($divisao);echo '</pre>';
+
+                  // ADICIONAR PRODUTO AO BANCO
+                  // $verificacao = $this->model->insertByTxt($divisao[0],$divisao[2],$divisao[3],$divisao[1],$divisao[6],$barcode_array);
+                  //
+                  // if($verificacao[0] == 1){
+                  //   array_push($barcode_certo, $verificacao[1]);
+                  // }elseif($verificacao[0] == 3){
+                  //   array_push($barcode_errado, $verificacao[1]);
+                  // }elseif($verificacao[0] == 2){
+                  //   array_push($barcode_atualizado, $verificacao[1]);
+                  // }
+
+                  // ATUALIZAR OS ARRAYS COM OS DADOS QUE VÃO ENTRANDO
+                  if($marca[1]){
+                    $marcas_array = $this->modelMarca->getAllMarcas();
+                  }
+                  if($categoria[1]){
+                    $categorias_array = $this->modelCategoria->getAllCategorias();
+                  }
+                  if($grupo[1]){
+                    $grupos_array = $this->modelGrupo->getAllGrupos();
+                  }
+                  if($subgrupo[1]){
+                    $subgrupos_array = $this->modelSubgrupo->getAllSubgrupos();
+                  }
+
+                }
+                $data['arrays'] = array($barcode_certo,$barcode_errado);
+
+                die;
+
+              }else{
+                  $data['msg'] = 'Informe todos os campos';
+              }
+          }
+
+      $this->view->load('header');
+      $this->view->load('nav');
+      $this->view->load('importa');
+      $this->view->load('footer');
+    }
+
+    private function tratamentoMarca($marca,$array){
+
+      $marca = ucfirst(strtolower($marca)); // Como no .txt a marca é toda maiúscula, eu fiz isso pra q a primeira fosse maiuscula e as outras nao.
+
+      foreach ($array as $pica) {
+        if(trim($marca) == trim(ucfirst(strtolower($pica[1])))) { // EU NAO SEI PRA Q CARALHO SERVE ESSE TRIM MAS O IF NAO FUNCIONA SEM ELE
+          $id_marca = $pica[0]; //PEGA O ID DA MARCA Q ELE ENCONTROU
+          $bool = true;
+          break;
+        }else{
+          $bool = false;
+        }
+      }
+
+      //RETORNA VALOR CORRIGIDO DO ID DA MARCA
+      if($bool){
+        return [$id_marca,false];
+
+      }else{
+        $this->modelMarca->insertMarcaTxt($marca);
+        return [$this->modelMarca->getIdByNome($marca),true]; //ESSES TRUE OU FALSE SERVEM PRA ATUALIZAR O ARRAY, SENAO DA UM DESENCONTRO DE DADOS ATUALIZADOS/ANTIGOS
+      }
+    }
+
+    private function tratamentoCategoria($categoria,$array){
+
+      $categoria = ucfirst(strtolower(($categoria))); // Como no .txt a marca é toda maiúscula, eu fiz isso pra q a primeira fosse maiuscula e as outras nao.
+
+      foreach ($array as $pica) {
+        if(trim(($categoria)) == trim(ucfirst(strtolower($pica[1])))) { // EU NAO SEI PRA Q CARALHO SERVE ESSE TRIM MAS O IF NAO FUNCIONA SEM ELE
+          $id_categoria = $pica[0]; //PEGA O ID DA categoria Q ELE ENCONTROU
+          $bool = true;
+          break;
+        }else{
+          $bool = false;
+        }
+      }
+
+      //RETORNA VALOR CORRIGIDO DO ID DA categoria
+      if($bool){
+        return [$id_categoria,false];
+
+      }else{
+        $this->modelCategoria->insertCategoriaTxt($categoria);
+        return [$this->modelCategoria->getIdByNome($categoria),true];//ESSES TRUE OU FALSE SERVEM PRA ATUALIZAR O ARRAY, SENAO DA UM DESENCONTRO DE DADOS ATUALIZADOS/ANTIGOS
+      }
+    }
+
+    private function tratamentoGrupo($grupo,$id_categoria,$array){
+
+      $grupo = ucfirst(strtolower(($grupo))); // Como no .txt a marca é toda maiúscula, eu fiz isso pra q a primeira fosse maiuscula e as outras nao.
+
+      $bool = 0;
+      foreach ($array as $pica) {
+        if(trim(($grupo)) == trim(ucfirst(strtolower($pica[1])))) { // EU NAO SEI PRA Q CARALHO SERVE ESSE TRIM MAS O IF NAO FUNCIONA SEM ELE
+          $id_grupo = $pica[0]; //PEGA O ID DA categoria Q ELE ENCONTROU
+          $bool = true;
+          break;
+        }else{
+          $bool = false;
+        }
+      }
+
+      //RETORNA VALOR CORRIGIDO DO ID DA categoria
+      if($bool){
+        return [$id_grupo,false];
+
+      }else{
+        $this->modelGrupo->insertGrupoTxt($grupo,$id_categoria);
+        return [$this->modelGrupo->getIdByNome($grupo),true];//ESSES TRUE OU FALSE SERVEM PRA ATUALIZAR O ARRAY, SENAO DA UM DESENCONTRO DE DADOS ATUALIZADOS/ANTIGOS
+      }
+    }
+
+    private function tratamentoSubrupo($subgrupo,$id_grupo,$id_marca,$array){
+
+      $subgrupo = ucfirst(strtolower(($subgrupo))); // Como no .txt a marca é toda maiúscula, eu fiz isso pra q a primeira fosse maiuscula e as outras nao.
+
+      $bool = 0;
+      foreach ($array as $pica) {
+        if(trim(($subgrupo)) == trim(ucfirst(strtolower($pica[1])))) { // EU NAO SEI PRA Q CARALHO SERVE ESSE TRIM MAS O IF NAO FUNCIONA SEM ELE
+          $id_subgrupo = $pica[0]; //PEGA O ID DA categoria Q ELE ENCONTROU
+          $bool = true;
+          break;
+        }else{
+          $bool = false;
+        }
+      }
+
+      //RETORNA VALOR CORRIGIDO DO ID DA categoria
+      if($bool){
+        return [$id_subgrupo,false];
+
+      }else{
+        $this->modelSubgrupo->insertSubgrupoTxt($subgrupo,$id_grupo,$id_marca);
+        return [$this->modelSubgrupo->getIdByNome($subgrupo),true];//ESSES TRUE OU FALSE SERVEM PRA ATUALIZAR O ARRAY, SENAO DA UM DESENCONTRO DE DADOS ATUALIZADOS/ANTIGOS
+      }
+    }
+
+    private function tratamentoPreco($preco){
+      $preco = str_replace(',', '.', $preco);
+      $preco = floatval ($preco);
+      return $preco;
+    }
+
+    private function tratamentoEstoque($estoque){
+      $estoque = intval ($estoque);
+      return $estoque;
+    }
+
+
 }

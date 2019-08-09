@@ -123,4 +123,36 @@ class SubgrupoModel extends Model {
     }
 
 
+    public function getAllSubgrupos() {
+
+        $list = [];
+
+        $sql = "SELECT id_subgrupo,nome from subgrupo";
+        $consulta = $this->ExecuteQuery($sql, $list);
+
+        foreach ($consulta as $linha) {
+          $list[] = [$linha['id_subgrupo'],$linha['nome']];
+        }
+        //echo '<pre>';var_dump($list);echo '</pre>';die;
+        return $list;
+    }
+
+    public function insertSubgrupoTxt($nome,$id_grupo,$id_marca) {
+
+        $sql = "INSERT INTO subgrupo(nome,id_grupo,id_marca,destaque) VALUES(:nome,:idgrupo,:idmarc,:destaque)";
+        if ($this->ExecuteCommand($sql,[':nome'=>$nome,':idgrupo'=>$id_grupo,':idmarc'=>$id_marca,':destaque'=>0])){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function getIdByNome($nome) {
+        $list = [];
+        $sql = "SELECT id_subgrupo FROM subgrupo WHERE nome = :nome";
+        $query = $this->ExecuteQuery($sql, [':nome' => $nome]);
+        return $query[0]['id_subgrupo'];
+    }
+
+
 }
