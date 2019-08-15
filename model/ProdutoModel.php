@@ -195,6 +195,8 @@
       }
 
       public function updateByTxt($barcode,$preco,$estoque,$array) {
+        //IMPORTANTE!! $array É ARRAY COM TODOS OS BARCODES
+
 
         //echo '<pre>';var_dump($array);echo '</pre>';
         //echo '<pre>';var_dump($barcode);echo '</pre>';
@@ -223,6 +225,39 @@
 
           //echo '<h1 style="COLOR:RED">ERRADO</h1>';
 
+          $ver = array(3,$barcode);
+          return $ver;
+        }
+
+      }
+
+      public function insertByTxt($barcode,$preco,$estoque,$especificacao,$id_subgrupo,$array) {
+        //IMPORTANTE!! $array É ARRAY COM TODOS OS BARCODES
+
+        //echo '<pre>';var_dump($array);echo '</pre>';
+        //echo '<pre>';var_dump($barcode);echo '</pre>';
+
+        if(!in_array($barcode, $array)){
+
+          //echo '<h1 style="COLOR:blue">existe</h1>';
+
+          $sql = "INSERT INTO produto(barcode,preco,estoque,especificacao,id_subgrupo) VALUES(:barcode,:preco,:estoque,:especificacao,:id_subgrupo)";
+          
+          $param = [':barcode' => $barcode,
+                    ':preco' => $preco,
+                    ':estoque' => $estoque,
+                    ':especificacao' => $especificacao,
+                    ':id_subgrupo' => $id_subgrupo
+                    ];
+
+          if ($this->ExecuteCommand($sql, $param)) {
+              $ver = array(1,$barcode);
+              return $ver;
+          }else{
+            $ver = array(2,$barcode);
+            return $ver;
+          }
+        }else {
           $ver = array(3,$barcode);
           return $ver;
         }

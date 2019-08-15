@@ -75,4 +75,37 @@ class GrupoModel extends Model {
         //echo 'Gok';
         return $list;
     }
+
+    public function getAllGrupos() {
+
+        $list = [];
+
+        $sql = "SELECT id_grupo,nome from grupo";
+        $consulta = $this->ExecuteQuery($sql, $list);
+
+        foreach ($consulta as $linha) {
+          $list[] = [$linha['id_grupo'],$linha['nome']];
+        }
+        //echo '<pre>';var_dump($list);echo '</pre>';die;
+        return $list;
+    }
+
+    public function insertGrupoTxt($nome,$id) {
+        $sql = "INSERT INTO grupo(nome,id_categoria) VALUES(:nome,:id)";
+        if ($this->ExecuteCommand($sql,[':nome'=>$nome,':id'=>$id])){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function getIdByNome($nome) {
+        $list = [];
+        $sql = "SELECT id_grupo FROM grupo WHERE nome = :nome";
+        $query = $this->ExecuteQuery($sql, [':nome' => $nome]);
+        return $query[0]['id_grupo'];
+    }
+
+
+
 }

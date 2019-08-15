@@ -28,6 +28,15 @@ class MarcaModel extends Model {
         }
     }
 
+    public function insertMarcaTxt($nome) {
+        $sql = "INSERT INTO marca(nome) VALUES(:nome)";
+        if ($this->ExecuteCommand($sql,[':nome'=>$nome])){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
      public  function removeMarca($id) {
         $sql = "DELETE FROM marca WHERE id_marca = :id";
         if ($this->ExecuteCommand($sql, [':id'=>$id])) {
@@ -58,6 +67,14 @@ class MarcaModel extends Model {
         return $list;
     }
 
+    public function getIdByNome($nome) {
+        $list = [];
+        $sql = "SELECT id_marca FROM marca WHERE nome = :nome";
+        $query = $this->ExecuteQuery($sql, [':nome' => $nome]);
+
+        return $query;
+    }
+
     public function getMarcaByProduto($ids) {
         $list = [];
         $num = count($ids);
@@ -79,6 +96,20 @@ class MarcaModel extends Model {
             $list[] = new Marca($linha['id_marca'], $linha['nome'], $linha['imagem'], $linha['catalogo'], $linha['slider']);
         }
         //echo 'Mok';
+        return $list;
+    }
+
+    public function getAllMarcas() {
+
+        $list = [];
+
+        $sql = "SELECT id_marca,nome from marca";
+        $consulta = $this->ExecuteQuery($sql, $list);
+
+        foreach ($consulta as $linha) {
+          $list[] = [$linha['id_marca'],$linha['nome']];
+        }
+        //echo '<pre>';var_dump($list);echo '</pre>';die;
         return $list;
     }
 

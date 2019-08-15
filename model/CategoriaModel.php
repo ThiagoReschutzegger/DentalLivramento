@@ -57,5 +57,34 @@ class CategoriaModel extends Model {
         //echo 'Cok';
         return $list;
     }
+    public function getAllCategorias() {
+
+        $list = [];
+
+        $sql = "SELECT id_categoria,nome from categoria";
+        $consulta = $this->ExecuteQuery($sql, $list);
+
+        foreach ($consulta as $linha) {
+          $list[] = [$linha['id_categoria'],$linha['nome']];
+        }
+        //echo '<pre>';var_dump($list);echo '</pre>';die;
+        return $list;
+    }
+
+    public function insertCategoriaTxt($nome) {
+        $sql = "INSERT INTO categoria(nome) VALUES(:nome)";
+        if ($this->ExecuteCommand($sql,[':nome'=>$nome])){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function getIdByNome($nome) {
+        $list = [];
+        $sql = "SELECT id_categoria FROM categoria WHERE nome = :nome";
+        $query = $this->ExecuteQuery($sql, [':nome' => $nome]);
+        return $query[0]['id_categoria'];
+    }
 
 }
