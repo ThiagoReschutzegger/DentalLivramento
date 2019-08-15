@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <!-- SITE TITTLE -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dental Livramento</title>
+      
+      <meta name="theme-color" content="#00bafa" />
+
+    <!-- PLUGINS CSS STYLE -->
+    <link href="plugins/jquery-ui/jquery-ui.css" rel="stylesheet">
+    <link href="plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="plugins/selectbox/select_option1.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="plugins/rs-plugin/css/settings.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="plugins/slick/slick.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="plugins/slick/slick-theme.css" media="screen">
+
+    <!-- GOOGLE FONT -->
+    <link href='https://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
+
+    <!-- CUSTOM CSS -->
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/default.css" id="option_color">
+    <link rel="stylesheet" href="css/custom.css">
+
+    <!-- Icons -->
+    <link rel="shortcut icon" href="icon.ico">
+
+    <style>
+        li { 
+          display: inline-block;
+          font-size: 1.5em;
+          list-style-type: none;
+          padding: 1em;
+          text-transform: uppercase;
+        }
+
+        li span {
+          display: block;
+          font-size: 4.5rem;
+        }
+        body { 
+          background:
+          linear-gradient(
+            rgba(52, 52, 52, 0.5), /*0, 150, 185, 0.5 */
+            rgba(206, 206, 206, 0.5)  /*0, 220, 255, 0.5*/
+            ) no-repeat center center fixed , url(back.jpg) no-repeat center center fixed; 
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          -o-background-size: cover;
+          background-size: cover;
+        }
+    </style>
+
+  </head>
+
+  <body class="body-wrapper">
+
+    <!-- MAIN CONTENT SECTION -->
+    <section class="mainContent clearfix notFound" style="background-color: transparent">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-6 col-12">
+            <a href="https://www.facebook.com/DentalLivramento" target="_blank" class="navbar-brand pageLogo"><img src="DentalLivramentoLogoFinal.png" alt="logo" class="logo-pl logo-nav image-fluid"></a>
+            <h1 style="font-size: 50px !important; text-shadow: 8px 8px 1px #4b4b4b !important;">Em breve novo site</h1>
+              <ul>
+                <li><span id="days" style="margin-bottom: 60px;"></span>dias</li>
+                <li><span id="hours" style="margin-bottom: 60px;"></span>horas</li>
+                <li><span id="minutes" style="margin-bottom: 60px;"></span>Minutos</li>
+                <li><span id="seconds" style="margin-bottom: 60px;"></span>Segundos</li>
+              </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="plugins/jquery/jquery.min.js"></script>
+    <script src="plugins/jquery/jquery-migrate-3.0.0.min.js"></script>
+    <script src="plugins/jquery-ui/jquery-ui.js"></script>
+    <script src="plugins/bootstrap/js/popper.min.js"></script>
+    <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="plugins/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+    <script src="plugins/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+    <script src="plugins/slick/slick.js"></script>
+    <script src="plugins/selectbox/jquery.selectbox-0.1.3.min.js"></script>
+    <script src="plugins/countdown/jquery.syotimer.js"></script>
+    <script src="js/custom.js"></script>
+      
+    <script type="text/javascript">
+          const second = 1000,
+          minute = second * 60,
+          hour = minute * 60,
+          day = hour * 24;
+
+    let countDown = new Date('Oct 15, 2019 03:00:00').getTime(),
+        x = setInterval(function() {
+
+          let now = new Date().getTime(),
+              distance = countDown - now;
+
+          document.getElementById('days').innerText = Math.floor(distance / (day)),
+            document.getElementById('hours').innerText = Math.floor((distance % (day)) / (hour)),
+            document.getElementById('minutes').innerText = Math.floor((distance % (hour)) / (minute)),
+            document.getElementById('seconds').innerText = Math.floor((distance % (minute)) / second);
+
+          //do something later when date is reached
+          //if (distance < 0) {
+          //  clearInterval(x);
+          //  'IT'S MY BIRTHDAY!;
+          //}
+
+        }, second)  
+    </script>
+
+  </body>
+</html>

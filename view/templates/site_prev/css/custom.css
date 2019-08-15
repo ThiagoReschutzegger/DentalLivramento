@@ -1,0 +1,132 @@
+/* NOSSOS ESTILOS CUSTOMIZADOS */
+
+.mouse-grab{
+  cursor: grab;
+}
+
+.mouse-grab:active{
+  cursor: grabbing;
+}
+
+.table-espec{
+  width: 80% !important;
+}
+
+@media (max-width: 500px) {
+  .table-espec{
+    width: 100% !important;
+  }
+  .font-table-cart{
+    font-size: 10px !important;
+    font-weight: 400 !important;
+  }
+  .list-unstyled li{
+    font-size: 120% !important;
+  }
+  .Vizualizando{
+    display: none;
+  }
+  .select-shop{
+    float: none !important;
+    padding-left: 12%;
+  }
+  .heightiado{
+    padding-top: 4%;
+    height: 200px;
+    }
+  .box-v2 h4{
+    font-size: 15px !important;
+  }
+
+  .box-v2 i{
+    font-size: 40px !important;
+  }
+
+  .box-v2 span{
+    font-size: 10px !important;
+  }
+  .featuredProducts{
+    margin-bottom: 0px !important;
+  }
+  .boxes-index{
+    display: none;
+  }
+  .quant-prod{
+    display: none;
+  }
+}
+@media (max-width: 700px) {
+  .modalBar{
+    width: 100% !important;
+    padding-top: 0px;
+  }
+  .modal-body{
+    padding-right: 15px !important;
+  }
+  .menuBar{
+    display: none;
+  }
+  .sectionPadding{
+    padding-top: 45px;
+  }
+}
+
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance:textfield;
+}
+
+*::selection {
+    background: lightblue;
+    color: #343434;
+}
+
+.modalBar{
+  width: 100%;
+}
+
+@media (min-width: 770px) {
+    .logo-nav{
+        width: 300px;
+        height: auto;
+        padding-top: 0;
+    }
+}
+@media (max-width: 1000px) {
+    .logo-nav{
+        width:200px;
+        height: auto;
+        padding-top: 0;
+    }
+}
+@media (max-width: 300px) {
+    .logo-nav{
+        width:150px;
+        height: auto;
+        padding-top: 0;
+    }
+}
+
+.box-v2{
+  background-color: transparent;
+  border: 3px solid #e4e4e4;
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 400px) {
+    .btn-finalizar{
+        margin-top: 10px;
+    }
+
+    .img-slider{
+      height: auto !important;
+      width: 120px !important;
+      margin-top: 50px !important;
+    }
+}
