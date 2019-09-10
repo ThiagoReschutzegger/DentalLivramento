@@ -18,6 +18,22 @@ class MarcaModel extends Model {
         $marca = $this->ExecuteQuery($sql, [':id' => $id])[0];
             return new Marca( $marca['id_marca'],$marca['nome'],$marca['imagem'],$marca['catalogo'],$marca['slider']);
     }
+    
+    public function getMarcaByIds($ids) {
+        $list = [];
+        $string = "WHERE id_marca = "; //15 caracteres
+        foreach ($ids as $id){
+            $string = $string.$id." OR id_marca = ";
+        }
+        $string = substr($string, 0, -15);
+        
+        $sql = "SELECT * FROM marca ".$string;
+        $consulta = $this->ExecuteQuery($sql, array());
+        foreach ($consulta as $linha) {
+            $list[] = new Marca($linha['id_marca'],$linha['nome'],$linha['imagem'],$linha['catalogo'],$linha['slider']);
+        }
+        return $list;
+    }
 
     public function insertMarca($marca) {
         $sql = "INSERT INTO marca(nome,imagem,catalogo) VALUES(:nome,:imagem,:catalogo)";

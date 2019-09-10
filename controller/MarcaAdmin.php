@@ -17,31 +17,31 @@ class MarcaAdmin extends Admin {
       $this->view->load('footer');
     }
 
-    public function addMarca() {
-      $data['msg'] = '';
-      if (filter_input(INPUT_POST, 'add')) {
-            $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
-            $imagem = filter_input(INPUT_POST, 'imagem', FILTER_SANITIZE_STRING);
-            $catalogo = filter_input(INPUT_POST, 'catalogo', FILTER_SANITIZE_STRING);
-            $slider = filter_input(INPUT_POST, 'slider', FILTER_SANITIZE_STRING);
-
-            if ($nome && $imagem) {
-                $marca = new Marca(null,$nome,$imagem,$catalogo,$slider);
-                if ($this->model->insertMarca($marca)) {
-                     $data['msg'] = 'Adicionado com Sucesso!';
-                } else {
-                    $data['msg'] = 'Erro!';
-                    }
-            } else {
-                 $data['msg'] = 'Preencha todos os Campos!';
-
-            }
-        }
-      $this->view->load('header');
-      $this->view->load('nav');
-      $this->view->load('add-marca', $data);
-      $this->view->load('footer');
-    }
+//    public function addMarca() {
+//      $data['msg'] = '';
+//      if (filter_input(INPUT_POST, 'add')) {
+//            $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
+//            $imagem = filter_input(INPUT_POST, 'imagem', FILTER_SANITIZE_STRING);
+//            $catalogo = filter_input(INPUT_POST, 'catalogo', FILTER_SANITIZE_STRING);
+//            $slider = filter_input(INPUT_POST, 'slider', FILTER_SANITIZE_STRING);
+//
+//            if ($nome && $imagem) {
+//                $marca = new Marca(null,$nome,$imagem,$catalogo,$slider);
+//                if ($this->model->insertMarca($marca)) {
+//                     $data['msg'] = 'Adicionado com Sucesso!';
+//                } else {
+//                    $data['msg'] = 'Erro!';
+//                    }
+//            } else {
+//                 $data['msg'] = 'Preencha todos os Campos!';
+//
+//            }
+//        }
+//      $this->view->load('header');
+//      $this->view->load('nav');
+//      $this->view->load('add-marca', $data);
+//      $this->view->load('footer');
+//    }
 
     public function viewMarca($id) {
       $data['marca'] = $this->model->getMarcaById($id);
@@ -51,18 +51,18 @@ class MarcaAdmin extends Admin {
       $this->view->load('footer');
     }
 
-    public function deleteMarca($id) {
-      if (filter_input(INPUT_POST, 'del')) {
-        $this->model->removeMarca($id);
-        $this->index();
-        return true;
-      }
-      $data['marca'] = $this->model->getMarcaById($id);
-      $this->view->load('header');
-      $this->view->load('nav');
-      $this->view->load('del-marca', $data['marca']);
-      $this->view->load('footer');
-    }
+//    public function deleteMarca($id) {
+//      if (filter_input(INPUT_POST, 'del')) {
+//        $this->model->removeMarca($id);
+//        $this->index();
+//        return true;
+//      }
+//      $data['marca'] = $this->model->getMarcaById($id);
+//      $this->view->load('header');
+//      $this->view->load('nav');
+//      $this->view->load('del-marca', $data['marca']);
+//      $this->view->load('footer');
+//    }
 
     public function updateMarca($ident) {
       $data['msg'] = '';

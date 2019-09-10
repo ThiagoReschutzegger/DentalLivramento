@@ -9,23 +9,33 @@
           <div class="col-lg-12">
               <div class="card">
                   <div class="card-body">
-                      <form method="POST" class="form-inline">
-                          <div class="form-group">
-                              <div class="col-sm-12 ">
-                                  <span style='color:grey; font-size:15px'>&nbsp&nbsp&nbspOrganizar por:&nbsp&nbsp&nbsp</span>
-                                  <select name="organizar" class="form-control">
-                                      <option value='2'>Agrup. de produtos</option>
-                                      <option value='1'>Produto unitário</option>
-                                  </select>
-                              </div>
+                      <?php if ($data['resultado'] == 'all'): ?>
+                      <div class="row">
+                          <div class="col-lg-9">
+                              <h2 style="padding-top: 10px;">Visualizando todos</h2>
                           </div>
-                          <div class="form-group">
-                              <label for='inlineFormInput' class="form-control-label">&nbsp&nbsp&nbspCód. de Barras&nbsp&nbsp&nbsp</label>
+                          <div class="form-group col-lg-3 col-xs-12" style="align: right;">
+                              <a href="<?php echo $this->base_url; ?>ProdutoAdmin/buscaProduto" class="btn btn-primary" style="color: white">Voltar a pesquisa &nbsp&nbsp<i class="fa fa-search"></i></a>
+                          </div>
+                          <br>
+                          <br>
+                        </div>
+                          
+                      <?php else : ?>
+                      
+                      <form method="POST" class="form-inline row">
+                          <div class="col-lg-1 col-xs-12">
+                              <span style='color:grey; font-size:15px'>Pesquisar:&nbsp&nbsp</span>
+                          </div>
+                          <div class="form-group col-lg-3 col-xs-12">
                               <input id="inlineFormInput" name="codigo" type="text" placeholder="CÓDIGO DE BARRAS" class="mr-1 form-control">
                           </div>
-                          <div class="form-group">
-                              <label for='inlineFormInputGroup' class="form-control-label">&nbsp&nbsp&nbspNome&nbsp&nbsp&nbsp</label>
+                          <div class="form-group col-lg-3 col-xs-12">
                               <input id="inlineFormInputGroup" name="nome" type="text" placeholder="NOME DO PRODUTO" class="mr-1 form-control">
+                          </div>
+                          <div class="col-lg-2"></div>
+                          <div class="form-group col-lg-3 col-xs-12" style="align: right;">
+                              <a href="<?php echo $this->base_url; ?>ProdutoAdmin/buscaProduto/all" class="btn btn-primary" style="color: white">Visualizar todos &nbsp&nbsp<i class="icon-grid"></i></a>
                           </div>
                           <br>
                           <br>
@@ -35,6 +45,7 @@
                               <input type="submit" name="buscar" value="Buscar" class="btn btn-primary col-lg-12 col-sm-12 col-md-12">
                           </div>
                       </form>
+                      <?php endif;?>
                   </div>
               </div>
           </div>
@@ -43,7 +54,7 @@
                   <div class="card-body">
                       <?php if ($data['resultado'] == 'inicio'): ?>
                           <div class="alert alert-info" role="alert">
-                              Insira alguns dos campos.
+                              Insira algum dos campos.
                           </div>
                       <?php elseif ($data['resultado'] == 'vazio'): ?>
                           <div class="alert alert-warning" role="alert">
@@ -85,41 +96,68 @@
                                   </table>
                               </div>
                           </div>
-                        <?php elseif ($data['status'] == '2'): ?>
-                          <div class="card-header d-flex align-items-center">
-                              <h3 class="h4">Resultado da busca</h3>
-                          </div>
-                          <div class="card-body">
-                              <div class="table-responsive">
-                                  <table class="table table-striped table-hover">
-                                      <thead>
-                                          <tr>
-                                              <th>Imagem</th>
-                                              <th>Nome</th>
-                                              <th>Descrição</th>
-                                              <th>Marca</th>
-                                              <th>Visualizar</th>
-                                          </tr>
-                                      </thead>
-                                      <tbody>
-                                          <?php foreach ($data['resultado'] as $produto): ?>
-                                              <tr onclick="location.href='<?php echo $this->base_url ?>ProdutoAdmin/viewSubOf/<?php echo $produto->getId_subgrupo(); ?>';" style="cursor: pointer;">
-                                                  <td><center><img height="100" src="<?php echo $produto->getImagem(); ?>"></center></td>
-                                          <td><?php echo $produto->getNome(); ?></td>
-                                          <td><?php echo mb_substr($produto->getDescricao(), 0, 45, 'UTF-8') . "<br>".mb_substr($produto->getDescricao(), 46, 90, 'UTF-8')."..."; ?></td>
-                                          <td><?php echo $produto->getId_marca(); ?></td>
-                                          <td>
-                                          <center><a href="<?php echo $this->base_url ?>ProdutoAdmin/viewSubOf/<?php echo $produto->getId_subgrupo(); ?>"><button type="button" class="btn btn-secondary btn-block"><i class="fa fa-eye"></i></button></a></center>
-                                          </td>
-                                          </tr>
-                                      <?php endforeach; ?>
-                                      <tr>
-                                          <td colspan="8"><center><a href="<?php echo $this->base_url; ?>ProdutoAdmin/addProdutoWhere" class="btn btn-success btn-lg btn-block"><i class="fa fa-plus"></i></a></center></td>
-                                      </tr>
-                                      </tbody>
-                                  </table>
+                        <?php elseif ($data['resultado'] == 'all'): ?>
+                            
+                            <?php foreach ($data['categoria'] as $categoria):?>
+                            <?php $algum = false; ?>
+                            <div class="card-header d-flex align-items-center row" style="border-width: 3px; border-color: #04040457;">
+                                <div class="col-md-2">
+                                    <h3 class="h4"><?php echo $categoria->getNome(); ?></h3>
+                                </div>
+                            <div class="container-fluid col-md-10 row">
+                            <?php foreach ($data['grupo'] as $grupo):
+                                 if($grupo->getId_categoria() == $categoria->getId_categoria()):
+                             ?>
+
+                              <div class="col-lg-6">
+                                  <div class="card">
+                                      <div class="card-header d-flex align-items-center" >
+                                      <h3 class="h4">
+                                        <a class="btn btn-info" data-toggle="collapse" href="#collapseExample<?php echo $grupo->getId_grupo(); ?>" role="button" aria-expanded="false" aria-controls="collapseExample" style="text-decoration: none;">
+                                          <?php echo $grupo->getNome(); ?>
+                                        </a>
+                                      </h3>
+                                    </div>
+                                    <div class="collapse" id="collapseExample<?php echo $grupo->getId_grupo(); ?>">
+                                      <div class="card-body">
+                                        <div class="table-responsive">
+                                          <table class="table table-striped table-hover">
+                                            <thead>
+                                              <tr>
+                                                <th>Nome do Subgrupo</th>
+                                                <th></th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                <?php foreach ($data['subgrupo'] as $subgrupo):
+                                                  if ($subgrupo->getId_grupo() == $grupo->getId_grupo()):
+                                                      echo '<tr>
+                                                      <td>'.$subgrupo->getNome().'</td>
+                                                      <td>
+                                                      <a class="btn btn-primary" href="'.$this->base_url.'ProdutoAdmin/viewItens/'.$subgrupo->getId_subgrupo().'"><i class="fa fa-angle-double-right"></i></a>
+                                                      </td>
+                                                      </tr>';
+                                                      $algum = true;
+                                                  endif;
+                                               endforeach;
+                                               if(!$algum){
+                                                 echo '<tr><td colspan="3"><center>Nenhum subgrupo existente nesse grupo.</center></td></tr>';
+                                                 $algum = true;
+                                               }
+                                              ?>
+                                            </tbody>
+                                          </table>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
                               </div>
+                            <?php $algum = false; endif; endforeach; ?>
+                            
                           </div>
+                          </div>
+                        <?php endforeach;?>
                         <?php endif;?>
                       <?php endif; ?>
 

@@ -16,13 +16,7 @@
     <div class="card-body">
       <form class="form-horizontal" method="post">
         <input type="hidden" name="id" value="<?php echo $marca->getId_marca(); ?>"/>
-        <div class="form-group row">
-          <label class="col-sm-2 form-control-label text-right">Nome:</label>
-          <div class="col-sm-8">
-            <input type="text" class="form-control" name="nome" value="<?php echo $marca->getNome(); ?>">
-          </div>
-        </div>
-        <div class="line"></div>
+        <input type="hidden" class="form-control" name="nome" value="<?php echo $marca->getNome(); ?>"/>
         <div class="form-group row">
           <label class="col-sm-2 form-control-label text-right">Link:</label>
           <div class="col-sm-8">

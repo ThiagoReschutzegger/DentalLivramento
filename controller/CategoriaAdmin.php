@@ -18,30 +18,30 @@ class CategoriaAdmin extends Admin {
       $this->view->load('footer');
     }
 
-    public function addCategoria() {
-      $data['msg'] = '';
-      if (filter_input(INPUT_POST, 'add')) {
-        $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
-        $descricao = '..';
-        $imagem = filter_input(INPUT_POST, 'imagem', FILTER_SANITIZE_STRING);
-
-            if ($nome && $descricao && $imagem) {
-                $categoria = new Categoria(null,$nome,$descricao,$imagem);
-                if ($this->model->insertCategoria($categoria)) {
-                      $data['msg'] = 'Adicionado com Sucesso!';
-                } else {
-                    $data['msg'] = 'Erro!';
-                    }
-            } else {
-                 $data['msg'] = 'Preencha todos os Campos!';
-
-            }
-        }
-      $this->view->load('header');
-      $this->view->load('nav');
-      $this->view->load('add-categoria', $data);
-      $this->view->load('footer');
-    }
+//    public function addCategoria() {
+//      $data['msg'] = '';
+//      if (filter_input(INPUT_POST, 'add')) {
+//        $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
+//        $descricao = '..';
+//        $imagem = filter_input(INPUT_POST, 'imagem', FILTER_SANITIZE_STRING);
+//
+//            if ($nome && $descricao && $imagem) {
+//                $categoria = new Categoria(null,$nome,$descricao,$imagem);
+//                if ($this->model->insertCategoria($categoria)) {
+//                      $data['msg'] = 'Adicionado com Sucesso!';
+//                } else {
+//                    $data['msg'] = 'Erro!';
+//                    }
+//            } else {
+//                 $data['msg'] = 'Preencha todos os Campos!';
+//
+//            }
+//        }
+//      $this->view->load('header');
+//      $this->view->load('nav');
+//      $this->view->load('add-categoria', $data);
+//      $this->view->load('footer');
+//    }
 
     public function viewCategoria($id) { //baguncinha
       $data['categoria'] = $this->model->getCategoriaById($id);
@@ -52,18 +52,18 @@ class CategoriaAdmin extends Admin {
       $this->view->load('footer');
     }
 
-    public function deleteCategoria($id) {
-      if (filter_input(INPUT_POST, 'del')) {
-        $this->model->removeCategoria($id);
-        $this->index();
-        return true;
-      }
-      $data['categoria'] = $this->model->getCategoriaById($id);
-      $this->view->load('header');
-      $this->view->load('nav');
-      $this->view->load('del-categoria', $data['categoria']);
-      $this->view->load('footer');
-    }
+//    public function deleteCategoria($id) {
+//      if (filter_input(INPUT_POST, 'del')) {
+//        $this->model->removeCategoria($id);
+//        $this->index();
+//        return true;
+//      }
+//      $data['categoria'] = $this->model->getCategoriaById($id);
+//      $this->view->load('header');
+//      $this->view->load('nav');
+//      $this->view->load('del-categoria', $data['categoria']);
+//      $this->view->load('footer');
+//    }
 
     public function updateCategoria($ident) {
       $data['msg'] = '';

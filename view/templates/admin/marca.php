@@ -39,15 +39,15 @@
                       <a class="btn btn-info" style="font-size: 15px;" href="<?php echo $this->base_url; ?>MarcaAdmin/updateMarca/<?php echo $marca->getId_marca(); ?>">
                         <i class="fa fa-pencil"></i>
                       </a>
-                      <a class="btn btn-danger" style="font-size: 15px;" href="<?php echo $this->base_url; ?>MarcaAdmin/deleteMarca/<?php echo $marca->getId_marca(); ?>">
+<!--                      <a class="btn btn-danger" style="font-size: 15px;" href="<?php echo $this->base_url; ?>MarcaAdmin/deleteMarca/<?php echo $marca->getId_marca(); ?>">
                         <i class="fa fa-remove"></i>
-                      </a>
+                      </a>-->
                     </td>
                   </tr>
                 <?php endforeach; ?>
-                  <tr>
+<!--                  <tr>
                       <td colspan="8"><center><a href="<?php echo $this->base_url; ?>MarcaAdmin/addMarca" class="btn btn-success btn-lg btn-block"><i class="fa fa-plus"></i></a></center></td>
-                  </tr>
+                  </tr>-->
 
                 </tbody>
               </table>

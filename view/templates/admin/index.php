@@ -44,14 +44,7 @@
 
                     </div>
                 </div>
-                <!-- Item -->
-                <div class="col-xl-6 col-sm-6">
-                    <div class="item d-flex align-items-center">
-                        <div class="icon bg-orange"><i class="icon-grid"></i></div>
-                        <div class="title"><a class="linkDash" href="<?php echo $this->base_url . "GrupoAdmin"; ?>"><span>Grupos<br></span></a>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
             <div class="row bg-white has-shadow">
                 <!-- Item -->
