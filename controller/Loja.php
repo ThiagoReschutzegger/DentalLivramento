@@ -9,6 +9,7 @@ class Loja extends Controller{
     protected $modelSlider;
     protected $modelMarca;
     protected $modelSubgrupo;
+    protected $modelItem;
     protected $modelPackproduto;
     protected $modelCarrinho;
     protected $modelPedido;
@@ -26,6 +27,7 @@ class Loja extends Controller{
         $this->modelSlider = new SliderModel();
         $this->modelMarca = new MarcaModel();
         $this->modelSubgrupo = new SubgrupoModel();
+        $this->modelItem = new ItemModel();
         $this->modelCarrinho = new CarrinhoModel();
         $this->modelPedido = new PedidoModel();
         $this->modelPackproduto = new PackprodutoModel();
@@ -42,140 +44,75 @@ class Loja extends Controller{
     public function index(){
       header('location:' . $this->config->base_url);
     }
-
-    public function view($param = null){ //Edu
-
-      $string = explode(".",$param);
-      $id_grupo = $string[0];
-      if(!isset($string[1]) || $string[1] == 0){
-          $paginador = 1;
-      }else{
-        $paginador = $string[1];
-      }
-      if(!isset($string[2])){
-          $marca_id = 0;
-      }else{
-        $marca_id = $string[2];
-      }
-      if(!isset($string[3])){
-          $ordem = '';
-      }else{
-        $ordem = $string[3];
-      }
-
-      if($id_grupo == null) header('location:' . $this->config->base_url); //contra espetinhos
-
+    
+    public function viewSub($id_grupo){
         $data['estilo'] = $this->model->getEstiloAtual();
         $data['grupo'] = $this->modelGrupo->getGrupo();
         $data['grupo-atual'] = $this->modelGrupo->getGrupoById($id_grupo);
         $data['categoria'] = $this->modelCategoria->getCategoria();
         $data['categoria-atual'] = $this->modelCategoria->getCategoriaByGrupoId($id_grupo);
+        $data['subgrupo'] = $this->modelSubgrupo->getSubgrupoByGrupo($id_grupo);
+        
+        $data['total-sub'] = count($data['subgrupo']);
+        
+        
+        $this->view->load('header',$data);
+        $this->view->load('nav',$data);
+        $this->view->load('shopping_subs', $data);
+        $this->view->load('footer');
+    }
+
+    public function view($id_subgrupo){ //Edu
+
+      if($id_subgrupo == null) header('location:' . $this->config->base_url); //contra espetinhos
+
+        $data['estilo'] = $this->model->getEstiloAtual();
+        $data['subgrupo'] = $this->modelSubgrupo->getSubgrupoById($id_subgrupo);
+        $data['grupo'] = $this->modelGrupo->getGrupo();
+        $data['grupo-atual'] = $this->modelGrupo->getGrupoById($data['subgrupo']->getId_grupo());
+        $data['categoria'] = $this->modelCategoria->getCategoria();
+        $data['categoria-atual'] = $this->modelCategoria->getCategoriaByGrupoId($data['subgrupo']->getId_grupo());
         $data['itens'] = $this->father->getList();
 
-        if (filter_input(INPUT_POST, 'filter') || $marca_id > 0 || $ordem != '') {
+        if (filter_input(INPUT_POST, 'filter')) {
 
-          if(filter_input(INPUT_POST, 'guiest_id1', FILTER_SANITIZE_STRING)){
             $ordem = filter_input(INPUT_POST, 'guiest_id1', FILTER_SANITIZE_STRING);
-          }
-
-          $data['packproduto'] = $this->modelPackproduto->filtroPackproduto($marca_id,$ordem,$id_grupo,$paginador)[1];
-
-          $data['paginador_max'] = $this->modelPackproduto->filtroPackproduto($marca_id,$ordem,$id_grupo,$paginador)[0];
-          $data['paginador_atual'] = $paginador;
-
-          $data['total_prod'] = $this->modelPackproduto->filtroPackproduto($marca_id,$ordem,$id_grupo,$paginador)[2];
-          $ids_prod = [];
-          foreach ($data['packproduto'] as $produtos){
-            if(in_array($produtos->getId_subgrupo(), $ids_prod)) continue; else $ids_prod[] = $produtos->getId_subgrupo();
-          }
-
-          $data['total_prod_atual'] = count($ids_prod);
-
-          $data['ordem'] = $this->modelPackproduto->filtroPackproduto($marca_id,$ordem,$id_grupo,$paginador)[3];
+            
+            $data['item'] = $this->modelItem->getItemBySubgrupo($id_subgrupo);
+            $data['ordem'] = $ordem;
 
         }else {
-          $data['packproduto'] = $this->modelPackproduto->getPackprodutoByGrupo($id_grupo,$paginador)[1];
-
-          // echo '<pre>';var_dump($data['packproduto']);echo '</pre>';die;
-
-          $data['paginador_max'] = $this->modelPackproduto->getPackprodutoByGrupo($id_grupo,$paginador)[0];
-          $data['paginador_atual'] = $paginador;
-
-          $data['total_prod'] = $this->modelPackproduto->getPackprodutoByGrupo($id_grupo,$paginador)[2];
-          $ids_prod = [];
-          foreach ($data['packproduto'] as $produtos){
-            if(in_array($produtos->getId_subgrupo(), $ids_prod)) continue; else $ids_prod[] = $produtos->getId_subgrupo();
-          }
-
-          $data['total_prod_atual'] = count($ids_prod);
-
-          $data['ordem'] = "new";
-
-          //echo "<pre>";var_dump($data['packproduto']);die;
+          
+            $data['item'] = $this->modelItem->getItemBySubgrupo($id_subgrupo);
+            $data['ordem'] = "new";
         }
+        
+        $data['produto'] = $this->modelproduto->getProdutosBySubgrupoId($id_subgrupo);
+        $data['total_prod'] = count($data['item']);
 
-        $data['link'] = $marca_id.".".$ordem;
-        $data['ordem_atual'] = $ordem;
-
-        if(empty($data['packproduto'])){ //caso não tenha nenhum prod no grupo, gambiarra.com
-        $data['packproduto'] = 'password';
-        $ids[] = 0;
-        $data['marca'] = null;
-        $data['total'] = 0;
-        $todos_precos = [];
-        $todos_precos[] = 0;
-        }else{
-          $preco_aux = []; //array onde tem todos os preços dos produtos que estão sendo exibidos
-          $todos_precos = [];
-          $ids = [];
-          foreach ($data['packproduto'] as $produtos){ //gambiarra pra pegar o menor preço de cada produto
-            $preco_aux[$produtos->getId_subgrupo()] = number_format($produtos->getPreco(), 2);
-            $preco_aux[$produtos->getId_subgrupo()] = str_replace(',', '', $preco_aux[$produtos->getId_subgrupo()]);
-            $ids[] = $produtos->getId_subgrupo();
-            if(!isset($data[$produtos->getId_subgrupo()])) $data[$produtos->getId_subgrupo()] = $preco_aux[$produtos->getId_subgrupo()];
-            if($preco_aux[$produtos->getId_subgrupo()] < $data[$produtos->getId_subgrupo()]){
-              $data[$produtos->getId_subgrupo()] = $preco_aux[$produtos->getId_subgrupo()];
+        $ids_marca = [];
+        $data['produto_precos'] = $this->modelproduto->getProdutosBySubgrupoIdComOrdem($id_subgrupo);
+        foreach($data['produto_precos'] as $produto):
+            if(empty($data['preco_min'.$produto->getId_marca()])){
+                $data['preco_min'.$produto->getId_marca()] = $produto->getPreco();
             }
-            $todos_precos[] = (int)$data[$produtos->getId_subgrupo()];
-          }
-          $data['marca'] = $this->modelMarca->getMarcaByProduto($ids);
-
-          $count = 0;
-          $ids_aux = [];
-          foreach($data['packproduto'] as $produtos){
-            // echo "s";
-
-            if(in_array($produtos->getId_subgrupo(), $ids_aux)){
-              // echo "k";
-              $count=$count+1;
-                continue;
-            } else {
-              // echo "r";
-
-              $ids_aux[] = $produtos->getId_subgrupo();
+            if($data['preco_min'.$produto->getId_marca()] > $produto->getPreco()){
+                $data['preco_min'.$produto->getId_marca()] = $produto->getPreco();
             }
-          }
-          $total = count($data['packproduto'])-$count;
-          $data['total'] = ceil($total/12);
-
-          }
-          if(empty($preco_aux)){ //caso não tenha nenhum prod no grupo, gambiarra.com
-          $preco_aux[] = 0;
-          }
-
-        $data['preco_min'] = (int)min($todos_precos);
-
-        $data['preco_max'] = (int)max($todos_precos);
-
-        $ids = array_unique($ids);
-
-        // if (filter_input(INPUT_POST, 'filtrar')) {
-        //   $min = filter_input(INPUT_POST, 'preco-min', FILTER_SANITIZE_STRING);
-        //   $max = filter_input(INPUT_POST, 'preco-max', FILTER_SANITIZE_STRING);
-        //   echo $min."<br>".$max;
-        //   die;
-        // }
-
+            if(!in_array($produto->getId_marca(), $ids_marca)){
+                $ids_marca[] = $produto->getId_marca();
+            }
+        endforeach;
+        
+        if($data['ordem'] == "menor"){
+            $data['ordem_precos'] = $ids_marca; //para ordenar os itens em maior ou menor preço, sendo a ordem do array os ids das marcas a serem exibidas do maior ao menor, caso contrario inverter o array na exibição;
+        }
+        if($data['ordem'] == "maior"){
+            $data['ordem_precos'] = array_reverse($ids_marca); //para ordenar os itens em maior ou menor preço, sendo a ordem do array os ids das marcas a serem exibidas do maior ao menor, caso contrario inverter o array na exibição;
+        }
+        
+        $data['marca'] = $this->modelMarca->getMarcaByIds($ids_marca);
+        
         if (filter_input(INPUT_POST, 'enviar-msg')) {
           $email = filter_input(INPUT_POST, 'email-msg', FILTER_SANITIZE_STRING);
           $msg = filter_input(INPUT_POST, 'mensagem-msg', FILTER_SANITIZE_STRING);

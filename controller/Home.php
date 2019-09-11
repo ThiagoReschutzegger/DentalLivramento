@@ -9,6 +9,7 @@ class Home extends Controller{
     protected $modelSlider;
     protected $modelMarca;
     protected $modelSubgrupo;
+    protected $modelItem;
     protected $modelPackproduto;
     protected $modelCarrinho;
     protected $modelPedido;
@@ -27,6 +28,7 @@ class Home extends Controller{
         $this->modelSlider = new SliderModel();
         $this->modelMarca = new MarcaModel();
         $this->modelSubgrupo = new SubgrupoModel();
+        $this->modelItem = new ItemModel();
         $this->modelCarrinho = new CarrinhoModel();
         $this->modelPedido = new PedidoModel();
         $this->modelPackproduto = new PackprodutoModel();
@@ -48,7 +50,7 @@ class Home extends Controller{
         $data['slider'] = $this->modelSlider->getSlider();
         $data['marca'] = $this->modelMarca->getMarca();
         $data['itens'] = $this->getList();
-        $data['prod-destaq'] = $this->modelSubgrupo->getSubgrupoDestaque();
+        $data['prod-destaq'] = $this->modelItem->getItemDestaque();
         $data['preloader'] = '1';
 
         if(!empty($data['slider'])){ //se vier algo no slider
@@ -63,6 +65,13 @@ class Home extends Controller{
             $data['descricao'.$slider->getId_slider()] = $data['packproduto'][0]->getDescricao();
             $data['id_sub'.$slider->getId_slider()] = $data['packproduto'][0]->getId_subgrupo();
           }
+        }
+        
+        if(!empty($data['prod-destaq'])){ //se tiver algum item sendo destacado
+            foreach($data['prod-destaq'] as $destaque){ // objeto item
+                $subgrupo = $this->modelSubgrupo->getSubgrupoById($destaque->getId_subgrupo());
+                $data['nome'.$destaque->getId_item()] = $subgrupo->getNome();
+            }
         }
 
         $this->view->load('header',$data);

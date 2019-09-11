@@ -121,7 +121,7 @@
             </div>
             <div class="productCaption clearfix">
               <a href="<?php echo $this->base_url; ?>Home/viewProduto/<?php echo $destaque->getId_subgrupo(); ?>">
-                <h4><?php echo $destaque->getNome(); ?></h4>
+                <h4><?php echo $data['nome'.$destaque->getId_item()]; ?></h4>
               </a>
             </div>
           </div>

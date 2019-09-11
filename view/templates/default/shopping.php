@@ -4,27 +4,6 @@ $gp_atual = $data['grupo-atual'];
 $ids_prod = []; //pra nao repetir os subgrupos na hora de listar la
 $ids_prod[] = 0;
 ?>
-<script type="text/javascript">
-jQuery(document).ready(function(){
-//============================== PRICE SLIDER RANGER =========================
-var minimum = <?php echo floor($data['preco_min']); ?>;
-var maximum = <?php echo floor($data['preco_max']); ?> + 1;
-
-$( '#price-range' ).slider({
-  range: true,
-  min: minimum,
-  max: maximum,
-  values: [ minimum, maximum ],
-  slide: function( event, ui ) {
-    $( '#price-amount-1' ).val( 'R$' + ui.values[ 0 ] );
-    $( '#price-amount-2' ).val( 'R$' + ui.values[ 1 ] );
-  }
-});
-
-$( '#price-amount-1' ).val( 'R$' + $( '#price-range' ).slider( 'values', 0 ));
-$( '#price-amount-2' ).val( 'R$' + $( '#price-range' ).slider( 'values', 1 ));
-});
-</script>
 
 <style type="text/css" scoped>
 .pageHeaderImage{
@@ -79,7 +58,7 @@ $( '#price-amount-2' ).val( 'R$' + $( '#price-range' ).slider( 'values', 1 ));
                     <?php foreach ($data['grupo'] as $linha):
                       if($linha->getId_categoria() == $cat_atual->getId_categoria()):
                     ?>
-                      <li><a href="<?php echo $this->base_url; ?>Loja/view/<?php echo $linha->getId_grupo(); ?>" <?php if($linha->getId_grupo() == $gp_atual->getId_grupo()) echo "style='font-weight: bold !important; text-decoration: underline !important;'"; ?>><i class="fa fa-caret-right" aria-hidden="true"></i><?php echo $linha->getNome(); ?></a></li>
+                      <li><a href="<?php echo $this->base_url; ?>Loja/viewSub/<?php echo $linha->getId_grupo(); ?>" <?php if($linha->getId_grupo() == $gp_atual->getId_grupo()) echo "style='font-weight: bold !important; text-decoration: underline !important;'"; ?>><i class="fa fa-caret-right" aria-hidden="true"></i><?php echo $linha->getNome(); ?></a></li>
                     <?php endif; endforeach; ?>
                   </ul>
                 </li>
@@ -92,7 +71,7 @@ $( '#price-amount-2' ).val( 'R$' + $( '#price-range' ).slider( 'values', 1 ));
                         <?php foreach ($data['grupo'] as $linha):
                           if($linha->getId_categoria() == $categorias->getId_categoria()):
                         ?>
-                          <li><a href="<?php echo $this->base_url; ?>Loja/view/<?php echo $linha->getId_grupo(); ?>"><i class="fa fa-caret-right" aria-hidden="true"></i><?php echo $linha->getNome(); ?></a></li>
+                          <li><a href="<?php echo $this->base_url; ?>Loja/viewSub/<?php echo $linha->getId_grupo(); ?>"><i class="fa fa-caret-right" aria-hidden="true"></i><?php echo $linha->getNome(); ?></a></li>
                           <?php endif; endforeach; ?>
                       </ul>
                     </li>
@@ -103,63 +82,18 @@ $( '#price-amount-2' ).val( 'R$' + $( '#price-range' ).slider( 'values', 1 ));
         </div>
         </div>
 
-        <div class="sideBar">
-          <div class="panel panel-default">
-            <div class="panel-heading">Filtrar por Marca</div>
-            <div class="panel-body clearfix">
-              <label for="">Selecione a Marca: </label>
-              <?php if($data['packproduto'] == 'password'):?>
-                <p>Nenhum produto!</p>
-              <?php else:?>
-              <div class="collapse navbar-collapse navbar-ex1-collapse navbar-side-collapse">
-              <ul class="nav navbar-nav side-nav">
-                <li>
-                  <ul class="collapse collapseItem show">
-                    <?php $ids_aux = []; $ids_aux[] = 0; ?>
-                    <?php if ($data['link'] == '0.'.$data['ordem_atual']):
-                      foreach ($data['marca'] as $marca):
-                      if(in_array($marca->getId_marca(), $ids_aux)) continue;
-                    ?>
-                      <li><a href="<?php echo $this->base_url."Loja/view/".$gp_atual->getId_grupo().".1.".$marca->getId_marca();?>" ><i class="fa fa-caret-right" aria-hidden="true"></i><?php echo $marca->getNome(); ?></a></li> <!--  if($linha->getId_grupo() == $gp_atual->getId_grupo()) echo "style='font-weight: bold !important; text-decoration: underline !important;'"; -->
-                    <?php $ids_aux[] = $marca->getId_marca(); endforeach;
-                      else:
-                        foreach ($data['marca'] as $marca):
-                          if($data['link'] == $marca->getId_marca().'.'.$data['ordem_atual']): ?>
-                            <li><a disabled="true" ><b><u><i class="fa fa-caret-right" aria-hidden="true"></i><?php echo $marca->getNome(); ?></u></b></a></li>
-                            <li><small>Esta marca está selecionada.<br>Redefina caso queira outra.</small></li>
-                    <?php endif; break; endforeach; endif; ?>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-          <?php endif;?>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-2"></div>
-          <div class="col-8">
-            <a href="<?php echo $this->base_url; ?>Loja/view/<?php echo $gp_atual->getId_grupo(); ?>"  class="btn btn-inverse-outlined btn-sm btn-block" style="display: inline-block;">Redefiinr</a>
-          </div>
-        </div><br><br>
-
-
       </div>
       <div class="col-lg-9 col-md-8">
         <div class="row filterArea">
           <div class="col-5 Vizualizando">
             <span style="color: gray; padding-top: 5px;">Vizualizando
-              <?php if($data['total_prod'] < 12) echo $data['total_prod']; else echo  $data['total_prod_atual']; ?>
-               de
-                <?php echo $data['total_prod'];?>
+              <?php  echo $data['total_prod']; ?>
                 produtos:</span>
           </div>
           <div class="col-md-7 col-sm-12">
             <div class="float-right select-shop">
             <select name="guiest_id1" id="guiest_id1" class="select-drop">
               <option <?php if($data['ordem'] == "new") echo "selected"; ?> value="new">Mais Novo </option>
-              <option <?php if($data['ordem'] == "alfa") echo "selected"; ?> value="alfa">Ordem Alfabética</option>
               <option <?php if($data['ordem'] == "maior") echo "selected"; ?> value="maior">Preço Maior</option>
               <option <?php if($data['ordem'] == "menor") echo "selected"; ?> value="menor">Preço Menor</option>
             </select><input class="btn btn-primary" type="submit" name="filter" value="Go!" style="height: 35px; line-height: 0px;"/>
@@ -168,46 +102,72 @@ $( '#price-amount-2' ).val( 'R$' + $( '#price-range' ).slider( 'values', 1 ));
 
         </div>
         <div class="row">
-          <?php if($data['packproduto'] == 'password'):?>
+          <?php if(empty($data['item'])):?>
             <div class="col-md-6 col-lg-4">
               <div class="productBox">
                 <div class="productCaption clearfix">
-                    <h5>Este grupo não possui produtos cadastrados!</h5>
+                    <h5>Este subgrupo não possui produtos cadastrados!</h5>
                 </div>
               </div>
             </div>
           <?php else:
-           foreach ($data['packproduto'] as $produtos):
-             if(in_array($produtos->getId_subgrupo(), $ids_prod)) continue; else $ids_prod[] = $produtos->getId_subgrupo();
-             ?>
+             if($data['ordem'] != "new"):
+              foreach ($data['ordem_precos'] as $ordem):
+              foreach ($data['item'] as $item): 
+               if($item->getId_marca() == $ordem): 
+              ?>
               <div class="col-md-6 col-lg-4">
                 <div class="productBox">
 
                   <div class="productImage clearfix">
-                    <img src="<?php echo $produtos->getImagem(); ?>" alt="products-img">
-                    <div class="productMasking" onclick="location.href='<?php echo $this->base_url; ?>Home/viewProduto/<?php echo $produtos->getId_subgrupo(); ?>';" style="cursor: pointer; background-color: inherit !important;">
+                    <img src="<?php if($item->getImagem() != "") echo $item->getImagem(); else echo $this->base_url."view/images/produto-sem-imagem.gif"; ?>" alt="products-img">
+                    <div class="productMasking" onclick="location.href='<?php echo $this->base_url; ?>Home/viewProduto/<?php echo $item->getId_item(); ?>';" style="cursor: pointer; background-color: inherit !important;">
                     </div>
 
                   </div>
 
                   <div class="productCaption clearfix">
-                    <a href="<?php echo $this->base_url; ?>Home/viewProduto/<?php echo $produtos->getId_subgrupo(); ?>">
-                      <h5><?php echo $produtos->getNome(); ?></h5>
+                    <a href="<?php echo $this->base_url; ?>Home/viewProduto/<?php echo $item->getId_item(); ?>">
+                        <h5 style="margin-bottom: 5px;"><?php echo $data['subgrupo']->getNome(); ?></h5>
+                        <h3 class="fonte-e-cor-top" style="font-size: 15px; margin-bottom: 5px;">
+                            <?php foreach ($data['marca'] as $marca):
+                                if($marca->getId_marca() == $item->getId_marca()) echo $marca->getNome();
+                            endforeach; ?>
+                        </h3>
                     </a>
-                    <h3>R$ <?php echo $data[$produtos->getId_subgrupo()]; ?></h3>
+                    <h3>R$ <?php echo  number_format($data['preco_min'.$item->getId_marca()], 2); ?></h3>
                   </div>
                 </div>
               </div>
-        <?php endforeach; endif; ?>
+        <?php endif; endforeach; endforeach; else: 
+          foreach ($data['item'] as $item): 
+          ?>
+             
+            <div class="col-md-6 col-lg-4">
+                <div class="productBox">
+
+                  <div class="productImage clearfix">
+                    <img src="<?php if($item->getImagem() != "") echo $item->getImagem(); else echo $this->base_url."view/images/produto-sem-imagem.gif"; ?>" alt="products-img">
+                    <div class="productMasking" onclick="location.href='<?php echo $this->base_url; ?>Home/viewProduto/<?php echo $item->getId_item(); ?>';" style="cursor: pointer; background-color: inherit !important;">
+                    </div>
+
+                  </div>
+
+                  <div class="productCaption clearfix">
+                    <a href="<?php echo $this->base_url; ?>Home/viewProduto/<?php echo $item->getId_item(); ?>">
+                        <h5 style="margin-bottom: 5px;"><?php echo $data['subgrupo']->getNome(); ?></h5>
+                        <h3 class="fonte-e-cor-top" style="font-size: 15px; margin-bottom: 5px;">
+                            <?php foreach ($data['marca'] as $marca):
+                                if($marca->getId_marca() == $item->getId_marca()) echo $marca->getNome();
+                            endforeach; ?>
+                        </h3>
+                    </a>
+                    <h3>R$ <?php echo  number_format($data['preco_min'.$item->getId_marca()], 2); ?></h3>
+                  </div>
+                </div>
+              </div>
+            <?php endforeach; endif; endif; ?>
         </div>
-        <center><div class="btn-group row" role="group" aria-label="Basic example" style="margin:0"><center>
-          <?php if ($data['paginador_atual'] > 1 ): ?>
-            <a href="<?php echo $this->base_url; ?>Loja/view/<?php echo $gp_atual->getId_grupo();?>.<?php echo $data['paginador_atual']-1; if($data['link'] != '') echo ".".$data['link']; ?>" class="btn btn-primary-outlined" style="margin-top: 10px;">Anterior</a>
-          <?php endif; ?>
-          <?php if ($data['paginador_atual'] < $data['paginador_max'] ): ?>
-            <a href="<?php echo $this->base_url; ?>Loja/view/<?php echo $gp_atual->getId_grupo();?>.<?php echo $data['paginador_atual']+1; if($data['link'] != '') echo ".".$data['link']; ?>" class="btn btn-primary-outlined" style="margin-top: 10px;">Próxima</a>
-          <?php endif; ?>
-        </center></div></center>
       </div>
     </div>
   </div>

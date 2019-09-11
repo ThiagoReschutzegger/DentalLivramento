@@ -14,13 +14,14 @@ class ItemModel extends Model {
     
     public function getItemBySubgrupo($id) {
         $list = [];
-        $sql = "SELECT * FROM item WHERE id_subgrupo = :id";
+        $sql = "SELECT * FROM item WHERE id_subgrupo = :id ORDER BY id_item DESC";
         $consulta = $this->ExecuteQuery($sql, [':id' => $id]);
         foreach ($consulta as $item) {
             $list[] = new Item($item['id_item'], $item['descricao'], $item['imagem'], $item['destaque'], $item['id_subgrupo'], $item['id_marca']);
         }
         return $list;
     }
+    
     
     public function getItemById($id) {
         $sql = "SELECT * FROM item WHERE id_item = :id;";

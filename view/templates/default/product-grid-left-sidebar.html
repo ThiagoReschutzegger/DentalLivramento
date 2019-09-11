@@ -35,6 +35,14 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <style type="text/css">
+
+        .myclass:hover {
+            transform: scale(1.1);
+            transition: all 0.3s ease-in-out;
+          }
+          
+    </style>
   </head>
 
   <body class="body-wrapper version1">
@@ -463,25 +471,30 @@
                   </div>
                 </div>
               </div>
+                
               <div class="row">
                 <div class="col-md-6 col-lg-4">
                   <div class="productBox">
-                    <div class="productImage clearfix">
-                      <img src="img/products/products-01.jpg" alt="products-img">
-                      <div class="productMasking">
-                        <ul class="list-inline btn-group" role="group">
-                          <li><a class="btn btn-default btn-wishlist"><i class="fa fa-heart-o"></i></a></li>
-                          <li><a href="javascript:void(0)" class="btn btn-default" data-toast data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Product" data-toast-message="successfuly added to cart!" class="btn btn-default"><i class="fa fa-shopping-basket"></i></a></li>
-                          <li><a class="btn btn-default" data-toggle="modal" href=".quick-view" ><i class="fa fa-eye"></i></a></li>
-                        </ul>
+                      <div class="productImage clearfix" 
+                           style='
+                           background:
+                            linear-gradient(
+                              rgba(0, 186, 250, 0.7), /*0, 150, 185, 0.5 */
+                              rgba(0, 220, 255, 0.5)  /*0, 220, 255, 0.5*/
+                              ),
+                            url("img/pattern-dental.jpg"); 
+                            background-size: cover;
+                            background-position: center center;
+                            background-repeat: no-repeat;
+                            height: 150px;
+                            border-radius: 15px;
+                           '>
+                          <center>
+                              <h2 class="myclass" style="font-size: 2.5em; font-wheight: lighter; color: white; padding-top: 30px; font-variant-caps: all-petite-caps;">
+                                  Acessórios para dentistas
+                              </h2>
+                          </center>
                       </div>
-                    </div>
-                    <div class="productCaption clearfix">
-                      <a href="single-product.html">
-                        <h5>Nike Sportswear</h5>
-                      </a>
-                      <h3>$199</h3>
-                    </div>
                   </div>
                 </div>
                 <div class="col-md-6 col-lg-4">

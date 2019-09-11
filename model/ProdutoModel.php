@@ -33,6 +33,16 @@
           }
           return $list;
       }
+      
+      public function getProdutosBySubgrupoIdComOrdem($id) {
+          $list = [];
+          $sql = "SELECT * FROM produto WHERE id_subgrupo=:id ORDER BY preco ASC";
+          $produto = $this->ExecuteQuery($sql, [':id' => $id]);
+          foreach ($produto as $linha) {
+              $list[] = new Produto($linha['id_produto'], $linha['barcode'], $linha['preco'], $linha['estoque'], $linha['especificacao'], $linha['id_subgrupo'], $linha['id_marca']);
+          }
+          return $list;
+      }
 
       public function insertProduto($produto) {
           $sql = "INSERT INTO produto(barcode,preco,estoque,especificacao,id_subgrupo,id_marca) VALUES(:barcode,:preco,:estoque,:especificacao,:id_subgrupo,:id_marca)";

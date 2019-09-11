@@ -157,7 +157,7 @@ $(document).ready(function(){
                           <?php foreach($data['grupo'] as $grupo):
                             if($grupo->getId_categoria() == $categoria->getId_categoria()):
                           ?>
-                            <li><a href="<?php echo $this->base_url; ?>Loja/view/<?php echo $grupo->getId_grupo(); ?>"><?php echo $grupo->getNome(); ?></a></li>
+                            <li><a href="<?php echo $this->base_url; ?>Loja/viewSub/<?php echo $grupo->getId_grupo(); ?>"><?php echo $grupo->getNome(); ?></a></li>
                           <?php endif; endforeach; ?>
                         </ul></li>
                       </ul>
