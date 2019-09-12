@@ -38,7 +38,7 @@ class SubgrupoModel extends Model {
 
     public function getSubgrupoByGrupo($id) {
         $list = [];
-        $sql = "SELECT * FROM subgrupo WHERE id_grupo = :id;";
+        $sql = "SELECT * FROM subgrupo WHERE id_grupo = :id ORDER BY nome ASC;";
         $consulta = $this->ExecuteQuery($sql, [':id' => $id]);
         foreach ($consulta as $subgrupo) {
             $list[] = new Subgrupo($subgrupo['id_subgrupo'], $subgrupo['nome'], $subgrupo['id_grupo']);

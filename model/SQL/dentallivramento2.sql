@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 10-Set-2019 às 20:17
+-- Generation Time: 12-Set-2019 às 19:00
 -- Versão do servidor: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
@@ -184,7 +184,9 @@ CREATE TABLE `item` (
 
 INSERT INTO `item` (`id_item`, `descricao`, `imagem`, `destaque`, `id_subgrupo`, `id_marca`) VALUES
 (1, 'produto top demaisss', 'https://sparco.vteximg.com.br/arquivos/ids/157741-1000-1000/008007RNR_01.jpg', '1', 1, 1),
-(2, 'outro top produtovsky.', '', '0', 1, 2);
+(2, 'outro top produtovsky.', '', '1', 1, 2),
+(3, 'esse volante eh bom', 'http://img03.taobaocdn.com/imgextra/i3/155126098/T2D36jXaFaXXXXXXXX_!!155126098.jpg', '1', 2, 1),
+(4, 'esse eh boom pow', 'https://http2.mlstatic.com/volante-esportivo-sparco-35cm-dimentro-camurca-D_NQ_NP_746149-MLB26636288403_012018-F.jpg', '1', 2, 2);
 
 -- --------------------------------------------------------
 
@@ -286,9 +288,11 @@ CREATE TABLE `produto` (
 --
 
 INSERT INTO `produto` (`id_produto`, `barcode`, `preco`, `estoque`, `especificacao`, `id_subgrupo`, `id_marca`) VALUES
-(1, '134562522', 49.99, 20, 'Para Ferrari', 1, 1),
+(1, '134562522', 499.99, 20, 'Para Ferrari', 1, 1),
 (2, '12344412', 100.5, 23, 'Para Lamborghini', 1, 1),
-(3, '12412312221112', 200, 12, 'Tamanho Universal', 1, 2);
+(3, '12412312221112', 200, 12, 'Tamanho Universal', 1, 2),
+(4, '236666662348', 234, 11, 'preto e amarelo', 2, 1),
+(5, '99931423', 432.5, 15, 'vermelho e preto', 2, 2);
 
 -- --------------------------------------------------------
 
@@ -321,7 +325,9 @@ CREATE TABLE `subgrupo` (
 --
 
 INSERT INTO `subgrupo` (`id_subgrupo`, `nome`, `id_grupo`) VALUES
-(1, 'Banco esportivo', 19);
+(1, 'Banco esportivo', 19),
+(2, 'Volante de competição', 19),
+(3, 'abafador', 19);
 
 -- --------------------------------------------------------
 
@@ -487,7 +493,7 @@ ALTER TABLE `grupo`
 -- AUTO_INCREMENT for table `item`
 --
 ALTER TABLE `item`
-  MODIFY `id_item` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_item` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `itemcarrinho`
 --
@@ -512,7 +518,7 @@ ALTER TABLE `pedido`
 -- AUTO_INCREMENT for table `produto`
 --
 ALTER TABLE `produto`
-  MODIFY `id_produto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_produto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `slider`
 --
@@ -522,7 +528,7 @@ ALTER TABLE `slider`
 -- AUTO_INCREMENT for table `subgrupo`
 --
 ALTER TABLE `subgrupo`
-  MODIFY `id_subgrupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_subgrupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `usuario`
 --
