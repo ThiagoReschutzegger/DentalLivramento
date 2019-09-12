@@ -31,7 +31,7 @@ class ProdutoAdmin extends Admin {
     }
 
     public function buscaProduto($param = null){
-        
+
         $data['msg'] = '';
         $data['status'] = '0';
         $data['resultado'] = 'inicio';
@@ -57,17 +57,17 @@ class ProdutoAdmin extends Admin {
                 } else {
                     $data['resultado'] = 'inicio';
                 }
-            
+
         } else {
             $data['resultado'] = 'inicio';
         }
-        
+
         if($param == "all"){
             $data['resultado'] = "all";
             $data['categoria'] = $this->modelCategoria->getCategoria();
             $data['grupo'] = $this->modelGrupo->getGrupo();
             $data['subgrupo'] = $this->modelSubgrupo->getSubgrupo();
-            
+
         }
 
         $this->view->load('header');
@@ -206,13 +206,13 @@ class ProdutoAdmin extends Admin {
 //        $this->view->load('view-single-prod', $data);
 //        $this->view->load('footer');
 //    }
-    
+
     public function viewItens($id_subgrupo) {
 
         $data['subgrupo'] = $this->modelSubgrupo->getSubgrupoById($id_subgrupo);
         $data['item'] = $this->modelItem->getItemBySubgrupo($id_subgrupo);
         $data['produto'] = $this->model->getProdutosBySubgrupoId($id_subgrupo);
-        
+
         $ids_item = [];
         foreach($data['item'] as $linha){
             $ids_item[] = $linha->getId_marca();
@@ -509,7 +509,7 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
                   $preco = $this->tratamentoPreco($divisao[2]); // ARRUMA E SUBSTITUI O NOME DA MARCA PELO ID DA MESMA
                   $estoque = $this->tratamentoEstoque($divisao[3]); // ARRUMA E SUBSTITUI O NOME DA MARCA PELO ID DA MESMA
                   $grupo = $this->tratamentoGrupo($divisao[5],$categoria[0],$grupos_array); // ARRUMA E SUBSTITUI O NOME DA MARCA PELO ID DA MESMA
-                  $subgrupo = $this->tratamentoSubrupo($divisao[6],$grupo[0],$marca[0],$subgrupos_array); // ARRUMA E SUBSTITUI O NOME DA MARCA PELO ID DA MESMA
+                  $subgrupo = $this->tratamentoSubrupo($divisao[6],$grupo[0],$subgrupos_array); // ARRUMA E SUBSTITUI O NOME DA MARCA PELO ID DA MESMA
 
                   $divisao[4] = $marca[0]; // TROCANDO NOME DA MARCA PELO ID
                   $divisao[7] = $categoria[0]; // TROCANDO NOME DA CATEGORIA PELO ID
@@ -518,10 +518,12 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
                   $divisao[5] = $grupo[0]; // TROCANDO NOME DO GRUPO PELO ID
                   $divisao[6] = $subgrupo[0]; // TROCANDO NOME DO GRUPO PELO ID
 
+                  //echo '<pre>';print_r($marca[0][0][]);echo '</pre>';
+
                   echo '<pre>';print_r($divisao);echo '</pre>';
 
                   // ADICIONAR PRODUTO AO BANCO
-                  $verificacao = $this->model->insertByTxt($divisao[0],$divisao[2],$divisao[3],$divisao[1],$divisao[6],$barcode_array);
+                  $verificacao = $this->model->insertByTxt($divisao[0],$divisao[2],$divisao[3],$divisao[1],$divisao[6],$divisao[4],$barcode_array);
 
                   if($verificacao[0] == 1){
                     array_push($barcode_certo, $verificacao[1]);
@@ -561,12 +563,14 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
       $this->view->load('footer');
     }
 
+
+
     private function tratamentoMarca($marca,$array){
 
-      $marca = ucfirst(strtolower($marca)); // Como no .txt a marca é toda maiúscula, eu fiz isso pra q a primeira fosse maiuscula e as outras nao.
+      $marca = iconv(mb_detect_encoding($marca, mb_detect_order(), true), "UTF-8//IGNORE", ucfirst(strtolower(($marca)))); // Como no .txt a marca é toda maiúscula, eu fiz isso pra q a primeira fosse maiuscula e as outras nao.
 
       foreach ($array as $pica) {
-        if(trim($marca) == trim(ucfirst(strtolower($pica[1])))) { // EU NAO SEI PRA Q CARALHO SERVE ESSE TRIM MAS O IF NAO FUNCIONA SEM ELE
+        if(trim($marca) == trim(iconv(mb_detect_encoding($pica[1], mb_detect_order(), true), "UTF-8//IGNORE", ucfirst(strtolower(($pica[1])))))) { // EU NAO SEI PRA Q CARALHO SERVE ESSE TRIM MAS O IF NAO FUNCIONA SEM ELE
           $id_marca = $pica[0]; //PEGA O ID DA MARCA Q ELE ENCONTROU
           $bool = true;
           break;
@@ -634,7 +638,7 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
       }
     }
 
-    private function tratamentoSubrupo($subgrupo,$id_grupo,$id_marca,$array){
+    private function tratamentoSubrupo($subgrupo,$id_grupo,$array){
 
       $subgrupo = iconv(mb_detect_encoding($subgrupo, mb_detect_order(), true), "UTF-8//IGNORE", ucfirst(strtolower(($subgrupo)))); // Como no .txt a marca é toda maiúscula, eu fiz isso pra q a primeira fosse maiuscula e as outras nao.
 
@@ -654,7 +658,7 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
         return [$id_subgrupo,false];
 
       }else{
-        $this->modelSubgrupo->insertSubgrupoTxt($subgrupo,$id_grupo,$id_marca);
+        $this->modelSubgrupo->insertSubgrupoTxt($subgrupo,$id_grupo);
         return [$this->modelSubgrupo->getIdByNome($subgrupo),true];//ESSES TRUE OU FALSE SERVEM PRA ATUALIZAR O ARRAY, SENAO DA UM DESENCONTRO DE DADOS ATUALIZADOS/ANTIGOS
       }
     }

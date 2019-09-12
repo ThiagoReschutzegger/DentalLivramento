@@ -43,7 +43,7 @@
           }
           return $list;
       }
-      
+
       public function getProdutosBySubgrupoIdComOrdem($id) {
           $list = [];
           $sql = "SELECT * FROM produto WHERE id_subgrupo=:id ORDER BY preco ASC";
@@ -253,7 +253,7 @@
 
       }
 
-      public function insertByTxt($barcode,$preco,$estoque,$especificacao,$id_subgrupo,$array) {
+      public function insertByTxt($barcode,$preco,$estoque,$especificacao,$id_subgrupo,$id_marca,$array) {
         //IMPORTANTE!! $array É ARRAY COM TODOS OS BARCODES
 
         //echo '<pre>';var_dump($array);echo '</pre>';
@@ -263,13 +263,14 @@
 
           //echo '<h1 style="COLOR:blue">existe</h1>';
 
-          $sql = "INSERT INTO produto(barcode,preco,estoque,especificacao,id_subgrupo) VALUES(:barcode,:preco,:estoque,:especificacao,:id_subgrupo)";
-          
+          $sql = "INSERT INTO produto(barcode,preco,estoque,especificacao,id_subgrupo,id_marca) VALUES(:barcode,:preco,:estoque,:especificacao,:id_subgrupo,:id_marca)";
+
           $param = [':barcode' => $barcode,
                     ':preco' => $preco,
                     ':estoque' => $estoque,
                     ':especificacao' => $especificacao,
-                    ':id_subgrupo' => $id_subgrupo
+                    ':id_subgrupo' => $id_subgrupo,
+                    ':id_marca' => $id_marca
                     ];
 
           if ($this->ExecuteCommand($sql, $param)) {
