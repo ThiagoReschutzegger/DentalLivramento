@@ -85,10 +85,8 @@ $ids_prod[] = 0;
       </div>
       <div class="col-lg-9 col-md-8">
         <div class="row filterArea">
-          <div class="col-5 Vizualizando">
-            <span style="color: gray; padding-top: 5px;">Vizualizando
-              <?php  echo $data['total_prod']; ?>
-                produtos:</span>
+            <div class="col-5 Vizualizando" style="padding-top: 10px;">
+                <a style="color: grey; font-size: 15px;" href="<?php echo $this->base_url; ?>Loja/viewSub/<?php echo $gp_atual->getId_grupo(); ?>" style="line-height: 25px"><i class="fa fa-reply" aria-hidden="true"></i>&nbsp;&nbsp;Ver mais</a>
           </div>
           <div class="col-md-7 col-sm-12">
             <div class="float-right select-shop">

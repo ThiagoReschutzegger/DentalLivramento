@@ -115,12 +115,12 @@
       <?php foreach($data['prod-destaq'] as $destaque): ?>
           <div class="slide col-md-3">
             <div class="productImage clearfix">
-              <img src="<?php echo $destaque->getImagem(); ?>">
-              <div class="productMasking" onclick="location.href='<?php echo $this->base_url; ?>Home/viewProduto/<?php echo $destaque->getId_subgrupo(); ?>';" style="cursor: pointer; background-color: inherit !important;">
+              <img src="<?php if($destaque->getImagem() != "") echo $destaque->getImagem(); else echo $this->base_url."view/images/produto-sem-imagem.gif"; ?>">
+              <div class="productMasking" onclick="location.href='<?php echo $this->base_url; ?>Home/viewProduto/<?php echo $destaque->getId_item(); ?>';" style="cursor: pointer; background-color: inherit !important;">
               </div>
             </div>
             <div class="productCaption clearfix">
-              <a href="<?php echo $this->base_url; ?>Home/viewProduto/<?php echo $destaque->getId_subgrupo(); ?>">
+              <a href="<?php echo $this->base_url; ?>Home/viewProduto/<?php echo $destaque->getId_item(); ?>">
                 <h4><?php echo $data['nome'.$destaque->getId_item()]; ?></h4>
               </a>
             </div>

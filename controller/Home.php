@@ -95,28 +95,30 @@ class Home extends Controller{
 
     }
 
-    public function viewProduto($id){ //Edu
+    public function viewProduto($id_item){ //Edu
         $data['estilo'] = $this->model->getEstiloAtual();
-        $data['packproduto'] = $this->modelPackproduto->getPackprodutoBySubgrupo($id);
-        $pkpd = $data['packproduto'][0];
-        $data['grupo-prod'] = $this->modelGrupo->getGrupoById($pkpd->getId_grupo());
+        $data['item'] = $this->modelItem->getItemById($id_item);
+        $data['subgrupo'] = $this->modelSubgrupo->getSubgrupoById($data['item']->getId_subgrupo());
+        $data['produto'] = $this->modelproduto->getProdutosByIds($data['item']->getId_subgrupo(), $data['item']->getId_marca()); //funcao na model pra pegar produtos que se relacionam com o item, mesmo id_subg e id_marca
+        $data['grupo-prod'] = $this->modelGrupo->getGrupoBySubgrupoId($data['item']->getId_subgrupo())[0];
         $data['categoria-prod'] = $this->modelCategoria->getCategoriaById($data['grupo-prod']->getId_categoria());
-        $data['marca'] = $this->modelMarca->getMarcaById($pkpd->getId_marca());
+        $data['marca'] = $this->modelMarca->getMarcaById($data['item']->getId_marca());
         $data['itens'] = $this->getList();
-        $data['prod-destaq'] = $this->modelSubgrupo->getSubgrupoDestaque();
+        $data['prod-destaq'] = $this->modelItem->getItemDestaque();
         $data['categoria'] = $this->modelCategoria->getCategoria();
         $data['grupo'] = $this->modelGrupo->getGrupo();
 
-        $preco_aux = [];
-        $estoque_aux = [];
-        $id_aux = [];
-        foreach ($data['packproduto'] as $produtos){
-          $preco_aux[] = (float)$produtos->getPreco();
-          $estoque_aux[] = $produtos->getEstoque();
-          $id_aux[] = $produtos->getId_produto();
-        }
-        $data['preco-ate'] = min($preco_aux);
-        $estoque_total = array_sum($estoque_aux);
+        $estoque = [];
+        $precos = [];
+        $id_aux = []; // deixei por causa do cart abaixo da logica estoque
+        foreach ($data['produto'] as $produtos): //pegar preço mínimo dos produtos e o estoque total
+          $precos[] = (float)$produtos->getPreco();
+          $estoque[] = $produtos->getEstoque();
+          $id_aux[] = $produtos->getId_produto();// deixei por causa do cart abaixo da logica estoque, rt
+        endforeach;
+        $data['preco-ate'] = min($precos);
+        
+        $estoque_total = array_sum($estoque); //verificar qual nivel de estoque está
         if($estoque_total > 50){
           $data['estoque-msg'] = 'color: #49c32c; border: 1px solid #49c32c;">Em estoque';
         }else if($estoque_total < 51 && $estoque_total > 25){
@@ -126,6 +128,7 @@ class Home extends Controller{
         }else if($estoque_total == 0){
           $data['estoque-msg'] = 'color: #f55c5d; border: 1px solid #f55c5d;">Sem estoque';
         }
+        
         $cart = [];
         $valor_carrinho = 0;
         if (filter_input(INPUT_POST, 'add')) {
@@ -156,6 +159,13 @@ class Home extends Controller{
           }
         }
         $data['itens'] = $this->getList();
+        
+        if(!empty($data['prod-destaq'])){ //se tiver algum item sendo destacado
+            foreach($data['prod-destaq'] as $destaque){ // objeto item
+                $subgrupo = $this->modelSubgrupo->getSubgrupoById($destaque->getId_subgrupo());
+                $data['nome'.$destaque->getId_item()] = $subgrupo->getNome();
+            }
+        }
 
         $this->view->load('header',$data);
         $this->view->load('nav',$data);

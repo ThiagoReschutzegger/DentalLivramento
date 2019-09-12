@@ -24,10 +24,20 @@
           return $produto['preco'];
       }
 
-      public function getProdutosBySubgrupoId($id) {
+      public function getProdutosBySubgrupoId($id_subgrupo) { //Edu, 
           $list = [];
-          $sql = "SELECT * FROM produto WHERE id_subgrupo=:id;";
-          $produto = $this->ExecuteQuery($sql, [':id' => $id]);
+          $sql = "SELECT * FROM produto WHERE id_subgrupo=:id_subgrupo";
+          $produto = $this->ExecuteQuery($sql, [':id_subgrupo' => $id_subgrupo]);
+          foreach ($produto as $linha) {
+              $list[] = new Produto($linha['id_produto'], $linha['barcode'], $linha['preco'], $linha['estoque'], $linha['especificacao'], $linha['id_subgrupo'], $linha['id_marca']);
+          }
+          return $list;
+      }
+      
+      public function getProdutosByIds($id_subgrupo, $id_marca) { //Edu, 
+          $list = [];
+          $sql = "SELECT * FROM produto WHERE id_subgrupo=:id_subgrupo AND id_marca=:id_marca;";
+          $produto = $this->ExecuteQuery($sql, [':id_subgrupo' => $id_subgrupo, ':id_marca' => $id_marca]);
           foreach ($produto as $linha) {
               $list[] = new Produto($linha['id_produto'], $linha['barcode'], $linha['preco'], $linha['estoque'], $linha['especificacao'], $linha['id_subgrupo'], $linha['id_marca']);
           }
