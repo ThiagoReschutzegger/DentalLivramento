@@ -11,7 +11,7 @@ class SubgrupoModel extends Model {
         }
         return $list;
     }
-    
+
     public function getSubgrupoById($id) {
         $sql = "SELECT * FROM subgrupo WHERE id_subgrupo = :id;";
         $subgrupo = $this->ExecuteQuery($sql, [':id' => $id])[0];
@@ -34,7 +34,7 @@ class SubgrupoModel extends Model {
 //        return new Subgrupo($subgrupo['id_subgrupo'], $subgrupo['nome'], $subgrupo['descricao'], $subgrupo['imagem'],  $subgrupo['destaque'], $subgrupo['id_grupo'], $subgrupo['id_marca']);
 //    }
 
-    
+
 
     public function getSubgrupoByGrupo($id) {
         $list = [];
@@ -117,24 +117,24 @@ class SubgrupoModel extends Model {
 //    }
 
 
-//    public function getAllSubgrupos() {
-//
-//        $list = [];
-//
-//        $sql = "SELECT id_subgrupo,nome from subgrupo";
-//        $consulta = $this->ExecuteQuery($sql, $list);
-//
-//        foreach ($consulta as $linha) {
-//          $list[] = [$linha['id_subgrupo'],$linha['nome']];
-//        }
-//        //echo '<pre>';var_dump($list);echo '</pre>';die;
-//        return $list;
-//    }
+   public function getAllSubgrupos() {
 
-    public function insertSubgrupoTxt($nome,$id_grupo,$id_marca) {
+       $list = [];
 
-        $sql = "INSERT INTO subgrupo(nome,id_grupo,id_marca,destaque) VALUES(:nome,:idgrupo,:idmarc,:destaque)";
-        if ($this->ExecuteCommand($sql,[':nome'=>$nome,':idgrupo'=>$id_grupo,':idmarc'=>$id_marca,':destaque'=>0])){
+       $sql = "SELECT id_subgrupo,nome from subgrupo";
+       $consulta = $this->ExecuteQuery($sql, $list);
+
+       foreach ($consulta as $linha) {
+         $list[] = [$linha['id_subgrupo'],$linha['nome']];
+       }
+       //echo '<pre>';var_dump($list);echo '</pre>';die;
+       return $list;
+   }
+
+    public function insertSubgrupoTxt($nome,$id_grupo) {
+
+        $sql = "INSERT INTO subgrupo(nome,id_grupo) VALUES(:nome,:idgrupo)";
+        if ($this->ExecuteCommand($sql,[':nome'=>$nome,':idgrupo'=>$id_grupo])){
             return true;
         } else {
             return false;
