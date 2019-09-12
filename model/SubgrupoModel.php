@@ -17,6 +17,23 @@ class SubgrupoModel extends Model {
         $subgrupo = $this->ExecuteQuery($sql, [':id' => $id])[0];
         return new Subgrupo($subgrupo['id_subgrupo'], $subgrupo['nome'], $subgrupo['id_grupo']);
     }
+    
+     public function getSubgrupoByIds($ids_subgrupo) { //Edu, 
+          $list = [];
+          
+            $string2 = "(id_subgrupo = ";
+            foreach ($ids_subgrupo as $id){
+                $string2 = $string2.$id." OR id_subgrupo = "; //18 charcter
+            }
+            $string2 = substr($string2, 0, -18);
+          
+          $sql = "SELECT * FROM subgrupo WHERE ".$string2.")";
+          $consulta = $this->ExecuteQuery($sql, array());
+          foreach ($consulta as $subgrupo) {
+            $list[] = new Subgrupo($subgrupo['id_subgrupo'], $subgrupo['nome'], $subgrupo['id_grupo']);
+        }
+          return $list;
+      }
 
 //    public function getSubgrupoDestaque() { //Edu
 //        $list = [];
@@ -146,6 +163,17 @@ class SubgrupoModel extends Model {
         $sql = "SELECT id_subgrupo FROM subgrupo WHERE nome = :nome";
         $query = $this->ExecuteQuery($sql, [':nome' => $nome]);
         return $query[0]['id_subgrupo'];
+    }
+    
+     public function searchSubgrupoForDefault($texto) { //Edu
+        $list = [];
+        $sql = "SELECT * FROM subgrupo WHERE UPPER(nome) like '%{$texto}%'";
+        $consulta = $this->ExecuteQuery($sql, array());
+
+        foreach ($consulta as $subgrupo) {
+          $list[] = new Subgrupo($subgrupo['id_subgrupo'], $subgrupo['nome'], $subgrupo['id_grupo']);
+        }
+        return $list;
     }
 
 
