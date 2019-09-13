@@ -297,5 +297,17 @@
         }
         return $list;
     }
+    
+    public function searchProdutoByBarcode($code) { //Edu
+        $list = [];
+        $sql = "SELECT * FROM produto WHERE barcode = :code";
+        $linha = $this->ExecuteQuery($sql, [':code' => $code]);
+//        echo '<pre>';var_dump($linha);echo '</pre>';die;
+        if(!empty($linha)){
+            return array($linha[0]['id_subgrupo'],$linha[0]['id_marca']);
+        }else{
+            return array();
+        }
+    }
 
   }

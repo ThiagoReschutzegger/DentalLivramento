@@ -37,21 +37,28 @@
                 <!-- Item -->
                 <div class="col-xl-6 col-sm-6">
                     <div class="item d-flex align-items-center">
-                        <div class="icon bg-green"><i class="fa fa-list"></i></div>
-                        <div class="title"><a class="linkDash" href="<?php echo $this->base_url . "CategoriaAdmin"; ?>"><span>Categorias<br></span></a>
+                        <div class="icon bg-violet"><i class="fa fa-upload"></i></div>
+                        <div class="title"><a class="linkDash" href="<?php echo $this->base_url . "ProdutoAdmin/uploadTxt"; ?>"><span>Atualizar via TXT<br></span></a>
 
                         </div>
 
                     </div>
                 </div>
-                
+                <!-- Item -->
+                <div class="col-xl-6 col-sm-6">
+                    <div class="item d-flex align-items-center">
+                        <div class="icon bg-green"><i class="fa fa-barcode"></i></div>
+                        <div class="title"><a class="linkDash" href="<?php echo $this->base_url . "ProdutoAdmin"; ?>"><span>Produtos<br></span></a>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="row bg-white has-shadow">
                 <!-- Item -->
                 <div class="col-xl-6 col-sm-6">
                     <div class="item d-flex align-items-center">
-                        <div class="icon bg-violet"><i class="fa fa-flag"></i></div>
-                        <div class="title"><a class="linkDash" href="<?php echo $this->base_url . "MarcaAdmin"; ?>"><span>Marcas<br></span></a>
+                        <div class="icon bg-orange"><i class="fa fa-cart-arrow-down"></i></div>
+                        <div class="title"><a class="linkDash" href="<?php echo $this->base_url . "PedidoAdmin"; ?>"><span>Pedidos<br></span></a>
 
                         </div>
 
@@ -60,8 +67,8 @@
                 <!-- Item -->
                 <div class="col-xl-6 col-sm-6">
                     <div class="item d-flex align-items-center">
-                        <div class="icon bg-blue"><i class="fa fa-barcode"></i></div>
-                        <div class="title"><a class="linkDash" href="<?php echo $this->base_url . "ProdutoAdmin"; ?>"><span>Produtos<br></span></a>
+                        <div class="icon bg-blue"><i class="fa fa-envelope"></i></div>
+                        <div class="title"><a class="linkDash" href="<?php echo $this->base_url . "MensagemAdmin"; ?>"><span>Mensagens<br></span></a>
                         </div>
                     </div>
                 </div>

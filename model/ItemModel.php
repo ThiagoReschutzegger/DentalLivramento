@@ -26,9 +26,14 @@ class ItemModel extends Model {
           $list = [];
           
             $string = "AND (id_marca = ";
-            foreach ($ids_marca as $id){
-                $string = $string.$id." OR id_marca = "; //15 charcter
-            }
+            if(is_array($ids_marca)):
+                foreach ($ids_marca as $id){
+                    $string = $string.$id." OR id_marca = "; //15 charcter
+                }
+            else:
+                $string = $string.$ids_marca." OR id_marca = ";
+            endif;
+            
             $string = substr($string, 0, -15);
           
           $sql = "SELECT * FROM item WHERE id_subgrupo=:id_subgrupo ".$string.")";
