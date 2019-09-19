@@ -504,12 +504,12 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
                   echo $i++;
                   $divisao = explode("\t",$row); // SEPARA TODOS OS DADOS EM UM ARRAY
 
-                  $marca = $this->tratamentoMarca($divisao[4],$marcas_array); // ARRUMA E SUBSTITUI O NOME DA MARCA PELO ID DA MESMA
                   $categoria = $this->tratamentoCategoria($divisao[7],$categorias_array); // ARRUMA E SUBSTITUI O NOME DA MARCA PELO ID DA MESMA
-                  $preco = $this->tratamentoPreco($divisao[2]); // ARRUMA E SUBSTITUI O NOME DA MARCA PELO ID DA MESMA
-                  $estoque = $this->tratamentoEstoque($divisao[3]); // ARRUMA E SUBSTITUI O NOME DA MARCA PELO ID DA MESMA
-                  $grupo = $this->tratamentoGrupo($divisao[5],$categoria[0],$grupos_array); // ARRUMA E SUBSTITUI O NOME DA MARCA PELO ID DA MESMA
+                  $grupo = $this->tratamentoGrupo($divisao[5],$categoria[0],$divisao[7],$grupos_array,$categorias_array); // ARRUMA E SUBSTITUI O NOME DA MARCA PELO ID DA MESMA
                   $subgrupo = $this->tratamentoSubrupo($divisao[6],$grupo[0],$subgrupos_array); // ARRUMA E SUBSTITUI O NOME DA MARCA PELO ID DA MESMA
+                  $marca = $this->tratamentoMarca($divisao[4],$marcas_array); // ARRUMA E SUBSTITUI O NOME DA MARCA PELO ID DA MESMA
+                  $estoque = $this->tratamentoEstoque($divisao[3]); // ARRUMA E SUBSTITUI O NOME DA MARCA PELO ID DA MESMA
+                  $preco = $this->tratamentoPreco($divisao[2]); // ARRUMA E SUBSTITUI O NOME DA MARCA PELO ID DA MESMA
 
                   $divisao[4] = $marca[0]; // TROCANDO NOME DA MARCA PELO ID
                   $divisao[7] = $categoria[0]; // TROCANDO NOME DA CATEGORIA PELO ID
@@ -594,7 +594,7 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
       $categoria = iconv(mb_detect_encoding($categoria, mb_detect_order(), true), "UTF-8//IGNORE", ucfirst(strtolower(($categoria)))); // Como no .txt a marca é toda maiúscula, eu fiz isso pra q a primeira fosse maiuscula e as outras nao.
 
       foreach ($array as $pica) {
-        if(trim(($categoria)) == trim(iconv(mb_detect_encoding($categoria, mb_detect_order(), true), "UTF-8//IGNORE", ucfirst(strtolower(($categoria)))))) { // EU NAO SEI PRA Q CARALHO SERVE ESSE TRIM MAS O IF NAO FUNCIONA SEM ELE
+        if(trim(($categoria)) == trim(iconv(mb_detect_encoding($pica[1], mb_detect_order(), true), "UTF-8//IGNORE", ucfirst(strtolower(($pica[1])))))) { // EU NAO SEI PRA Q CARALHO SERVE ESSE TRIM MAS O IF NAO FUNCIONA SEM ELE
           $id_categoria = $pica[0]; //PEGA O ID DA categoria Q ELE ENCONTROU
           $bool = true;
           break;
@@ -605,6 +605,7 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
 
       //RETORNA VALOR CORRIGIDO DO ID DA categoria
       if($bool){
+
         return [$id_categoria,false];
 
       }else{
@@ -617,25 +618,27 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
 
       $grupo = iconv(mb_detect_encoding($grupo, mb_detect_order(), true), "UTF-8//IGNORE", ucfirst(strtolower(($grupo)))); // Como no .txt a marca é toda maiúscula, eu fiz isso pra q a primeira fosse maiuscula e as outras nao.
 
-      $bool = 0;
-      foreach ($array as $pica) {
-        if(trim(($grupo)) == trim(iconv(mb_detect_encoding($pica[1], mb_detect_order(), true), "UTF-8//IGNORE", ucfirst(strtolower(($pica[1])))))) { // EU NAO SEI PRA Q CARALHO SERVE ESSE TRIM MAS O IF NAO FUNCIONA SEM ELE
-          $id_grupo = $pica[0]; //PEGA O ID DA categoria Q ELE ENCONTROU
-          $bool = true;
-          break;
-        }else{
-          $bool = false;
+        $bool = 0;
+        foreach ($array as $pica) {
+
+          if(trim(($grupo)) == trim(iconv(mb_detect_encoding($pica[1], mb_detect_order(), true), "UTF-8//IGNORE", ucfirst(strtolower(($pica[1])))))) { // EU NAO SEI PRA Q CARALHO SERVE ESSE TRIM MAS O IF NAO FUNCIONA SEM ELE
+            $id_grupo = $pica[0]; //PEGA O ID DA categoria Q ELE ENCONTROU
+            $bool = true;
+            break;
+          }else{
+            $bool = false;
+          }
         }
-      }
+        
+        if($bool){
+          return [$id_grupo,false];
 
-      //RETORNA VALOR CORRIGIDO DO ID DA categoria
-      if($bool){
-        return [$id_grupo,false];
+        }else{
+          $this->modelGrupo->insertGrupoTxt($grupo,$id_categoria);
+          return [$this->modelGrupo->getIdByNome($grupo),true];//ESSES TRUE OU FALSE SERVEM PRA ATUALIZAR O ARRAY, SENAO DA UM DESENCONTRO DE DADOS ATUALIZADOS/ANTIGOS
+        }
 
-      }else{
-        $this->modelGrupo->insertGrupoTxt($grupo,$id_categoria);
-        return [$this->modelGrupo->getIdByNome($grupo),true];//ESSES TRUE OU FALSE SERVEM PRA ATUALIZAR O ARRAY, SENAO DA UM DESENCONTRO DE DADOS ATUALIZADOS/ANTIGOS
-      }
+
     }
 
     private function tratamentoSubrupo($subgrupo,$id_grupo,$array){
