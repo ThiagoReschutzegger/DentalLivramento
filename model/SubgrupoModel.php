@@ -17,6 +17,23 @@ class SubgrupoModel extends Model {
         $subgrupo = $this->ExecuteQuery($sql, [':id' => $id])[0];
         return new Subgrupo($subgrupo['id_subgrupo'], $subgrupo['nome'], $subgrupo['id_grupo']);
     }
+    
+     public function getSubgrupoByIds($ids_subgrupo) { //Edu, 
+          $list = [];
+          
+            $string2 = "(id_subgrupo = ";
+            foreach ($ids_subgrupo as $id){
+                $string2 = $string2.$id." OR id_subgrupo = "; //18 charcter
+            }
+            $string2 = substr($string2, 0, -18);
+          
+          $sql = "SELECT * FROM subgrupo WHERE ".$string2.")";
+          $consulta = $this->ExecuteQuery($sql, array());
+          foreach ($consulta as $subgrupo) {
+            $list[] = new Subgrupo($subgrupo['id_subgrupo'], $subgrupo['nome'], $subgrupo['id_grupo']);
+        }
+          return $list;
+      }
 
 //    public function getSubgrupoDestaque() { //Edu
 //        $list = [];
@@ -146,6 +163,73 @@ class SubgrupoModel extends Model {
         $sql = "SELECT id_subgrupo FROM subgrupo WHERE nome = :nome";
         $query = $this->ExecuteQuery($sql, [':nome' => $nome]);
         return $query[0]['id_subgrupo'];
+    }
+    
+     public function searchSubgrupoForDefault($texto) { //Edu
+        $list = [];
+        $sql = "SELECT * FROM subgrupo WHERE UPPER(nome) like '%{$texto}%'";
+        $consulta = $this->ExecuteQuery($sql, array());
+
+        foreach ($consulta as $subgrupo) {
+          $list[] = new Subgrupo($subgrupo['id_subgrupo'], $subgrupo['nome'], $subgrupo['id_grupo']);
+        }
+        return $list;
+    }
+    
+    public function searchSubgrupoForAdm($texto) { //Edu
+        $list_sub = [];
+        $sql = "SELECT * FROM subgrupo WHERE UPPER(nome) like '%{$texto}%'";
+        $consulta = $this->ExecuteQuery($sql, array());
+
+        if(!empty($consulta)):
+        $ids_gp = [];
+        foreach ($consulta as $subgrupo) {
+          $list_sub[] = new Subgrupo($subgrupo['id_subgrupo'], $subgrupo['nome'], $subgrupo['id_grupo']);
+          if(!in_array($subgrupo['id_grupo'], $ids_gp)){
+              $ids_gp[] = $subgrupo['id_grupo'];
+          }
+        }
+        
+        $list_gp = [];
+        $string_gp = "WHERE id_grupo = "; 
+        foreach ($ids_gp as $id){
+            $string_gp = $string_gp.$id." OR id_grupo = "; //15 char
+        }
+        $string_gp = substr($string_gp, 0, -15);
+        
+        $sql = "SELECT * FROM grupo ".$string_gp;
+        $consulta = $this->ExecuteQuery($sql, array());
+
+        $ids_cat = [];
+        foreach ($consulta as $linha) {
+          $list_gp[] = new Grupo($linha['id_grupo'], $linha['nome'], $linha['id_categoria']);
+          if(!in_array($linha['id_categoria'], $ids_cat)){
+              $ids_cat[] = $linha['id_categoria'];
+          }
+        }
+        
+        $list_cat = [];
+        $string_cat = "WHERE id_categoria = "; 
+        foreach ($ids_cat as $id){
+            $string_cat = $string_cat.$id." OR id_categoria = "; //15 char
+        }
+        $string_cat = substr($string_cat, 0, -19);
+        
+        $sql = "SELECT * FROM categoria ".$string_cat;
+        $consulta = $this->ExecuteQuery($sql, array());
+
+        foreach ($consulta as $categoria) {
+          $list_cat[] = new Categoria( $categoria['id_categoria'],$categoria['nome'],$categoria['descricao'],$categoria['imagem']);
+         }
+        
+        
+//        echo '<pre>';var_dump($list_sub);echo '</pre>';
+//        die;
+        
+        return array($list_sub, $list_gp, $list_cat);
+        else:
+            return array();
+        endif;
     }
 
 

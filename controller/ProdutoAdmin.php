@@ -24,10 +24,7 @@ class ProdutoAdmin extends Admin {
     }
 
     public function index() {
-        $this->view->load('header');
-        $this->view->load('nav');
-        $this->view->load('produto');
-        $this->view->load('footer');
+        header('location:' . $this->config->base_url . 'ProdutoAdmin/buscaProduto');
     }
 
     public function buscaProduto($param = null){
@@ -43,14 +40,45 @@ class ProdutoAdmin extends Admin {
 
                 //echo '<pre>';var_dump($nome);var_dump($codigo);echo '</pre>';
 
-                if ($nome || $codigo) {
-                    $resultado = $this->model->searchProdutoUnitario($nome, $codigo);
+                if ($nome) {
+                    $string = $nome;
+                    while ($string){
+                        if ($this->modelSubgrupo->searchSubgrupoForAdm($string)) { 
+                          $resultado = $this->modelSubgrupo->searchSubgrupoForAdm($string);
+                          $data['status'] = '1';
+                          $string = false;
+                        }else{
+                            $string = substr_replace($string ,"", -1);
+                            if (strlen($string) < 4) $string = false; // caso fique uma string muito pequena para comparar aos nomes dos subgrupos
+                            $resultado = array();
+                        }
+                    }
+                    
+//                    echo '<pre>';var_dump($resultado[0]);echo '</pre>';
+//                    die;
+
+                    if (!empty($resultado)) {
+                        $data['resultado'] = 'SearchDeSub';
+                        $data['subgrupo'] = $resultado[0];
+                        $data['grupo'] = $resultado[1];
+                        $data['categoria'] = $resultado[2];
+                    } else {
+                        $data['resultado'] = 'vazio';
+                    }
+                } elseif($codigo) {
+                    $resultado = $this->model->searchProdutoByBarcode($codigo);
                     $data['status'] = '1';
                     //echo '<pre>';var_dump($resultado);echo '</pre>';
                     //die;
 
                     if (!empty($resultado)) {
-                        $data['resultado'] = $resultado;
+                        $data['resultado'] = 'SearchDeProd';
+                        $id_subgrupo = $resultado[0];
+                        $id_marca = $resultado[1];
+                        $data['item'] = $this->modelItem->getItemByIds($id_subgrupo,$id_marca);
+                        $data['subgrupo'] = $this->modelSubgrupo->getSubgrupoById($id_subgrupo);
+                        $data['produto'] = $this->model->getProdutosByIds($id_subgrupo, $id_marca);
+                        $data['marca'] = $this->modelMarca->getMarcaById($id_marca);
                     } else {
                         $data['resultado'] = 'vazio';
                     }

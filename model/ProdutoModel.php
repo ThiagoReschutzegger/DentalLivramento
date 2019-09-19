@@ -7,7 +7,7 @@
           $sql = "SELECT * FROM produto";
           $consulta = $this->ExecuteQuery($sql, array());
           foreach ($consulta as $linha) {
-              $list[] = new Produto($linha['id_produto'], $linha['barcode'], $linha['preco'], $linha['estoque'], $linha['especificacao'],$linha['id_subgrupo'],$linha['id_narca']);
+              $list[] = new Produto($linha['id_produto'], $linha['barcode'], $linha['preco'], $linha['estoque'], $linha['especificacao'],$linha['id_subgrupo'],$linha['id_marca']);
           }
           return $list;
       }
@@ -286,5 +286,28 @@
         }
 
       }
+      
+      public function searchProdutoForDefault($texto) { //Edu
+        $list = [];
+        $sql = "SELECT * FROM produto WHERE UPPER(especificacao) like '%{$texto}%'";
+        $consulta = $this->ExecuteQuery($sql, array());
+
+        foreach ($consulta as $linha) {
+          $list[] = new Produto($linha['id_produto'], $linha['barcode'], $linha['preco'], $linha['estoque'], $linha['especificacao'],$linha['id_subgrupo'],$linha['id_marca']);
+        }
+        return $list;
+    }
+    
+    public function searchProdutoByBarcode($code) { //Edu
+        $list = [];
+        $sql = "SELECT * FROM produto WHERE barcode = :code";
+        $linha = $this->ExecuteQuery($sql, [':code' => $code]);
+//        echo '<pre>';var_dump($linha);echo '</pre>';die;
+        if(!empty($linha)){
+            return array($linha[0]['id_subgrupo'],$linha[0]['id_marca']);
+        }else{
+            return array();
+        }
+    }
 
   }

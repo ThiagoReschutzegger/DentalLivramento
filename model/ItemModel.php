@@ -22,6 +22,28 @@ class ItemModel extends Model {
         return $list;
     }
     
+    public function getItemByIds($id_subgrupo, $ids_marca) { //Edu, 
+          $list = [];
+          
+            $string = "AND (id_marca = ";
+            if(is_array($ids_marca)):
+                foreach ($ids_marca as $id){
+                    $string = $string.$id." OR id_marca = "; //15 charcter
+                }
+            else:
+                $string = $string.$ids_marca." OR id_marca = ";
+            endif;
+            
+            $string = substr($string, 0, -15);
+          
+          $sql = "SELECT * FROM item WHERE id_subgrupo=:id_subgrupo ".$string.")";
+          $consulta = $this->ExecuteQuery($sql, [':id_subgrupo' => $id_subgrupo]);
+          foreach ($consulta as $item) {
+            $list[] = new Item($item['id_item'], $item['descricao'], $item['imagem'], $item['destaque'], $item['id_subgrupo'], $item['id_marca']);
+        }
+          return $list;
+      }
+    
     
     public function getItemById($id) {
         $sql = "SELECT * FROM item WHERE id_item = :id;";

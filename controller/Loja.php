@@ -132,36 +132,55 @@ class Loja extends Controller{
       $data['grupo'] = $this->modelGrupo->getGrupo();
       $data['categoria'] = $this->modelCategoria->getCategoria();
       $data['itens'] = $this->father->getList();
-      $data['packproduto'] = '';
+      $data['modelo'] = '';
       $data['texto'] = '';
 
       if (filter_input(INPUT_POST, 'pesquisar')) {
         $texto = filter_input(INPUT_POST, 'texto-psq', FILTER_SANITIZE_STRING);
-        if ($this->modelPackproduto->searchPackprodutoForDefault($texto)) {
-          $data['packproduto'] = $this->modelPackproduto->searchPackprodutoForDefault($texto);
-          $data['texto'] = $texto;
-
-          if(empty($data['packproduto'])){ //caso não tenha nenhum prod no grupo, gambiarra.com
-          $data['packproduto'] = 'password';
-          }else{
-            $preco_aux = []; //array onde tem todos os preços dos produtos que estão sendo exibidos
-            foreach ($data['packproduto'] as $produtos){ //gambiarra pra pegar o menor preço de cada produto
-              $preco_aux[$produtos->getId_subgrupo()] = number_format($produtos->getPreco(), 2);
-              $preco_aux[$produtos->getId_subgrupo()] = str_replace(',', '', $preco_aux[$produtos->getId_subgrupo()]);
-              if(!isset($data[$produtos->getId_subgrupo()])){
-                $data[$produtos->getId_subgrupo()] = $preco_aux[$produtos->getId_subgrupo()];
-              }
-              if($preco_aux[$produtos->getId_subgrupo()] < $data[$produtos->getId_subgrupo()]){
-                $data[$produtos->getId_subgrupo()] = $preco_aux[$produtos->getId_subgrupo()];
-              }
+        $string = $texto;
+        $pass = false;
+        while ($string){
+            if ($this->modelSubgrupo->searchSubgrupoForDefault($string)) { // Pesquisa de subgrupo, ou seja o nome do produto
+              $data['subgrupo'] = $this->modelSubgrupo->searchSubgrupoForDefault($string);
+              $data['texto'] = $texto;
+              $data['modelo'] = "SearchDeSubgrupo";
+              $pass = true;
+              $string = false;
+            }else{
+                $string = substr_replace($string ,"", -1);
+                if (strlen($string) < 4) $string = false; // caso fique uma string muito pequena para comparar aos nomes dos subgrupos
             }
-            }
-            if(empty($preco_aux)){ //caso não tenha nenhum prod no grupo, gambiarra.com
-            $preco_aux[] = 0;
-            }
-
-        }else{
-          $data['packproduto'] = 'password';
+        }
+        if(!$pass && $this->modelproduto->searchProdutoForDefault($texto)) { // Pesquisa de produto, ou seja as especificações e exibe item, como na this->view
+            $data['produto'] = $this->modelproduto->searchProdutoForDefault($texto);
+            $data['subgrupo'] = $this->modelSubgrupo->getSubgrupoById($data['produto'][0]->getId_subgrupo());
+            $data['texto'] = $texto;
+            $data['modelo'] = "SearchDeProduto";
+            $pass = true;
+            
+            $ids_marca = [];
+            foreach($data['produto'] as $produto):
+                if($produto->getId_subgrupo() != $data['subgrupo']->getId_subgrupo()) continue;
+                if(empty($data['preco_min'.$produto->getId_marca()])){
+                    $data['preco_min'.$produto->getId_marca()] = $produto->getPreco();
+                }
+                if($data['preco_min'.$produto->getId_marca()] > $produto->getPreco()){
+                    $data['preco_min'.$produto->getId_marca()] = $produto->getPreco();
+                }
+                if(!in_array($produto->getId_marca(), $ids_marca)){
+                    $ids_marca[] = $produto->getId_marca();
+                }
+            endforeach;
+            $data['marca'] = $this->modelMarca->getMarcaByIds($ids_marca);
+            $data['item'] = $this->modelItem->getItemByIds($data['subgrupo']->getId_subgrupo(), $ids_marca);
+            
+//            echo "<pre>";
+//            var_dump($data['produto']);
+//            echo "</pre>";
+//            die;
+            
+        }elseif(!$pass){ // se nao achar nada
+          $data['modelo'] = '';
           $data['texto'] = $texto;
         }
       }
