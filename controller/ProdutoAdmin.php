@@ -357,7 +357,7 @@ class ProdutoAdmin extends Admin {
         $destaque = filter_input(INPUT_POST, 'destaque', FILTER_SANITIZE_STRING);
 
         if ($descricao) { //imagem opcional
-            $item = new Item($id_item, $descricao, $imagem, $destaque, $data['item']->getId_subgrupo(), $data['item']->getId_marca());
+            $item = new Item($id_item, $descricao, $imagem, $destaque, $data['item']->getTipo(), $data['item']->getId_subgrupo(), $data['item']->getId_marca());
             if ($this->modelItem->updateItem($item)) {
                 $this->viewItens($data['item']->getId_subgrupo());
                 return true;

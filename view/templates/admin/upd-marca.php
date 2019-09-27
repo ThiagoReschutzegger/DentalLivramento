@@ -44,6 +44,20 @@
             </div>
           </div>
         </div>
+        <div class="line"></div>
+        <div class="form-group row">
+          <label class="col-sm-2 form-control-label text-right">Deseja exibir na visualização de Produtos:</label>
+          <div class="col-sm-8">
+            <div class="i-checks">
+              <input id="sim" type="radio" <?php  if($marca->getSingle_prod() != 0) echo "checked"; ?> value="1" name="single_prod" class="radio-template">
+              <label for="sim">Sim</label>
+            </div>
+            <div class="i-checks">
+              <input id="nao" type="radio" <?php  if($marca->getSingle_prod() == 0) echo "checked"; ?> value="0" name="single_prod" class="radio-template">
+              <label for="nao">Não</label>
+            </div>
+          </div>
+        </div>
         <div class="form-group row">
           <input type="reset" class="btn btn-secondary col-sm-4 offset-sm-2" style="margin-right: 10px;" value="Limpar" />
           <input type="submit" class="btn btn-success col-sm-4 " value="Salvar" name="upd" />

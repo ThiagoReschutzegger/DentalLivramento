@@ -7,13 +7,15 @@ class Marca {
     public $imagem;
     public $catalogo;
     public $slider;
+    public $single_prod;
 
-    function __construct($id_marca, $nome, $imagem, $catalogo, $slider) {
+    function __construct($id_marca, $nome, $imagem, $catalogo, $slider, $single_prod) {
         $this->id_marca = $id_marca;
         $this->nome = $nome;
         $this->imagem = $imagem;
         $this->catalogo = $catalogo;
         $this->slider = $slider;
+        $this->single_prod = $single_prod;
     }
 
     function getId_marca() {
@@ -35,6 +37,10 @@ class Marca {
     function getSlider() {
         return $this->slider;
     }
+    
+    function getSingle_prod() {
+        return $this->single_prod;
+    }
 
     function setId_marca($id_marca) {
         $this->id_marca = $id_marca;
@@ -54,5 +60,9 @@ class Marca {
 
     function setSlider($slider) {
         $this->slider = $slider;
+    }
+    
+    function setSingle_prod($single_prod) {
+        $this->single_prod = $single_prod;
     }
 }

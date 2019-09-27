@@ -72,9 +72,10 @@ class MarcaAdmin extends Admin {
         $imagem = filter_input(INPUT_POST, 'imagem', FILTER_SANITIZE_STRING);
         $catalogo = filter_input(INPUT_POST, 'catalogo', FILTER_SANITIZE_STRING);
         $slider = filter_input(INPUT_POST, 'slider', FILTER_SANITIZE_STRING);
+        $single_prod = filter_input(INPUT_POST, 'single_prod', FILTER_SANITIZE_STRING);
 
         if ($id && $nome && $imagem) {
-            $marca = new Marca($id,$nome,$imagem,$catalogo,$slider);
+            $marca = new Marca($id,$nome,$imagem,$catalogo,$slider,$single_prod);
             if ($this->model->updateMarca($marca)) {
                 $this->index();
                 return true;
