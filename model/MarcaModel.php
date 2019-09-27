@@ -7,7 +7,7 @@ class MarcaModel extends Model {
         $sql = "SELECT * FROM marca";
         $consulta = $this->ExecuteQuery($sql, array());
         foreach ($consulta as $linha) {
-            $list[] = new Marca($linha['id_marca'],$linha['nome'],$linha['imagem'],$linha['catalogo'],$linha['slider']);
+            $list[] = new Marca($linha['id_marca'],$linha['nome'],$linha['imagem'],$linha['catalogo'],$linha['slider'],$linha['single_prod']);
         }
         return $list;
     }
@@ -16,7 +16,7 @@ class MarcaModel extends Model {
         $sql = "SELECT * FROM marca WHERE id_marca=:id;";
         $consulta = $this->ExecuteQuery($sql, [':id' => $id])[0];
         $marca = $this->ExecuteQuery($sql, [':id' => $id])[0];
-            return new Marca( $marca['id_marca'],$marca['nome'],$marca['imagem'],$marca['catalogo'],$marca['slider']);
+            return new Marca( $marca['id_marca'],$marca['nome'],$marca['imagem'],$marca['catalogo'],$marca['slider'],$marca['single_prod']);
     }
     
     public function getMarcaByIds($ids) {
@@ -30,14 +30,14 @@ class MarcaModel extends Model {
         $sql = "SELECT * FROM marca ".$string;
         $consulta = $this->ExecuteQuery($sql, array());
         foreach ($consulta as $linha) {
-            $list[] = new Marca($linha['id_marca'],$linha['nome'],$linha['imagem'],$linha['catalogo'],$linha['slider']);
+            $list[] = new Marca($linha['id_marca'],$linha['nome'],$linha['imagem'],$linha['catalogo'],$linha['slider'],$linha['single_prod']);
         }
         return $list;
     }
 
     public function insertMarca($marca) {
-        $sql = "INSERT INTO marca(nome,imagem,catalogo) VALUES(:nome,:imagem,:catalogo)";
-        if ($this->ExecuteCommand($sql,[':nome'=>$marca->getNome(),':imagem'=>$marca->getImagem(),':catalogo'=>$marca->getCatalogo(),':slider'=>$marca->getSlider()])){
+        $sql = "INSERT INTO marca(nome,imagem,catalogo,slider,single_prod) VALUES(:nome,:imagem,:catalogo,1,1)";
+        if ($this->ExecuteCommand($sql,[':nome'=>$marca->getNome(),':imagem'=>$marca->getImagem(),':catalogo'=>$marca->getCatalogo()])){
             return true;
         } else {
             return false;
@@ -63,8 +63,8 @@ class MarcaModel extends Model {
     }
 
     public function updateMarca($marca) {
-        $sql = "UPDATE marca SET nome = :nome, imagem = :imagem, catalogo = :catalogo, slider = :slider WHERE id_marca = :id";
-        $param = [':id'=>$marca->getId_marca(),':nome'=>$marca->getNome(),':imagem'=>$marca->getImagem(),':catalogo'=>$marca->getCatalogo(),':slider'=>$marca->getSlider()];
+        $sql = "UPDATE marca SET nome = :nome, imagem = :imagem, catalogo = :catalogo, slider = :slider, single_prod = :single_prod WHERE id_marca = :id";
+        $param = [':id'=>$marca->getId_marca(),':nome'=>$marca->getNome(),':imagem'=>$marca->getImagem(),':catalogo'=>$marca->getCatalogo(),':slider'=>$marca->getSlider(),':single_prod'=>$marca->getSingle_prod()];
         if ($this->ExecuteCommand($sql,$param)) {
             return true;
         } else {
@@ -77,7 +77,7 @@ class MarcaModel extends Model {
         $sql = "SELECT marca.* FROM subgrupo JOIN marca ON subgrupo.id_marca=marca.id_marca WHERE id_subgrupo = :id";
         $query = $this->ExecuteQuery($sql, [':id' => $id]);
         foreach ($query as $linha) {
-            $list[] = new Marca($linha['id_marca'], $linha['nome'], $linha['imagem'], $linha['catalogo'], $linha['slider']);
+            $list[] = new Marca($linha['id_marca'], $linha['nome'], $linha['imagem'], $linha['catalogo'], $linha['slider'], $linha['single_prod']);
         }
         //echo 'Mok';
         return $list;
@@ -109,7 +109,7 @@ class MarcaModel extends Model {
         }
         $query = $this->ExecuteQuery($sql, array());
         foreach ($query as $linha) {
-            $list[] = new Marca($linha['id_marca'], $linha['nome'], $linha['imagem'], $linha['catalogo'], $linha['slider']);
+            $list[] = new Marca($linha['id_marca'], $linha['nome'], $linha['imagem'], $linha['catalogo'], $linha['slider'], $linha['single_prod']);
         }
         //echo 'Mok';
         return $list;

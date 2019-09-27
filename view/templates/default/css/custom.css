@@ -93,18 +93,26 @@ input[type=number] {
 
 @media (min-width: 770px) {
     .logo-nav{
-        width: 300px;
+        width: 200px;
         height: auto;
         padding-top: 0;
     }
 }
 @media (max-width: 1000px) {
     .logo-nav{
-        width:200px;
+        width:150px;
         height: auto;
         padding-top: 0;
     }
 }
+
+@media (max-width: 700px) {
+    .navbar-brand{
+        padding-top: 0 !important;
+        padding-bottom: 5px !important;
+    }
+}
+
 @media (max-width: 300px) {
     .logo-nav{
         width:150px;

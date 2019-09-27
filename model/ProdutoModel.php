@@ -7,7 +7,7 @@
           $sql = "SELECT * FROM produto";
           $consulta = $this->ExecuteQuery($sql, array());
           foreach ($consulta as $linha) {
-              $list[] = new Produto($linha['id_produto'], $linha['barcode'], $linha['preco'], $linha['estoque'], $linha['especificacao'],$linha['id_subgrupo'],$linha['id_marca']);
+              $list[] = new Produto($linha['id_produto'], $linha['barcode'], $linha['preco'], $linha['estoque'], $linha['especificacao'], $linha['tipo'], $linha['id_subgrupo'], $linha['id_marca']);
           }
           return $list;
       }
@@ -15,7 +15,7 @@
       public function getProdutoById($id) {
           $sql = "SELECT * FROM produto WHERE id_produto=:id;";
           $produto = $this->ExecuteQuery($sql, [':id' => $id])[0];
-          return new Produto($produto['id_produto'], $produto['barcode'], $produto['preco'], $produto['estoque'], $produto['especificacao'],$produto['id_subgrupo'],$produto['id_marca']);
+          return new Produto($produto['id_produto'], $produto['barcode'], $produto['preco'], $produto['estoque'], $produto['especificacao'], $produto['tipo'], $produto['id_subgrupo'],$produto['id_marca']);
       }
 
       public function getPrecoByProdutoId($id) {
@@ -29,7 +29,7 @@
           $sql = "SELECT * FROM produto WHERE id_subgrupo=:id_subgrupo";
           $produto = $this->ExecuteQuery($sql, [':id_subgrupo' => $id_subgrupo]);
           foreach ($produto as $linha) {
-              $list[] = new Produto($linha['id_produto'], $linha['barcode'], $linha['preco'], $linha['estoque'], $linha['especificacao'], $linha['id_subgrupo'], $linha['id_marca']);
+              $list[] = new Produto($linha['id_produto'], $linha['barcode'], $linha['preco'], $linha['estoque'], $linha['especificacao'], $linha['tipo'], $linha['id_subgrupo'], $linha['id_marca']);
           }
           return $list;
       }
@@ -39,7 +39,7 @@
           $sql = "SELECT * FROM produto WHERE id_subgrupo=:id_subgrupo AND id_marca=:id_marca;";
           $produto = $this->ExecuteQuery($sql, [':id_subgrupo' => $id_subgrupo, ':id_marca' => $id_marca]);
           foreach ($produto as $linha) {
-              $list[] = new Produto($linha['id_produto'], $linha['barcode'], $linha['preco'], $linha['estoque'], $linha['especificacao'], $linha['id_subgrupo'], $linha['id_marca']);
+              $list[] = new Produto($linha['id_produto'], $linha['barcode'], $linha['preco'], $linha['estoque'], $linha['especificacao'], $linha['tipo'], $linha['id_subgrupo'], $linha['id_marca']);
           }
           return $list;
       }
@@ -49,17 +49,18 @@
           $sql = "SELECT * FROM produto WHERE id_subgrupo=:id ORDER BY preco ASC";
           $produto = $this->ExecuteQuery($sql, [':id' => $id]);
           foreach ($produto as $linha) {
-              $list[] = new Produto($linha['id_produto'], $linha['barcode'], $linha['preco'], $linha['estoque'], $linha['especificacao'], $linha['id_subgrupo'], $linha['id_marca']);
+              $list[] = new Produto($linha['id_produto'], $linha['barcode'], $linha['preco'], $linha['estoque'], $linha['especificacao'], $linha['tipo'], $linha['id_subgrupo'], $linha['id_marca']);
           }
           return $list;
       }
 
       public function insertProduto($produto) {
-          $sql = "INSERT INTO produto(barcode,preco,estoque,especificacao,id_subgrupo,id_marca) VALUES(:barcode,:preco,:estoque,:especificacao,:id_subgrupo,:id_marca)";
+          $sql = "INSERT INTO produto(barcode,preco,estoque,especificacao,tipo,id_subgrupo,id_marca) VALUES(:barcode,:preco,:estoque,:especificacao,:tipo,:id_subgrupo,:id_marca)";
           if ($this->ExecuteCommand($sql, [':barcode' => $produto->getBarcode(),
                       ':preco' => $produto->getPreco(),
                       ':estoque' => $produto->getEstoque(),
                       ':especificacao' => $produto->getEspecificacao(),
+                      ':tipo' => $produto->getTipo(),
                       ':id_subgrupo' => $produto->getId_subgrupo(),
                       ':id_marca' => $produto->getId_marca()
                   ])) {
@@ -79,12 +80,13 @@
       }
 
       public function updateProduto($produto) {
-          $sql = "UPDATE produto SET barcode = :barcode, preco = :preco, estoque = :estoque, especificacao = :especificacao, id_subgrupo = :id_subgrupo, id_marca = :id_marca WHERE id_produto = :id";
+          $sql = "UPDATE produto SET barcode = :barcode, preco = :preco, estoque = :estoque, especificacao = :especificacao, tipo = :tipo, id_subgrupo = :id_subgrupo, id_marca = :id_marca WHERE id_produto = :id";
           $param = [':id' => $produto->getId_produto(),
               ':barcode' => $produto->getBarcode(),
               ':preco' => $produto->getPreco(),
               ':estoque' => $produto->getEstoque(),
               ':especificacao' => $produto->getEspecificacao(),
+              ':tipo' => $produto->getTipo(),
               ':id_subgrupo' => $produto->getId_subgrupo(),
               ':id_marca' => $produto->getId_marca()
           ];
@@ -293,7 +295,7 @@
         $consulta = $this->ExecuteQuery($sql, array());
 
         foreach ($consulta as $linha) {
-          $list[] = new Produto($linha['id_produto'], $linha['barcode'], $linha['preco'], $linha['estoque'], $linha['especificacao'],$linha['id_subgrupo'],$linha['id_marca']);
+          $list[] = new Produto($linha['id_produto'], $linha['barcode'], $linha['preco'], $linha['estoque'], $linha['especificacao'], $linha['tipo'],$linha['id_subgrupo'],$linha['id_marca']);
         }
         return $list;
     }
