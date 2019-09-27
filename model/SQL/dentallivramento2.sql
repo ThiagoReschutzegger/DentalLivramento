@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 12-Set-2019 às 19:00
+-- Generation Time: 27-Set-2019 às 22:52
 -- Versão do servidor: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
@@ -52,7 +52,7 @@ CREATE TABLE `categoria` (
 INSERT INTO `categoria` (`id_categoria`, `nome`, `descricao`, `imagem`) VALUES
 (6, 'Equipamentos', 'Equipamentos e acessórios odontológicos para o seu consultório disponíveis para venda.', 'https://conteudo.imguol.com.br/blogs/125/files/2016/10/utensilios-e-equipamentos-de-dentista-odontologia-broca-espatula-1452201753205_1920x1127.jpg'),
 (7, 'Ortodontia', 'A categoria não possui descrição.', 'https://www.sindicatometal.org.br/wp-content/uploads/2018/02/ortodontia-e1517842522535-860x450_c.png'),
-(8, 'Dentística', '..', 'http://funbeo.com.br/wp-content/uploads/2017/07/Odontologia-Este%CC%81tica-825x510.jpg');
+(8, 'Dentística', '..', 'https://wallpapercave.com/wp/wp1957138.jpg');
 
 -- --------------------------------------------------------
 
@@ -174,6 +174,7 @@ CREATE TABLE `item` (
   `descricao` varchar(1000) NOT NULL,
   `imagem` varchar(5000) NOT NULL,
   `destaque` enum('1','0') NOT NULL,
+  `tipo` varchar(100) NOT NULL,
   `id_subgrupo` int(11) NOT NULL,
   `id_marca` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -182,11 +183,11 @@ CREATE TABLE `item` (
 -- Extraindo dados da tabela `item`
 --
 
-INSERT INTO `item` (`id_item`, `descricao`, `imagem`, `destaque`, `id_subgrupo`, `id_marca`) VALUES
-(1, 'produto top demaisss', 'https://sparco.vteximg.com.br/arquivos/ids/157741-1000-1000/008007RNR_01.jpg', '1', 1, 1),
-(2, 'outro top produtovsky.', '', '1', 1, 2),
-(3, 'esse volante eh bom', 'http://img03.taobaocdn.com/imgextra/i3/155126098/T2D36jXaFaXXXXXXXX_!!155126098.jpg', '1', 2, 1),
-(4, 'esse eh boom pow', 'https://http2.mlstatic.com/volante-esportivo-sparco-35cm-dimentro-camurca-D_NQ_NP_746149-MLB26636288403_012018-F.jpg', '1', 2, 2);
+INSERT INTO `item` (`id_item`, `descricao`, `imagem`, `destaque`, `tipo`, `id_subgrupo`, `id_marca`) VALUES
+(1, 'produto top demaisss', 'https://sparco.vteximg.com.br/arquivos/ids/157741-1000-1000/008007RNR_01.jpg', '1', '', 1, 1),
+(2, 'outro top produtovsky.', '', '1', '', 1, 2),
+(3, 'esse volante eh bom', 'http://img03.taobaocdn.com/imgextra/i3/155126098/T2D36jXaFaXXXXXXXX_!!155126098.jpg', '1', '', 2, 1),
+(4, 'esse eh boom pow', 'https://http2.mlstatic.com/volante-esportivo-sparco-35cm-dimentro-camurca-D_NQ_NP_746149-MLB26636288403_012018-F.jpg', '1', '', 2, 2);
 
 -- --------------------------------------------------------
 
@@ -212,17 +213,18 @@ CREATE TABLE `marca` (
   `nome` varchar(100) NOT NULL,
   `imagem` varchar(5000) NOT NULL,
   `catalogo` varchar(1000) NOT NULL,
-  `slider` enum('1','0') NOT NULL
+  `slider` enum('1','0') NOT NULL,
+  `single_prod` enum('0','1') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `marca`
 --
 
-INSERT INTO `marca` (`id_marca`, `nome`, `imagem`, `catalogo`, `slider`) VALUES
-(1, 'Adidas', 'https://vandal-us.s3.amazonaws.com/spree/products/49846/original/open-uri20181203-14-1jczs.jpg', 'https://static.morelli.com.br/arquivos/midias/folhetos/br/Midia_284_4_1520622302610.pdf', '1'),
-(2, 'Puma', 'http://pluspng.com/img-png/puma-png-puma-png-240.png', 'https://static.morelli.com.br/arquivos/midias/folhetos/br/Midia_284_4_1520622302610.pdf', '1'),
-(3, 'qwert', 'https://logodownload.org/wp-content/uploads/2014/04/nike-logo-1.png', 'https://google.com.br', '1');
+INSERT INTO `marca` (`id_marca`, `nome`, `imagem`, `catalogo`, `slider`, `single_prod`) VALUES
+(1, 'Adidas', 'https://vandal-us.s3.amazonaws.com/spree/products/49846/original/open-uri20181203-14-1jczs.jpg', 'https://static.morelli.com.br/arquivos/midias/folhetos/br/Midia_284_4_1520622302610.pdf', '1', '1'),
+(2, 'Puma', 'http://pluspng.com/img-png/puma-png-puma-png-240.png', 'https://static.morelli.com.br/arquivos/midias/folhetos/br/Midia_284_4_1520622302610.pdf', '1', '0'),
+(3, 'qwert', 'https://logodownload.org/wp-content/uploads/2014/04/nike-logo-1.png', 'https://google.com.br', '1', '1');
 
 -- --------------------------------------------------------
 
@@ -279,6 +281,7 @@ CREATE TABLE `produto` (
   `preco` float NOT NULL,
   `estoque` int(11) NOT NULL,
   `especificacao` varchar(500) NOT NULL,
+  `tipo` varchar(100) NOT NULL,
   `id_subgrupo` int(11) NOT NULL,
   `id_marca` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -287,12 +290,12 @@ CREATE TABLE `produto` (
 -- Extraindo dados da tabela `produto`
 --
 
-INSERT INTO `produto` (`id_produto`, `barcode`, `preco`, `estoque`, `especificacao`, `id_subgrupo`, `id_marca`) VALUES
-(1, '134562522', 499.99, 20, 'Para Ferrari', 1, 1),
-(2, '12344412', 100.5, 23, 'Para Lamborghini', 1, 1),
-(3, '12412312221112', 200, 12, 'Tamanho Universal', 1, 2),
-(4, '236666662348', 234, 11, 'preto e amarelo', 2, 1),
-(5, '99931423', 432.5, 15, 'vermelho e preto', 2, 2);
+INSERT INTO `produto` (`id_produto`, `barcode`, `preco`, `estoque`, `especificacao`, `tipo`, `id_subgrupo`, `id_marca`) VALUES
+(1, '134562522', 499.99, 20, 'Para Ferrari', '', 1, 1),
+(2, '12344412', 100.5, 23, 'Para Lamborghini', '', 1, 1),
+(3, '12412312221112', 200, 12, 'Tamanho Universal preto', '', 1, 2),
+(4, '236666662348', 234, 11, 'preto e amarelo', '', 2, 1),
+(5, '99931423', 432.5, 15, 'vermelho e preto', '', 2, 2);
 
 -- --------------------------------------------------------
 
