@@ -107,5 +107,24 @@ class GrupoModel extends Model {
     }
 
 
+    public function verifyGrupo($grupo,$id_categoria){
+      $list = [];
+      $sql = "SELECT nome FROM grupo WHERE id_categoria = :id";
+      $query = $this->ExecuteQuery($sql, [':id' => $id_categoria]);
+      foreach ($query as $linha) {
+        $list[] = $linha['nome'];
+      }
+
+      $i = 0;
+      foreach ($list as $linha) {
+        if(strtoupper($grupo) == strtoupper($linha)){
+          return true;
+        }
+      }
+      return false;
+
+    }
+
+
 
 }
