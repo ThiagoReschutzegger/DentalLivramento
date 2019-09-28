@@ -111,10 +111,11 @@ class GrupoModel extends Model {
         $list = [];
         $sql = "SELECT id_categoria FROM grupo WHERE id_grupo = :id";
         $query = $this->ExecuteQuery($sql, [':id' => $id]);
+        var_dump($query);die;
         return $query['id_categoria'];
     }
 
-    
+
 
     public function verifyGrupo($grupo,$id_categoria){
       $list = [];

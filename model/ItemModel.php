@@ -11,7 +11,7 @@ class ItemModel extends Model {
         }
         return $list;
     }
-    
+
     public function getItemBySubgrupo($id) {
         $list = [];
         $sql = "SELECT * FROM item WHERE id_subgrupo = :id ORDER BY id_item DESC";
@@ -21,10 +21,10 @@ class ItemModel extends Model {
         }
         return $list;
     }
-    
-    public function getItemByIds($id_subgrupo, $ids_marca) { //Edu, 
+
+    public function getItemByIds($id_subgrupo, $ids_marca) { //Edu,
           $list = [];
-          
+
             $string = "AND (id_marca = ";
             if(is_array($ids_marca)):
                 foreach ($ids_marca as $id){
@@ -33,9 +33,9 @@ class ItemModel extends Model {
             else:
                 $string = $string.$ids_marca." OR id_marca = ";
             endif;
-            
+
             $string = substr($string, 0, -15);
-          
+
           $sql = "SELECT * FROM item WHERE id_subgrupo=:id_subgrupo ".$string.")";
           $consulta = $this->ExecuteQuery($sql, [':id_subgrupo' => $id_subgrupo]);
           foreach ($consulta as $item) {
@@ -43,8 +43,8 @@ class ItemModel extends Model {
         }
           return $list;
       }
-    
-    
+
+
     public function getItemById($id) {
         $sql = "SELECT * FROM item WHERE id_item = :id;";
         $item = $this->ExecuteQuery($sql, [':id' => $id])[0];
@@ -155,6 +155,27 @@ class ItemModel extends Model {
         }
     }
 
+    public function getAllItens() {
 
+        $list = [];
+
+        $sql = "SELECT id_item,tipo,id_subgrupo,id_marca from item";
+        $consulta = $this->ExecuteQuery($sql, $list);
+
+        foreach ($consulta as $linha) {
+          $list[] = [$linha['id_item'],$linha['tipo'],$linha['id_subgrupo'],$linha['id_marca']];
+        }
+        //echo '<pre>';var_dump($list);echo '</pre>';die;
+        return $list;
+    }
+
+    public function insertItemTxt($tipo,$id_marca,$id_subgrupo) {
+        $sql = "INSERT INTO item(tipo,id_marca,id_subgrupo,destaque) VALUES(:tipo,:id_marca,:id_subgrupo,0)";
+        if ($this->ExecuteCommand($sql,[':tipo'=>$tipo,':id_marca'=>$id_marca,':id_subgrupo'=>$id_subgrupo])){
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 }
