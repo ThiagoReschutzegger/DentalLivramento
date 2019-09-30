@@ -24,7 +24,7 @@
           return $produto['preco'];
       }
 
-      public function getProdutosBySubgrupoId($id_subgrupo) { //Edu, 
+      public function getProdutosBySubgrupoId($id_subgrupo) { //Edu,
           $list = [];
           $sql = "SELECT * FROM produto WHERE id_subgrupo=:id_subgrupo";
           $produto = $this->ExecuteQuery($sql, [':id_subgrupo' => $id_subgrupo]);
@@ -33,8 +33,8 @@
           }
           return $list;
       }
-      
-      public function getProdutosByIds($id_subgrupo, $id_marca) { //Edu, 
+
+      public function getProdutosByIds($id_subgrupo, $id_marca) { //Edu,
           $list = [];
           $sql = "SELECT * FROM produto WHERE id_subgrupo=:id_subgrupo AND id_marca=:id_marca;";
           $produto = $this->ExecuteQuery($sql, [':id_subgrupo' => $id_subgrupo, ':id_marca' => $id_marca]);
@@ -265,7 +265,7 @@
 
       }
 
-      public function insertByTxt($barcode,$preco,$estoque,$especificacao,$id_subgrupo,$id_marca,$array) {
+      public function insertByTxt($barcode,$preco,$estoque,$especificacao,$id_subgrupo,$id_marca,$tipo,$array) {
         //IMPORTANTE!! $array É ARRAY COM TODOS OS BARCODES
 
         //echo '<pre>';var_dump($array);echo '</pre>';
@@ -275,14 +275,15 @@
 
           //echo '<h1 style="COLOR:blue">existe</h1>';
 
-          $sql = "INSERT INTO produto(barcode,preco,estoque,especificacao,id_subgrupo,id_marca) VALUES(:barcode,:preco,:estoque,:especificacao,:id_subgrupo,:id_marca)";
+          $sql = "INSERT INTO produto(barcode,preco,estoque,especificacao,id_subgrupo,id_marca,tipo) VALUES(:barcode,:preco,:estoque,:especificacao,:id_subgrupo,:id_marca,:tipo)";
 
           $param = [':barcode' => $barcode,
                     ':preco' => $preco,
                     ':estoque' => $estoque,
                     ':especificacao' => $especificacao,
                     ':id_subgrupo' => $id_subgrupo,
-                    ':id_marca' => $id_marca
+                    ':id_marca' => $id_marca,
+                    ':tipo' => $tipo
                     ];
 
           if ($this->ExecuteCommand($sql, $param)) {
@@ -298,7 +299,7 @@
         }
 
       }
-      
+
       public function searchProdutoForDefault($texto) { //Edu
         $list = [];
         $sql = "SELECT * FROM produto WHERE UPPER(especificacao) like '%{$texto}%'";
@@ -309,7 +310,7 @@
         }
         return $list;
     }
-    
+
     public function searchProdutoByBarcode($code) { //Edu
         $list = [];
         $sql = "SELECT * FROM produto WHERE barcode = :code";
