@@ -46,7 +46,7 @@
                                               </thead>
                                             <tbody>
                                                 <?php foreach ($data['produto'] as $produto):
-                                                  if ($produto->getId_marca() == $item->getId_marca()):?>
+                                                  if ($produto->getId_marca() == $item->getId_marca() && $produto->getTipo() == $item->getTipo()):?>
                                                     <tr>
                                                         <td><?php echo $produto->getEspecificacao(); ?></td>
                                                         <td>R$ <?php echo number_format($produto->getPreco(), 2); ?></td>

@@ -70,7 +70,9 @@ class Home extends Controller{
         if(!empty($data['prod-destaq'])){ //se tiver algum item sendo destacado
             foreach($data['prod-destaq'] as $destaque){ // objeto item
                 $subgrupo = $this->modelSubgrupo->getSubgrupoById($destaque->getId_subgrupo());
+                $marca = $this->modelMarca->getMarcaById($destaque->getId_marca());
                 $data['nome'.$destaque->getId_item()] = $subgrupo->getNome();
+                $data['marca_dstq'.$destaque->getId_item()] = $marca->getNome();
             }
         }
 
@@ -99,7 +101,7 @@ class Home extends Controller{
         $data['estilo'] = $this->model->getEstiloAtual();
         $data['item'] = $this->modelItem->getItemById($id_item);
         $data['subgrupo'] = $this->modelSubgrupo->getSubgrupoById($data['item']->getId_subgrupo());
-        $data['produto'] = $this->modelproduto->getProdutosByIds($data['item']->getId_subgrupo(), $data['item']->getId_marca()); //funcao na model pra pegar produtos que se relacionam com o item, mesmo id_subg e id_marca
+        $data['produto'] = $this->modelproduto->getProdutosByIdsAndTipo($data['item']->getId_subgrupo(), $data['item']->getId_marca(), $data['item']->getTipo()); //funcao na model pra pegar produtos que se relacionam com o item, mesmo id_subg e id_marca
         $data['grupo-prod'] = $this->modelGrupo->getGrupoBySubgrupoId($data['item']->getId_subgrupo())[0];
         $data['categoria-prod'] = $this->modelCategoria->getCategoriaById($data['grupo-prod']->getId_categoria());
         $data['marca'] = $this->modelMarca->getMarcaById($data['item']->getId_marca());
@@ -163,7 +165,9 @@ class Home extends Controller{
         if(!empty($data['prod-destaq'])){ //se tiver algum item sendo destacado
             foreach($data['prod-destaq'] as $destaque){ // objeto item
                 $subgrupo = $this->modelSubgrupo->getSubgrupoById($destaque->getId_subgrupo());
+                $marca = $this->modelMarca->getMarcaById($destaque->getId_marca());
                 $data['nome'.$destaque->getId_item()] = $subgrupo->getNome();
+                $data['marca_dstq'.$destaque->getId_item()] = $marca->getNome();
             }
         }
 

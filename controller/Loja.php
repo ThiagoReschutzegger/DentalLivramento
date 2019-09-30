@@ -91,24 +91,33 @@ class Loja extends Controller{
         $data['total_prod'] = count($data['item']);
 
         $ids_marca = [];
+        $array = []; //array da ordem dos produtos (id marca-tipo) de maior a menor
         $data['produto_precos'] = $this->modelproduto->getProdutosBySubgrupoIdComOrdem($id_subgrupo);
         foreach($data['produto_precos'] as $produto):
-            if(empty($data['preco_min'.$produto->getId_marca()])){
-                $data['preco_min'.$produto->getId_marca()] = $produto->getPreco();
+            if(empty($data['preco_min'.$produto->getId_marca()."-".$produto->getTipo()])){
+                $data['preco_min'.$produto->getId_marca()."-".$produto->getTipo()] = $produto->getPreco();
+                $array[] = $produto->getId_marca()."-".$produto->getTipo();
             }
-            if($data['preco_min'.$produto->getId_marca()] > $produto->getPreco()){
-                $data['preco_min'.$produto->getId_marca()] = $produto->getPreco();
+            if($data['preco_min'.$produto->getId_marca()."-".$produto->getTipo()] > $produto->getPreco()){
+                $data['preco_min'.$produto->getId_marca()."-".$produto->getTipo()] = $produto->getPreco();
+                $del_val = $produto->getId_marca()."-".$produto->getTipo();
+                $key = array_search($del_val, $array);
+                unset($array[$key]);
+                $array[] = $produto->getId_marca()."-".$produto->getTipo();
             }
             if(!in_array($produto->getId_marca(), $ids_marca)){
                 $ids_marca[] = $produto->getId_marca();
             }
+            
+            
+            
         endforeach;
         
         if($data['ordem'] == "menor"){
-            $data['ordem_precos'] = $ids_marca; //para ordenar os itens em maior ou menor preço, sendo a ordem do array os ids das marcas a serem exibidas do maior ao menor, caso contrario inverter o array na exibição;
+            $data['ordem_precos'] = $array; //para ordenar os itens em maior ou menor preço, sendo a ordem do array os ids das marcas a serem exibidas do maior ao menor, caso contrario inverter o array na exibição;
         }
         if($data['ordem'] == "maior"){
-            $data['ordem_precos'] = array_reverse($ids_marca); //para ordenar os itens em maior ou menor preço, sendo a ordem do array os ids das marcas a serem exibidas do maior ao menor, caso contrario inverter o array na exibição;
+            $data['ordem_precos'] = array_reverse($array); //para ordenar os itens em maior ou menor preço, sendo a ordem do array os ids das marcas a serem exibidas do maior ao menor, caso contrario inverter o array na exibição;
         }
         
         $data['marca'] = $this->modelMarca->getMarcaByIds($ids_marca);

@@ -122,6 +122,7 @@
             <div class="productCaption clearfix">
               <a href="<?php echo $this->base_url; ?>Home/viewProduto/<?php echo $destaque->getId_item(); ?>">
                 <h4><?php echo $data['nome'.$destaque->getId_item()]; ?></h4>
+                <h3 class="fonte-e-cor-top" style="font-size: 15px; margin-bottom: 5px;"><?php echo $data['marca_dstq'.$destaque->getId_item()]; ?></h3>
               </a>
             </div>
           </div>

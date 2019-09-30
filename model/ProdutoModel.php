@@ -43,6 +43,16 @@
           }
           return $list;
       }
+      
+      public function getProdutosByIdsAndTipo($id_subgrupo, $id_marca, $tipo) { //Edu, 
+          $list = [];
+          $sql = "SELECT * FROM produto WHERE id_subgrupo=:id_subgrupo AND id_marca=:id_marca AND tipo=:tipo;";
+          $produto = $this->ExecuteQuery($sql, [':id_subgrupo' => $id_subgrupo, ':id_marca' => $id_marca, ':tipo' => $tipo]);
+          foreach ($produto as $linha) {
+              $list[] = new Produto($linha['id_produto'], $linha['barcode'], $linha['preco'], $linha['estoque'], $linha['especificacao'], $linha['tipo'], $linha['id_subgrupo'], $linha['id_marca']);
+          }
+          return $list;
+      }
 
       public function getProdutosBySubgrupoIdComOrdem($id) {
           $list = [];

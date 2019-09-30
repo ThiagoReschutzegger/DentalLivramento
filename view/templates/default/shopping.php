@@ -112,7 +112,7 @@ $ids_prod[] = 0;
              if($data['ordem'] != "new"):
               foreach ($data['ordem_precos'] as $ordem):
               foreach ($data['item'] as $item): 
-               if($item->getId_marca() == $ordem): 
+               if($item->getId_marca()."-".$item->getTipo() == $ordem): //$produto->getId_marca()."-".$produto->getTipo() 
               ?>
               <div class="col-md-6 col-lg-4">
                 <div class="productBox">
@@ -133,7 +133,7 @@ $ids_prod[] = 0;
                             endforeach; ?>
                         </h3>
                     </a>
-                    <h3>R$ <?php echo  number_format($data['preco_min'.$item->getId_marca()], 2); ?></h3>
+                    <h3>R$ <?php echo  number_format($data['preco_min'.$item->getId_marca()."-".$item->getTipo()], 2); ?></h3>
                   </div>
                 </div>
               </div>
@@ -148,7 +148,6 @@ $ids_prod[] = 0;
                     <img src="<?php if($item->getImagem() != "") echo $item->getImagem(); else echo $this->base_url."view/images/produto-sem-imagem.gif"; ?>" alt="products-img">
                     <div class="productMasking" onclick="location.href='<?php echo $this->base_url; ?>Home/viewProduto/<?php echo $item->getId_item(); ?>';" style="cursor: pointer; background-color: inherit !important;">
                     </div>
-
                   </div>
 
                   <div class="productCaption clearfix">
@@ -160,7 +159,7 @@ $ids_prod[] = 0;
                             endforeach; ?>
                         </h3>
                     </a>
-                    <h3>R$ <?php echo  number_format($data['preco_min'.$item->getId_marca()], 2); ?></h3>
+                    <h3>R$ <?php echo  number_format($data['preco_min'.$item->getId_marca()."-".$item->getTipo()], 2); ?></h3>
                   </div>
                 </div>
               </div>

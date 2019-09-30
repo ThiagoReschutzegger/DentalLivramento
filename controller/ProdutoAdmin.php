@@ -356,7 +356,7 @@ class ProdutoAdmin extends Admin {
         $imagem = filter_input(INPUT_POST, 'imagem', FILTER_SANITIZE_STRING);
         $destaque = filter_input(INPUT_POST, 'destaque', FILTER_SANITIZE_STRING);
 
-        if ($descricao) { //imagem opcional
+         //imagem e descrição opcionais
             $item = new Item($id_item, $descricao, $imagem, $destaque, $data['item']->getTipo(), $data['item']->getId_subgrupo(), $data['item']->getId_marca());
             if ($this->modelItem->updateItem($item)) {
                 $this->viewItens($data['item']->getId_subgrupo());
@@ -365,9 +365,6 @@ class ProdutoAdmin extends Admin {
               $this->viewItens($data['item']->getId_subgrupo());
               return true;
                 }
-        } else {
-             $data['msg'] = 'Preencha todos os Campos!';
-        }
       }
 
       $this->view->load('header');
