@@ -52,6 +52,7 @@ class Loja extends Controller{
         $data['categoria'] = $this->modelCategoria->getCategoria();
         $data['categoria-atual'] = $this->modelCategoria->getCategoriaByGrupoId($id_grupo);
         $data['subgrupo'] = $this->modelSubgrupo->getSubgrupoByGrupo($id_grupo);
+        $data['itens'] = $this->father->getList();
         
         $data['total-sub'] = count($data['subgrupo']);
         
