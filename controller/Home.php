@@ -369,7 +369,10 @@ class Home extends Controller{
       if(isset($_SESSION['carrinho'])){
         $list = [];
           foreach($_SESSION['carrinho'] as $item){
-            $list[] = array($this->modelPackproduto->getPackprodutoByIds($item->getId_produto(),$item->getId_subgrupo(),$item->getId_item()),$item->getQuantidade());
+            $item_ = $this->modelItem->getItemById($item->getId_item());
+            $marca = $this->modelMarca->getMarcaById($item_->getId_marca());
+            $id_marca = $marca->getId_marca();
+            $list[] = array($this->modelPackproduto->getPackprodutoByIds($item->getId_produto(),$item_->getId_subgrupo(),$id_marca),$item->getQuantidade());
 
           }
 

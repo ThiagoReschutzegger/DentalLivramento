@@ -101,7 +101,7 @@ class PedidoModel extends Model {
         $consulta = $this->ExecuteQuery($sql, array());
 
         foreach ($consulta as $linha) {
-          $list1[] = array('id_pedido' => $linha['id_pedido'],'produto' => new Packproduto($linha['id_produto'], $linha['barcode'], $linha['preco'], $linha['estoque'], $linha['especificacao'], $linha['id_subgrupo'], $linha['nome'], $linha['descricao'], $linha['imagem'], $linha['destaque'], $linha['id_grupo'], $linha['id_marca']), 'quantidade' => $linha['quantidade']);
+          $list1[] = array('id_pedido' => $linha['id_pedido'],'produto' => new Packproduto($linha['id_produto'], $linha['barcode'], $linha['preco'], $linha['estoque'], $linha['especificacao'], $linha['tipo'], $linha['id_subgrupo'], $linha['id_marca'], $linha['nome'], $linha['descricao'], $linha['imagem'], $linha['destaque']), 'quantidade' => $linha['quantidade']);
         }
 
         $list1 = $this->group_by("id_pedido", $list1);
