@@ -7,6 +7,7 @@ class ItemCarrinhoBanco {
     public $id_produto;
     public $quantidade;
     public $id_carrinho;
+    
 
     function __construct($id_itemcarrinho,$id_produto, $quantidade, $id_carrinho) {
 

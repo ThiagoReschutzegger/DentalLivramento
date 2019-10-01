@@ -66,7 +66,7 @@ class Home extends Controller{
             $data['id_sub'.$slider->getId_slider()] = $data['packproduto'][0]->getId_subgrupo();
           }
         }
-        
+
         if(!empty($data['prod-destaq'])){ //se tiver algum item sendo destacado
             foreach($data['prod-destaq'] as $destaque){ // objeto item
                 $subgrupo = $this->modelSubgrupo->getSubgrupoById($destaque->getId_subgrupo());
@@ -119,7 +119,7 @@ class Home extends Controller{
           $id_aux[] = $produtos->getId_produto();// deixei por causa do cart abaixo da logica estoque, rt
         endforeach;
         $data['preco-ate'] = min($precos);
-        
+
         $estoque_total = array_sum($estoque); //verificar qual nivel de estoque está
         if($estoque_total > 50){
           $data['estoque-msg'] = 'color: #49c32c; border: 1px solid #49c32c;">Em estoque';
@@ -130,7 +130,7 @@ class Home extends Controller{
         }else if($estoque_total == 0){
           $data['estoque-msg'] = 'color: #f55c5d; border: 1px solid #f55c5d;">Sem estoque';
         }
-        
+
         $cart = [];
         $valor_carrinho = 0;
         if (filter_input(INPUT_POST, 'add')) {
@@ -143,7 +143,7 @@ class Home extends Controller{
               // echo $preco_unitario;
               $preco_total = $quantidade * $preco_unitario;
 
-              array_push($cart,new ItemCarrinho($id_itens,$quantidade,$preco_total));
+              array_push($cart,new ItemCarrinho($id_itens,$quantidade,$preco_total,$id_item));
 
             }
           }
@@ -161,7 +161,7 @@ class Home extends Controller{
           }
         }
         $data['itens'] = $this->getList();
-        
+
         if(!empty($data['prod-destaq'])){ //se tiver algum item sendo destacado
             foreach($data['prod-destaq'] as $destaque){ // objeto item
                 $subgrupo = $this->modelSubgrupo->getSubgrupoById($destaque->getId_subgrupo());
@@ -368,7 +368,7 @@ class Home extends Controller{
       if(isset($_SESSION['carrinho'])){
         $list = [];
           foreach($_SESSION['carrinho'] as $item){
-            $list[] = array($this->modelPackproduto->getPackprodutoById($item->getId_produto()),$item->getQuantidade());
+            $list[] = array($this->modelPackproduto->getPackprodutoByIds($item->getId_produto(),$item->getId_subgrupo(),$item->getId_item()),$item->getQuantidade());
 
           }
 

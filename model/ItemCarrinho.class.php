@@ -6,15 +6,21 @@ class ItemCarrinho {
     public $id_produto;
     public $quantidade;
     public $precoitem;
+    public $id_item;
 
-    function __construct($id_produto, $quantidade, $precoitem) {
+    function __construct($id_produto, $quantidade, $precoitem, $id_item) {
         $this->id_produto = $id_produto;
         $this->quantidade = $quantidade;
         $this->precoitem = $precoitem;
+        $this->id_item = $id_item;
     }
 
     function getId_produto() {
         return $this->id_produto;
+    }
+
+    function getId_item() {
+        return $this->id_item;
     }
 
     function getQuantidade() {
