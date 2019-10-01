@@ -21,8 +21,9 @@ class PackprodutoModel extends Model {
     public function getPackprodutoByIds($id_produto, $id_subgrupo, $id_marca) { //Edu
         $sql = "SELECT produto.id_produto, produto.barcode, produto.preco, produto.estoque, produto.especificacao, produto.tipo, produto.id_subgrupo, produto.id_marca, subgrupo.nome, item.descricao, item.imagem, item.destaque "
                 . "from produto join subgrupo on produto.id_subgrupo=subgrupo.id_subgrupo "
-                . "join item on produto.id_subgrupo=item.id_subgrupo and produto.id_marca=item.id_marca and produto.tipo=item.tipo"
+                . "join item on produto.id_subgrupo=item.id_subgrupo and produto.id_marca=item.id_marca and produto.tipo=item.tipo "
                 . "where produto.id_produto = :id_produto and produto.id_subgrupo = :id_subgrupo and produto.id_marca = :id_marca";
+        
         $linha = $this->ExecuteQuery($sql, [':id_produto' => $id_produto, ':id_subgrupo' => $id_subgrupo, ':id_marca' => $id_marca])[0];
         return new Packproduto($linha['id_produto'], $linha['barcode'], $linha['preco'], $linha['estoque'], $linha['especificacao'], $linha['tipo'], $linha['id_subgrupo'], $linha['id_marca'], $linha['nome'], $linha['descricao'], $linha['imagem'], $linha['destaque']);
     }
