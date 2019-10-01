@@ -7,27 +7,27 @@ class Packproduto {
     public $preco;
     public $estoque;
     public $especificacao;
+    public $tipo;
     public $id_subgrupo;
-    public $nome;
-    public $imagem;
-    public $descricao;
-    public $destaque;
-    public $id_grupo;
     public $id_marca;
+    public $nome; //subgrupo
+    public $descricao; //item
+    public $imagem; //item
+    public $destaque; //item
 
-    function __construct($id_produto, $barcode, $preco, $estoque, $especificacao, $id_subgrupo, $nome, $descricao, $imagem, $destaque, $id_grupo, $id_marca) {
+    function __construct($id_produto, $barcode, $preco, $estoque, $especificacao, $tipo, $id_subgrupo, $id_marca, $nome, $descricao, $imagem, $destaque) {
         $this->id_produto = $id_produto;
         $this->barcode = $barcode;
         $this->preco = $preco;
         $this->estoque = $estoque;
         $this->especificacao = $especificacao;
+        $this->tipo = $tipo;
         $this->id_subgrupo = $id_subgrupo;
-        $this->nome = $nome;
-        $this->destaque = $destaque;
-        $this->imagem = $imagem;
-        $this->descricao = $descricao;
-        $this->id_grupo = $id_grupo;
         $this->id_marca = $id_marca;
+        $this->nome = $nome;
+        $this->descricao = $descricao;
+        $this->imagem = $imagem;
+        $this->destaque = $destaque;
     }
 
     function getId_produto() {
@@ -49,6 +49,10 @@ class Packproduto {
     function getEspecificacao() {
         return $this->especificacao;
     }
+    
+    function getTipo() {
+        return $this->tipo;
+    }
 
     function getId_subgrupo() {
         return $this->id_subgrupo;
@@ -68,10 +72,6 @@ class Packproduto {
 
     function getDestaque() {
         return $this->destaque;
-    }
-
-    function getId_grupo() {
-        return $this->id_grupo;
     }
 
     function getId_marca() {
@@ -97,6 +97,10 @@ class Packproduto {
     function setEspecificacao($especificacao) {
         $this->especificacao = $especificacao;
     }
+    
+    function setTipo($tipo) {
+        $this->tipo = $tipo;
+    }
 
     function setId_subgrupo($id_subgrupo) {
         $this->id_subgrupo = $id_subgrupo;
@@ -116,10 +120,6 @@ class Packproduto {
 
     function setDestaque($destaque) {
         $this->destaque = $destaque;
-    }
-
-    function setId_grupo($id_grupo) {
-        $this->id_grupo = $id_grupo;
     }
 
     function setId_marca($id_marca) {
