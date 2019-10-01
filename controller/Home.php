@@ -143,6 +143,7 @@ class Home extends Controller{
               // echo $preco_unitario;
               $preco_total = $quantidade * $preco_unitario;
 
+
               array_push($cart,new ItemCarrinho($id_itens,$quantidade,$preco_total,$id_item));
 
             }
