@@ -47,7 +47,7 @@
           <li><a href="<?php echo $this->base_url; ?>CategoriaAdmin"> <i class="fa fa-list"></i>Categorias </a></li>
           <li><a href="<?php echo $this->base_url; ?>MarcaAdmin"> <i class="fa fa-flag"></i>Marcas </a></li>
           <li><a href="<?php echo $this->base_url; ?>ProdutoAdmin"> <i class="fa fa-barcode"></i>Produtos </a></li>
-          <li><a href="<?php echo $this->base_url; ?>ProdutoAdmin/uploadTxt/"> <i class="fa fa-upload"></i>Atualizar via TXT </a></li>
+          <li><a href="<?php echo $this->base_url; ?>ProdutoAdmin/importaProdutosRP/"> <i class="fa fa-upload"></i>Atualizar via TXT </a></li>
           <li><a href="<?php echo $this->base_url; ?>PedidoAdmin"> <i class="fa fa-cart-arrow-down"></i>Pedidos </a></li>
           <li><a href="<?php echo $this->base_url; ?>MensagemAdmin"> <i class="fa fa-envelope"></i>Mensagens </a></li>
           <li><a href="<?php echo $this->base_url; ?>FotoAdmin"> <i class="fa fa-photo"></i>Fotos </a></li>

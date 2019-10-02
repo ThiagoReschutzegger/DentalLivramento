@@ -38,7 +38,7 @@
                 <div class="col-xl-6 col-sm-6">
                     <div class="item d-flex align-items-center">
                         <div class="icon bg-violet"><i class="fa fa-upload"></i></div>
-                        <div class="title"><a class="linkDash" href="<?php echo $this->base_url . "ProdutoAdmin/uploadTxt"; ?>"><span>Atualizar via TXT<br></span></a>
+                        <div class="title"><a class="linkDash" href="<?php echo $this->base_url . "ProdutoAdmin/importaProdutosRP"; ?>"><span>Atualizar via TXT<br></span></a>
 
                         </div>
 
