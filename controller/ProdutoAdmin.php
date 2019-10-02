@@ -524,12 +524,11 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
                 $subgrupos_array = $this->modelSubgrupo->getAllSubgrupos();
                 $item_array = $this->modelItem->getAllItens();
 
-                $i = 0;
 
                 set_time_limit(0);
                 foreach ($linhas as $row){
-                  echo $i++;
-                  $divisao = explode("\t",$row); // SEPARA TODOS OS DADOS EM UM ARRAY
+                  if($row == '') continue;
+                  $divisao = explode("|",$row); // SEPARA TODOS OS DADOS EM UM ARRAY
 
                   $categoria = $this->tratamentoCategoria($divisao[7],$categorias_array); // ARRUMA E SUBSTITUI O NOME DA MARCA PELO ID DA MESMA
                   $grupo = $this->tratamentoGrupo($divisao[6],$categoria[0],$grupos_array); // ARRUMA E SUBSTITUI O NOME DA MARCA PELO ID DA MESMA
@@ -540,7 +539,8 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
                     $marca[0] = $marca[0][0]['id_marca'];
                     $marca[1] = true;
                   }
-                  $tipo = $this->tratamentoItem($divisao[8],$marca[0],$subgrupo[0],$item_array);
+
+                  $tipo = $this->tratamentoItem($divisao[9],$marca[0],$subgrupo[0],$item_array);
                   $estoque = $this->tratamentoEstoque($divisao[3]); // ARRUMA E SUBSTITUI O NOME DA MARCA PELO ID DA MESMA
                   $preco = $this->tratamentoPreco($divisao[2]); // ARRUMA E SUBSTITUI O NOME DA MARCA PELO ID DA MESMA
 
@@ -552,7 +552,7 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
                   $divisao[3] = $estoque; // INTANDO O estoque
                   $divisao[5] = $grupo[0]; // TROCANDO NOME DO GRUPO PELO ID
                   $divisao[6] = $subgrupo[0]; // TROCANDO NOME DO GRUPO PELO ID
-                  $divisao[8] = $tipo[0]; // TROCANDO NOME DO GRUPO PELO ID
+                  $divisao[9] = $tipo[0]; // TROCANDO NOME DO GRUPO PELO ID
 
 
                   //echo '<pre>';print_r($marca[0][0][]);echo '</pre>';
@@ -560,7 +560,7 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
                   echo '<pre>';print_r($divisao);echo '</pre>';
 
                   // ADICIONAR PRODUTO AO BANCO
-                  $verificacao = $this->model->insertByTxt($divisao[0],$divisao[2],$divisao[3],$divisao[1],$divisao[6],$divisao[4],$divisao[8],$barcode_array);
+                  $verificacao = $this->model->insertByTxt($divisao[0],$divisao[2],$divisao[3],$divisao[1],$divisao[6],$divisao[4],$divisao[9],$barcode_array);
 
                   if($verificacao[0] == 1){
                     array_push($barcode_certo, $verificacao[1]);
