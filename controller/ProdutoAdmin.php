@@ -529,75 +529,70 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
                 foreach ($linhas as $row){
                   if($row == '') continue;
                   $divisao = explode("|",$row); // SEPARA TODOS OS DADOS EM UM ARRAY
-                  
-                  $categoria = $this->tratamentoCategoria($divisao[7],$categorias_array); // ARRUMA E SUBSTITUI O NOME DA MARCA PELO ID DA MESMA
-                  
-                  $grupos_array = $this->modelGrupo->getGrupoByCategoriaIdForTxt($categoria[0]);
-                  $grupo = $this->tratamentoGrupo($divisao[6],$categoria[0],$grupos_array); // ARRUMA E SUBSTITUI O NOME DA MARCA PELO ID DA MESMA
-                  
-                  $subgrupos_array = $this->modelSubgrupo->getSubgrupoByGrupoForTxt($grupo[0]);
-                  $subgrupo = $this->tratamentoSubrupo($divisao[5],$grupo[0],$subgrupos_array); // ARRUMA E SUBSTITUI O NOME DA MARCA PELO ID DA MESMA
-                  
-                  $marca = $this->tratamentoMarca($divisao[4],$marcas_array); // ARRUMA E SUBSTITUI O NOME DA MARCA PELO ID DA MESMA
-                  
-//                  if(is_array($marca)){
-//                    $marca[0] = $marca[0][0][0];
-//                    $marca[1] = true;
-//                  }
 
-                  $item_array = $this->modelItem->getItemBySubgrupoForTxt($subgrupo[0]);
-                  $tipo = $this->tratamentoItem($divisao[9],$marca[0],$subgrupo[0],$item_array);
-                  
-                  $estoque = $this->tratamentoEstoque($divisao[3]); // ARRUMA E SUBSTITUI O NOME DA MARCA PELO ID DA MESMA
-                  $preco = $this->tratamentoPreco($divisao[2]); // ARRUMA E SUBSTITUI O NOME DA MARCA PELO ID DA MESMA
+                  $estoque = $this->tratamentoEstoque($divisao[3]);
+                  $preco = $this->tratamentoPreco($divisao[2]);
+
+                  // var_dump($divisao[0]);
+                  // var_dump($barcode_array);
+                  // die;
+
+                  if($this->verificaExistenciaProduto($divisao[0],$barcode_array)){
+                     $this->model->updateByTxt($divisao[0],$preco,$estoque);
+                  }else{
+                    $categoria = $this->tratamentoCategoria($divisao[7],$categorias_array); // ARRUMA E SUBSTITUI O NOME DA MARCA PELO ID DA MESMA
+
+                    $grupos_array = $this->modelGrupo->getGrupoByCategoriaIdForTxt($categoria[0]);
+                    $grupo = $this->tratamentoGrupo($divisao[6],$categoria[0],$grupos_array); // ARRUMA E SUBSTITUI O NOME DA MARCA PELO ID DA MESMA
+
+                    $subgrupos_array = $this->modelSubgrupo->getSubgrupoByGrupoForTxt($grupo[0]);
+                    $subgrupo = $this->tratamentoSubrupo($divisao[5],$grupo[0],$subgrupos_array); // ARRUMA E SUBSTITUI O NOME DA MARCA PELO ID DA MESMA
+
+                    $marca = $this->tratamentoMarca($divisao[4],$marcas_array); // ARRUMA E SUBSTITUI O NOME DA MARCA PELO ID DA MESMA
+
+                    $item_array = $this->modelItem->getItemBySubgrupoForTxt($subgrupo[0]);
+                    $tipo = $this->tratamentoItem($divisao[9],$marca[0],$subgrupo[0],$item_array);
+
+                    $divisao[4] = $marca[0]; // TROCANDO NOME DA MARCA PELO ID
+                    $divisao[7] = $categoria[0]; // TROCANDO NOME DA CATEGORIA PELO ID
+                    $divisao[2] = $preco; // FLOATANDO O preco
+                    $divisao[3] = $estoque; // INTANDO O estoque
+                    $divisao[5] = $grupo[0]; // TROCANDO NOME DO GRUPO PELO ID
+                    $divisao[6] = $subgrupo[0]; // TROCANDO NOME DO GRUPO PELO ID
+                    $divisao[9] = $tipo[0]; // TROCANDO NOME DO GRUPO PELO ID
 
 
+                    //echo '<pre>';print_r($marca[0][0][]);echo '</pre>';
 
-                  $divisao[4] = $marca[0]; // TROCANDO NOME DA MARCA PELO ID
-                  $divisao[7] = $categoria[0]; // TROCANDO NOME DA CATEGORIA PELO ID
-                  $divisao[2] = $preco; // FLOATANDO O preco
-                  $divisao[3] = $estoque; // INTANDO O estoque
-                  $divisao[5] = $grupo[0]; // TROCANDO NOME DO GRUPO PELO ID
-                  $divisao[6] = $subgrupo[0]; // TROCANDO NOME DO GRUPO PELO ID
-                  $divisao[9] = $tipo[0]; // TROCANDO NOME DO GRUPO PELO ID
+                    echo '<pre>';print_r($divisao);echo '</pre>';
 
+                    // ADICIONAR PRODUTO AO BANCO
+                    $verificacao = $this->model->insertByTxt($divisao[0],$divisao[2],$divisao[3],$divisao[1],$divisao[6],$divisao[4],$divisao[9],$divisao[10],$barcode_array);
 
-                  //echo '<pre>';print_r($marca[0][0][]);echo '</pre>';
+                    if($verificacao[0] == 1){
+                      array_push($barcode_certo, $verificacao[1]);
+                    }elseif($verificacao[0] == 3){
+                      array_push($barcode_errado, $verificacao[1]);
+                    }elseif($verificacao[0] == 2){
+                      array_push($barcode_atualizado, $verificacao[1]);
+                    }
 
-                  echo '<pre>';print_r($divisao);echo '</pre>';
-
-                  // ADICIONAR PRODUTO AO BANCO
-                  $verificacao = $this->model->insertByTxt($divisao[0],$divisao[2],$divisao[3],$divisao[1],$divisao[6],$divisao[4],$divisao[9],$barcode_array);
-
-                  if($verificacao[0] == 1){
-                    array_push($barcode_certo, $verificacao[1]);
-                  }elseif($verificacao[0] == 3){
-                    array_push($barcode_errado, $verificacao[1]);
-                  }elseif($verificacao[0] == 2){
-                    array_push($barcode_atualizado, $verificacao[1]);
+  //                  // ATUALIZAR OS ARRAYS COM OS DADOS QUE VÃO ENTRANDO
+                    if($marca[1]){
+                      $marcas_array = $this->modelMarca->getAllMarcas();
+                    }
+  //                  if($tipo[1]){
+  //                    $item_array = $this->modelItem->getAllItens();
+  //                  }
+                    if($categoria[1]){
+                      $categorias_array = $this->modelCategoria->getAllCategorias();
+                    }
                   }
-
-//                  // ATUALIZAR OS ARRAYS COM OS DADOS QUE VÃO ENTRANDO
-                  if($marca[1]){
-                    $marcas_array = $this->modelMarca->getAllMarcas();
-                  }
-//                  if($tipo[1]){
-//                    $item_array = $this->modelItem->getAllItens();
-//                  }
-                  if($categoria[1]){
-                    $categorias_array = $this->modelCategoria->getAllCategorias();
-                  }
-//                   if($grupo[1]){
-//                     $grupos_array = $this->modelGrupo->getAllGrupos();
-//                   }
-//                   if($subgrupo[1]){
-//                     $subgrupos_array = $this->modelSubgrupo->getAllSubgrupos();
-//                   }
 
                 }
                 $data['arrays'] = array($barcode_certo,$barcode_errado);
                 set_time_limit(30);
-                die;
+                header('location:' . $this->config->base_url . 'ProdutoAdmin/buscaProduto');
 
               }else{
                   $data['msg'] = 'Informe todos os campos';
@@ -610,6 +605,15 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
       $this->view->load('footer');
     }
 
+    private function verificaExistenciaProduto($barcode,$array){
+
+      if(in_array($barcode, $array)){
+        return true;
+      }else{
+        return false;
+      }
+
+    }
 
 
     private function tratamentoMarca($marca,$array){
@@ -760,7 +764,7 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
       $tipo_txt = iconv(mb_detect_encoding($tipo_txt, mb_detect_order(), true), "UTF-8//IGNORE", ucfirst(strtolower(($tipo_txt)))); // Como no .txt a marca é toda maiúscula, eu fiz isso pra q a primeira fosse maiuscula e as outras nao.
 
       if(empty($array)) $bool = false;
-      
+
       foreach ($array as $pica) {
         if(trim(($tipo_txt)) == trim(iconv(mb_detect_encoding($pica[1], mb_detect_order(), true), "UTF-8//IGNORE", ucfirst(strtolower(($pica[1]))))) && $pica[3]==$id_marca && $pica[2]==$id_subgrupo) { // EU NAO SEI PRA Q CARALHO SERVE ESSE TRIM MAS O IF NAO FUNCIONA SEM ELE
           $id_item = $pica[0]; //PEGA O ID DA MARCA Q ELE ENCONTROU

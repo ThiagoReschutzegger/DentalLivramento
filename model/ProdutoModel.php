@@ -43,8 +43,8 @@
           }
           return $list;
       }
-      
-      public function getProdutosByIdsAndTipo($id_subgrupo, $id_marca, $tipo) { //Edu, 
+
+      public function getProdutosByIdsAndTipo($id_subgrupo, $id_marca, $tipo) { //Edu,
           $list = [];
           $sql = "SELECT * FROM produto WHERE id_subgrupo=:id_subgrupo AND id_marca=:id_marca AND tipo=:tipo;";
           $produto = $this->ExecuteQuery($sql, [':id_subgrupo' => $id_subgrupo, ':id_marca' => $id_marca, ':tipo' => $tipo]);
@@ -228,44 +228,22 @@
           return $list;
       }
 
-      public function updateByTxt($barcode,$preco,$estoque,$array) {
+      public function updateByTxt($barcode,$preco,$estoque) {
         //IMPORTANTE!! $array É ARRAY COM TODOS OS BARCODES
 
 
-        //echo '<pre>';var_dump($array);echo '</pre>';
-        //echo '<pre>';var_dump($barcode);echo '</pre>';
-
-        if(in_array($barcode, $array)){
-
-          //echo '<h1 style="COLOR:blue">existe</h1>';
 
           $sql = "UPDATE produto SET preco = :preco, estoque = :estoque WHERE barcode = :barcode";
           $param = [':barcode' => $barcode,
                     ':preco' => $preco,
                     ':estoque' => $estoque
                     ];
-          if ($this->ExecuteCommand($sql, $param)) {
-
-            //echo '<h1 style="COLOR:green">CERTO</h1>';
-
-              $ver = array(1,$barcode);
-              return $ver;
-          }else{
-            $ver = array(2,$barcode);
-            return $ver;
-          }
-
-        }else {
-
-          //echo '<h1 style="COLOR:RED">ERRADO</h1>';
-
-          $ver = array(3,$barcode);
-          return $ver;
-        }
-
+          $this->ExecuteCommand($sql, $param);
       }
 
-      public function insertByTxt($barcode,$preco,$estoque,$especificacao,$id_subgrupo,$id_marca,$tipo,$array) {
+
+
+      public function insertByTxt($barcode,$preco,$estoque,$especificacao,$id_subgrupo,$id_marca,$tipo,$embalagem,$array) {
         //IMPORTANTE!! $array É ARRAY COM TODOS OS BARCODES
 
         //echo '<pre>';var_dump($array);echo '</pre>';
@@ -275,7 +253,7 @@
 
           //echo '<h1 style="COLOR:blue">existe</h1>';
 
-          $sql = "INSERT INTO produto(barcode,preco,estoque,especificacao,id_subgrupo,id_marca,tipo) VALUES(:barcode,:preco,:estoque,:especificacao,:id_subgrupo,:id_marca,:tipo)";
+          $sql = "INSERT INTO produto(barcode,preco,estoque,especificacao,id_subgrupo,id_marca,tipo,embalagem) VALUES(:barcode,:preco,:estoque,:especificacao,:id_subgrupo,:id_marca,:tipo,:embalagem)";
 
           $param = [':barcode' => $barcode,
                     ':preco' => $preco,
@@ -283,7 +261,8 @@
                     ':especificacao' => $especificacao,
                     ':id_subgrupo' => $id_subgrupo,
                     ':id_marca' => $id_marca,
-                    ':tipo' => $tipo
+                    ':tipo' => $tipo,
+                    ':embalagem' => $embalagem
                     ];
 
           if ($this->ExecuteCommand($sql, $param)) {
