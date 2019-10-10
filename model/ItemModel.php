@@ -168,6 +168,20 @@ class ItemModel extends Model {
         //echo '<pre>';var_dump($list);echo '</pre>';die;
         return $list;
     }
+    
+    public function getItemBySubgrupoForTxt($id) {
+
+        $list = [];
+
+        $sql = "SELECT id_item,tipo,id_subgrupo,id_marca FROM item WHERE id_subgrupo = :id";
+        $consulta = $this->ExecuteQuery($sql,[':id' => $id]);
+
+        foreach ($consulta as $linha) {
+          $list[] = [$linha['id_item'],$linha['tipo'],$linha['id_subgrupo'],$linha['id_marca']];
+        }
+        //echo '<pre>';var_dump($list);echo '</pre>';die;
+        return $list;
+    }
 
     public function insertItemTxt($tipo,$id_marca,$id_subgrupo) {
         $sql = "INSERT INTO item(tipo,id_marca,id_subgrupo,destaque) VALUES(:tipo,:id_marca,:id_subgrupo,0)";

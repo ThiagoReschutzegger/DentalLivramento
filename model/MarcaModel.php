@@ -86,9 +86,9 @@ class MarcaModel extends Model {
     public function getIdByNome($nome) {
         $list = [];
         $sql = "SELECT id_marca FROM marca WHERE nome = :nome";
-        $query = $this->ExecuteQuery($sql, [':nome' => $nome]);
+        $query = $this->ExecuteQuery($sql, [':nome' => $nome])[0];
 
-        return $query;
+        return $query['id_marca'];
     }
 
     public function getMarcaByProduto($ids) {

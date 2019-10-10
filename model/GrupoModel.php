@@ -75,6 +75,30 @@ class GrupoModel extends Model {
         //echo 'Gok';
         return $list;
     }
+    
+    public function getGrupoByCategoriaId($id) { //Edu
+        $list = [];
+        $sql = "SELECT grupo.* FROM categoria JOIN grupo ON categoria.id_categoria=grupo.id_categoria WHERE id_categoria = :id";
+        $query = $this->ExecuteQuery($sql, [':id' => $id]);
+        foreach ($query as $linha) {
+            $list[] = new Grupo($linha['id_grupo'], $linha['nome'], $linha['id_categoria']);
+        }
+        //echo 'Gok';
+        return $list;
+    }
+    
+    public function getGrupoByCategoriaIdForTxt($id) { //Edu
+       $list = [];
+
+        $sql = "SELECT id_grupo, nome FROM grupo WHERE id_categoria = :id";
+        $consulta = $this->ExecuteQuery($sql, [':id' => $id]);
+
+        foreach ($consulta as $linha) {
+          $list[] = [$linha['id_grupo'],$linha['nome']];
+        }
+        //echo '<pre>';var_dump($list);echo '</pre>';die;
+        return $list;
+    }
 
     public function getAllGrupos() {
 

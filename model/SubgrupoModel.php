@@ -62,6 +62,19 @@ class SubgrupoModel extends Model {
         }
         return $list;
     }
+    
+    public function getSubgrupoByGrupoForTxt($id) {
+        $list = [];
+
+        $sql = "SELECT id_subgrupo, nome FROM subgrupo WHERE id_grupo = :id";
+        $consulta = $this->ExecuteQuery($sql, [':id' => $id]);
+
+        foreach ($consulta as $linha) {
+          $list[] = [$linha['id_subgrupo'],$linha['nome']];
+        }
+        //echo '<pre>';var_dump($list);echo '</pre>';die;
+        return $list;
+    }
 
     public function insertSubgrupo($subgrupo) {
         $sql = "INSERT INTO subgrupo(nome,id_grupo) VALUES(:nome,:id_grupo)";
