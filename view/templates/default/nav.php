@@ -151,15 +151,7 @@ $(document).ready(function(){
                     <li class="col-md-3 col-12">
                       <ul class="list-unstyled">
                         <li style="display: none;"></li>
-                        <li><a class="title-categoria" href="javascript:;" data-toggle="collapse" aria-expanded="false" data-target="#nav<?php echo $categoria->getId_categoria(); ?>"><?php echo $categoria->getNome(); ?> <i class="fa fa-plus"></i></a></li>
-                        <li><ul id="nav<?php echo $categoria->getId_categoria(); ?>" class="collapse collapseItem list-unstyled" style="padding-top:0;">
-                          <li style="display: none;"></li>
-                          <?php foreach($data['grupo'] as $grupo):
-                            if($grupo->getId_categoria() == $categoria->getId_categoria()):
-                          ?>
-                            <li><a href="<?php echo $this->base_url; ?>Loja/viewSub/<?php echo $grupo->getId_grupo(); ?>"><?php echo $grupo->getNome(); ?></a></li>
-                          <?php endif; endforeach; ?>
-                        </ul></li>
+                        <li><a class="title-categoria" href="<?php echo $this->base_url; ?>Loja/viewGrupo/<?php echo $categoria->getId_categoria(); ?>" ><?php echo $categoria->getNome(); ?></a></li>
                       </ul>
                     </li>
                   <?php endforeach; ?>

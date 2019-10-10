@@ -86,7 +86,7 @@ html, * {
   font-weight: 700 !important;
   text-transform: uppercase !important;
   font-size: 12px !important;
-  color: #696969 !important;
+  color: #696969;
   float: left !important;
 }
 
@@ -1156,7 +1156,7 @@ body.loaded {
   text-transform: capitalize;
   width: 100%;
   font-size: 14px;
-  color: #252525;
+  color: #696969;
   float: left;
 }
 

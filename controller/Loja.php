@@ -45,6 +45,19 @@ class Loja extends Controller{
       header('location:' . $this->config->base_url);
     }
     
+    public function viewGrupo($id_categoria){
+        $data['estilo'] = $this->model->getEstiloAtual();
+        $data['grupo'] = $this->modelGrupo->getGrupoByCategoriaId($id_categoria);
+        $data['categoria-atual'] = $this->modelCategoria->getCategoriaById($id_categoria);
+        $data['categoria'] = $this->modelCategoria->getCategoria();
+        $data['itens'] = $this->father->getList();
+        
+        $this->view->load('header',$data);
+        $this->view->load('nav',$data);
+        $this->view->load('shopping_grupo', $data);
+        $this->view->load('footer');
+    }
+    
     public function viewSub($id_grupo){
         $data['estilo'] = $this->model->getEstiloAtual();
         $data['grupo'] = $this->modelGrupo->getGrupo();

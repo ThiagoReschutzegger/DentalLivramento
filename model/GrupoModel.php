@@ -78,7 +78,7 @@ class GrupoModel extends Model {
     
     public function getGrupoByCategoriaId($id) { //Edu
         $list = [];
-        $sql = "SELECT grupo.* FROM categoria JOIN grupo ON categoria.id_categoria=grupo.id_categoria WHERE id_categoria = :id";
+        $sql = "SELECT * FROM grupo WHERE id_categoria = :id";
         $query = $this->ExecuteQuery($sql, [':id' => $id]);
         foreach ($query as $linha) {
             $list[] = new Grupo($linha['id_grupo'], $linha['nome'], $linha['id_categoria']);

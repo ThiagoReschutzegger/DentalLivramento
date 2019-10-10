@@ -80,6 +80,10 @@ ul.nav-tabs .nav-item .nav-link.active, .category-content {
   color: #9B59B6 !important;
 }
 
+.title-categoria :hover {
+    color: #9B59B6;
+}
+
 #wf{
   color: lime !important;
 }
