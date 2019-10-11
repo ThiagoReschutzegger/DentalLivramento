@@ -49,6 +49,7 @@ class Home extends Controller{
         $data['destaque'] = $this->modelDestaque->getDestaque();
         $data['slider'] = $this->modelSlider->getSlider();
         $data['marca'] = $this->modelMarca->getMarca();
+        $data['marcaslider'] = $this->modelMarca->getMarcaSlider();
         $data['itens'] = $this->getList();
         $data['prod-destaq'] = $this->modelItem->getItemDestaque();
         $data['preloader'] = '1';
@@ -184,7 +185,7 @@ class Home extends Controller{
                 }
             }
         }
-        
+
         $this->view->load('header',$data);
         $this->view->load('nav',$data);
         $this->view->load('single-product',$data); //single-product2

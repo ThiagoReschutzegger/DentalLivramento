@@ -12,13 +12,23 @@ class MarcaModel extends Model {
         return $list;
     }
 
+    public function getMarcaSlider() {
+        $list = [];
+        $sql = "SELECT * FROM marca WHERE imagem != ''";
+        $consulta = $this->ExecuteQuery($sql, array());
+        foreach ($consulta as $linha) {
+            $list[] = new Marca($linha['id_marca'],$linha['nome'],$linha['imagem'],$linha['catalogo'],$linha['slider'],$linha['single_prod']);
+        }
+        return $list;
+    }
+
     public function getMarcaById($id) {
         $sql = "SELECT * FROM marca WHERE id_marca=:id;";
         $consulta = $this->ExecuteQuery($sql, [':id' => $id])[0];
         $marca = $this->ExecuteQuery($sql, [':id' => $id])[0];
             return new Marca( $marca['id_marca'],$marca['nome'],$marca['imagem'],$marca['catalogo'],$marca['slider'],$marca['single_prod']);
     }
-    
+
     public function getMarcaByIds($ids) {
         $list = [];
         $string = "WHERE id_marca = "; //15 caracteres
@@ -26,7 +36,7 @@ class MarcaModel extends Model {
             $string = $string.$id." OR id_marca = ";
         }
         $string = substr($string, 0, -15);
-        
+
         $sql = "SELECT * FROM marca ".$string;
         $consulta = $this->ExecuteQuery($sql, array());
         foreach ($consulta as $linha) {

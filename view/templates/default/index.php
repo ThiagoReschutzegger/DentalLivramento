@@ -212,7 +212,7 @@
 
                   <script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script><iframe src="//lightwidget.com/widgets/a3e97b3bbf3a521886bd4b709841ca34.html" scrolling="no" allowtransparency="true" class="lightwidget-widget" style="width:100%;border:0;overflow:hidden;"></iframe>
                    <!-- <script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script><iframe src="//lightwidget.com/widgets/9dd0a7f3fb2458b1baa16527e4c4e5fe.html" scrolling="no" allowtransparency="true" class="lightwidget-widget" style="width:100%;border:0;overflow:hidden;"></iframe> -->
-                  
+
                 </ul>
               <ul>
                 <br>
@@ -234,7 +234,7 @@
 <section class="lightSection clearfix mouse-grab" style='filter:grayscale(100%);'>
   <div class="container">
     <div class="owl-carousel partnersLogoSlider">
-      <?php foreach ($data['marca'] as $marca) :
+      <?php foreach ($data['marcaslider'] as $marca) :
         if($marca->getSlider() == 0): continue; else:
       ?>
       <div class="slide">
