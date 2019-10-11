@@ -87,12 +87,13 @@ $(document).ready(function(){
                       <li>
                         <a href="#">
                           <div class="media">
-                            <img class="media-left media-object img-fluid" style="max-height:70px;max-width:80px;" src="<?php echo $item[0]->getImagem(); ?>" alt="cart-Image">
+                            <img class="media-left media-object img-fluid" style="max-height:70px;max-width:80px;" 
+                                 src="<?php if($item[0]->getImagem() != "") echo $item[0]->getImagem(); else echo $this->base_url."view/images/produto-sem-imagem.gif"; ?>" alt="cart-Image">
                             <div class="media-body">
                               <h5 class="media-heading"><?php echo $item[0]->getNome(); ?></h5>
                               <span><?php echo $item[0]->getEspecificacao(); ?></span>
                               <br>
-                              <h5><span><?php echo $item[1]; ?> X R$ <?php echo $item[0]->getPreco(); ?></span></h5>
+                              <h5><span><?php echo $item[1]; ?> X R$ <?php echo number_format((float)$item[0]->getPreco(), 2); ?></span></h5>
                             </div>
                           </div>
                         </a>

@@ -73,13 +73,13 @@
                     <?php foreach($data['itens'] as $item): ?>
                     <tr>
                       <td>
-                        <span class="cartImage"><img class="img-fluid" style="max-height:120px;max-width:120px;" src="<?php echo $item[0]->getImagem(); ?>" alt="image"></span>
+                        <span class="cartImage"><img class="img-fluid" style="max-height:120px;max-width:120px;" src="<?php if($item[0]->getImagem() != "") echo $item[0]->getImagem(); else echo $this->base_url."view/images/produto-sem-imagem.gif"; ?>" alt="image"></span>
                       </td>
                       <td class="font-table-cart"><?php echo $item[0]->getNome();?>
                       <br><span style="font-size:11px;" ><?php echo $item[0]->getEspecificacao();?></span>
                       </td>
                       <td class="font-table-cart"><center><b><?php echo $item[1]; ?></b></center></td>
-                      <td class="font-table-cart">R$ <?php echo $item[0]->getPreco(); ?></td>
+                      <td class="font-table-cart">R$ <?php echo number_format((float)$item[0]->getPreco(), 2); ?></td>
                     </tr>
                   <?php endforeach; ?>
                   </tbody>
@@ -133,7 +133,7 @@
             <?php foreach ($data['itens'] as $key): ?>
               <li class="d-flex justify-content-between">
                 <span class="tag"><?php echo $key[0]->getNome();?><br><span style="font-size:11px;" ><?php echo $key[0]->getEspecificacao();?></span></span>
-                <span class="val">R$ <?php echo $key[0]->getPreco(); ?></span>
+                <span class="val">R$ <?php echo number_format((float)$item[0]->getPreco(), 2); ?></span>
               </li>
             <?php endforeach; ?>
             <li class="d-flex justify-content-between">

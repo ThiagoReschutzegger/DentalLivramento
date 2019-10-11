@@ -52,10 +52,10 @@
                   foreach ($data['itens'] as $item): ?>
                   <tr>
                     <td class="text-center">
-                      <span class="cartImage text-center"><img class="img-fluid" style="max-height:120px;max-width:120px;" src="<?php echo $item[0]->getImagem(); ?>" alt="image"></span>
+                      <span class="cartImage text-center"><img class="img-fluid" style="max-height:120px;max-width:120px;" src="<?php if($item[0]->getImagem() != "") echo $item[0]->getImagem(); else echo $this->base_url."view/images/produto-sem-imagem.gif"; ?>" alt="image"></span>
                     </td>
                     <td class="font-table-cart"><?php echo $item[0]->getNome(); ?><br><span style="color:grey;font-size:12px;"><?php echo $item[0]->getEspecificacao(); ?></span></td>
-                    <td class="font-table-cart">R$ <?php echo $item[0]->getPreco(); ?></td>
+                    <td class="font-table-cart">R$ <?php echo number_format((float)$item[0]->getPreco(), 2); ?></td>
                     <td class="font-table-cart" style="text-transform: lowercase;"><b><?php echo $item[1]; ?></b> unid.</td>
                     <td class="font-table-cart">R$ <?php echo number_format((float)((float)$item[0]->getPreco() * (float)$item[1]), 2, ',', ''); ?>
                       <a href="<?php echo $this->base_url; ?>Home/viewCart/i.<?php echo $i; ?>" style="color: #00bafa; position: relative; margin-right: 5px; opacity: 1; float: right; font-size: 1.5rem;"><span aria-hidden="true">&times;</span></a>
