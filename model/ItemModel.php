@@ -128,6 +128,16 @@ class ItemModel extends Model {
         }
     }
 
+    public function updateTodosSemImagem() {
+        $sql = "UPDATE item SET imagem=:imagem WHERE imagem=''";
+        $param = [':imagem' => $this->asset."view/images/produto-sem-imagem.gif"];
+        if ($this->ExecuteCommand($sql, $param)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 //    public function searchItem($nome, $codigo) {
 //        $list = [];
 //
