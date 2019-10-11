@@ -61,6 +61,16 @@ class ItemModel extends Model {
         return $list;
     }
 
+    public function getItemRelacionados($id_subgrupo) { //Edu
+        $list = [];
+        $sql = "SELECT * FROM item WHERE id_subgrupo = :id_subgrupo ORDER BY RAND() LIMIT 4";
+        $consulta = $this->ExecuteQuery($sql, [':id_subgrupo' => $id_subgrupo]);
+        foreach ($consulta as $item) {
+            $list[] = new Item($item['id_item'], $item['descricao'], $item['imagem'], $item['destaque'], $item['tipo'], $item['id_subgrupo'], $item['id_marca']);
+        }
+        return $list;
+    }
+
 //    public function getIdBy($nome, $descricao, $imagem) {
 //        $sql = "SELECT * FROM item WHERE nome = :nome AND descricao = :descricao AND imagem = :imagem;";
 //        $item = $this->ExecuteQuery($sql, [':nome' => $nome, ':descricao' => $descricao, ':imagem' => $imagem ])[0];
@@ -168,7 +178,7 @@ class ItemModel extends Model {
         //echo '<pre>';var_dump($list);echo '</pre>';die;
         return $list;
     }
-    
+
     public function getItemBySubgrupoForTxt($id) {
 
         $list = [];

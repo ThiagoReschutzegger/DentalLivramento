@@ -109,6 +109,8 @@ class Home extends Controller{
         $data['prod-destaq'] = $this->modelItem->getItemDestaque();
         $data['categoria'] = $this->modelCategoria->getCategoria();
         $data['grupo'] = $this->modelGrupo->getGrupo();
+        //var_dump($data['subgrupo']);die;
+        $data['prod-relacionados'] = $this->modelItem->getItemRelacionados($data['subgrupo']->getId_subgrupo());
 
         $estoque = [];
         $precos = [];
@@ -162,6 +164,15 @@ class Home extends Controller{
           }
         }
         $data['itens'] = $this->getList();
+
+        if(!empty($data['prod-relacionados'])){ //se tiver algum item sendo destacado
+            foreach($data['prod-relacionados'] as $destaque){ // objeto item
+                $subgrupo = $this->modelSubgrupo->getSubgrupoById($destaque->getId_subgrupo());
+                $marca = $this->modelMarca->getMarcaById($destaque->getId_marca());
+                $data['nome'.$destaque->getId_item()] = $subgrupo->getNome();
+                $data['marca_dstq'.$destaque->getId_item()] = $marca->getNome();
+            }
+        }
 
         if(!empty($data['prod-destaq'])){ //se tiver algum item sendo destacado
             foreach($data['prod-destaq'] as $destaque){ // objeto item

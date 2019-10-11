@@ -567,7 +567,7 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
                     echo '<pre>';print_r($divisao);echo '</pre>';
 
                     // ADICIONAR PRODUTO AO BANCO
-                    $verificacao = $this->model->insertByTxt($divisao[0],$divisao[2],$divisao[3],$divisao[1],$divisao[6],$divisao[4],$divisao[9],$divisao[10],$barcode_array);
+                    $verificacao = $this->model->insertByTxt($divisao[0],$divisao[2],$divisao[3],$divisao[1],$divisao[6],$divisao[4],$divisao[9],$divisao[8],$barcode_array);
 
                     if($verificacao[0] == 1){
                       array_push($barcode_certo, $verificacao[1]);
