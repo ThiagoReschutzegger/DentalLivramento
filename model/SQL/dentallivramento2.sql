@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 11-Out-2019 às 06:43
+-- Generation Time: 11-Out-2019 às 20:09
 -- Versão do servidor: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
@@ -224,7 +224,7 @@ CREATE TABLE `marca` (
   `imagem` varchar(5000) NOT NULL,
   `catalogo` varchar(1000) NOT NULL,
   `slider` enum('1','0') NOT NULL,
-  `single_prod` enum('0','1') NOT NULL
+  `single_prod` enum('1','0') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -235,9 +235,9 @@ INSERT INTO `marca` (`id_marca`, `nome`, `imagem`, `catalogo`, `slider`, `single
 (1, 'Adidas', 'https://vandal-us.s3.amazonaws.com/spree/products/49846/original/open-uri20181203-14-1jczs.jpg', 'https://static.morelli.com.br/arquivos/midias/folhetos/br/Midia_284_4_1520622302610.pdf', '1', '1'),
 (2, 'Puma', 'http://pluspng.com/img-png/puma-png-puma-png-240.png', 'https://static.morelli.com.br/arquivos/midias/folhetos/br/Midia_284_4_1520622302610.pdf', '1', '0'),
 (3, 'qwert', 'https://logodownload.org/wp-content/uploads/2014/04/nike-logo-1.png', 'https://google.com.br', '1', '1'),
-(141, 'Implacil', '', '', '1', '0'),
-(142, 'Orthomundi', '', '', '1', '0'),
-(143, 'Triunfo', '', '', '1', '0');
+(141, 'Implacil', '', '', '1', '1'),
+(142, 'Orthomundi', '', '', '1', '1'),
+(143, 'Triunfo', '', '', '1', '1');
 
 -- --------------------------------------------------------
 
