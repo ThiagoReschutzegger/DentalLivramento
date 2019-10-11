@@ -537,7 +537,7 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
                   // var_dump($barcode_array);
                   // die;
 
-                  
+
                     $categoria = $this->tratamentoCategoria($divisao[7],$categorias_array); // ARRUMA E SUBSTITUI O NOME DA MARCA PELO ID DA MESMA
 
                     $grupos_array = $this->modelGrupo->getGrupoByCategoriaIdForTxt($categoria[0]);
@@ -591,6 +591,9 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
 
                 }
                 $data['arrays'] = array($barcode_certo,$barcode_errado);
+
+                //$this->modelItem->updateTodosSemImagem();
+
                 set_time_limit(30);
                 header('location:' . $this->config->base_url . 'ProdutoAdmin/buscaProduto');
 
