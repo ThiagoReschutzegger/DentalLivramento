@@ -165,24 +165,26 @@ class Home extends Controller{
         }
         $data['itens'] = $this->getList();
 
-        if(!empty($data['prod-relacionados'])){ //se tiver algum item sendo destacado
-            foreach($data['prod-relacionados'] as $destaque){ // objeto item
-                $subgrupo = $this->modelSubgrupo->getSubgrupoById($destaque->getId_subgrupo());
-                $marca = $this->modelMarca->getMarcaById($destaque->getId_marca());
-                $data['nome'.$destaque->getId_item()] = $subgrupo->getNome();
-                $data['marca_dstq'.$destaque->getId_item()] = $marca->getNome();
+        if (count($data['prod-relacionados']) > 3){
+            if(!empty($data['prod-relacionados'])){ //se tiver algum item sendo destacado
+                foreach($data['prod-relacionados'] as $destaque){ // objeto item
+                    $subgrupo = $this->modelSubgrupo->getSubgrupoById($destaque->getId_subgrupo());
+                    $marca = $this->modelMarca->getMarcaById($destaque->getId_marca());
+                    $data['nome'.$destaque->getId_item()] = $subgrupo->getNome();
+                    $data['marca_dstq'.$destaque->getId_item()] = $marca->getNome();
+                }
+            }
+        }else if(count($data['prod-destaq']) > 3){
+            if(!empty($data['prod-destaq'])){ //se tiver algum item sendo destacado
+                foreach($data['prod-destaq'] as $destaque){ // objeto item
+                    $subgrupo = $this->modelSubgrupo->getSubgrupoById($destaque->getId_subgrupo());
+                    $marca = $this->modelMarca->getMarcaById($destaque->getId_marca());
+                    $data['nome'.$destaque->getId_item()] = $subgrupo->getNome();
+                    $data['marca_dstq'.$destaque->getId_item()] = $marca->getNome();
+                }
             }
         }
-
-        if(!empty($data['prod-destaq'])){ //se tiver algum item sendo destacado
-            foreach($data['prod-destaq'] as $destaque){ // objeto item
-                $subgrupo = $this->modelSubgrupo->getSubgrupoById($destaque->getId_subgrupo());
-                $marca = $this->modelMarca->getMarcaById($destaque->getId_marca());
-                $data['nome'.$destaque->getId_item()] = $subgrupo->getNome();
-                $data['marca_dstq'.$destaque->getId_item()] = $marca->getNome();
-            }
-        }
-
+        
         $this->view->load('header',$data);
         $this->view->load('nav',$data);
         $this->view->load('single-product',$data); //single-product2

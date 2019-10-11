@@ -133,6 +133,7 @@ endforeach;
                     $produtos = $data['produto'][0];
                   ?>
                   <br><?php echo $produtos->getEspecificacao(); ?></p>
+                  <?php if($produtos->getEmbalagem() != ''): ?><p>Embalagem: <?php echo $produtos->getEmbalagem(); ?></p><?php endif;?>
                   <div class="cartListInner">
                   <div class="table-responsive">
                     <form method="post">
@@ -169,6 +170,7 @@ endforeach;
                 </div>
                   <?php else:?>
                     </p>
+                    <?php if($produtos->getEmbalagem() != ''): ?><p>Embalagem: <?php echo $produtos->getEmbalagem(); ?></p><?php endif;?>
                   <div class="cartListInner">
                   <div class="table-responsive">
                   <form method="post">
@@ -247,30 +249,28 @@ endforeach;
             </div>
           </div>
 
-          <?php if (count($data['prod-relacionados'])>3): ?>
-              <div class="page-header text-uppercase">
-                <h4 class="text-uppercase fonte-e-cor-top">Produtos Relacionados</h4>
+<?php if (count($data['prod-relacionados'])>3): ?>
+    <div class="page-header text-uppercase">
+      <h4 class="text-uppercase fonte-e-cor-top">Produtos Relacionados</h4>
+    </div>
+    <div class="row featuredProducts featuredProductsSlider margin-bottom mouse-grab">
+      <?php foreach($data['prod-relacionados'] as $destaque): ?>
+          <div class="slide col-md-3">
+            <div class="productImage clearfix">
+              <img src="<?php if($destaque->getImagem() != "") echo $destaque->getImagem(); else echo $this->base_url."view/images/produto-sem-imagem.gif"; ?>">
+              <div class="productMasking" onclick="location.href='<?php echo $this->base_url; ?>Home/viewProduto/<?php echo $destaque->getId_item(); ?>';" style="cursor: pointer; background-color: inherit !important;">
               </div>
-              <div class="row featuredProducts featuredProductsSlider margin-bottom mouse-grab">
-                <?php foreach($data['prod-relacionados'] as $destaque): ?>
-                    <div class="slide col-md-3">
-                      <div class="productImage clearfix">
-                        <img src="<?php if($destaque->getImagem() != "") echo $destaque->getImagem(); else echo $this->base_url."view/images/produto-sem-imagem.gif"; ?>">
-                        <div class="productMasking" onclick="location.href='<?php echo $this->base_url; ?>Home/viewProduto/<?php echo $destaque->getId_item(); ?>';" style="cursor: pointer; background-color: inherit !important;">
-                        </div>
-                      </div>
-                      <div class="productCaption clearfix">
-                        <a href="<?php echo $this->base_url; ?>Home/viewProduto/<?php echo $destaque->getId_item(); ?>">
-                          <h4><?php echo $data['nome'.$destaque->getId_item()]; ?></h4>
-                          <h3 class="fonte-e-cor-top" style="font-size: 15px; margin-bottom: 5px;"><?php echo $data['marca_dstq'.$destaque->getId_item()]; ?></h3>
-                        </a>
-                      </div>
-                    </div>
-                <?php endforeach; ?>
-              </div>
-            <?php endif; ?>
-
-<?php if (count($data['prod-destaq'])>3): ?>
+            </div>
+            <div class="productCaption clearfix">
+              <a href="<?php echo $this->base_url; ?>Home/viewProduto/<?php echo $destaque->getId_item(); ?>">
+                <h4><?php echo $data['nome'.$destaque->getId_item()]; ?></h4>
+                <h3 class="fonte-e-cor-top" style="font-size: 15px; margin-bottom: 5px;"><?php echo $data['marca_dstq'.$destaque->getId_item()]; ?></h3>
+              </a>
+            </div>
+          </div>
+      <?php endforeach; ?>
+    </div>
+  <?php elseif (count($data['prod-destaq'])>3): ?>
     <div class="page-header text-uppercase">
       <h4 class="text-uppercase fonte-e-cor-top">Destaques</h4>
     </div>

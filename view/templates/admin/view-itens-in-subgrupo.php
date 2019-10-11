@@ -43,6 +43,7 @@
                                               <th>Preço</th>
                                               <th>Estoque</th>
                                               <th>Cód. Barras</th>
+                                              <th>Linha</th>
                                               </thead>
                                             <tbody>
                                                 <?php foreach ($data['produto'] as $produto):
@@ -52,6 +53,7 @@
                                                         <td>R$ <?php echo number_format($produto->getPreco(), 2); ?></td>
                                                         <td><?php echo $produto->getEstoque(); ?></td>
                                                         <td><?php echo $produto->getBarcode(); ?></td>
+                                                        <td><?php echo $produto->getTipo(); ?></td>
                                                     </tr>
                                                 <?php endif;
                                                endforeach;
