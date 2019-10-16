@@ -177,6 +177,13 @@ class SubgrupoModel extends Model {
         $query = $this->ExecuteQuery($sql, [':nome' => $nome]);
         return $query[0]['id_subgrupo'];
     }
+    
+    public function getIdByNomeAndFather($nome, $id_grupo) {
+        $list = [];
+        $sql = "SELECT id_subgrupo FROM subgrupo WHERE nome = :nome AND id_grupo = :id";
+        $query = $this->ExecuteQuery($sql, [':nome' => $nome, ':id' => $id_grupo]);
+        return $query[0]['id_subgrupo'];
+    }
 
     public function getIdGrupoByNome($nome) {
         $list = [];

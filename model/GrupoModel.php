@@ -78,7 +78,7 @@ class GrupoModel extends Model {
     
     public function getGrupoByCategoriaId($id) { //Edu
         $list = [];
-        $sql = "SELECT * FROM grupo WHERE id_categoria = :id";
+        $sql = "SELECT * FROM grupo WHERE id_categoria = :id ORDER BY nome asc";
         $query = $this->ExecuteQuery($sql, [':id' => $id]);
         foreach ($query as $linha) {
             $list[] = new Grupo($linha['id_grupo'], $linha['nome'], $linha['id_categoria']);
@@ -123,10 +123,10 @@ class GrupoModel extends Model {
         }
     }
 
-    public function getIdByNome($nome) {
+    public function getIdByNomeAndFather($nome, $id_categoria) {
         $list = [];
-        $sql = "SELECT id_grupo FROM grupo WHERE nome = :nome";
-        $query = $this->ExecuteQuery($sql, [':nome' => $nome]);
+        $sql = "SELECT id_grupo FROM grupo WHERE nome = :nome AND id_categoria = :id";
+        $query = $this->ExecuteQuery($sql, [':nome' => $nome, ':id' => $id_categoria]);
         return $query[0]['id_grupo'];
     }
 

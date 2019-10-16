@@ -88,7 +88,7 @@ endforeach;
                       <div class="exzoom_img_box">
                         <ul class='exzoom_img_ul'>
                           <li><img src="<?php if($item->getImagem() != "") echo $item->getImagem(); else echo $this->base_url."view/images/produto-sem-imagem.gif"; ?>"/></li>
-                          <?php if ($marca->getSingle_prod() == 1): ?>
+                          <?php if ($marca->getSingle_prod() == 1 && $marca->getImagem() != ''): ?>
                             <li><img src="<?php echo $marca->getImagem(); ?>"/></li>
                           <?php endif; ?>
                         </ul>

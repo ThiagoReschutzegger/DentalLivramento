@@ -141,7 +141,9 @@
 	display: none !important;
 }
     </style>
+    
     <!-- BANNER -->
+    <?php if(!empty($data['destaque'])): ?>
     <div class="container">
       <div class="row justify-content-md-end">
         <div class="col-sm-12 ml-auto bannercontainer ">
@@ -202,6 +204,7 @@
         </div>
       </div>
     </div>
+    <?php endif;?>
 
     <div class="container">
       <div class="row justify-content-md-end">

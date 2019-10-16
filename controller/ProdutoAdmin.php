@@ -536,7 +536,10 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
                   // var_dump($divisao[0]);
                   // var_dump($barcode_array);
                   // die;
-
+                  
+                  if($this->verificaExistenciaProduto($divisao[0],$barcode_array)){
+                    $this->model->updateByTxt($divisao[0],$preco,$estoque,$divisao[8]);
+                  }else{
 
                     $categoria = $this->tratamentoCategoria($divisao[7],$categorias_array); // ARRUMA E SUBSTITUI O NOME DA MARCA PELO ID DA MESMA
 
@@ -564,11 +567,11 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
 
                     echo '<pre>';print_r($divisao);echo '</pre>';
 
-                    if($this->verificaExistenciaProduto($divisao[0],$barcode_array)){
-                        $this->model->updateByTxt($divisao[0],$preco,$estoque,$divisao[8]);
-                     }else{
+                    
                         // ADICIONAR PRODUTO AO BANCO
-                        $verificacao = $this->model->insertByTxt($divisao[0],$divisao[2],$divisao[3],$divisao[1],$divisao[6],$divisao[4],$divisao[9],$divisao[8],$barcode_array);
+                    
+                        $especificacao = iconv(mb_detect_encoding($divisao[1], mb_detect_order(), true), "UTF-8//IGNORE", ucfirst(strtolower(($divisao[1]))));
+                        $verificacao = $this->model->insertByTxt($divisao[0],$divisao[2],$divisao[3],$especificacao,$divisao[6],$divisao[4],$divisao[9],$divisao[8],$barcode_array);
 
                         if($verificacao[0] == 1){
                           array_push($barcode_certo, $verificacao[1]);
@@ -577,7 +580,7 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
                         }elseif($verificacao[0] == 2){
                           array_push($barcode_atualizado, $verificacao[1]);
                         }
-                     }
+                     
   //                // ATUALIZAR OS ARRAYS COM OS DADOS QUE VÃO ENTRANDO
                     if($marca[1]){
                       $marcas_array = $this->modelMarca->getAllMarcas();
@@ -588,7 +591,7 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
                     if($categoria[1]){
                       $categorias_array = $this->modelCategoria->getAllCategorias();
                     }
-
+                  }
                 }
                 $data['arrays'] = array($barcode_certo,$barcode_errado);
 
@@ -692,7 +695,7 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
 
     }else{
       $this->modelGrupo->insertGrupoTxt($grupo,$id_categoria);
-      return [$this->modelGrupo->getIdByNome($grupo),true];//ESSES TRUE OU FALSE SERVEM PRA ATUALIZAR O ARRAY, SENAO DA UM DESENCONTRO DE DADOS ATUALIZADOS/ANTIGOS
+      return [$this->modelGrupo->getIdByNomeAndFather($grupo,$id_categoria),true];//ESSES TRUE OU FALSE SERVEM PRA ATUALIZAR O ARRAY, SENAO DA UM DESENCONTRO DE DADOS ATUALIZADOS/ANTIGOS
     }
 
   }
@@ -744,7 +747,7 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
 
       }else{
         $this->modelSubgrupo->insertSubgrupoTxt($subgrupo,$id_grupo);
-        return [$this->modelSubgrupo->getIdByNome($subgrupo),true];//ESSES TRUE OU FALSE SERVEM PRA ATUALIZAR O ARRAY, SENAO DA UM DESENCONTRO DE DADOS ATUALIZADOS/ANTIGOS
+        return [$this->modelSubgrupo->getIdByNomeAndFather($subgrupo,$id_grupo),true];//ESSES TRUE OU FALSE SERVEM PRA ATUALIZAR O ARRAY, SENAO DA UM DESENCONTRO DE DADOS ATUALIZADOS/ANTIGOS
       }
 
     }
