@@ -24,6 +24,12 @@
                             <button type="submit" name="add" value="true" class="btn btn-primary">Enviar</button>
                           </div>
                         </div>
+                        <div class="line"></div>
+                        <div class="form-group row">
+                          <div class="col-sm-9 offset-sm-3">
+                              <p><b>Aguarde até o círculo na aba da página parar de girar.<br>Só assim estará completa a atualização!</b></p>
+                          </div>
+                        </div>
                       </form>
                     </div>
         </div>

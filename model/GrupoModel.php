@@ -159,6 +159,9 @@ class GrupoModel extends Model {
 
     }
 
-
+    public function removeEmpty() {
+        $sql = "DELETE FROM grupo WHERE id_grupo not in (SELECT id_grupo FROM subgrupo)";
+        $this->ExecuteCommand($sql, array());
+    }
 
 }

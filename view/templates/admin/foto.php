@@ -54,7 +54,7 @@ function copyInput(id){
                   <div class="box item" style="text-align: center;">
                       <img src="<?php echo $this->base_url; ?>view/images/<?php echo $foto->getSrc(); ?>">
                       <div class="box-content">
-                        <input type="text" class="title" value="localhost<?php echo $this->base_url; ?>view/images/<?php echo $foto->getSrc(); ?>" id="input<?php echo $foto->getId_foto();?>" style="width: 100px; height: 20px; font-size: 10px"/>
+                        <input type="text" class="title" value="http://dentallivramento.com.br<?php echo $this->base_url; ?>view/images/<?php echo $foto->getSrc(); ?>" id="input<?php echo $foto->getId_foto();?>" style="width: 100px; height: 20px; font-size: 10px"/>
                         <ul class="icons"><center>
                             <li><a onclick="copyInput('<?php echo $foto->getId_foto();?>')"><i class="fa fa-copy"></i></a></li>
                         </center></ul>

@@ -86,5 +86,10 @@ class CategoriaModel extends Model {
         $query = $this->ExecuteQuery($sql, [':nome' => $nome]);
         return $query[0]['id_categoria'];
     }
+    
+    public function removeEmpty() {
+        $sql = "DELETE FROM categoria WHERE id_categoria not in (SELECT id_categoria FROM grupo)";
+        $this->ExecuteCommand($sql, array());
+    }
 
 }

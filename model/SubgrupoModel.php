@@ -269,6 +269,11 @@ class SubgrupoModel extends Model {
             return array();
         endif;
     }
+    
+    public function removeEmpty() {
+        $sql = "DELETE FROM subgrupo WHERE id_subgrupo not in (SELECT id_subgrupo FROM item)";
+        $this->ExecuteCommand($sql, array());
+    }
 
 
 }

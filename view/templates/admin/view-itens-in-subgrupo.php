@@ -1,8 +1,13 @@
   <div class="content-inner">
       <!-- Page Header-->
-      <header class="page-header">
-          <div class="container-fluid">
-              <h2 class="no-margin-bottom">Subgrupo: <span style="color: skyblue;"><?php echo $data['subgrupo']->getNome(); ?></span></h2>
+      <header class="page-header" style="padding-bottom: 0;">
+          <div class="container-fluid row">
+              <div class="col-lg-9">    
+                  <h2 class="no-margin-bottom" style="padding-top: 10px;">Subgrupo: <span style="color: skyblue;"><?php echo $data['subgrupo']->getNome(); ?></span></h2>
+                </div>
+                <div class="form-group col-lg-3 col-xs-12" style="align: right;">
+                    <a href="<?php echo $this->base_url; ?>ProdutoAdmin/buscaProduto/all" class="btn btn-primary" style="color: white">Visualizar todos &nbsp&nbsp<i class="icon-grid"></i></a>
+                </div>
           </div>
       </header>
       <section>

@@ -211,5 +211,24 @@ class ItemModel extends Model {
             return false;
         }
     }
+    
+    public function updateByTxt($id_item, $tipo, $id_subgrupo, $id_marca) {
+        //IMPORTANTE!! $array É ARRAY COM TODOS OS BARCODES
+
+          $sql = "UPDATE item SET tipo = :tipo, id_subgrupo = :id_subgrupo, id_marca = :id_marca WHERE id_item = :id_item";
+          $param = [':id_item' => $id_item,
+                    ':tipo' => $tipo,
+                    ':id_subgrupo' => $id_subgrupo,
+                    ':id_marca' => $id_marca
+                    ];
+          $this->ExecuteCommand($sql, $param);
+      }
+      
+      public function getItemBy($id_subgrupo, $id_marca, $tipo) {
+        $list = [];
+        $sql = "SELECT * FROM item WHERE id_subgrupo = :id_subgrupo AND id_marca = :id_marca AND tipo = '".$tipo."'";
+        $item = $this->ExecuteQuery($sql, [':id_subgrupo' => $id_subgrupo, ':id_marca' => $id_marca])[0];
+        return new Item($item['id_item'], $item['descricao'], $item['imagem'], $item['destaque'], $item['tipo'], $item['id_subgrupo'], $item['id_marca']);
+    }
 
 }

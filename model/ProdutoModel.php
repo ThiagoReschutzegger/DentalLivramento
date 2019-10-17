@@ -230,16 +230,20 @@
           return $list;
       }
 
-      public function updateByTxt($barcode,$preco,$estoque,$embalagem) {
+      public function updateByTxt($barcode,$preco,$estoque,$embalagem, $tipo, $id_subgrupo, $id_marca, $especificacao) {
         //IMPORTANTE!! $array É ARRAY COM TODOS OS BARCODES
 
 
 
-          $sql = "UPDATE produto SET preco = :preco, estoque = :estoque, embalagem = :embalagem WHERE barcode = :barcode";
+          $sql = "UPDATE produto SET preco = :preco, estoque = :estoque, embalagem = :embalagem, tipo = :tipo, id_subgrupo = :id_subgrupo, id_marca = :id_marca, especificacao = :especificacao WHERE barcode = :barcode";
           $param = [':barcode' => $barcode,
                     ':preco' => $preco,
                     ':estoque' => $estoque,
-                    ':embalagem' => $embalagem
+                    ':embalagem' => $embalagem,
+                    ':tipo' => $tipo,
+                    ':id_subgrupo' => $id_subgrupo,
+                    ':id_marca' => $id_marca,
+                    ':especificacao' => $especificacao
                     ];
           $this->ExecuteCommand($sql, $param);
       }
@@ -304,5 +308,20 @@
             return array();
         }
     }
+    
+    public function removeProdutoByBarcode($barcode) {
+          $sql = "DELETE FROM produto WHERE barcode = :barcode";
+          if ($this->ExecuteCommand($sql, [':barcode' => $barcode])) {
+              return true;
+          } else {
+              return false;
+          }
+      }
+      
+      public function getProdutoByBarcode($barcode) {
+          $sql = "SELECT * FROM produto WHERE barcode=:barcode;";
+          $produto = $this->ExecuteQuery($sql, [':barcode' => $barcode])[0];
+          return new Produto($produto['id_produto'], $produto['barcode'], $produto['preco'], $produto['estoque'], $produto['especificacao'], $produto['tipo'], $produto['embalagem'], $produto['id_subgrupo'],$produto['id_marca']);
+      }
 
   }

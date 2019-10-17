@@ -524,6 +524,7 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
 //                $subgrupos_array = $this->modelSubgrupo->getSubgrupoByGrupo();
 //                $item_array = $this->modelItem->getItemBySubgrupo();
 
+                $barcodes_txt = [];
 
                 set_time_limit(0);
                 foreach ($linhas as $row){
@@ -536,11 +537,7 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
                   // var_dump($divisao[0]);
                   // var_dump($barcode_array);
                   // die;
-                  
-                  if($this->verificaExistenciaProduto($divisao[0],$barcode_array)){
-                    $this->model->updateByTxt($divisao[0],$preco,$estoque,$divisao[8]);
-                  }else{
-
+                 
                     $categoria = $this->tratamentoCategoria($divisao[7],$categorias_array); // ARRUMA E SUBSTITUI O NOME DA MARCA PELO ID DA MESMA
 
                     $grupos_array = $this->modelGrupo->getGrupoByCategoriaIdForTxt($categoria[0]);
@@ -551,8 +548,6 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
 
                     $marca = $this->tratamentoMarca($divisao[4],$marcas_array); // ARRUMA E SUBSTITUI O NOME DA MARCA PELO ID DA MESMA
 
-                    $item_array = $this->modelItem->getItemBySubgrupoForTxt($subgrupo[0]);
-                    $tipo = $this->tratamentoItem($divisao[9],$marca[0],$subgrupo[0],$item_array);
 
                     $divisao[4] = $marca[0]; // TROCANDO NOME DA MARCA PELO ID
                     $divisao[7] = $categoria[0]; // TROCANDO NOME DA CATEGORIA PELO ID
@@ -560,19 +555,42 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
                     $divisao[3] = $estoque; // INTANDO O estoque
                     $divisao[5] = $grupo[0]; // TROCANDO NOME DO GRUPO PELO ID
                     $divisao[6] = $subgrupo[0]; // TROCANDO NOME DO GRUPO PELO ID
-                    $divisao[9] = $tipo[0]; // TROCANDO NOME DO GRUPO PELO ID
-
+//                    $divisao[9] = $tipo[0]; // TROCANDO NOME DO GRUPO PELO ID
+                    $especificacao = iconv(mb_detect_encoding($divisao[1], mb_detect_order(), true), "UTF-8//IGNORE", ucfirst(strtolower(($divisao[1]))));
+                    $tipo = iconv(mb_detect_encoding($divisao[9], mb_detect_order(), true), "UTF-8//IGNORE", ucfirst(strtolower(($divisao[9]))));
+                    
+                    $barcodes_txt[] = $divisao[0];
 
                     //echo '<pre>';print_r($marca[0][0][]);echo '</pre>';
 
-                    echo '<pre>';print_r($divisao);echo '</pre>';
+                    //echo '<pre>';print_r($divisao);echo '</pre>';
 
+                     
+                  if($this->verificaExistenciaProduto($divisao[0],$barcode_array)){
                     
+                    $produto = $this->model->getProdutoByBarcode($divisao[0]);
+                    $id_sub_past = $produto->getId_subgrupo();
+                    $id_marca_past = $produto->getId_marca();
+                    $tipo_past = $produto->getTipo();
+                    
+                    $item = $this->modelItem->getItemBy($id_sub_past, $id_marca_past, $tipo_past);
+                    if(!empty($item)){
+                        $id_item = $item->getId_item();
+                        $bool = true;
+                    }else{
+                        $bool = false;
+                    }
+                    
+                    $this->model->updateByTxt($divisao[0],$preco,$estoque,$divisao[8], $tipo, $subgrupo[0], $marca[0], $especificacao); // Atualiza o Prod
+                                                //barcode / preco / estoque / embalagem / tipo / id_sub / id_marca / especificacao
+                    
+                    if($bool){
+                        $this->modelItem->updateByTxt($id_item, $tipo, $subgrupo[0], $marca[0]); // Atualiza o Item
+                    }
+                  }else{
                         // ADICIONAR PRODUTO AO BANCO
-                    
-                        $especificacao = iconv(mb_detect_encoding($divisao[1], mb_detect_order(), true), "UTF-8//IGNORE", ucfirst(strtolower(($divisao[1]))));
-                        $verificacao = $this->model->insertByTxt($divisao[0],$divisao[2],$divisao[3],$especificacao,$divisao[6],$divisao[4],$divisao[9],$divisao[8],$barcode_array);
-
+                        $verificacao = $this->model->insertByTxt($divisao[0],$divisao[2],$divisao[3],$especificacao,$divisao[6],$divisao[4],$tipo,$divisao[8],$barcode_array);
+                        
                         if($verificacao[0] == 1){
                           array_push($barcode_certo, $verificacao[1]);
                         }elseif($verificacao[0] == 3){
@@ -580,7 +598,11 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
                         }elseif($verificacao[0] == 2){
                           array_push($barcode_atualizado, $verificacao[1]);
                         }
-                     
+                    }
+                    
+                    $item_array = $this->modelItem->getItemBySubgrupoForTxt($subgrupo[0]);
+                    $tipo = $this->tratamentoItem($divisao[9],$marca[0],$subgrupo[0],$item_array);  
+                        
   //                // ATUALIZAR OS ARRAYS COM OS DADOS QUE VÃO ENTRANDO
                     if($marca[1]){
                       $marcas_array = $this->modelMarca->getAllMarcas();
@@ -591,15 +613,17 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
                     if($categoria[1]){
                       $categorias_array = $this->modelCategoria->getAllCategorias();
                     }
-                  }
+                 
                 }
                 $data['arrays'] = array($barcode_certo,$barcode_errado);
 
                 //$this->modelItem->updateTodosSemImagem();
-
-                set_time_limit(30);
+                
+                $this->atualizaDataBase($barcode_array, $barcodes_txt);
+                
                 header('location:' . $this->config->base_url . 'ProdutoAdmin/buscaProduto');
-
+                set_time_limit(30);
+                
               }else{
                   $data['msg'] = 'Informe todos os campos';
               }
@@ -628,7 +652,7 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
 
       if(empty($array)) $bool = false;
       foreach ($array as $pica) {
-        if(trim($marca) == trim(iconv(mb_detect_encoding($pica[1], mb_detect_order(), true), "UTF-8//IGNORE", ucfirst(strtolower(($pica[1])))))) { // EU NAO SEI PRA Q CARALHO SERVE ESSE TRIM MAS O IF NAO FUNCIONA SEM ELE
+        if(trim($marca) == trim($pica[1])) { // EU NAO SEI PRA Q CARALHO SERVE ESSE TRIM MAS O IF NAO FUNCIONA SEM ELE
           $id_marca = $pica[0]; //PEGA O ID DA MARCA Q ELE ENCONTROU
           $bool = true;
           break;
@@ -653,7 +677,7 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
 
       if(empty($array)) $bool = false;
       foreach ($array as $pica) {
-        if(trim(($categoria)) == trim(iconv(mb_detect_encoding($pica[1], mb_detect_order(), true), "UTF-8//IGNORE", ucfirst(strtolower(($pica[1])))))) { // EU NAO SEI PRA Q CARALHO SERVE ESSE TRIM MAS O IF NAO FUNCIONA SEM ELE
+        if(trim(($categoria)) == trim($pica[1])) { // EU NAO SEI PRA Q CARALHO SERVE ESSE TRIM MAS O IF NAO FUNCIONA SEM ELE
           $id_categoria = $pica[0]; //PEGA O ID DA categoria Q ELE ENCONTROU
           $bool = true;
           break;
@@ -680,7 +704,7 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
     if(empty($array)) $bool = false;
     if (is_array($array) || is_object($array)){
       foreach ($array as $pica) {
-        if(trim(($grupo)) == trim(iconv(mb_detect_encoding($pica[1], mb_detect_order(), true), "UTF-8//IGNORE", ucfirst(strtolower(($pica[1])))))) { // EU NAO SEI PRA Q CARALHO SERVE ESSE TRIM MAS O IF NAO FUNCIONA SEM ELE
+        if(trim(($grupo)) == trim($pica[1])) { // EU NAO SEI PRA Q CARALHO SERVE ESSE TRIM MAS O IF NAO FUNCIONA SEM ELE
           $id_grupo = $pica[0]; //PEGA O ID DA categoria Q ELE ENCONTROU
           $bool = true;
           break;
@@ -732,7 +756,7 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
       if(empty($array)) $bool = false;
       if (is_array($array) || is_object($array)){
         foreach ($array as $pica) {
-          if(trim(($subgrupo)) == trim(iconv(mb_detect_encoding($pica[1], mb_detect_order(), true), "UTF-8//IGNORE", ucfirst(strtolower(($pica[1])))))) { // EU NAO SEI PRA Q CARALHO SERVE ESSE TRIM MAS O IF NAO FUNCIONA SEM ELE
+          if(trim(($subgrupo)) == trim($pica[1])) { // EU NAO SEI PRA Q CARALHO SERVE ESSE TRIM MAS O IF NAO FUNCIONA SEM ELE
             $id_subgrupo = $pica[0]; //PEGA O ID DA categoria Q ELE ENCONTROU
             $bool = true;
             break;
@@ -772,7 +796,7 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
       if(empty($array)) $bool = false;
 
       foreach ($array as $pica) {
-        if(trim(($tipo_txt)) == trim(iconv(mb_detect_encoding($pica[1], mb_detect_order(), true), "UTF-8//IGNORE", ucfirst(strtolower(($pica[1]))))) && $pica[3]==$id_marca && $pica[2]==$id_subgrupo) { // EU NAO SEI PRA Q CARALHO SERVE ESSE TRIM MAS O IF NAO FUNCIONA SEM ELE
+        if(trim(($tipo_txt)) == trim($pica[1]) && $pica[3]==$id_marca && $pica[2]==$id_subgrupo) { // EU NAO SEI PRA Q CARALHO SERVE ESSE TRIM MAS O IF NAO FUNCIONA SEM ELE
           $id_item = $pica[0]; //PEGA O ID DA MARCA Q ELE ENCONTROU
           $bool = true;
           break;
@@ -791,7 +815,31 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
       }
     }
 
+    public function atualizaDataBase($barcodes_cadastrados, $barcodes_txt){ //Edu, função para eliminar as coisas vazias pós upload de txt
+      // Motivo? com o update de produto e item, estes podem sair de um subgrupo e ir a outro, podendo ocasionar um subgrupo vazio
+      // então se há um subgrupo vazio, ele é excluido, assim se houver um grupo vazio por causa disso, também será, e categoria...
+      
+      $barcodes_not_on_txt = array_diff($barcodes_cadastrados, $barcodes_txt);
+      
+      if(!empty($barcodes_not_on_txt)){ //Exclusão de produtos e itens que esão cadastrados no banco mas que não vem mais pelo txt
+        foreach($barcodes_not_on_txt as $barcode){
+              $produto = $this->model->getProdutoByBarcode($barcode);
+              $id_sub_past = $produto->getId_subgrupo();
+              $id_marca_past = $produto->getId_marca();
+              $tipo_past = $produto->getTipo();
+              $item = $this->modelItem->getItemBy($id_sub_past, $id_marca_past, $tipo_past);
+              $id_item = $item->getId_item();
 
+              $this->model->removeProdutoByBarcode($barcode);
+              $this->modelItem->removeItem($id_item);   
+        }
+      }
+      
+      $this->modelSubgrupo->removeEmpty(); //select * from subgrupo where id_subgrupo not in (select id_subgrupo from item)
+      $this->modelGrupo->removeEmpty();
+      $this->modelCategoria->removeEmpty();
+      
+    }
 
 
 
