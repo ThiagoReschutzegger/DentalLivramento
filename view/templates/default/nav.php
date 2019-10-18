@@ -150,9 +150,21 @@ $(document).ready(function(){
                   <ul class="dropdown-menu row">
                     <?php foreach($data['categoria'] as $categoria): ?>
                     <li class="col-md-3 col-12">
-                      <ul class="list-unstyled">
+                        <ul class="list-unstyled" style="padding: 0; padding-top: 10px">
                         <li style="display: none;"></li>
-                        <li><a class="title-categoria" href="<?php echo $this->base_url; ?>Loja/viewGrupo/<?php echo $categoria->getId_categoria(); ?>" ><?php echo $categoria->getNome(); ?></a></li>
+                        <li><a class="title-categoria" href="javascript:;" data-toggle="collapse" aria-expanded="false" data-target="#nav<?php echo $categoria->getId_categoria(); ?>"><?php echo $categoria->getNome(); ?> <i class="fa fa-plus"></i></a></li>
+                        <li><ul id="nav<?php echo $categoria->getId_categoria(); ?>" class="collapse collapseItem list-unstyled" style="padding-top:0;">
+                          <li style="display: none;"></li>
+                          <?php foreach($data['grupo'] as $grupo):
+                            if($grupo->getId_categoria() == $categoria->getId_categoria()):
+                          ?>
+                            <li><a href="<?php echo $this->base_url; ?>Loja/viewSub/<?php echo $grupo->getId_grupo(); ?>"
+                                   style="padding: 5px !important; padding-left: 25px !important;">
+                                    <?php echo $grupo->getNome(); ?>
+                                </a>
+                            </li>
+                          <?php endif; endforeach; ?>
+                        </ul></li>
                       </ul>
                     </li>
                   <?php endforeach; ?>
