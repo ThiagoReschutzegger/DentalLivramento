@@ -271,7 +271,7 @@ class SubgrupoModel extends Model {
     }
     
     public function removeEmpty() {
-        $sql = "DELETE FROM subgrupo WHERE id_subgrupo not in (SELECT id_subgrupo FROM item)";
+        $sql = "DELETE FROM subgrupo WHERE id_subgrupo not in (SELECT id_subgrupo FROM produto)";
         $this->ExecuteCommand($sql, array());
     }
 

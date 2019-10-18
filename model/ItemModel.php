@@ -226,9 +226,18 @@ class ItemModel extends Model {
       
       public function getItemBy($id_subgrupo, $id_marca, $tipo) {
         $list = [];
-        $sql = "SELECT * FROM item WHERE id_subgrupo = :id_subgrupo AND id_marca = :id_marca AND tipo = '".$tipo."'";
-        $item = $this->ExecuteQuery($sql, [':id_subgrupo' => $id_subgrupo, ':id_marca' => $id_marca])[0];
+        $sql = "SELECT * FROM item WHERE id_subgrupo = :id_subgrupo AND id_marca = :id_marca AND tipo = :tipo";
+        $item = $this->ExecuteQuery($sql, [':id_subgrupo' => $id_subgrupo, ':id_marca' => $id_marca, ':tipo' => $tipo])[0];
         return new Item($item['id_item'], $item['descricao'], $item['imagem'], $item['destaque'], $item['tipo'], $item['id_subgrupo'], $item['id_marca']);
+    }
+    
+    public function verificaItemBy($id_subgrupo, $id_marca, $tipo) {
+        $list = [];
+        $sql = "SELECT * FROM item WHERE id_subgrupo = :id_subgrupo AND id_marca = :id_marca AND tipo = :tipo";
+        if(!empty($this->ExecuteQuery($sql, [':id_subgrupo' => $id_subgrupo, ':id_marca' => $id_marca, ':tipo' => $tipo])[0])){
+            return true;
+        }else return false;
+    
     }
 
 }

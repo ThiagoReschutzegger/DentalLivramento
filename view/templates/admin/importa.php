@@ -21,7 +21,7 @@
                         <div class="line"></div>
                         <div class="form-group row">
                           <div class="col-sm-4 offset-sm-3">
-                            <button type="submit" name="add" value="true" class="btn btn-primary">Enviar</button>
+                            <button type="submit" name="add" value="true" onclick="sendTXT();return true;" class="btn btn-primary">Enviar</button>
                           </div>
                         </div>
                         <div class="line"></div>

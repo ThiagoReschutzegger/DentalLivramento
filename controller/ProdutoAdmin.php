@@ -541,10 +541,10 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
                     $categoria = $this->tratamentoCategoria($divisao[7],$categorias_array); // ARRUMA E SUBSTITUI O NOME DA MARCA PELO ID DA MESMA
 
                     $grupos_array = $this->modelGrupo->getGrupoByCategoriaIdForTxt($categoria[0]);
-                    $grupo = $this->tratamentoGrupo($divisao[6],$categoria[0],$grupos_array); // ARRUMA E SUBSTITUI O NOME DA MARCA PELO ID DA MESMA
+                    $grupo = $this->tratamentoGrupo($divisao[5],$categoria[0],$grupos_array); // ARRUMA E SUBSTITUI O NOME DA MARCA PELO ID DA MESMA
 
                     $subgrupos_array = $this->modelSubgrupo->getSubgrupoByGrupoForTxt($grupo[0]);
-                    $subgrupo = $this->tratamentoSubrupo($divisao[5],$grupo[0],$subgrupos_array); // ARRUMA E SUBSTITUI O NOME DA MARCA PELO ID DA MESMA
+                    $subgrupo = $this->tratamentoSubrupo($divisao[6],$grupo[0],$subgrupos_array); // ARRUMA E SUBSTITUI O NOME DA MARCA PELO ID DA MESMA
 
                     $marca = $this->tratamentoMarca($divisao[4],$marcas_array); // ARRUMA E SUBSTITUI O NOME DA MARCA PELO ID DA MESMA
 
@@ -556,15 +556,16 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
                     $divisao[5] = $grupo[0]; // TROCANDO NOME DO GRUPO PELO ID
                     $divisao[6] = $subgrupo[0]; // TROCANDO NOME DO GRUPO PELO ID
 //                    $divisao[9] = $tipo[0]; // TROCANDO NOME DO GRUPO PELO ID
-                    $especificacao = iconv(mb_detect_encoding($divisao[1], mb_detect_order(), true), "UTF-8//IGNORE", ucfirst(strtolower(($divisao[1]))));
-                    $tipo = iconv(mb_detect_encoding($divisao[9], mb_detect_order(), true), "UTF-8//IGNORE", ucfirst(strtolower(($divisao[9]))));
+                    $especificacao = ucfirst(strtolower(utf8_encode($divisao[1])));
+                    $tipo = ucfirst(strtolower(utf8_encode($divisao[9])));
                     
                     $barcodes_txt[] = $divisao[0];
 
                     //echo '<pre>';print_r($marca[0][0][]);echo '</pre>';
 
                     //echo '<pre>';print_r($divisao);echo '</pre>';
-
+                    //echo '<pre>';echo "1 - ".$especificacao." -> ".$divisao[1]."<br>";
+                    //echo "2 - ".$especificacao_2." -> ".$divisao[1]."<br>";echo '</pre>';
                      
                   if($this->verificaExistenciaProduto($divisao[0],$barcode_array)){
                     
@@ -573,8 +574,8 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
                     $id_marca_past = $produto->getId_marca();
                     $tipo_past = $produto->getTipo();
                     
-                    $item = $this->modelItem->getItemBy($id_sub_past, $id_marca_past, $tipo_past);
-                    if(!empty($item)){
+                    if($this->modelItem->verificaItemBy($id_sub_past, $id_marca_past, $tipo_past)){
+                        $item = $this->modelItem->getItemBy($id_sub_past, $id_marca_past, $tipo_past);
                         $id_item = $item->getId_item();
                         $bool = true;
                     }else{
@@ -648,7 +649,7 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
 
     private function tratamentoMarca($marca,$array){
       //var_dump($marca);echo"<br>";
-      $marca = iconv(mb_detect_encoding($marca, mb_detect_order(), true), "UTF-8//IGNORE", ucfirst(strtolower(($marca)))); // Como no .txt a marca é toda maiúscula, eu fiz isso pra q a primeira fosse maiuscula e as outras nao.
+      $marca = ucfirst(strtolower(utf8_encode($marca))); // Como no .txt a marca é toda maiúscula, eu fiz isso pra q a primeira fosse maiuscula e as outras nao.
 
       if(empty($array)) $bool = false;
       foreach ($array as $pica) {
@@ -673,7 +674,7 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
 
     private function tratamentoCategoria($categoria,$array){
 
-      $categoria = iconv(mb_detect_encoding($categoria, mb_detect_order(), true), "UTF-8//IGNORE", ucfirst(strtolower(($categoria)))); // Como no .txt a marca é toda maiúscula, eu fiz isso pra q a primeira fosse maiuscula e as outras nao.
+      $categoria = ucfirst(strtolower(utf8_encode($categoria))); // Como no .txt a marca é toda maiúscula, eu fiz isso pra q a primeira fosse maiuscula e as outras nao.
 
       if(empty($array)) $bool = false;
       foreach ($array as $pica) {
@@ -699,7 +700,7 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
 
     private function tratamentoGrupo($grupo,$id_categoria,$array){
 
-    $grupo = iconv(mb_detect_encoding($grupo, mb_detect_order(), true), "UTF-8//IGNORE", ucfirst(strtolower(($grupo)))); // Como no .txt a marca é toda maiúscula, eu fiz isso pra q a primeira fosse maiuscula e as outras nao.
+    $grupo = ucfirst(strtolower(utf8_encode($grupo))); // Como no .txt a marca é toda maiúscula, eu fiz isso pra q a primeira fosse maiuscula e as outras nao.
 
     if(empty($array)) $bool = false;
     if (is_array($array) || is_object($array)){
@@ -751,7 +752,7 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
 
     private function tratamentoSubrupo($subgrupo,$id_grupo,$array){
 
-      $subgrupo = iconv(mb_detect_encoding($subgrupo, mb_detect_order(), true), "UTF-8//IGNORE", ucfirst(strtolower(($subgrupo)))); // Como no .txt a marca é toda maiúscula, eu fiz isso pra q a primeira fosse maiuscula e as outras nao.
+      $subgrupo = ucfirst(strtolower(utf8_encode($subgrupo))); // Como no .txt a marca é toda maiúscula, eu fiz isso pra q a primeira fosse maiuscula e as outras nao.
 
       if(empty($array)) $bool = false;
       if (is_array($array) || is_object($array)){
@@ -791,7 +792,7 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
 
       //print_r($array);echo"kkk";
 
-      $tipo_txt = iconv(mb_detect_encoding($tipo_txt, mb_detect_order(), true), "UTF-8//IGNORE", ucfirst(strtolower(($tipo_txt)))); // Como no .txt a marca é toda maiúscula, eu fiz isso pra q a primeira fosse maiuscula e as outras nao.
+      $tipo_txt = ucfirst(strtolower(utf8_encode($tipo_txt))); // Como no .txt a marca é toda maiúscula, eu fiz isso pra q a primeira fosse maiuscula e as outras nao.
 
       if(empty($array)) $bool = false;
 
@@ -827,11 +828,19 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
               $id_sub_past = $produto->getId_subgrupo();
               $id_marca_past = $produto->getId_marca();
               $tipo_past = $produto->getTipo();
+              
+//              echo "<pre>".$id_sub_past." - ".$id_marca_past." - ".$tipo_past."<br></pre>";
+              
               $item = $this->modelItem->getItemBy($id_sub_past, $id_marca_past, $tipo_past);
-              $id_item = $item->getId_item();
+              $prod = $this->model->getProdutosByIdsAndTipo($id_sub_past, $id_marca_past, $tipo_past);
+              
+              if(count($prod) == 1){
+                $id_item = $item->getId_item();
+                $this->modelItem->removeItem($id_item);  
+              }
+//              echo '<pre>';print_r($item);echo '</pre>';
 
               $this->model->removeProdutoByBarcode($barcode);
-              $this->modelItem->removeItem($id_item);   
         }
       }
       

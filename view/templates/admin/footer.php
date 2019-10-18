@@ -24,5 +24,20 @@
 <script src="<?php echo $this->asset; ?>js/charts-home.js"></script>
 <!-- Main File-->
 <script src="<?php echo $this->asset; ?>js/front.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script type="text/javascript">
+        function sendTXT() {
+            Swal.fire({
+              imageUrl: 'https://futeinvest.com/wp-content/uploads/carta-novaampulheta.gif',
+              title: 'Atualizando... Aguarde!',
+              showConfirmButton: false,
+              showCloseButton: false,
+              imageWidth: 200,
+              imageHeight: 200,
+              imageAlt: 'loading',
+            })
+        };
+    </script>
 </body>
 </html>
