@@ -239,5 +239,47 @@ class ItemModel extends Model {
         }else return false;
     
     }
+    
+    public function selectDuplicate($id_subgrupo, $id_marca, $tipo) {
+        $list = [];
+        $sql = "select * from item
+                where (tipo,id_subgrupo,id_marca) in (
+                  select tipo,id_subgrupo,id_marca
+                  from   item
+                  group by tipo,id_subgrupo,id_marca
+                  having count(*) > 1
+                ) and id_subgrupo = :id_subgrupo
+                and id_marca = :id_marca
+                and tipo = :tipo
+                ORDER BY id_item DESC";
+        $consulta = $this->ExecuteQuery($sql, [':id_subgrupo' => $id_subgrupo, ':id_marca' => $id_marca, ':tipo' => $tipo]);
+        
+         foreach ($consulta as $item) {
+            $list[] = new Item($item['id_item'], $item['descricao'], $item['imagem'], $item['destaque'], $item['tipo'], $item['id_subgrupo'], $item['id_marca']);
+        }
+        //echo '<pre>';var_dump($list);echo '</pre>';die;
+        return $list;
+        
+    }
+    
+    public function isDuplicate() {
+        $list = [];
+        $sql = "select *
+                  from   item
+                  group by tipo,id_subgrupo,id_marca
+                  having count(*) > 1
+                ";
+        
+        $consulta = $this->ExecuteQuery($sql, array());
+        
+         foreach ($consulta as $item) {
+            $list[] = new Item($item['id_item'], $item['descricao'], $item['imagem'], $item['destaque'], $item['tipo'], $item['id_subgrupo'], $item['id_marca']);
+        }
+        
+        return $list;
+    
+    }
+    
+    
 
 }
