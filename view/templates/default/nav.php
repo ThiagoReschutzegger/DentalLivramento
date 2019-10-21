@@ -27,6 +27,7 @@ $(document).ready(function(){
   <body class="body-wrapper version1">
 
     <!-- Preloader -->
+    <?php if(isset($data['preloader']) && $data['preloader']=="1"): ?>
     <div id="preloader" class="smooth-loader-wrapper">
       <div class="preloader_container">
         <div class="block"></div>
@@ -47,6 +48,7 @@ $(document).ready(function(){
         <div class="block"></div>
       </div>
     </div>
+    <?php endif;?>
 
     <div class="main-wrapper">
 
@@ -87,7 +89,7 @@ $(document).ready(function(){
                       <li>
                         <a href="#">
                           <div class="media">
-                            <img class="media-left media-object img-fluid" style="max-height:70px;max-width:80px;" 
+                            <img class="media-left media-object img-fluid" style="max-height:70px;max-width:80px;"
                                  src="<?php if($item[0]->getImagem() != "") echo $item[0]->getImagem(); else echo $this->base_url."view/images/produto-sem-imagem.gif"; ?>" alt="cart-Image">
                             <div class="media-body">
                               <h5 class="media-heading"><?php echo $item[0]->getNome(); ?></h5>
