@@ -148,6 +148,7 @@
 <script src="<?php echo $this->asset ?>plugins/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
 <script src="<?php echo $this->asset ?>plugins/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
 <script src="<?php echo $this->asset ?>plugins/slick/slick.js"></script>
+<script src="<?php echo $this->asset ?>plugins/owl-carousel/owl.carousel.js"></script>
 <script src="<?php echo $this->asset ?>plugins/fancybox/jquery.fancybox.min.js"></script>
 <script src="<?php echo $this->asset ?>plugins/iziToast/js/iziToast.js"></script>
 <script src="<?php echo $this->asset ?>plugins/prismjs/prism.js"></script>
@@ -155,6 +156,7 @@
 <script src="<?php echo $this->asset ?>plugins/countdown/jquery.syotimer.js"></script>
 <script src="<?php echo $this->asset ?>plugins/velocity/velocity.min.js"></script>
 <script src="<?php echo $this->asset ?>js/custom.js"></script>
+<script src="<?php echo $this->asset ?>js/custom_2.js"></script>
 <script src="<?php echo $this->asset ?>plugins/slider-zoom/jquery.exzoom.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js"></script>
 <script src="<?php echo $this->asset ?>js/mmenu.polyfills.js"></script>

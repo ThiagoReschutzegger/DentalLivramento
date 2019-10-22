@@ -114,7 +114,7 @@ $ids_prod[] = 0;
               foreach ($data['item'] as $item): 
                if($item->getId_marca()."-".$item->getTipo() == $ordem): //$produto->getId_marca()."-".$produto->getTipo() 
               ?>
-              <div class="col-md-6 col-lg-4">
+              <div class="col-sm-6 col-lg-4 produto-box">
                 <div class="productBox">
 
                   <div class="productImage clearfix">
@@ -141,7 +141,7 @@ $ids_prod[] = 0;
           foreach ($data['item'] as $item): 
           ?>
              
-            <div class="col-md-6 col-lg-4">
+            <div class="col-sm-6 col-lg-4 produto-box">
                 <div class="productBox">
 
                   <div class="productImage clearfix">

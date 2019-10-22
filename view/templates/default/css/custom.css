@@ -50,6 +50,9 @@ body{
   .botao-insta{
     margin-top: 20px;
   }
+  .produto-box{
+    width: 50% !important;
+  }
   .font-table-cart{
     font-size: 10px !important;
     font-weight: 400 !important;
