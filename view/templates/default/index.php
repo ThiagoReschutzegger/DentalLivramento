@@ -1,12 +1,6 @@
 
-<div class="fixed-tabs-Whats">
-  <div class="aba-contactWhats">
-    <div class="aba-whatsphone">
-      <div class="aba-whatsphone-icone"></div>
-      <div class="aba-whatsphone-text"><a target="_blank" href="https://api.whatsapp.com/send?phone=5551989292792">WhatsApp<br>
-        <strong>(51) 98929-2792</strong></a></div>
-    </div>
-  </div>
+<div id="mySidenav" class="sidenav">
+  <a href="#" id="about"><img width="40" src="https://www.freepnglogos.com/uploads/whatsapp-logo-app-png-4.png"></a>
 </div>
 
 <!-- BANNER -->
