@@ -157,7 +157,85 @@
 <script src="<?php echo $this->asset ?>js/custom.js"></script>
 <script src="<?php echo $this->asset ?>plugins/slider-zoom/jquery.exzoom.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js"></script>
+<script src="<?php echo $this->asset ?>js/mmenu.polyfills.js"></script>
+<script src="<?php echo $this->asset ?>js/mmenu.js"></script>
+<script>
+
+	new Mmenu(
+		document.querySelector('#menu'),
+		{
+					extensions	: ['theme-white','shadow-page',"pagedim-black"],
+          slidingsubmenus: false,
+					setSelected	: true,
+					counters	: true,
+					searchfield : {
+						placeholder		: 'Pesquisar no site'
+					},
+					iconbar		: {
+						use 		: '(min-width: 450px)',
+						top 		: [
+							'<a href="#/"><span class="fa fa-bars"></span></a>'
+						],
+						bottom 		: [
+							'<a href="https://www.facebook.com/DentalLivramento/"><span class="fa fa-facebook"></span></a>',
+							'<a href="https://www.instagram.com/dentallivramento/"><span class="fa fa-instagram"></span></a>'
+						]
+					},
+					sidebar		: {
+						collapsed		: {
+							use 			: '(min-width: 450px)',
+							hideNavbar		: true
+						},
+						expanded		: {
+							use 			: '(min-width: 940px)'
+						}
+					},
+					navbars		: [
+						{
+							content		: [ 'searchfield' ]
+						}, {
+							type		: 'tabs',
+							content		: [
+								'<a href="#panel-menu"><i class="fa fa-bars"></i> <span>Menu</span></a>'
+							]
+						}, {
+							content		: [ 'prev', 'breadcrumbs', 'close' ]
+						}, {
+							position	: 'bottom',
+							content		: [ '<a href="http://webfrontier.000webhostapp.com/" target="_blank">Desenvolvido por Web Frontier</a>' ]
+						}
+					]
+				}, {
+					searchfield : {
+						clear 		: true
+					},
+					navbars		: {
+						breadcrumbs	: {
+							removeFirst	: true
+						}
+					}
+				}
+			);
+
+			document.addEventListener( 'click', function( evnt ) {
+				var anchor = evnt.target.closest( 'a[href^="#/"]' );
+				if ( anchor ) {
+					evnt.preventDefault();
+				}
+			});
+</script>
 <script type="text/javascript">
+
+  function eventFire(el, etype){
+    if (el.fireEvent) {
+      el.fireEvent('on' + etype);
+    } else {
+      var evObj = document.createEvent('Events');
+      evObj.initEvent(etype, true, false);
+      el.dispatchEvent(evObj);
+    }
+  }
+
     $( document ).ready(function() {
         $( "#teste" ).click(function() {
             $("#teste2").toggle();
@@ -165,7 +243,14 @@
         $('.ddd_tel').mask('(99) 99999-9999');
         $('.cep').mask('99999-999');
         $(".eapps-remove-link").css({ 'background-color' : '', 'opacity' : '0' });
+
+        eventFire(document.getElementsByClassName('mm-btn mm-btn_close mm-navbar__btn')[0], 'click');
+
+
+
     });
+
+
 </script>
 
 </body>

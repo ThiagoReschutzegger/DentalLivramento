@@ -19,6 +19,7 @@
     <link href="<?php echo $this->asset ?>plugins/iziToast/css/iziToast.css" rel="stylesheet">
     <link href="<?php echo $this->asset ?>plugins/prismjs/prism.css" rel="stylesheet">
     <link href="<?php echo $this->asset ?>plugins/slider-zoom/jquery.exzoom.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="<?php echo $this->asset ?>css/demo.css" /> -->
     <link rel="stylesheet" type="text/css" href="<?php echo $this->asset ?>plugins/rs-plugin/css/settings.css" media="screen">
     <link rel="stylesheet" type="text/css" href="<?php echo $this->asset ?>plugins/slick/slick.css" media="screen">
     <link rel="stylesheet" type="text/css" href="<?php echo $this->asset ?>plugins/slick/slick-theme.css" media="screen">
@@ -31,6 +32,7 @@
     <link href="<?php echo $this->asset ?>css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo $this->asset ?>css/<?php echo $data['estilo']->getLocal(); ?>" id="option_color">
     <link rel="stylesheet" href="<?php echo $this->asset ?>css/custom.css">
+    <link rel="stylesheet" href="<?php echo $this->asset ?>css/mmenu.css" />
 
     <!-- Icons -->
     <link rel="shortcut icon" href="<?php echo $this->asset ?>img/icon.ico">

@@ -52,6 +52,7 @@ class Home extends Controller{
         $data['marcaslider'] = $this->modelMarca->getMarcaSlider();
         $data['itens'] = $this->getList();
         $data['prod-destaq'] = $this->modelItem->getItemDestaque();
+        $data['subgrupo-nav'] = $this->modelSubgrupo->getSubgrupo();
         $data['preloader'] = '1';
 
         if(!empty($data['slider'])){ //se vier algo no slider

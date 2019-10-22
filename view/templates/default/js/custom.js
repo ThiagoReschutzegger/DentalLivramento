@@ -4,7 +4,7 @@ jQuery(document).ready(function(){
 
 	setTimeout(function(){
 		$('body').addClass('loaded');
-	}, 0);
+	}, 10);
 
 
 	$(window).on('load',function(){
