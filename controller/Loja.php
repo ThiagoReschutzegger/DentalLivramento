@@ -44,32 +44,34 @@ class Loja extends Controller{
     public function index(){
       header('location:' . $this->config->base_url);
     }
-    
+
     public function viewGrupo($id_categoria){
         $data['estilo'] = $this->model->getEstiloAtual();
+        $data['subgrupo-nav'] = $this->modelSubgrupo->getSubgrupo();
         $data['grupo'] = $this->modelGrupo->getGrupoByCategoriaId($id_categoria);
         $data['categoria-atual'] = $this->modelCategoria->getCategoriaById($id_categoria);
         $data['categoria'] = $this->modelCategoria->getCategoria();
         $data['itens'] = $this->father->getList();
-        
+
         $this->view->load('header',$data);
         $this->view->load('nav',$data);
         $this->view->load('shopping_grupo', $data);
         $this->view->load('footer');
     }
-    
+
     public function viewSub($id_grupo){
         $data['estilo'] = $this->model->getEstiloAtual();
         $data['grupo'] = $this->modelGrupo->getGrupo();
+        $data['subgrupo-nav'] = $this->modelSubgrupo->getSubgrupo();
         $data['grupo-atual'] = $this->modelGrupo->getGrupoById($id_grupo);
         $data['categoria'] = $this->modelCategoria->getCategoria();
         $data['categoria-atual'] = $this->modelCategoria->getCategoriaByGrupoId($id_grupo);
         $data['subgrupo'] = $this->modelSubgrupo->getSubgrupoByGrupo($id_grupo);
         $data['itens'] = $this->father->getList();
-        
+
         $data['total-sub'] = count($data['subgrupo']);
-        
-        
+
+
         $this->view->load('header',$data);
         $this->view->load('nav',$data);
         $this->view->load('shopping_subs', $data);
@@ -83,6 +85,7 @@ class Loja extends Controller{
         $data['estilo'] = $this->model->getEstiloAtual();
         $data['subgrupo'] = $this->modelSubgrupo->getSubgrupoById($id_subgrupo);
         $data['grupo'] = $this->modelGrupo->getGrupo();
+        $data['subgrupo-nav'] = $this->modelSubgrupo->getSubgrupo();
         $data['grupo-atual'] = $this->modelGrupo->getGrupoById($data['subgrupo']->getId_grupo());
         $data['categoria'] = $this->modelCategoria->getCategoria();
         $data['categoria-atual'] = $this->modelCategoria->getCategoriaByGrupoId($data['subgrupo']->getId_grupo());
@@ -91,16 +94,16 @@ class Loja extends Controller{
         if (filter_input(INPUT_POST, 'filter')) {
 
             $ordem = filter_input(INPUT_POST, 'guiest_id1', FILTER_SANITIZE_STRING);
-            
+
             $data['item'] = $this->modelItem->getItemBySubgrupo($id_subgrupo);
             $data['ordem'] = $ordem;
 
         }else {
-          
+
             $data['item'] = $this->modelItem->getItemBySubgrupo($id_subgrupo);
             $data['ordem'] = "new";
         }
-        
+
         $data['produto'] = $this->modelproduto->getProdutosBySubgrupoId($id_subgrupo);
         $data['total_prod'] = count($data['item']);
 
@@ -122,20 +125,20 @@ class Loja extends Controller{
             if(!in_array($produto->getId_marca(), $ids_marca)){
                 $ids_marca[] = $produto->getId_marca();
             }
-            
-            
-            
+
+
+
         endforeach;
-        
+
         if($data['ordem'] == "menor"){
             $data['ordem_precos'] = $array; //para ordenar os itens em maior ou menor preço, sendo a ordem do array os ids das marcas a serem exibidas do maior ao menor, caso contrario inverter o array na exibição;
         }
         if($data['ordem'] == "maior"){
             $data['ordem_precos'] = array_reverse($array); //para ordenar os itens em maior ou menor preço, sendo a ordem do array os ids das marcas a serem exibidas do maior ao menor, caso contrario inverter o array na exibição;
         }
-        
+
         $data['marca'] = $this->modelMarca->getMarcaByIds($ids_marca);
-        
+
         if (filter_input(INPUT_POST, 'enviar-msg')) {
           $email = filter_input(INPUT_POST, 'email-msg', FILTER_SANITIZE_STRING);
           $msg = filter_input(INPUT_POST, 'mensagem-msg', FILTER_SANITIZE_STRING);
@@ -153,6 +156,7 @@ class Loja extends Controller{
       $data['preloader'] = '1';
       $data['estilo'] = $this->model->getEstiloAtual();
       $data['grupo'] = $this->modelGrupo->getGrupo();
+      $data['subgrupo-nav'] = $this->modelSubgrupo->getSubgrupo();
       $data['categoria'] = $this->modelCategoria->getCategoria();
       $data['itens'] = $this->father->getList();
       $data['modelo'] = '';
@@ -180,7 +184,7 @@ class Loja extends Controller{
             $data['texto'] = $texto;
             $data['modelo'] = "SearchDeProduto";
             $pass = true;
-            
+
             $ids_marca = [];
             foreach($data['produto'] as $produto):
                 if($produto->getId_subgrupo() != $data['subgrupo']->getId_subgrupo()) continue;
@@ -196,12 +200,12 @@ class Loja extends Controller{
             endforeach;
             $data['marca'] = $this->modelMarca->getMarcaByIds($ids_marca);
             $data['item'] = $this->modelItem->getItemByIds($data['subgrupo']->getId_subgrupo(), $ids_marca);
-            
+
 //            echo "<pre>";
 //            var_dump($data['produto']);
 //            echo "</pre>";
 //            die;
-            
+
         }elseif(!$pass){ // se nao achar nada
           $data['modelo'] = '';
           $data['texto'] = $texto;

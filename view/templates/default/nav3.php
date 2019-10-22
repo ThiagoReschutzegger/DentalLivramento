@@ -27,7 +27,7 @@ $(document).ready(function(){
   <body class="body-wrapper version1">
 
     <!-- Preloader -->
-    <?php //if(isset($data['preloader']) && $data['preloader']=="1"): ?>
+    <?php if(isset($data['preloader']) && $data['preloader']=="1"): ?>
     <div id="preloader" class="smooth-loader-wrapper">
       <div class="preloader_container">
         <div class="block"></div>
@@ -48,7 +48,7 @@ $(document).ready(function(){
         <div class="block"></div>
       </div>
     </div>
-    <?php //endif;?>
+    <?php endif;?>
 
     <div class="main-wrapper">
 
@@ -119,32 +119,6 @@ $(document).ready(function(){
         </div>
 
         <!-- NAVBAR -->
-        <nav id="menu">
-				<div id="panel-menu">
-					<ul>
-            <?php foreach($data['categoria'] as $categoria): ?>
-              <li><span><?php echo $categoria->getNome(); ?></span>
-                <ul>
-                  <?php foreach($data['grupo'] as $grupo):
-                    if($grupo->getId_categoria() == $categoria->getId_categoria()):
-                  ?>
-                    <li>
-                      <span><?php echo $grupo->getNome(); ?></span>
-                      <ul>
-                        <?php foreach($data['subgrupo-nav'] as $subgrupo):
-                          if($subgrupo->getId_grupo() == $grupo->getId_grupo()):
-                        ?>
-                          <li><a href="<?php echo $this->base_url;?>Loja/view/<?php echo $subgrupo->getId_subgrupo(); ?>"><?php echo $subgrupo->getNome(); ?></a></li>
-                        <?php endif; endforeach; ?>
-                      </ul>
-                    </li>
-
-            <?php endif; endforeach; ?></ul>
-            </li>
-            <?php endforeach; ?>
-					</ul>
-				</div>
-			</nav>
         <nav class="navbar navbar-main navbar-default navbar-expand-md" role="navigation">
           <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -174,7 +148,29 @@ $(document).ready(function(){
                   <a href="<?php echo $this->base_url; ?>Home" class="nav-link" role="button" aria-haspopup="true">Home</a>
                 </li>
                 <li class="nav-item dropdown megaDropMenu ">
-                  <a id="menuopener" href='#menu' class="dropdown-toggle nav-link" data-toggle="dropdown" data-hover="dropdown" data-delay="300" data-close-others="true" aria-expanded="false">Categorias</b></a>
+                  <a href="javascript:void(0)" class="dropdown-toggle nav-link" data-toggle="dropdown" data-hover="dropdown" data-delay="300" data-close-others="true" aria-expanded="false" id="blockclick">Categorias</b></a>
+                  <ul class="dropdown-menu row">
+                    <?php foreach($data['categoria'] as $categoria): ?>
+                    <li class="col-md-3 col-12">
+                        <ul class="list-unstyled" style="padding: 0; padding-top: 10px">
+                        <li style="display: none;"></li>
+                        <li><a class="title-categoria" href="javascript:;" data-toggle="collapse" aria-expanded="false" data-target="#nav<?php echo $categoria->getId_categoria(); ?>"><?php echo $categoria->getNome(); ?> <i class="fa fa-plus"></i></a></li>
+                        <li><ul id="nav<?php echo $categoria->getId_categoria(); ?>" class="collapse collapseItem list-unstyled" style="padding-top:0;">
+                          <li style="display: none;"></li>
+                          <?php foreach($data['grupo'] as $grupo):
+                            if($grupo->getId_categoria() == $categoria->getId_categoria()):
+                          ?>
+                            <li><a href="<?php echo $this->base_url; ?>Loja/viewSub/<?php echo $grupo->getId_grupo(); ?>"
+                                   style="padding: 5px !important; padding-left: 25px !important;">
+                                    <?php echo $grupo->getNome(); ?>
+                                </a>
+                            </li>
+                          <?php endif; endforeach; ?>
+                        </ul></li>
+                      </ul>
+                    </li>
+                  <?php endforeach; ?>
+                  </ul>
                 </li>
                 <li class="nav-item">
                   <a href="#contato" class="nav-link scrollLink" role="button" aria-haspopup="true">Contato</a>
