@@ -194,15 +194,7 @@
 						{
 							content		: [ 'searchfield' ]
 						}, {
-							type		: 'tabs',
-							content		: [
-								'<a href="#panel-menu"><i class="fa fa-bars"></i> <span>Menu</span></a>'
-							]
-						}, {
 							content		: [ 'prev', 'breadcrumbs', 'close' ]
-						}, {
-							position	: 'bottom',
-							content		: [ '<a href="http://webfrontier.000webhostapp.com/" target="_blank">Desenvolvido por Web Frontier</a>' ]
 						}
 					]
 				}, {
