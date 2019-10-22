@@ -113,7 +113,7 @@
     </div>
     <div class="row featuredProducts featuredProductsSlider margin-bottom mouse-grab">
       <?php foreach($data['prod-destaq'] as $destaque): ?>
-          <div class="slide col-md-3">
+          <div class="slide col-sm-6 col-md-3">
             <div class="productImage clearfix">
               <img src="<?php if($destaque->getImagem() != "") echo $destaque->getImagem(); else echo $this->base_url."view/images/produto-sem-imagem.gif"; ?>">
               <div class="productMasking" onclick="location.href='<?php echo $this->base_url; ?>Home/viewProduto/<?php echo $destaque->getId_item(); ?>';" style="cursor: pointer; background-color: inherit !important;">
@@ -221,7 +221,9 @@
                 <br>
                 <center>
                 <div class="btn-group" role="group" aria-label="Basic example">
-              	  <a href="https://www.instagram.com/dentallivramento/" target="_blank"><button type="button" class="btn btn-primary btn-rounded btn-lg"><i class="fa fa-instagram"></i>&nbspVISITE NOSSO INSTAGRAM</button></a>
+              	  <a href="https://www.instagram.com/dentallivramento/" target="_blank">
+                      <button type="button" class="btn btn-primary btn-rounded btn-lg"><i class="fa fa-instagram"></i>&nbspVISITE NOSSO INSTAGRAM</button>
+                  </a>
               	</div>
                 </center>
               </ul>
@@ -234,7 +236,7 @@
 </section>
 
 <!-- LIGHT SECTION -->
-<section class="lightSection clearfix mouse-grab" style='filter:grayscale(100%);'>
+<section class="lightSection clearfix mouse-grab botao-insta" style='filter:grayscale(100%);'>
   <div class="container">
     <div class="owl-carousel partnersLogoSlider">
       <?php foreach ($data['marcaslider'] as $marca) :

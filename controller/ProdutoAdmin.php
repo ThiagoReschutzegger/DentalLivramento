@@ -844,6 +844,19 @@ public function uploadTxt(){// Upload do .txt para atualizar preço e estoque. S
         }
       }
       
+      $item_repet = $this->modelItem->isDuplicate();
+      if(!empty($item_repet)){
+          foreach ($item_repet as $item){
+              $duplicado = $this->modelItem->selectDuplicate($item->getId_subgrupo(), $item->getId_marca(), $item->getTipo());
+              $count = count($duplicado);
+              while(1 < $count){
+                  $this->modelItem->removeItem($duplicado[$count-1]->getId_item());
+                  $count--;
+              }
+          }
+      }
+      
+      
       $this->modelSubgrupo->removeEmpty(); //select * from subgrupo where id_subgrupo not in (select id_subgrupo from item)
       $this->modelGrupo->removeEmpty();
       $this->modelCategoria->removeEmpty();
