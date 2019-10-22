@@ -1,3 +1,14 @@
+
+<div class="fixed-tabs-Whats">
+  <div class="aba-contactWhats">
+    <div class="aba-whatsphone">
+      <div class="aba-whatsphone-icone"></div>
+      <div class="aba-whatsphone-text"><a target="_blank" href="https://api.whatsapp.com/send?phone=5551989292792">WhatsApp<br>
+        <strong>(51) 98929-2792</strong></a></div>
+    </div>
+  </div>
+</div>
+
 <!-- BANNER -->
 <div class="bannercontainer bannerV1 mouse-grab" style="overflow:hidden">
   <div class="fullscreenbanner-container">
@@ -141,7 +152,7 @@
 	display: none !important;
 }
     </style>
-    
+
     <!-- BANNER -->
     <?php if(!empty($data['destaque'])): ?>
     <div class="container">

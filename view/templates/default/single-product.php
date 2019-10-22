@@ -100,7 +100,7 @@ endforeach;
                   <ul class="list-inline">
                     <li><a href="<?php echo $this->base_url; ?>Loja/view/<?php echo $subgrupo->getId_subgrupo(); ?>" style="line-height: 25px"><i class="fa fa-reply" aria-hidden="true"></i>Continuar Comprando</a></li>
                     <li style="margin-right: 0px; float: right;">
-                      <a target="_blank" href="<?php echo $marca->getCatalogo(); ?>" class="btn btn-primary" style="font-size: 10px; line-height: 25px; height: 25px; color: white;">
+                      <a target="_blank" href="<?php echo $marca->getCatalogo(); ?>" class="btn btn-primary <?php if($marca->getCatalogo() == '') echo "disabled"; ?>" style="font-size: 10px; line-height: 25px; height: 25px; color: white;">
                         <i class="fa fa-file" aria-hidden="true"></i>&nbsp;Catálogo&nbsp;<?php echo $marca->getNome(); ?>
                       </a>
                     </li>
