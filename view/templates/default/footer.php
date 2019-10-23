@@ -166,7 +166,7 @@
 	new Mmenu(
 		document.querySelector('#menu'),
 		{
-					extensions	: ['theme-white','shadow-page',"pagedim-black"],
+					extensions	: ['theme-black','shadow-page',"pagedim-black"],
           slidingsubmenus: false,
 					setSelected	: true,
 					counters	: true,
@@ -174,7 +174,7 @@
 						placeholder		: 'Pesquisar no site'
 					},
 					iconbar		: {
-						use 		: '(min-width: 450px)',
+						use 		: '(min-width: 10000px)',
 						top 		: [
 							'<a href="#/"><span class="fa fa-bars"></span></a>'
 						],
@@ -185,11 +185,13 @@
 					},
 					sidebar		: {
 						collapsed		: {
-							use 			: '(min-width: 450px)',
-							hideNavbar		: true
+							use 			: '(min-width: 10000px)',
+							hideNavbar		: true,
+							hideDivider		: true  
 						},
 						expanded		: {
-							use 			: '(min-width: 940px)'
+							use 			: '(min-width: 10000px)',
+                                                        initial                 : 'close'
 						}
 					},
 					navbars		: [
@@ -246,6 +248,13 @@
 
 
 </script>
+
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="<?php echo $this->asset ?>plugins/slider_new/default.css">
+
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+<script src="<?php echo $this->asset ?>plugins/slider_new/default.js"></script>
 
 </body>
 </html>
