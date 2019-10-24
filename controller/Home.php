@@ -79,7 +79,7 @@ class Home extends Controller{
         }
 
         $this->view->load('header',$data);
-        $this->view->load('nav',$data);
+        $this->view->load('nav2',$data);
         $this->view->load('index', $data);
         $this->view->load('footer');
         $data['preloader'] = false;
