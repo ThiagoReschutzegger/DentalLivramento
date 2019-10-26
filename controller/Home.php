@@ -53,6 +53,7 @@ class Home extends Controller{
         $data['itens'] = $this->getList();
         $data['prod-destaq'] = $this->modelItem->getItemDestaque();
         $data['subgrupo-nav'] = $this->modelSubgrupo->getSubgrupo();
+        $data['categoria-dstq'] = $this->modelCategoria->getCategoriaDestaque();
         $data['preloader'] = '1';
 
         if(!empty($data['slider'])){ //se vier algo no slider
@@ -79,7 +80,7 @@ class Home extends Controller{
         }
 
         $this->view->load('header',$data);
-        $this->view->load('nav2',$data);
+        $this->view->load('nav',$data);
         $this->view->load('index', $data);
         $this->view->load('footer');
         $data['preloader'] = false;
@@ -92,6 +93,8 @@ class Home extends Controller{
         $data['grupo'] = $this->modelGrupo->getGrupo();
         $data['subgrupo-nav'] = $this->modelSubgrupo->getSubgrupo();
         $data['itens'] = $this->getList();
+        $data['subgrupo-nav'] = $this->modelSubgrupo->getSubgrupo();
+        $data['categoria-dstq'] = $this->modelCategoria->getCategoriaDestaque();
 
         $this->view->load('header',$data);
         $this->view->load('nav',$data);
@@ -111,6 +114,7 @@ class Home extends Controller{
         $data['itens'] = $this->getList();
         $data['prod-destaq'] = $this->modelItem->getItemDestaque();
         $data['subgrupo-nav'] = $this->modelSubgrupo->getSubgrupo();
+        $data['categoria-dstq'] = $this->modelCategoria->getCategoriaDestaque();
         $data['categoria'] = $this->modelCategoria->getCategoria();
         $data['grupo'] = $this->modelGrupo->getGrupo();
         //var_dump($data['subgrupo']);die;
@@ -200,6 +204,7 @@ class Home extends Controller{
         $data['categoria'] = $this->modelCategoria->getCategoria();
         $data['grupo'] = $this->modelGrupo->getGrupo();
         $data['subgrupo-nav'] = $this->modelSubgrupo->getSubgrupo();
+        $data['categoria-dstq'] = $this->modelCategoria->getCategoriaDestaque();
         $data['itens'] = $this->getList();
 
         if($deletar != -1){
@@ -225,6 +230,7 @@ class Home extends Controller{
         $data['categoria'] = $this->modelCategoria->getCategoria();
         $data['grupo'] = $this->modelGrupo->getGrupo();
         $data['subgrupo-nav'] = $this->modelSubgrupo->getSubgrupo();
+        $data['categoria-dstq'] = $this->modelCategoria->getCategoriaDestaque();
         $data['itens'] = $this->getList();
 
         if (filter_input(INPUT_POST, 'add')) {
@@ -263,7 +269,8 @@ class Home extends Controller{
           $data['categoria'] = $this->modelCategoria->getCategoria();
           $data['grupo'] = $this->modelGrupo->getGrupo();
           $data['itens'] = $this->getList();
-          $data['subgrupo-nav'] = $this->modelSubgrupo->getSubgrupo();
+        $data['subgrupo-nav'] = $this->modelSubgrupo->getSubgrupo();
+        $data['categoria-dstq'] = $this->modelCategoria->getCategoriaDestaque();
           $data['dados'] = $dados;
 
           $this->view->load('header',$data);
@@ -281,6 +288,7 @@ class Home extends Controller{
         $data['grupo'] = $this->modelGrupo->getGrupo();
         $data['itens'] = $this->getList();
         $data['subgrupo-nav'] = $this->modelSubgrupo->getSubgrupo();
+        $data['categoria-dstq'] = $this->modelCategoria->getCategoriaDestaque();
         $data['preloader'] = '1';
         $this->view->load('header',$data);
         $this->view->load('nav',$data);
@@ -317,6 +325,7 @@ class Home extends Controller{
         $data['estilo'] = $this->model->getEstiloAtual();
         $data['categoria'] = $this->modelCategoria->getCategoria();
         $data['subgrupo-nav'] = $this->modelSubgrupo->getSubgrupo();
+        $data['categoria-dstq'] = $this->modelCategoria->getCategoriaDestaque();
         $data['grupo'] = $this->modelGrupo->getGrupo();
         $data['itens'] = $this->getList();
 
@@ -329,6 +338,8 @@ class Home extends Controller{
         $data['estilo'] = $this->model->getEstiloAtual();
         $data['categoria'] = $this->modelCategoria->getCategoria();
         $data['grupo'] = $this->modelGrupo->getGrupo();
+        $data['subgrupo-nav'] = $this->modelSubgrupo->getSubgrupo();
+        $data['categoria-dstq'] = $this->modelCategoria->getCategoriaDestaque();
         $data['itens'] = $this->getList();
 
         $this->view->load('header',$data);

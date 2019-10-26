@@ -24,7 +24,7 @@
   </div>
   </div>
 </div>
-<div class="row col-sm-12 col-md-8 heightiado" height="400px" style="border:0; margin-left: 0vw; background: url('<?php echo $this->asset; ?>img/maps.png'); background-size: cover; cursor: pointer;" onclick="window.open('https://goo.gl/maps/YXtkNTJjGjZsRFpM6');"></div>
+<div class="row col-sm-12 col-md-8 heightiado" height="400px" style="border:0; margin-left: 0vw; background: url('<?php echo $this->asset; ?>img/maps.png'); background-size: cover; cursor: pointer; background-position: center center;" onclick="window.open('https://goo.gl/maps/YXtkNTJjGjZsRFpM6');"></div>
 </div>
 <div class="row" style="margin-top: 30px">
 <div class="col-md-4 col-12">
@@ -229,6 +229,15 @@
       el.dispatchEvent(evObj);
     }
   }
+  
+    function openCategoria(id_categoria){
+       eventFire(document.getElementById('openMenu'), 'click');
+       setTimeout(function() {
+           var element = $(":first-child", document.getElementById('cat-'+id_categoria))[0];
+            eventFire(element, 'click');
+        },600);
+       
+   }
 
     $( document ).ready(function() {
         $( "#teste" ).click(function() {
@@ -241,7 +250,7 @@
         eventFire(document.getElementsByClassName('mm-btn mm-btn_close mm-navbar__btn')[0], 'click');
 
 
-
+        
     });
 
 

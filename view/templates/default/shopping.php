@@ -51,7 +51,7 @@ $ids_prod[] = 0;
           <div class="panel-heading">Categorias</div>
           <div class="panel-body">
             <div class="collapse navbar-collapse navbar-ex1-collapse navbar-side-collapse">
-              <ul class="nav navbar-nav side-nav">
+                <ul class="nav navbar-nav side-nav" style="background-color: white;">
                 <li>
                   <a href="javascript:;" data-toggle="collapse" aria-expanded="true" data-target="#menu_side<?php echo $cat_atual->getId_categoria();?>"><?php echo $cat_atual->getNome();?><i class="fa fa-plus"></i></a>
                   <ul id="menu_side<?php echo $cat_atual->getId_categoria();?>" class="collapse collapseItem show">

@@ -66,14 +66,26 @@ class CategoriaAdmin extends Admin {
 //    }
 
     public function updateCategoria($ident) {
-      $data['msg'] = '';
+    $data['categoria-dstq'] = $this->model->getCategoriaDestaque();
+    $count = count($data['categoria-dstq']);
+    $data['key'] = true;
+    if($count > 2) $data['key'] = false;
+    foreach($data['categoria-dstq'] as $categoria):
+        if($ident == $categoria->getId_categoria()){
+            $data['key'] = true;
+        }
+    endforeach;
+    
+    
+    $data['msg'] = '';
       if (filter_input(INPUT_POST, 'upd')) {
         $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_STRING);
         $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
+        $destaque = filter_input(INPUT_POST, 'destaque', FILTER_SANITIZE_STRING);
         $descricao = '..';
         $imagem = filter_input(INPUT_POST, 'imagem', FILTER_SANITIZE_STRING);
-        if ($id && $nome && $descricao && $imagem) {
-            $categoria = new Categoria($id,$nome,$descricao,$imagem);
+        if ($id && $nome && $descricao) {
+            $categoria = new Categoria($id,$nome,$descricao,$imagem,$destaque);
             if ($this->model->updateCategoria($categoria)) {
                 $this->index();
                 return true;

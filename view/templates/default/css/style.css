@@ -1035,6 +1035,7 @@ body.loaded {
   margin-right: 15px;
   margin-top: 0px;
   color: #ffffff;
+  top: 0 !important;
   font-size: 22px;
   position: absolute;
   right: 0;
@@ -1698,12 +1699,6 @@ body.bodyColor.container {
   font-size: 13px;
   border-color: #ccc;
   background: transparent;
-}
-
-@media (min-width: 992px) {
-  .navTop-middle .searchBox .input-group .form-control {
-    border-left-color: transparent;
-  }
 }
 
 @media (min-width: 992px) {

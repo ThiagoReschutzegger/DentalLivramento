@@ -7,7 +7,7 @@ class CategoriaModel extends Model {
         $sql = "SELECT * FROM categoria ORDER BY nome asc";
         $consulta = $this->ExecuteQuery($sql, array());
         foreach ($consulta as $linha) {
-            $list[] = new Categoria($linha['id_categoria'],$linha['nome'],$linha['descricao'],$linha['imagem']);
+            $list[] = new Categoria($linha['id_categoria'],$linha['nome'],$linha['descricao'],$linha['imagem'], $linha['destaque']);
         }
         return $list;
     }
@@ -16,12 +16,12 @@ class CategoriaModel extends Model {
         $sql = "SELECT * FROM categoria WHERE id_categoria=:id;";
         $consulta = $this->ExecuteQuery($sql, [':id' => $id])[0];
         $categoria = $this->ExecuteQuery($sql, [':id' => $id])[0];
-            return new Categoria( $categoria['id_categoria'],$categoria['nome'],$categoria['descricao'],$categoria['imagem']);
+            return new Categoria( $categoria['id_categoria'],$categoria['nome'],$categoria['descricao'],$categoria['imagem'], $categoria['destaque']);
     }
 
     public function insertCategoria($categoria) {
-        $sql = "INSERT INTO categoria(nome,descricao,imagem) VALUES(:nome,:descricao,:imagem)";
-        if ($this->ExecuteCommand($sql,[':nome'=>$categoria->getNome(),':descricao'=>$categoria->getDescricao(),':imagem'=>$categoria->getImagem()])){
+        $sql = "INSERT INTO categoria(nome,descricao,imagem,destaque) VALUES(:nome,:descricao,:imagem,:destaque)";
+        if ($this->ExecuteCommand($sql,[':nome'=>$categoria->getNome(),':descricao'=>$categoria->getDescricao(),':imagem'=>$categoria->getImagem(),':destaque'=>$categoria->getDestaque()])){
             return true;
         } else {
             return false;
@@ -38,8 +38,8 @@ class CategoriaModel extends Model {
     }
 
     public function updateCategoria($categoria) {
-        $sql = "UPDATE categoria SET nome = :nome, imagem = :imagem, descricao = :descricao  WHERE id_categoria = :id";
-        $param = [':id'=>$categoria->getId_categoria(),':nome'=>$categoria->getNome(),':descricao'=>$categoria->getDescricao(),':imagem'=>$categoria->getImagem()];
+        $sql = "UPDATE categoria SET nome = :nome, imagem = :imagem, descricao = :descricao, destaque = :destaque WHERE id_categoria = :id";
+        $param = [':id'=>$categoria->getId_categoria(),':nome'=>$categoria->getNome(),':descricao'=>$categoria->getDescricao(),':destaque'=>$categoria->getDestaque(),':imagem'=>$categoria->getImagem()];
         if ($this->ExecuteCommand($sql,$param)) {
             return true;
         } else {
@@ -52,7 +52,7 @@ class CategoriaModel extends Model {
         $sql = "SELECT categoria.* FROM grupo JOIN categoria ON grupo.id_categoria=categoria.id_categoria WHERE id_grupo = :id";
         $query = $this->ExecuteQuery($sql, [':id' => $id]);
         foreach ($query as $linha) {
-            $list[] = new Categoria($linha['id_categoria'], $linha['nome'], $linha['descricao'], $linha['imagem']);
+            $list[] = new Categoria($linha['id_categoria'], $linha['nome'], $linha['descricao'], $linha['imagem'], $linha['destaque']);
         }
         //echo 'Cok';
         return $list;
@@ -90,6 +90,16 @@ class CategoriaModel extends Model {
     public function removeEmpty() {
         $sql = "DELETE FROM categoria WHERE id_categoria not in (SELECT id_categoria FROM grupo)";
         $this->ExecuteCommand($sql, array());
+    }
+    
+    public function getCategoriaDestaque() {
+        $list = [];
+        $sql = "SELECT * FROM categoria WHERE destaque = '1' ORDER BY nome asc";
+        $consulta = $this->ExecuteQuery($sql, array());
+        foreach ($consulta as $linha) {
+            $list[] = new Categoria($linha['id_categoria'],$linha['nome'],$linha['descricao'],$linha['imagem'], $linha['destaque']);
+        }
+        return $list;
     }
 
 }

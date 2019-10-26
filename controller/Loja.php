@@ -48,6 +48,7 @@ class Loja extends Controller{
     public function viewGrupo($id_categoria){
         $data['estilo'] = $this->model->getEstiloAtual();
         $data['subgrupo-nav'] = $this->modelSubgrupo->getSubgrupo();
+        $data['categoria-dstq'] = $this->modelCategoria->getCategoriaDestaque();
         $data['grupo'] = $this->modelGrupo->getGrupoByCategoriaId($id_categoria);
         $data['categoria-atual'] = $this->modelCategoria->getCategoriaById($id_categoria);
         $data['categoria'] = $this->modelCategoria->getCategoria();
@@ -63,6 +64,7 @@ class Loja extends Controller{
         $data['estilo'] = $this->model->getEstiloAtual();
         $data['grupo'] = $this->modelGrupo->getGrupo();
         $data['subgrupo-nav'] = $this->modelSubgrupo->getSubgrupo();
+        $data['categoria-dstq'] = $this->modelCategoria->getCategoriaDestaque();
         $data['grupo-atual'] = $this->modelGrupo->getGrupoById($id_grupo);
         $data['categoria'] = $this->modelCategoria->getCategoria();
         $data['categoria-atual'] = $this->modelCategoria->getCategoriaByGrupoId($id_grupo);
@@ -86,6 +88,7 @@ class Loja extends Controller{
         $data['subgrupo'] = $this->modelSubgrupo->getSubgrupoById($id_subgrupo);
         $data['grupo'] = $this->modelGrupo->getGrupo();
         $data['subgrupo-nav'] = $this->modelSubgrupo->getSubgrupo();
+        $data['categoria-dstq'] = $this->modelCategoria->getCategoriaDestaque();
         $data['grupo-atual'] = $this->modelGrupo->getGrupoById($data['subgrupo']->getId_grupo());
         $data['categoria'] = $this->modelCategoria->getCategoria();
         $data['categoria-atual'] = $this->modelCategoria->getCategoriaByGrupoId($data['subgrupo']->getId_grupo());
@@ -156,7 +159,8 @@ class Loja extends Controller{
       $data['preloader'] = '1';
       $data['estilo'] = $this->model->getEstiloAtual();
       $data['grupo'] = $this->modelGrupo->getGrupo();
-      $data['subgrupo-nav'] = $this->modelSubgrupo->getSubgrupo();
+    $data['subgrupo-nav'] = $this->modelSubgrupo->getSubgrupo();
+    $data['categoria-dstq'] = $this->modelCategoria->getCategoriaDestaque();
       $data['categoria'] = $this->modelCategoria->getCategoria();
       $data['itens'] = $this->father->getList();
       $data['modelo'] = '';

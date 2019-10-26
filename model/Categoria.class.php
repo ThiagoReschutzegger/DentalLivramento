@@ -6,12 +6,14 @@ class Categoria {
     public $nome;
     public $descricao;
     public $imagem;
+    public $destaque;
 
-    function __construct($id_categoria, $nome, $descricao, $imagem) {
+    function __construct($id_categoria, $nome, $descricao, $imagem, $destaque) {
         $this->id_categoria = $id_categoria;
         $this->nome = $nome;
         $this->descricao = $descricao;
         $this->imagem = $imagem;
+        $this->destaque = $destaque;
     }
 
     function getId_categoria() {
@@ -29,6 +31,10 @@ class Categoria {
     function getImagem() {
         return $this->imagem;
     }
+    
+    function getDestaque() {
+        return $this->destaque;
+    }
 
     function setId_categoria($id_categoria) {
         $this->id_categoria = $id_categoria;
@@ -44,6 +50,10 @@ class Categoria {
 
     function setImagem($imagem) {
         $this->imagem = $imagem;
+    }
+    
+    function setDestaque($destaque) {
+        $this->destaque = $destaque;
     }
 
 
