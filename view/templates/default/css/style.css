@@ -1691,7 +1691,7 @@ body.bodyColor.container {
 @media (min-width: 992px) {
   .navTop-middle .searchBox {
     display: table;
-    width: 68%;
+    width: 100%;
   }
 }
 
