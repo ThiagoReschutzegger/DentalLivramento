@@ -24,7 +24,7 @@
                 <div class="col-xl-6 col-sm-6">
                     <div class="item d-flex align-items-center">
                         <div class="icon bg-yellow"><i class="fa fa-star"></i></div>
-                        <div class="title"><a class="linkDash" href="<?php echo $this->base_url . "DestaqueAdmin"; ?>"><span>Destaques<br></span></a>
+                        <div class="title"><a class="linkDash" href="<?php echo $this->base_url . "SliderAdmin"; ?>"><span>Slides<br></span></a>
                             <!--<div class="progress">
                                 <div role="progressbar" style="width: 25%; height: 4px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-violet"></div>
                             </div>-->

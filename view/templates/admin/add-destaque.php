@@ -2,7 +2,7 @@
 <div class="col-lg-12">
   <?php if ($data['msg']): ?>
     <div class="row container-fluid">
-        <div class="col-sm-12 alert alert-<?php if($data['msg']== 'Adicionado com Sucesso!'){ echo "success";} else{ echo "danger";}?> alert-dismissable">
+        <div class="col-sm-12 alert alert-<?php if($data['msg_alt']== 's'){ echo "success";} else{ echo "danger";}?> alert-dismissable">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
             <?php echo $data['msg'] ?>
         </div>
@@ -10,45 +10,31 @@
   <?php endif ?>
   <div class="card">
     <div class="card-header d-flex align-items-center">
-      <h3 class="h4">Adicionar Destaque</h3>
+      <h3 class="h4">Adicionar Slide</h3>
     </div>
     <div class="card-body">
-      <form class="form-horizontal" method="post">
+      <form class="form-horizontal" method="post" enctype="multipart/form-data">
         <div class="line"></div>
         <div class="form-group row">
-          <label class="col-sm-3 form-control-label text-right">Link da imagem:</label>
+          <label class="col-sm-3 form-control-label text-right">Arquivo da imagem:</label>
           <div class="col-sm-8">
-            <input type="text" class="form-control" name="imagem">
-            <small class="help-block-none">Cole aqui o link da imagem. <b style="color:red;">SEMPRE terminado em <i>.jpg</i>, <i>.png</i> ou outras extensões imagem.</b></small>
+            <input class="form-control" type="file" name="foto" accept="image/*" style="height: 45px">
+            <small class="help-block-none">Arquivos .jpg, .png, .jpeg e .gif.</small>
           </div>
         </div>
-
+        
         <div class="form-group row">
-          <label class="col-sm-3 form-control-label text-right">Selecione o Grupo:</label>
+          <label class="col-sm-3 form-control-label text-right">Id do Produto:</label>
           <div class="col-sm-8">
-            <div class="input-group">
-                <div class="input-group-prepend">
-                  <button data-toggle="dropdown" type="button" class="btn btn-outline-secondary dropdown-toggle" aria-expanded="false">Selecionar<span class="caret"></span></button>
-                  <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">
-                    <a disabled="true" class="dropdown-item">Selecionar</a>
-                    <div class="dropdown-divider"></div>
-                    <a href="<?php echo $this->base_url; ?>GrupoAdmin/addGrupo" target="_blank" class="dropdown-item">Adicionar</a>
-                  </div>
-                </div>
-            <select class="form-control" name="id_grupo">
-              <option selected="selected" disabled="true">Selecione:</option>
-              <?php foreach( $data['grupo'] as $grupo ): ?>
-                  <option value="<?php echo $grupo->getId_grupo(); ?>" ><?php echo $grupo->getNome(); ?></option>
-              <?php endforeach; ?>
-            </select>
-          </div>
+            <input type="number" class="form-control" name="id_item">
+            <small class="help-block-none">Cole aqui o número final do link do produto. Ex: <i style="color:red;">http://dentallivramento.com.br/Home/viewProduto/</i><b style="color: red; background-color: lightblue;">878</b></small>
           </div>
         </div>
 
         <div class="form-group row">
           <input type="reset" class="btn btn-secondary col-sm-4 offset-sm-2" style="margin-right: 10px;" value="Limpar" />
           <input type="submit" class="btn btn-success col-sm-4 " value="Salvar" name="add" />
-            <a href="<?php echo $this->base_url; ?>DestaqueAdmin" class="btn btn-danger col-sm-8 offset-sm-2" style="margin-top: 10px;">Parar de Adicionar<a/>
+            <a href="<?php echo $this->base_url; ?>SliderAdmin" class="btn btn-danger col-sm-8 offset-sm-2" style="margin-top: 10px;">Parar de Adicionar</a>
         </div>
         </form>
     </div>

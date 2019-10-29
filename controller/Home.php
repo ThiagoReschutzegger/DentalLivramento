@@ -5,8 +5,8 @@ class Home extends Controller{
     protected $modelproduto;
     protected $modelCategoria;
     protected $modelGrupo;
-    protected $modelDestaque;
-    protected $modelSlider;
+    protected $modelSlider_1;
+    protected $modelSlider_2;
     protected $modelMarca;
     protected $modelSubgrupo;
     protected $modelItem;
@@ -24,8 +24,8 @@ class Home extends Controller{
         $this->modelproduto = new ProdutoModel();
         $this->modelCategoria = new CategoriaModel();
         $this->modelGrupo = new GrupoModel();
-        $this->modelDestaque = new DestaqueModel();
-        $this->modelSlider = new SliderModel();
+        $this->modelSlider_1 = new Slider_1Model();
+        $this->modelSlider_2 = new Slider_2Model();
         $this->modelMarca = new MarcaModel();
         $this->modelSubgrupo = new SubgrupoModel();
         $this->modelItem = new ItemModel();
@@ -46,8 +46,8 @@ class Home extends Controller{
         $data['estilo'] = $this->model->getEstiloAtual();
         $data['categoria'] = $this->modelCategoria->getCategoria();
         $data['grupo'] = $this->modelGrupo->getGrupo();
-        $data['destaque'] = $this->modelDestaque->getDestaque();
-        $data['slider'] = $this->modelSlider->getSlider();
+        $data['slider_1'] = $this->modelSlider_1->getSlider_1();
+        $data['slider_2'] = $this->modelSlider_2->getSlider_2();
         $data['marca'] = $this->modelMarca->getMarca();
         $data['marcaslider'] = $this->modelMarca->getMarcaSlider();
         $data['itens'] = $this->getList();
@@ -55,20 +55,6 @@ class Home extends Controller{
         $data['subgrupo-nav'] = $this->modelSubgrupo->getSubgrupo();
         $data['categoria-dstq'] = $this->modelCategoria->getCategoriaDestaque();
         $data['preloader'] = '1';
-
-        if(!empty($data['slider'])){ //se vier algo no slider
-          foreach($data['slider'] as $slider){
-            $data['packproduto'] = $this->modelPackproduto->getPackprodutoBySubgrupo($slider->getId_subgrupo());
-            $precos = [];
-            foreach($data['packproduto'] as $linha){
-              $precos[] = $linha->getPreco();
-            }
-            $data['preco_min'.$slider->getId_slider()] = min($precos);
-            $data['nome'.$slider->getId_slider()] = $data['packproduto'][0]->getNome();
-            $data['descricao'.$slider->getId_slider()] = $data['packproduto'][0]->getDescricao();
-            $data['id_sub'.$slider->getId_slider()] = $data['packproduto'][0]->getId_subgrupo();
-          }
-        }
 
         if(!empty($data['prod-destaq'])){ //se tiver algum item sendo destacado
             foreach($data['prod-destaq'] as $destaque){ // objeto item

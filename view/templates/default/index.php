@@ -24,10 +24,12 @@
               <li>
                 <img src="<?php echo $this->asset;?>img/slider-1.jpeg">
               </li>
+              <?php if($data['slider_1']):
+                  foreach ($data['slider_1'] as $slider):  ?>
               <li>
-                <img src="<?php echo $this->asset;?>img/slider-2.jpeg">
-
+                  <img onclick="window.open('<?php echo $this->base_url.'Home/viewProduto/'.$slider->getId_item();?>');" style="cursor: pointer" src="<?php echo $slider->getImagem();?>">
               </li>
+              <?php endforeach; endif;?>
         </ul>
     </div>
 
@@ -58,6 +60,28 @@
     </div>
   <?php endif; ?>
 
+    <div class="container">
+      <div class="row justify-content-md-end">
+        <div class="col-sm-12 ml-auto bannercontainer ">
+               <div class="slider fullscreen">
+                   <ul class="slides" style="height: 35vw;">
+                          <li>
+                            <img src="<?php echo $this->asset;?>img/slider-1.jpeg">
+                          </li>
+                          <?php if($data['slider_2']):
+                            foreach ($data['slider_2'] as $slider):  ?>
+                            <li>
+                                <img onclick="window.open('<?php echo $this->base_url.'Home/viewProduto/'.$slider->getId_item();?>');" style="cursor: pointer" src="<?php echo $slider->getImagem();?>">
+                            </li>
+                          <?php endforeach; endif;?>
+                    </ul>
+                </div>
+            </div>
+      </div>
+    </div>
+      
+      
+      
     <script>
     function linkSlider(id) {
         window.location.href=<?php echo $this->base_url; ?>+'Loja/view/'+id;
@@ -69,70 +93,6 @@
 	display: none !important;
 }
     </style>
-
-    <!-- BANNER -->
-    <?php if(!empty($data['destaque'])): ?>
-    <div class="container">
-      <div class="row justify-content-md-end">
-        <div class="col-sm-12 ml-auto bannercontainer ">
-          <div class="fullscreenbanner-container bannerV4">
-            <div class="fullscreenbanner">
-              <ul>
-                <?php
-                $num = count($data['destaque']);
-                $i = 1;
-                foreach ($data['destaque'] as $destaque):
-                 foreach ($data['grupo'] as $grupo):
-                    if($destaque->getId_grupo() == $grupo->getId_grupo()):?>
-                      <li data-transition='slidehorizontal' data-slotamount='5' data-masterspeed='700' data-title='Slide <?php echo $i; ?>' id="<?php echo $i; ?>" onclick='linkSlider(<?php echo $destaque->getId_grupo(); ?>)' data-plugin-options='{"gridwidth": 500, "gridheight": 500, "navigation": { "arrows": { "enable": false } }}' style="cursor: pointer;" >
-
-                        <img src='<?php echo $destaque->getImagem(); ?>' alt='slidebg1' data-bgfit='cover' data-bgposition='center center' data-bgrepeat='no-repeat'>
-                        <div class='slider-caption slider-captionV4'>
-                          <div  class='tp-caption rs-caption-2 sft'
-                            data-hoffset='0'
-                            data-x='85'
-                            data-y='115'
-                            data-speed='800'
-                            data-start='2000'
-                            data-easing='Back.easeInOut'
-                            data-endspeed='300'>
-                          </div> <div class="tp-caption rs-caption-3 sft"
-                            data-hoffset="0"
-                            data-x="85"
-                            data-y="240"
-                            data-speed="1000"
-                            data-start="3000"
-                            data-easing="Power4.easeOut"
-                            data-endspeed="300"
-                            data-endeasing="Power1.easeIn"
-                            data-captionhidden="off">
-                          </div>
-                          <div class="tp-caption rs-caption-4 sft"
-                            data-hoffset="0"
-                            data-x="85"
-                            data-y="300"
-                            data-speed="800"
-                            data-start="3500"
-                            data-easing="Power4.easeOut"
-                            data-endspeed="300"
-                            data-endeasing="Power1.easeIn"
-                            data-captionhidden="off">
-                          </div>
-                        </div>
-
-                      </li>
-                      <?php
-                      $i++;
-                    endif;
-                   endforeach;
-                  endforeach;?>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <?php endif;?>
 
     <div class="container">
       <div class="row justify-content-md-end">
