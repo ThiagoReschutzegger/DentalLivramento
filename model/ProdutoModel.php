@@ -308,7 +308,7 @@
             return array();
         }
     }
-    
+
     public function removeProdutoByBarcode($barcode) {
           $sql = "DELETE FROM produto WHERE barcode = :barcode";
           if ($this->ExecuteCommand($sql, [':barcode' => $barcode])) {
@@ -317,11 +317,26 @@
               return false;
           }
       }
-      
+
       public function getProdutoByBarcode($barcode) {
           $sql = "SELECT * FROM produto WHERE barcode=:barcode;";
           $produto = $this->ExecuteQuery($sql, [':barcode' => $barcode])[0];
           return new Produto($produto['id_produto'], $produto['barcode'], $produto['preco'], $produto['estoque'], $produto['especificacao'], $produto['tipo'], $produto['embalagem'], $produto['id_subgrupo'],$produto['id_marca']);
+      }
+
+      public function searchProduto2($pesquisa){
+
+        $list = [];
+
+        $sql = "SELECT * FROM produto WHERE MATCH (especificacao) AGAINST (:pesquisa)";
+        $consulta = $this->ExecuteQuery($sql, [':pesquisa' => $pesquisa]);
+
+        foreach ($consulta as $linha) {
+          $list[] = new Produto($linha['id_produto'], $linha['barcode'], $linha['preco'], $linha['estoque'], $linha['especificacao'], $linha['tipo'], $linha['embalagem'],$linha['id_subgrupo'],$linha['id_marca']);
+        }
+        //echo '<pre>';var_dump($list);echo '</pre>';die;
+        return $list;
+
       }
 
   }

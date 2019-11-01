@@ -62,7 +62,7 @@ class SubgrupoModel extends Model {
         }
         return $list;
     }
-    
+
     public function getSubgrupoByGrupoForTxt($id) {
         $list = [];
 
@@ -177,7 +177,7 @@ class SubgrupoModel extends Model {
         $query = $this->ExecuteQuery($sql, [':nome' => $nome]);
         return $query[0]['id_subgrupo'];
     }
-    
+
     public function getIdByNomeAndFather($nome, $id_grupo) {
         $list = [];
         $sql = "SELECT id_subgrupo FROM subgrupo WHERE nome = :nome AND id_grupo = :id";
@@ -269,10 +269,25 @@ class SubgrupoModel extends Model {
             return array();
         endif;
     }
-    
+
     public function removeEmpty() {
         $sql = "DELETE FROM subgrupo WHERE id_subgrupo not in (SELECT id_subgrupo FROM produto)";
         $this->ExecuteCommand($sql, array());
+    }
+
+    public function searchSubgrupo2($pesquisa){
+
+      $list = [];
+
+      $sql = "SELECT * FROM subgrupo WHERE MATCH (nome) AGAINST (:pesquisa)";
+      $consulta = $this->ExecuteQuery($sql, [':pesquisa' => $pesquisa]);
+
+      foreach ($consulta as $linha) {
+        $list[] = new Subgrupo($linha['id_subgrupo'], $linha['nome'], $linha['id_grupo']);
+      }
+      //echo '<pre>';var_dump($list);echo '</pre>';die;
+      return $list;
+
     }
 
 
