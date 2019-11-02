@@ -110,15 +110,18 @@ $(document).ready(function(){
               <a class="navbar-brand" href="<?php echo $this->base_url ?>Home" style="margin:-15px 0px 15px 15px">
                 <center><img class="logo-pl logo-nav image-fluid" src="<?php echo $this->asset ?>img/DentalLivramentoLogoFinal.png"></center>
               </a>
-
-            <div class="navTop-middle search-field-pc">
-              <div class="searchBox">
-                <span class="input-group">
-                  <input id="searchbox" type="text" class="form-control" placeholder="O produto que procura está aqui!" aria-describedby="basic-addon2">
-                  <button id="searchButton" type="submit" class="input-group-addon"><i class="fa fa-search"></i></button>
-                </span>
-              </div>
-            </div>
+            
+                <div class="navTop-middle search-field-pc">
+                  <div class="searchBox">
+                    <span class="input-group">
+                        <form method="post" action="<?php echo $this->base_url; ?>Loja/search" style="width: 100%;">
+                      <input style="width: 100%;" id="searchbox" name="pesquisa" type="text" class="form-control" placeholder="O produto que procura está aqui!" aria-describedby="basic-addon2">
+                      <button type="submit" name="go" value="x" class="input-group-addon"><i class="fa fa-search"></i></button>
+                    </form>
+                    </span>
+                  </div>
+                </div>
+           
             <div class="dropdown cart-dropdown">
               <a href="cart-page.html" class="dropdown-toggle shop-cart" data-toggle="dropdown">
                 <i class="fa fa-shopping-cart"></i>
@@ -129,8 +132,8 @@ $(document).ready(function(){
               </a>
               <ul class="dropdown-menu dropdown-menu-right">
                 <?php if(isset($_SESSION['carrinho']) && $data['itens'] != ''): ?>
-                <li><?php echo count($data['itens']) > 1? "Itens" : "Item"?> em seu carrinho</li>
-                <?php foreach($data['itens'] as $item): ?>
+                <li><?php echo count($data['itens']) > 1? "Últimos Itens" : "Último Item"?> em seu carrinho</li>
+                <?php $data['itens'] = array_reverse($data['itens']); $i = 1; foreach($data['itens'] as $item): if($i > 4) continue; ?>
                 <li>
                   <a href="#">
                     <div class="media">
@@ -145,7 +148,7 @@ $(document).ready(function(){
                     </div>
                   </a>
                 </li>
-              <?php endforeach; ?>
+              <?php $i++; endforeach; ?>
                 <li>
                   <div class="btn-group" role="group" aria-label="...">
                     <button type="button" class="btn btn-default" onclick="location.href='<?php echo $this->base_url; ?>Home/viewCart';">Carrinho</button>
@@ -157,14 +160,18 @@ $(document).ready(function(){
               <?php endif; ?>
               </ul>
             </div>
+            
               <div class="navTop-middle search-field-mobile">
-              <div class="">
-                <span class="input-group">
-                  <input id="searchbox" type="text" class="form-control" placeholder="O produto que procura está aqui!" aria-describedby="basic-addon2">
-                  <button id="searchButton" type="submit" class="input-group-addon" style="background-color: #00bafa; color: white;"><i class="fa fa-search"></i></button>
-                </span>
-              </div>
-            </div>
+                <div class="">
+                  <span class="input-group">
+                      <form method="post" action="<?php echo $this->base_url; ?>Loja/search" style="width: 100%;">
+                    <input style="width: 100%;" id="searchbox" name="pesquisa" type="text" class="form-control" placeholder="O produto que procura está aqui!" aria-describedby="basic-addon2">
+                    <button type="submit" name="go" value="x" class="input-group-addon" style="background-color: #00bafa; color: white; display: none;"><i class="fa fa-search"></i></button>
+                    </form>
+                  </span>
+                </div>
+             </div>
+            
           </div>
         </div>
       <nav class="navbar navbar-main navbar-default navbar-expand-md nav-V3" role="navigation">

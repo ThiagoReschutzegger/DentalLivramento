@@ -285,7 +285,6 @@ class SubgrupoModel extends Model {
     }
 
     public function searchSubgrupo2($pesquisa){
-
       $list = [];
 
       $sql = "SELECT * FROM subgrupo WHERE MATCH (nome) AGAINST (:pesquisa)";
