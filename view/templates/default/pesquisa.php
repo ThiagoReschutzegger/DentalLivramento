@@ -51,7 +51,6 @@
   <?php else:
       if ($data['modelo'] == 'SearchDeProduto'):
         foreach ($data['item'] as $item):
-          if($item->getId_subgrupo() != $data['subgrupo']->getId_subgrupo()) continue;
      ?>
   <div class="col-sm-6">
     <div class="media flex-wrap productBox">
@@ -65,9 +64,9 @@
       </a>
       </div>
       <div class="media-body" onclick="location.href='<?php echo $this->base_url; ?>Home/viewProduto/<?php echo $item->getId_item(); ?>';" style="cursor: pointer;">
-        <h4 class="media-heading"><?php echo $data['subgrupo']->getNome(); ?></h4>
+        <h4 class="media-heading"><?php echo $data['nome-sub'.$item->getId_item()]; ?></h4>
         <p><?php echo mb_substr($item->getDescricao(), 0, 100, 'UTF-8')."...";  ?></p>
-        <h3>R$ <?php echo  number_format($data['preco_min'.$item->getId_marca()], 2); ?></h3>
+        <h3>R$ <?php echo  number_format($data['preco_min'.$item->getId_item()], 2); ?></h3>
       </div>
     </div>
   </div>
@@ -80,6 +79,9 @@
                               <h2 style="font-size: 2.5em; font-wheight: lighter; color: white; padding-top: 30px; font-variant-caps: all-petite-caps;">
                                   <?php echo $subgrupo->getNome(); ?>
                               </h2>
+                              <h4 style="font-size: 1.8em; font-weight: bold; color: white; font-variant-caps: all-petite-caps;">
+                                  <?php echo $data['nome-grupo'.$subgrupo->getId_subgrupo()]; ?>
+                              </h4>
                           </center>
                       </div>
                   </div>

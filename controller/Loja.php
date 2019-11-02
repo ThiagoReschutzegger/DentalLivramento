@@ -173,7 +173,13 @@ class Loja extends Controller{
             if ($this->modelSubgrupo->searchSubgrupo2($string)) { // Pesquisa de subgrupo, ou seja o nome do produto
               $data['subgrupo'] = $this->modelSubgrupo->searchSubgrupo2($string);
               $data['texto'] = $texto;
-              $data['modelo'] = "SearchDeSubgrupo";
+              $data['modelo'] = "Searc($this->modelSubgrupo->searchSubgrupo2($string)) {hDeSubgrupo";
+              
+              foreach($data['subgrupo'] as $subgrupo):
+                $grupo = $this->modelGrupo->getGrupoById($subgrupo->getId_grupo());
+                $data['nome-grupo'.$subgrupo->getId_subgrupo()] = $grupo->getNome();
+              endforeach;
+              
               $pass = true;
               $string = false;
             }else{
@@ -181,29 +187,34 @@ class Loja extends Controller{
                 if (strlen($string) < 4) $string = false; // caso fique uma string muito pequena para comparar aos nomes dos subgrupos
             }
         }
-        if($this->modelproduto->searchProduto2($texto)) { // Pesquisa de produto, ou seja as especificações e exibe item, como na this->view
-          
+        if($this->modelproduto->searchProduto2($texto) && !$pass) { // Pesquisa de produto, ou seja as especificações e exibe item, como na this->view
+            
             $data['produto'] = $this->modelproduto->searchProduto2($texto);
-            $data['subgrupo'] = $this->modelSubgrupo->getSubgrupoById($data['produto'][0]->getId_subgrupo());
             $data['texto'] = $texto;
             $data['modelo'] = "SearchDeProduto";
             $pass = true;
-
+            
             $ids_marca = [];
+            $data['item'] = [];
             foreach($data['produto'] as $produto):
-                if($produto->getId_subgrupo() != $data['subgrupo']->getId_subgrupo()) continue;
-                if(empty($data['preco_min'.$produto->getId_marca()])){
-                    $data['preco_min'.$produto->getId_marca()] = $produto->getPreco();
+                $item = $this->modelItem->getItemBy($produto->getId_subgrupo(),$produto->getId_marca(),$produto->getTipo());
+                $data['item'][] = $item;
+                if(empty($data['preco_min'.$item->getId_item()])){
+                    $data['preco_min'.$item->getId_item()] = $produto->getPreco();
                 }
-                if($data['preco_min'.$produto->getId_marca()] > $produto->getPreco()){
-                    $data['preco_min'.$produto->getId_marca()] = $produto->getPreco();
+                if($data['preco_min'.$item->getId_item()] > $produto->getPreco()){
+                    $data['preco_min'.$item->getId_item()] = $produto->getPreco();
+                }
+                if(empty($data['nome-sub'.$item->getId_item()])){
+                    $subgrupo = $this->modelSubgrupo->getSubgrupoById($item->getId_subgrupo());
+                    $data['nome-sub'.$item->getId_item()] = $subgrupo->getNome();
                 }
                 if(!in_array($produto->getId_marca(), $ids_marca)){
-                    $ids_marca[] = $produto->getId_marca();
-                }
+                     $ids_marca[] = $produto->getId_marca();
+                } 
             endforeach;
             $data['marca'] = $this->modelMarca->getMarcaByIds($ids_marca);
-            $data['item'] = $this->modelItem->getItemByIds($data['subgrupo']->getId_subgrupo(), $ids_marca);
+            
 
 //            echo "<pre>";
 //            var_dump($data['produto']);
