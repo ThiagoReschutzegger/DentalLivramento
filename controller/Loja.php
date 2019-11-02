@@ -165,15 +165,15 @@ class Loja extends Controller{
       $data['modelo'] = '';
       $data['texto'] = '';
 
-      if (filter_input(INPUT_POST, 'pesquisar')) {
-        $texto = filter_input(INPUT_POST, 'texto-psq', FILTER_SANITIZE_STRING);
+      if (filter_input(INPUT_POST, 'go')) {
+        $texto = filter_input(INPUT_POST, 'pesquisa', FILTER_SANITIZE_STRING);
         $string = $texto;
         $pass = false;
         while ($string){
-            if ($this->modelSubgrupo->searchSubgrupo2($string)) { // Pesquisa de subgrupo, ou seja o nome do produto
-              $data['subgrupo'] = $this->modelSubgrupo->searchSubgrupo2($string);
+            if ($this->modelSubgrupo->searchSubgrupoForDefault($string)) { // Pesquisa de subgrupo, ou seja o nome do produto
+              $data['subgrupo'] = $this->modelSubgrupo->searchSubgrupoForDefault($string);
               $data['texto'] = $texto;
-              $data['modelo'] = "Searc($this->modelSubgrupo->searchSubgrupo2($string)) {hDeSubgrupo";
+              $data['modelo'] = "SearchDeSubgrupo";
               
               foreach($data['subgrupo'] as $subgrupo):
                 $grupo = $this->modelGrupo->getGrupoById($subgrupo->getId_grupo());
