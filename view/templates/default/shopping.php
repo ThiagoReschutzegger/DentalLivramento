@@ -133,7 +133,7 @@ $ids_prod[] = 0;
                             endforeach; ?>
                         </h3>
                     </a>
-                    <h3>R$ <?php echo  number_format($data['preco_min'.$item->getId_marca()."-".$item->getTipo()], 2); ?></h3>
+                    <h3>R$ <?php echo  number_format($data['preco_min'.$item->getId_marca()."-".$item->getTipo()], 2); ?><a href="<?php echo $this->base_url; ?>Home/viewProduto/<?php echo $item->getId_item(); ?>"  class="btn btn-primary-outlined btn-compra">Comprar</a></h3>
                   </div>
                 </div>
               </div>
@@ -159,7 +159,7 @@ $ids_prod[] = 0;
                             endforeach; ?>
                         </h3>
                     </a>
-                    <h3>R$ <?php echo  number_format($data['preco_min'.$item->getId_marca()."-".$item->getTipo()], 2); ?></h3>
+                    <h3>R$ <?php echo  number_format($data['preco_min'.$item->getId_marca()."-".$item->getTipo()], 2); ?><a href="<?php echo $this->base_url; ?>Home/viewProduto/<?php echo $item->getId_item(); ?>"  class="btn btn-primary-outlined btn-compra" >Comprar</a></h3>
                   </div>
                 </div>
               </div>

@@ -44,6 +44,10 @@ body{
 }
 
 @media (max-width: 500px) {
+    .btn-compra{
+        float: initial !important;
+        margin-top: 5px;
+    }
     .btn-selec{
         padding-left: 10px !important;
         padding-right: 10px !important;
@@ -231,4 +235,12 @@ span.fa-bars{
 
 .tp-simpleresponsive{
     height: auto !important;
+}
+
+.btn-compra{
+    font-size: 0.7em; 
+    line-height: 2.1em; 
+    padding: 0 7px; 
+    float: right;
+    height: 30px;
 }
