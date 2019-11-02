@@ -41,7 +41,7 @@ class Home extends Controller{
         if(isset($_SESSION['carrinho'])){
             $this->carrinho = $_SESSION['carrinho'];
         }
-        //echo "<pre>";var_dump($_SESSION['carrinho']);echo "</pre>";
+        //echo "<pre>";var_dump($_SESSION);echo "</pre>";
     }
 
     public function index(){
@@ -68,7 +68,7 @@ class Home extends Controller{
                 $data['marca_dstq'.$destaque->getId_item()] = $marca->getNome();
             }
         }
-        
+
         if(!empty($data['prod-selec'])){ //se tiver algum item sendo destacado
             foreach($data['prod-selec'] as $selecionado){ // objeto item
                 $subgrupo = $this->modelSubgrupo->getSubgrupoById($selecionado->getId_subgrupo());
@@ -77,19 +77,19 @@ class Home extends Controller{
                 $data['selec-nome'.$selecionado->getId_item()] = $subgrupo->getNome();
                 $data['selec-grupo'.$selecionado->getId_item()] = $grupo->getNome();
                 $data['marca_selec'.$selecionado->getId_item()] = $marca->getNome();
-                
+
                 $produtos = $this->modelproduto->getProdutosByIdsAndTipo($subgrupo->getId_subgrupo(), $selecionado->getId_marca(), $selecionado->getTipo());
-                
+
                 $data['preco-selec'.$selecionado->getId_item()] = 0;
                 foreach($produtos as $prod){
                     if($prod->getPreco() > $data['preco-selec'.$selecionado->getId_item()]){
                         $data['preco-selec'.$selecionado->getId_item()] = $prod->getPreco();
                     }
                 }
-                
+
             }
         }
-        
+
         if(!empty($data['subgrupo-selec'])){ //se tiver algum item sendo destacado
             $ids_selec = [];
             foreach($data['subgrupo-selec'] as $selecionado){ // objeto item
@@ -223,6 +223,28 @@ class Home extends Controller{
     }
 
     public function viewCart($deletar = -1){ //Edu
+
+      if (filter_input(INPUT_POST, 'add')) {
+
+        //echo"<pre>";print_r($_SESSION['carrinho'])."<br><br>";
+
+        foreach($_SESSION['carrinho'] as $item){
+          if(filter_input(INPUT_POST, 'espec'.$item->getId_produto(), FILTER_SANITIZE_STRING) != $item->getQuantidade()){
+            $item->setQuantidade(filter_input(INPUT_POST, 'espec'.$item->getId_produto(), FILTER_SANITIZE_STRING));
+
+            $preco_unitario = $this->modelproduto->getPrecoByProdutoId($item->getId_produto());
+
+            $preco_total = $item->getQuantidade() * $preco_unitario;
+
+            $item->setPrecoitem($preco_total);
+
+          }
+        }
+        header('location:' . $this->config->base_url . 'Home/step1');
+        return true;
+        //print_r($_SESSION['carrinho'])."<br><br>";echo"</pre>";
+
+      }
         $data['estilo'] = $this->model->getEstiloAtual();
         $data['categoria'] = $this->modelCategoria->getCategoria();
         $data['grupo'] = $this->modelGrupo->getGrupo();
@@ -246,6 +268,7 @@ class Home extends Controller{
         $this->view->load('cart', $data);
         $this->view->load('footer');
     }
+
 
     public function step1(){ //Edu
         if(isset($_SESSION['carrinho'])){
