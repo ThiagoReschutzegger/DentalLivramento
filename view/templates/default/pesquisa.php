@@ -1,5 +1,5 @@
 <style type="text/css" scoped>
-        
+
         .back-sub:hover {
             font-size: 1.2em;
             transition: all 0.1s ease-in-out;
@@ -17,7 +17,7 @@
             height: 130px !important;
             border-radius: 15px;
             cursor: pointer;
-          } 
+          }
 </style>
 <div class="mainContent clearfix home-v5">
 <!-- ORDER -->
@@ -49,7 +49,7 @@
       </div>
     </div>
   <?php else:
-      if ($data['modelo'] == 'SearchDeProduto'):  
+      if ($data['modelo'] == 'SearchDeProduto'):
         foreach ($data['item'] as $item):
           if($item->getId_subgrupo() != $data['subgrupo']->getId_subgrupo()) continue;
      ?>
@@ -71,7 +71,7 @@
       </div>
     </div>
   </div>
-<?php endforeach; elseif($data['modelo'] == 'SearchDeSubgrupo'): 
+<?php endforeach; elseif($data['modelo'] == 'SearchDeSubgrupo'):
     foreach ($data['subgrupo'] as $subgrupo): ;?>
     <div class="col-md-6 col-lg-4" style="margin-bottom: 50px">
                 <div class="productBox">

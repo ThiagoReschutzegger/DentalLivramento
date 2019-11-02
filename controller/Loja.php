@@ -21,6 +21,9 @@ class Loja extends Controller{
         $this->modelproduto = new ProdutoModel();
         $this->modelCategoria = new CategoriaModel();
         $this->modelGrupo = new GrupoModel();
+
+        //$this->modelDestaque = new DestaqueModel();
+        //$this->modelSlider = new SliderModel();
         $this->modelMarca = new MarcaModel();
         $this->modelSubgrupo = new SubgrupoModel();
         $this->modelItem = new ItemModel();
@@ -167,8 +170,8 @@ class Loja extends Controller{
         $string = $texto;
         $pass = false;
         while ($string){
-            if ($this->modelSubgrupo->searchSubgrupoForDefault($string)) { // Pesquisa de subgrupo, ou seja o nome do produto
-              $data['subgrupo'] = $this->modelSubgrupo->searchSubgrupoForDefault($string);
+            if ($this->modelSubgrupo->searchSubgrupo2($string)) { // Pesquisa de subgrupo, ou seja o nome do produto
+              $data['subgrupo'] = $this->modelSubgrupo->searchSubgrupo2($string);
               $data['texto'] = $texto;
               $data['modelo'] = "SearchDeSubgrupo";
               $pass = true;
@@ -178,8 +181,9 @@ class Loja extends Controller{
                 if (strlen($string) < 4) $string = false; // caso fique uma string muito pequena para comparar aos nomes dos subgrupos
             }
         }
-        if(!$pass && $this->modelproduto->searchProdutoForDefault($texto)) { // Pesquisa de produto, ou seja as especificações e exibe item, como na this->view
-            $data['produto'] = $this->modelproduto->searchProdutoForDefault($texto);
+        if($this->modelproduto->searchProduto2($texto)) { // Pesquisa de produto, ou seja as especificações e exibe item, como na this->view
+          
+            $data['produto'] = $this->modelproduto->searchProduto2($texto);
             $data['subgrupo'] = $this->modelSubgrupo->getSubgrupoById($data['produto'][0]->getId_subgrupo());
             $data['texto'] = $texto;
             $data['modelo'] = "SearchDeProduto";
