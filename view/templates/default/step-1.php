@@ -117,7 +117,7 @@
             </div>
             <div class="form-group col-md-6 col-12">
               <label for="">Celular: <span style='color:red'><b>*</b></span></label>
-              <input name="telefone" placeholder="(00)0000-0000"  class="form-control ddd_tel" required>
+              <input name="telefone" type="number" class="form-control" required>
             </div>
             <div class="form-group col-12">
               <label for="">Mensagem:</label>

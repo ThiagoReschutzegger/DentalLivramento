@@ -83,3 +83,41 @@
           </div>
         </div>
       </div>
+      
+      <div class="card">
+        <div class="card-header d-flex align-items-center">
+          <h3 class="h4">Banners (somente 2 são exibidos)</h3>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Imagem</th>
+                  <th>Subgrupo</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php foreach ($data['selecionado'] as $selec): ?>
+                <tr>
+                  <th scope="row"><?php echo $selec->getId_selecionado(); ?></th>
+                  <td><a href="<?php echo $selec->getImagem(); ?>" target="_blank"><img src="<?php echo $selec->getImagem(); ?>" height="100px"/></a></td>
+                  <td><?php echo $data['nome-sub'.$selec->getId_selecionado()]; ?></td>
+                  <td>
+                    <a class="btn btn-danger" style="font-size: 15px;" href="<?php echo $this->base_url; ?>SliderAdmin/deleteBanner/<?php echo $selec->getId_selecionado(); ?>">
+                      <i class="fa fa-remove"></i>
+                    </a>
+                  </td>
+                </tr>
+              <?php endforeach; ?>
+                <tr>
+                    <td colspan="8"><center><a href="<?php echo $this->base_url; ?>SliderAdmin/addBannerWhere" class="btn btn-success btn-lg btn-block"><i class="fa fa-plus"></i></a></center></td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>

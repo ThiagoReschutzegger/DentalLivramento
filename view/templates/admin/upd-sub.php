@@ -31,14 +31,28 @@
         </div>
         <div class="line"></div>
         <div class="form-group row">
-          <label class="col-sm-2 form-control-label text-right">Deseja exibir no Slider Principal?</label>
+          <label class="col-sm-2 form-control-label text-right">Deseja exibir nos DESTAQUES?</label>
           <div class="col-sm-8">
             <div class="i-checks">
-              <input id="sim" type="radio" <?php  if($item->getDestaque() != 0) echo "checked"; ?> value="1" name="destaque" class="radio-template">
+              <input id="sim" type="radio" <?php  if($item->getDestaque() == 1) echo "checked"; ?> value="1" name="destaque" class="radio-template">
               <label for="sim">Sim</label>
             </div>
             <div class="i-checks">
-              <input id="nao" type="radio" <?php  if($item->getDestaque() == 0) echo "checked"; ?> value="0" name="destaque" class="radio-template">
+              <input id="nao" type="radio" <?php  if($item->getDestaque() != 1) echo "checked"; ?> value="0" name="destaque" class="radio-template">
+              <label for="nao">Não</label>
+            </div>
+          </div>
+        </div>
+        <div class="line"></div>
+        <div class="form-group row">
+          <label class="col-sm-2 form-control-label text-right">Deseja exibir nos SELECIONADOS?</label>
+          <div class="col-sm-8">
+            <div class="i-checks">
+              <input id="sim" type="radio" <?php  if($item->getSelecionado() == 1) echo "checked"; ?> value="1" name="selecionado" class="radio-template">
+              <label for="sim">Sim</label>
+            </div>
+            <div class="i-checks">
+              <input id="nao" type="radio" <?php  if($item->getSelecionado() != 1) echo "checked"; ?> value="0" name="selecionado" class="radio-template">
               <label for="nao">Não</label>
             </div>
           </div>

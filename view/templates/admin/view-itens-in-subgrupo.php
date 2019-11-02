@@ -34,8 +34,17 @@
                                                                 text-decoration: none;" disabled="true">
                                                 <?php if($item->getDestaque() == 1) echo "Dentro dos destaques"; else echo "Fora dos Destaques"; ?>
                                             </a>
+                                            <a style=" padding: 2px 30px;
+                                                                border-radius: 40px;
+                                                                <?php if($item->getSelecionado() == 1) echo "background: #54e69d;"; else echo "background: #ff2929;"; ?>
+                                                                color: #fff;
+                                                                margin-top: 5px;
+                                                                font-size: 0.9em;
+                                                                text-decoration: none;" disabled="true">
+                                                <?php if($item->getSelecionado() == 1) echo "Dentro dos Selecionados"; else echo "Fora dos Selecionados"; ?>
+                                            </a>
                                         </div>
-                                        <div class="col-lg-3">
+                                        <div class="col-lg-3" style="text-align: -webkit-right;">
                                             <a href="<?php echo $this->base_url; ?>ProdutoAdmin/updateItem/<?php echo $item->getId_item(); ?>" class="btn btn-primary" style="color: white">Editar &nbsp&nbsp<i class="fa fa-edit"></i></a>
                                         </div>
                                     </div>

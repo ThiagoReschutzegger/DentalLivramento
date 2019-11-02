@@ -3,11 +3,11 @@
 <div class="col-lg-12">
   <div class="card">
     <div class="card-header d-flex align-items-center ">
-      <h3 class="h4">Deletar Slider</h3>
+      <h3 class="h4">Deletar banner</h3>
     </div>
     <div class="card-body alert-danger">
         <div class="form-group row">
-          <label class="col-sm-2 form-control-label text-right">Slider:</label>
+          <label class="col-sm-2 form-control-label text-right">Imagem:</label>
           <div class="col-sm-8">
             <img src="<?php echo $destaque->getImagem(); ?>" width="500px"/>
           </div>

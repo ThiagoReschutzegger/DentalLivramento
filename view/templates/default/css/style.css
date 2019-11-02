@@ -3179,7 +3179,7 @@ body.bodyColor.container {
 
 @media (min-width: 1200px) {
   .bannerV4 .fullscreenbanner {
-    height: 470px !important;
+    height: 470px;
   }
 }
 

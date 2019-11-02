@@ -7,7 +7,7 @@ class ItemModel extends Model {
         $sql = "SELECT * FROM item";
         $consulta = $this->ExecuteQuery($sql, array());
         foreach ($consulta as $item) {
-            $list[] = new Item($item['id_item'], $item['descricao'], $item['imagem'], $item['destaque'], $item['tipo'], $item['id_subgrupo'], $item['id_marca']);
+            $list[] = new Item($item['id_item'], $item['descricao'], $item['imagem'], $item['destaque'], $item['selecionado'], $item['tipo'], $item['id_subgrupo'], $item['id_marca']);
         }
         return $list;
     }
@@ -17,7 +17,7 @@ class ItemModel extends Model {
         $sql = "SELECT * FROM item WHERE id_subgrupo = :id ORDER BY id_item DESC";
         $consulta = $this->ExecuteQuery($sql, [':id' => $id]);
         foreach ($consulta as $item) {
-            $list[] = new Item($item['id_item'], $item['descricao'], $item['imagem'], $item['destaque'], $item['tipo'], $item['id_subgrupo'], $item['id_marca']);
+            $list[] = new Item($item['id_item'], $item['descricao'], $item['imagem'], $item['destaque'], $item['selecionado'], $item['tipo'], $item['id_subgrupo'], $item['id_marca']);
         }
         return $list;
     }
@@ -39,7 +39,7 @@ class ItemModel extends Model {
           $sql = "SELECT * FROM item WHERE id_subgrupo=:id_subgrupo ".$string.")";
           $consulta = $this->ExecuteQuery($sql, [':id_subgrupo' => $id_subgrupo]);
           foreach ($consulta as $item) {
-            $list[] = new Item($item['id_item'], $item['descricao'], $item['imagem'], $item['destaque'], $item['tipo'], $item['id_subgrupo'], $item['id_marca']);
+            $list[] = new Item($item['id_item'], $item['descricao'], $item['imagem'], $item['destaque'], $item['selecionado'], $item['tipo'], $item['id_subgrupo'], $item['id_marca']);
         }
           return $list;
       }
@@ -48,7 +48,7 @@ class ItemModel extends Model {
     public function getItemById($id) {
         $sql = "SELECT * FROM item WHERE id_item = :id;";
         $item = $this->ExecuteQuery($sql, [':id' => $id])[0];
-        return new Item($item['id_item'], $item['descricao'], $item['imagem'], $item['destaque'], $item['tipo'], $item['id_subgrupo'], $item['id_marca']);
+        return new Item($item['id_item'], $item['descricao'], $item['imagem'], $item['destaque'], $item['selecionado'], $item['tipo'], $item['id_subgrupo'], $item['id_marca']);
     }
 
     public function getItemDestaque() { //Edu
@@ -56,7 +56,17 @@ class ItemModel extends Model {
         $sql = "SELECT * FROM item WHERE destaque = 1";
         $consulta = $this->ExecuteQuery($sql, array());
         foreach ($consulta as $item) {
-            $list[] = new Item($item['id_item'], $item['descricao'], $item['imagem'], $item['destaque'], $item['tipo'], $item['id_subgrupo'], $item['id_marca']);
+            $list[] = new Item($item['id_item'], $item['descricao'], $item['imagem'], $item['destaque'], $item['selecionado'], $item['tipo'], $item['id_subgrupo'], $item['id_marca']);
+        }
+        return $list;
+    }
+    
+    public function getItemSelecionado() { //Edu
+        $list = [];
+        $sql = "SELECT * FROM item WHERE selecionado = '1'";
+        $consulta = $this->ExecuteQuery($sql, array());
+        foreach ($consulta as $item) {
+            $list[] = new Item($item['id_item'], $item['descricao'], $item['imagem'], $item['destaque'], $item['selecionado'], $item['tipo'], $item['id_subgrupo'], $item['id_marca']);
         }
         return $list;
     }
@@ -66,7 +76,7 @@ class ItemModel extends Model {
         $sql = "SELECT * FROM item WHERE id_subgrupo = :id_subgrupo ORDER BY RAND() LIMIT 4";
         $consulta = $this->ExecuteQuery($sql, [':id_subgrupo' => $id_subgrupo]);
         foreach ($consulta as $item) {
-            $list[] = new Item($item['id_item'], $item['descricao'], $item['imagem'], $item['destaque'], $item['tipo'], $item['id_subgrupo'], $item['id_marca']);
+            $list[] = new Item($item['id_item'], $item['descricao'], $item['imagem'], $item['destaque'], $item['selecionado'], $item['tipo'], $item['id_subgrupo'], $item['id_marca']);
         }
         return $list;
     }
@@ -112,11 +122,12 @@ class ItemModel extends Model {
     }
 
     public function updateItem($item) {
-        $sql = "UPDATE item SET descricao = :descricao, imagem = :imagem, destaque = :destaque, tipo = :tipo, id_subgrupo = :id_subgrupo, id_marca = :id_marca WHERE id_item = :id_item";
+        $sql = "UPDATE item SET descricao = :descricao, imagem = :imagem, destaque = :destaque, selecionado = :selecionado, tipo = :tipo, id_subgrupo = :id_subgrupo, id_marca = :id_marca WHERE id_item = :id_item";
         $param = [':id_item' => $item->getId_item(),
                   ':descricao' => $item->getDescricao(),
                   ':imagem' => $item->getImagem(),
                   ':destaque' => $item->getDestaque(),
+                  ':selecionado' => $item->getSelecionado(),
                   ':tipo' => $item->getTipo(),
                   ':id_subgrupo' => $item->getId_subgrupo(),
                   ':id_marca' => $item->getId_marca()
@@ -204,7 +215,7 @@ class ItemModel extends Model {
     }
 
     public function insertItemTxt($tipo,$id_marca,$id_subgrupo) {
-        $sql = "INSERT INTO item(tipo,id_marca,id_subgrupo,destaque) VALUES(:tipo,:id_marca,:id_subgrupo,0)";
+        $sql = "INSERT INTO item(tipo,id_marca,id_subgrupo,destaque,selecionado) VALUES(:tipo,:id_marca,:id_subgrupo,0,0)";
         if ($this->ExecuteCommand($sql,[':tipo'=>$tipo,':id_marca'=>$id_marca,':id_subgrupo'=>$id_subgrupo])){
             return true;
         } else {
@@ -228,7 +239,7 @@ class ItemModel extends Model {
         $list = [];
         $sql = "SELECT * FROM item WHERE id_subgrupo = :id_subgrupo AND id_marca = :id_marca AND tipo = :tipo";
         $item = $this->ExecuteQuery($sql, [':id_subgrupo' => $id_subgrupo, ':id_marca' => $id_marca, ':tipo' => $tipo])[0];
-        return new Item($item['id_item'], $item['descricao'], $item['imagem'], $item['destaque'], $item['tipo'], $item['id_subgrupo'], $item['id_marca']);
+        return new Item($item['id_item'], $item['descricao'], $item['imagem'], $item['destaque'], $item['selecionado'], $item['tipo'], $item['id_subgrupo'], $item['id_marca']);
     }
     
     public function verificaItemBy($id_subgrupo, $id_marca, $tipo) {
@@ -255,7 +266,7 @@ class ItemModel extends Model {
         $consulta = $this->ExecuteQuery($sql, [':id_subgrupo' => $id_subgrupo, ':id_marca' => $id_marca, ':tipo' => $tipo]);
         
          foreach ($consulta as $item) {
-            $list[] = new Item($item['id_item'], $item['descricao'], $item['imagem'], $item['destaque'], $item['tipo'], $item['id_subgrupo'], $item['id_marca']);
+            $list[] = new Item($item['id_item'], $item['descricao'], $item['imagem'], $item['destaque'], $item['selecionado'], $item['tipo'], $item['id_subgrupo'], $item['id_marca']);
         }
         //echo '<pre>';var_dump($list);echo '</pre>';die;
         return $list;
@@ -273,7 +284,7 @@ class ItemModel extends Model {
         $consulta = $this->ExecuteQuery($sql, array());
         
          foreach ($consulta as $item) {
-            $list[] = new Item($item['id_item'], $item['descricao'], $item['imagem'], $item['destaque'], $item['tipo'], $item['id_subgrupo'], $item['id_marca']);
+            $list[] = new Item($item['id_item'], $item['descricao'], $item['imagem'], $item['destaque'], $item['selecionado'], $item['tipo'], $item['id_subgrupo'], $item['id_marca']);
         }
         
         return $list;

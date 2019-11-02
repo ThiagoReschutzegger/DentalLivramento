@@ -6,15 +6,17 @@ class Item {
     public $descricao;
     public $imagem;
     public $destaque;
+    public $selecionado;
     public $tipo;
     public $id_subgrupo;
     public $id_marca;
 
-    function __construct($id_item, $descricao, $imagem, $destaque, $tipo, $id_subgrupo, $id_marca) {
+    function __construct($id_item, $descricao, $imagem, $destaque, $selecionado, $tipo, $id_subgrupo, $id_marca) {
         $this->id_item = $id_item;
         $this->descricao = $descricao;
         $this->imagem = $imagem;
         $this->destaque = $destaque;
+        $this->selecionado = $selecionado;
         $this->tipo = $tipo;
         $this->id_subgrupo = $id_subgrupo;
         $this->id_marca = $id_marca;
@@ -30,6 +32,10 @@ class Item {
 
     function getDestaque() {
         return $this->destaque;
+    }
+
+    function getSelecionado() {
+        return $this->selecionado;
     }
     
     function getTipo() {
@@ -58,6 +64,10 @@ class Item {
 
     function setDestaque($destaque) {
         $this->destaque = $destaque;
+    }
+
+    function setSelecionado($selecionado) {
+        $this->selecionado = $selecionado;
     }
     
     function setTipo($tipo) {

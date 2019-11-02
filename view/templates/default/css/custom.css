@@ -44,53 +44,60 @@ body{
 }
 
 @media (max-width: 500px) {
-  .table-espec{
-    width: 100% !important;
-  }
-  .botao-insta{
-    margin-top: 20px;
-  }
-  .produto-box{
-    width: 50% !important;
-  }
-  .font-table-cart{
-    font-size: 10px !important;
-    font-weight: 400 !important;
-  }
-  .list-unstyled li{
-    font-size: 120% !important;
-  }
-  .Vizualizando{
-    display: none;
-  }
-  .select-shop{
-    float: none !important;
-    padding-left: 12%;
-  }
-  .heightiado{
-    padding-top: 4%;
-    height: 200px;
+    .btn-selec{
+        padding-left: 10px !important;
+        padding-right: 10px !important;
     }
-  .box-v2 h4{
-    font-size: 15px !important;
-  }
+    .subgrupo-selec{
+        display: none;
+    }
+    .table-espec{
+      width: 100% !important;
+    }
+    .botao-insta{
+      margin-top: 20px;
+    }
+    .produto-box{
+      width: 50% !important;
+    }
+    .font-table-cart{
+      font-size: 10px !important;
+      font-weight: 400 !important;
+    }
+    .list-unstyled li{
+      font-size: 120% !important;
+    }
+    .Vizualizando{
+      display: none;
+    }
+    .select-shop{
+      float: none !important;
+      padding-left: 12%;
+    }
+    .heightiado{
+      padding-top: 4%;
+      height: 200px;
+      }
+    .box-v2 h4{
+      font-size: 15px !important;
+    }
 
-  .box-v2 i{
-    font-size: 40px !important;
-  }
+    .box-v2 i{
+      font-size: 40px !important;
+    }
 
-  .box-v2 span{
-    font-size: 10px !important;
-  }
-  .featuredProducts{
-    margin-bottom: 0px !important;
-  }
-  .boxes-index{
-    display: none;
-  }
-  .quant-prod{
-    display: none;
-  }
+    .box-v2 span{
+      font-size: 10px !important;
+    }
+    .featuredProducts{
+      margin-bottom: 0px !important;
+    }
+    .boxes-index{
+      display: none;
+    }
+    .quant-prod{
+      display: none;
+}
 }
 @media (max-width: 700px) {
   .modalBar{
@@ -218,3 +225,10 @@ span.fa-bars{
     padding: 7px;
 }
 
+.tp-revslider-mainul{
+    height: 16.5vw !important;
+}
+
+.tp-simpleresponsive{
+    height: auto !important;
+}

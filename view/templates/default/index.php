@@ -34,8 +34,37 @@
     </div>
 
 <!-- MAIN CONTENT SECTION -->
-<section class="mainContent clearfix">
+<section class="mainContent clearfix" style="padding-bottom: 10px !important;">
   <div class="container">
+      
+    <?php if (count($data['prod-selec'])>3): ?>
+      <!-- DEAL SECTION -->
+    <div class="page-header text-uppercase">
+      <h4 class="text-uppercase fonte-e-cor-top">Produtos Selecionados</h4>
+    </div>
+          
+    <div class="row dealSlider dealSection">
+
+    <?php foreach($data['prod-selec'] as $selecionado):?>
+      <div class="slide col-md-4">
+        <div class="imageBox">
+          <div class="productDeal clearfix">
+              <h3><span><?php echo $data['selec-grupo'.$selecionado->getId_item()]; ?></span></h3>
+          </div>
+          <div class="productImage clearfix">
+            <a href="<?php echo $this->base_url."Home/viewProduto/".$selecionado->getId_item();?>"><img src="<?php echo $selecionado->getImagem(); ?>" alt="Product Image"></a>
+          </div>
+          <div class="productCaption clearfix text-center">
+            <h3><a href="<?php echo $this->base_url."Home/viewProduto/".$selecionado->getId_item();?>"><?php echo $data['selec-nome'.$selecionado->getId_item()]; ?></a></h3>
+            <span class="offer-price" style="margin-bottom: 15px;">R$<?php echo number_format((float)$data['preco-selec'.$selecionado->getId_item()], 2); ?></span>
+            <a href="<?php echo $this->base_url."Home/viewProduto/".$selecionado->getId_item();?>" class="btn btn-border btn-selec">Comprar<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      </div>
+        <?php endforeach; endif;?>
+     
+
+    </div>
 
 <?php if (count($data['prod-destaq'])>3): ?>
     <div class="page-header text-uppercase">
@@ -59,6 +88,8 @@
       <?php endforeach; ?>
     </div>
   <?php endif; ?>
+      
+
 
     <div class="container">
       <div class="row justify-content-md-end">
@@ -94,6 +125,32 @@
 }
     </style>
 
+    <?php if (count($data['ids-selec'])<3): ?>
+     <!-- FEATURE COLLECTION SECTION -->
+          <div class="row featuredCollection version2 version3 subgrupo-selec" style='padding: 15px; padding-top: 80px;'>
+            <?php foreach ($data['subgrupo-selec'] as $selecionado):
+             if(!in_array($selecionado->getId_selecionado(), $data['ids-selec'])) continue;
+            ?>
+                <div class="col-md-6 col-12">
+                  <div class="slide">
+                    <div class="productImage productImage1" 
+                         style="
+                                background-size: cover;
+                                background-position: unset;
+                                height: 22vw !important;
+                                background-image: url(<?php echo $selecionado->getImagem();?>) !important;
+                         "
+                         >
+                    </div>
+                    <div class="productCaption clearfix text-right">
+                      <h3><a style="font-family: GothicBold; color: white;" href="<?php echo $this->base_url.'Loja/view/'.$selecionado->getId_subgrupo(); ?>"><?php echo $data['nome-sub-selec'.$selecionado->getId_selecionado()]; ?></a></h3>
+                      <a href="<?php echo $this->base_url.'Loja/view/'.$selecionado->getId_subgrupo(); ?>" class="btn btn-primary-outlined" style="font-family: GothicBold">Comprar</a>
+                    </div>
+                  </div>
+                </div>
+            <?php endforeach;?>
+          </div>
+    <?php endif; ?>
     <div class="container">
       <div class="row justify-content-md-end">
         <div class="col-sm-12 ml-auto bannercontainer ">
@@ -120,8 +177,11 @@
         </div>
       </div>
     </div>
+    
+    
   </div>
 </section>
+
 
 <!-- LIGHT SECTION -->
 <section class="lightSection clearfix mouse-grab botao-insta" style='filter:grayscale(100%);'>

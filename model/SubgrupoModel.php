@@ -274,6 +274,14 @@ class SubgrupoModel extends Model {
         $sql = "DELETE FROM subgrupo WHERE id_subgrupo not in (SELECT id_subgrupo FROM produto)";
         $this->ExecuteCommand($sql, array());
     }
-
+    
+    public function verificaSubgrupo($id) {
+        $list = [];
+        $sql = "SELECT * FROM subgrupo WHERE id_subgrupo = :id_subgrupo";
+        if(!empty($this->ExecuteQuery($sql, [':id_subgrupo' => $id])[0])){
+            return true;
+        }else return false;
+    
+    }
 
 }

@@ -9,6 +9,7 @@ class Home extends Controller{
     protected $modelSlider_2;
     protected $modelMarca;
     protected $modelSubgrupo;
+    protected $modelSubgrupo_selecionado;
     protected $modelItem;
     protected $modelPackproduto;
     protected $modelCarrinho;
@@ -28,6 +29,7 @@ class Home extends Controller{
         $this->modelSlider_2 = new Slider_2Model();
         $this->modelMarca = new MarcaModel();
         $this->modelSubgrupo = new SubgrupoModel();
+        $this->modelSubgrupo_selecionado = new Subgrupo_selecionadoModel();
         $this->modelItem = new ItemModel();
         $this->modelCarrinho = new CarrinhoModel();
         $this->modelPedido = new PedidoModel();
@@ -52,7 +54,9 @@ class Home extends Controller{
         $data['marcaslider'] = $this->modelMarca->getMarcaSlider();
         $data['itens'] = $this->getList();
         $data['prod-destaq'] = $this->modelItem->getItemDestaque();
+        $data['prod-selec'] = $this->modelItem->getItemSelecionado();
         $data['subgrupo-nav'] = $this->modelSubgrupo->getSubgrupo();
+        $data['subgrupo-selec'] = $this->modelSubgrupo_selecionado->getSubgrupo_selecionado();
         $data['categoria-dstq'] = $this->modelCategoria->getCategoriaDestaque();
         $data['preloader'] = '1';
 
@@ -63,6 +67,39 @@ class Home extends Controller{
                 $data['nome'.$destaque->getId_item()] = $subgrupo->getNome();
                 $data['marca_dstq'.$destaque->getId_item()] = $marca->getNome();
             }
+        }
+        
+        if(!empty($data['prod-selec'])){ //se tiver algum item sendo destacado
+            foreach($data['prod-selec'] as $selecionado){ // objeto item
+                $subgrupo = $this->modelSubgrupo->getSubgrupoById($selecionado->getId_subgrupo());
+                $grupo = $this->modelGrupo->getGrupoById($subgrupo->getId_grupo());
+                $marca = $this->modelMarca->getMarcaById($selecionado->getId_marca());
+                $data['selec-nome'.$selecionado->getId_item()] = $subgrupo->getNome();
+                $data['selec-grupo'.$selecionado->getId_item()] = $grupo->getNome();
+                $data['marca_selec'.$selecionado->getId_item()] = $marca->getNome();
+                
+                $produtos = $this->modelproduto->getProdutosByIdsAndTipo($subgrupo->getId_subgrupo(), $selecionado->getId_marca(), $selecionado->getTipo());
+                
+                $data['preco-selec'.$selecionado->getId_item()] = 0;
+                foreach($produtos as $prod){
+                    if($prod->getPreco() > $data['preco-selec'.$selecionado->getId_item()]){
+                        $data['preco-selec'.$selecionado->getId_item()] = $prod->getPreco();
+                    }
+                }
+                
+            }
+        }
+        
+        if(!empty($data['subgrupo-selec'])){ //se tiver algum item sendo destacado
+            $ids_selec = [];
+            foreach($data['subgrupo-selec'] as $selecionado){ // objeto item
+                if($this->modelSubgrupo->verificaSubgrupo($selecionado->getId_subgrupo())){
+                    $ids_selec[] = $selecionado->getId_selecionado();
+                    $subgrupo = $this->modelSubgrupo->getSubgrupoById($selecionado->getId_subgrupo());
+                    $data['nome-sub-selec'.$selecionado->getId_selecionado()] = $subgrupo->getNome();
+                }
+            }
+            $data['ids-selec'] = $ids_selec;
         }
 
         $this->view->load('header',$data);

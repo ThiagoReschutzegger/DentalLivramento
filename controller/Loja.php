@@ -5,8 +5,6 @@ class Loja extends Controller{
     protected $modelproduto;
     protected $modelCategoria;
     protected $modelGrupo;
-    protected $modelDestaque;
-    protected $modelSlider;
     protected $modelMarca;
     protected $modelSubgrupo;
     protected $modelItem;
@@ -23,8 +21,6 @@ class Loja extends Controller{
         $this->modelproduto = new ProdutoModel();
         $this->modelCategoria = new CategoriaModel();
         $this->modelGrupo = new GrupoModel();
-        $this->modelDestaque = new DestaqueModel();
-        $this->modelSlider = new SliderModel();
         $this->modelMarca = new MarcaModel();
         $this->modelSubgrupo = new SubgrupoModel();
         $this->modelItem = new ItemModel();

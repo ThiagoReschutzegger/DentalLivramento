@@ -8,7 +8,6 @@ class ProdutoAdmin extends Admin {
     protected $modelSubgrupo;
     protected $modelMarca;
     protected $modelPack;
-    protected $modelSlider;
     protected $modelItem;
 
     public function __construct() {
@@ -19,7 +18,6 @@ class ProdutoAdmin extends Admin {
         $this->modelSubgrupo = new SubgrupoModel();
         $this->modelMarca = new MarcaModel();
         $this->modelPack = new PackprodutoModel();
-        $this->modelSlider = new SliderModel();
         $this->modelItem = new ItemModel();
     }
 
@@ -355,9 +353,10 @@ class ProdutoAdmin extends Admin {
         $descricao = filter_input(INPUT_POST, 'descricao', FILTER_SANITIZE_STRING);
         $imagem = filter_input(INPUT_POST, 'imagem', FILTER_SANITIZE_STRING);
         $destaque = filter_input(INPUT_POST, 'destaque', FILTER_SANITIZE_STRING);
+        $selecionado = filter_input(INPUT_POST, 'selecionado', FILTER_SANITIZE_STRING);
 
          //imagem e descrição opcionais
-            $item = new Item($id_item, $descricao, $imagem, $destaque, $data['item']->getTipo(), $data['item']->getId_subgrupo(), $data['item']->getId_marca());
+            $item = new Item($id_item, $descricao, $imagem, $destaque, $selecionado, $data['item']->getTipo(), $data['item']->getId_subgrupo(), $data['item']->getId_marca());
             if ($this->modelItem->updateItem($item)) {
                 $this->viewItens($data['item']->getId_subgrupo());
                 return true;
