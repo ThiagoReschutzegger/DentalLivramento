@@ -1,6 +1,6 @@
 
 <div id="mySidenav" class="sidenav">
-  <a href="#" id="about"><img width="40" src="https://www.freepnglogos.com/uploads/whatsapp-logo-app-png-4.png"></a>
+  <a href="https://api.whatsapp.com/send?phone=555591717303" id="about"><img width="40" src="https://www.freepnglogos.com/uploads/whatsapp-logo-app-png-4.png"></a>
 </div>
 
 <!-- BANNER -->
@@ -14,7 +14,7 @@
         <li data-transition="slidehorizontal" data-slotamount="5" data-masterspeed="700" data-title="Slide 1">
           <img src="<?php echo $this->asset ?>img/home/banner-slider/slider-bg.jpg" alt="slidebg1" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat">
         </li>
-        
+
       </ul>
     </div>
   </div>
@@ -36,13 +36,13 @@
 <!-- MAIN CONTENT SECTION -->
 <section class="mainContent clearfix" style="padding-bottom: 10px !important;">
   <div class="container">
-      
+
     <?php if (count($data['prod-selec'])>3): ?>
       <!-- DEAL SECTION -->
     <div class="page-header text-uppercase">
       <h4 class="text-uppercase fonte-e-cor-top">Produtos Selecionados</h4>
     </div>
-          
+
     <div class="row dealSlider dealSection">
 
     <?php foreach($data['prod-selec'] as $selecionado):?>
@@ -62,7 +62,7 @@
         </div>
       </div>
         <?php endforeach; endif;?>
-     
+
 
     </div>
 
@@ -88,7 +88,7 @@
       <?php endforeach; ?>
     </div>
   <?php endif; ?>
-      
+
 
 
     <div class="container">
@@ -110,9 +110,9 @@
             </div>
       </div>
     </div>
-      
-      
-      
+
+
+
     <script>
     function linkSlider(id) {
         window.location.href=<?php echo $this->base_url; ?>+'Loja/view/'+id;
@@ -133,7 +133,7 @@
             ?>
                 <div class="col-md-6 col-12">
                   <div class="slide">
-                    <div class="productImage productImage1" 
+                    <div class="productImage productImage1"
                          style="
                                 background-size: cover;
                                 background-position: unset;
@@ -177,8 +177,8 @@
         </div>
       </div>
     </div>
-    
-    
+
+
   </div>
 </section>
 
