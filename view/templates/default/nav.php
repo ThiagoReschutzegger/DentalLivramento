@@ -129,8 +129,8 @@ $(document).ready(function(){
               </a>
               <ul class="dropdown-menu dropdown-menu-right">
                 <?php if(isset($_SESSION['carrinho']) && $data['itens'] != ''): ?>
-                <li><?php echo count($data['itens']) > 1? "Itens" : "Item"?> em seu carrinho</li>
-                <?php foreach($data['itens'] as $item): ?>
+                <li><?php echo count($data['itens']) > 1? "Últimos Itens" : "Último Item"?> em seu carrinho</li>
+                <?php $data['itens'] = array_reverse($data['itens']); $i = 1; foreach($data['itens'] as $item): if($i > 4) continue; ?>
                 <li>
                   <a href="#">
                     <div class="media">
@@ -145,7 +145,7 @@ $(document).ready(function(){
                     </div>
                   </a>
                 </li>
-              <?php endforeach; ?>
+              <?php $i++; endforeach; ?>
                 <li>
                   <div class="btn-group" role="group" aria-label="...">
                     <button type="button" class="btn btn-default" onclick="location.href='<?php echo $this->base_url; ?>Home/viewCart';">Carrinho</button>
