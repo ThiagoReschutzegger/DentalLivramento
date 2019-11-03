@@ -21,7 +21,7 @@ $(document).ready(function(){
      $(".navbar").css('position', 'static', 'important');
      $('#blockclick').click(false);
    }
-  
+
 });
 
 </script>
@@ -71,7 +71,7 @@ $(document).ready(function(){
                       O maior e mais completo estoque da região!
                   </h1>
               </div>
-              
+
             </div>
           </div>
         </div>
@@ -110,7 +110,7 @@ $(document).ready(function(){
               <a class="navbar-brand" href="<?php echo $this->base_url ?>Home" style="margin:-15px 0px 15px 15px">
                 <center><img class="logo-pl logo-nav image-fluid" src="<?php echo $this->asset ?>img/DentalLivramentoLogoFinal.png"></center>
               </a>
-            
+
                 <div class="navTop-middle search-field-pc">
                   <div class="searchBox">
                     <span class="input-group">
@@ -121,7 +121,7 @@ $(document).ready(function(){
                     </span>
                   </div>
                 </div>
-           
+
             <div class="dropdown cart-dropdown">
               <a href="cart-page.html" class="dropdown-toggle shop-cart" data-toggle="dropdown">
                 <i class="fa fa-shopping-cart"></i>
@@ -160,7 +160,7 @@ $(document).ready(function(){
               <?php endif; ?>
               </ul>
             </div>
-            
+
               <div class="navTop-middle search-field-mobile">
                 <div class="">
                   <span class="input-group">
@@ -171,7 +171,7 @@ $(document).ready(function(){
                   </span>
                 </div>
              </div>
-            
+
           </div>
         </div>
       <nav class="navbar navbar-main navbar-default navbar-expand-md nav-V3" role="navigation">
@@ -204,7 +204,7 @@ $(document).ready(function(){
                   <a href="" onclick="openCategoria(<?php echo $categoria->getId_categoria(); ?>); return true;" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $categoria->getNome(); ?></a>
               </li>
               <?php endforeach; ?>
-              
+
 <!--              <li class="dropdown nav-item megaDropMenu">
                 <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="300" data-close-others="true" aria-expanded="false">Ortodontia</b></a>
                 <ul class="dropdown-menu row">

@@ -217,10 +217,11 @@ class Home extends Controller{
         }
         $data['ids_cart'] = [];
         $data['ids_cart'][] = 0;
-        foreach($data['itens'] as $item):
-            $data['ids_cart'][] = $item[0]->getId_produto();
-        endforeach;
-        
+        if(isset($_SESSION['carrinho'])){
+          foreach($data['itens'] as $item):
+              $data['ids_cart'][] = $item[0]->getId_produto();
+          endforeach;
+        }
 
         $this->view->load('header',$data);
         $this->view->load('nav',$data);
