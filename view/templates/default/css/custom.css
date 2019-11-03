@@ -4,8 +4,7 @@
 
 #mySidenav a {
   position: fixed !important; /* Position them relative to the browser window */
-  right: -80px; /* Position them outside of the screen */
-  transition: 0.3s; /* Add transition on hover */
+  right: -5px; /* Position them outside of the screen */
   padding: 15px; /* 15px padding */
   width: 100px;
   text-decoration: none; /* Remove underline */
@@ -14,16 +13,14 @@
   border-radius: 5px 0 0 5px; /* Rounded corners on the top right and bottom right side */
   z-index:9999;
   float: right;
+  background-image: linear-gradient(#25D366,#4FCE5D);
 }
 
-#mySidenav a:hover {
-  right: -5px; /* On mouse-over, make the elements appear as they should */
-}
 
 /* The about link: 20px from the top with a green background */
 #about {
   top: 150px;
-  background-image: linear-gradient(#4CAF50,lightgreen);
+
 }
 
 body{
@@ -238,9 +235,9 @@ span.fa-bars{
 }
 
 .btn-compra{
-    font-size: 0.7em; 
-    line-height: 2.1em; 
-    padding: 0 7px; 
+    font-size: 0.7em;
+    line-height: 2.1em;
+    padding: 0 7px;
     float: right;
     height: 30px;
 }
