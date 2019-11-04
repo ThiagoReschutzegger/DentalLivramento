@@ -226,6 +226,7 @@ class Home extends Controller{
                 $data['ids_cart'][] = $data['itens'][0][0]->getId_produto();
             endif;
         }
+        
         $this->view->load('header',$data);
         $this->view->load('nav',$data);
         $this->view->load('single-product',$data); //single-product2

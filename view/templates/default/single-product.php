@@ -110,16 +110,7 @@ endforeach;
                     <small>a partir de: </small>
                     R$<?php echo number_format((float)$data['preco-ate'], 2); ?>
                   </h3>
-                  <span style="
-                  background-color: transparent;
-                  padding: 5px;
-                  font-size: 12px;
-                  height: 30px;
-                  line-height: 30px;
-                  font-weight: 400;
-                  text-transform: uppercase;
-                  <?php echo $data['estoque-msg'];?></span>
-                  <hr>                                              <!-- " -->
+                  
                   <p>
                     <?php if(mb_strlen($item->getDescricao()) > 150):?>
                     <span id="pre"><?php echo mb_substr($item->getDescricao(), 0, 150, 'UTF-8'); ?></span>
