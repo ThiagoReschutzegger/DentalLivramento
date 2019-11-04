@@ -217,11 +217,15 @@ class Home extends Controller{
         }
         $data['ids_cart'] = [];
         $data['ids_cart'][] = 0;
-        foreach($data['itens'] as $item):
-            $data['ids_cart'][] = $item[0]->getId_produto();
-        endforeach;
-        
-
+        if(!empty($data['itens'])){
+            if(count($data['itens']) > 1):
+            foreach($data['itens'] as $item):
+                $data['ids_cart'][] = $item[0]->getId_produto();
+            endforeach;
+            else:
+                $data['ids_cart'][] = $data['itens'][0][0]->getId_produto();
+            endif;
+        }
         $this->view->load('header',$data);
         $this->view->load('nav',$data);
         $this->view->load('single-product',$data); //single-product2
