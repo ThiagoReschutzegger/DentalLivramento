@@ -1866,7 +1866,6 @@ body.bodyColor.container {
 
 @media (min-width: 768px) {
   .nav-V3.navbar-default {
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     height: 50px;
   }

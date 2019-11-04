@@ -111,7 +111,7 @@ $(document).ready(function(){
                 <center><img class="logo-pl logo-nav image-fluid" src="<?php echo $this->asset ?>img/DentalLivramentoLogoFinal.png"></center>
               </a>
 
-                <div class="navTop-middle search-field-pc">
+                <div class="navTop-middle search-field-pc" style="border-left: 1px solid #cccccc;">
                   <div class="searchBox">
                     <span class="input-group">
                         <form method="post" action="<?php echo $this->base_url; ?>Loja/search" style="width: 100%;">

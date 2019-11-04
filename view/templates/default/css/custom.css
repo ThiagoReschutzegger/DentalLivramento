@@ -5,6 +5,7 @@
 #mySidenav a {
   position: fixed !important; /* Position them relative to the browser window */
   right: -5px; /* Position them outside of the screen */
+  top: 85vh;
   padding: 15px; /* 15px padding */
   width: 100px;
   text-decoration: none; /* Remove underline */
