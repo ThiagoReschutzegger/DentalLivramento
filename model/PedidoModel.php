@@ -16,7 +16,7 @@ class PedidoModel extends Model {
       return $result;
     }
 
-    public function getPedido() {
+    public function getPedido() { //nao mais utilized
         $list = [];
         $list1 = [];
 
@@ -24,7 +24,7 @@ class PedidoModel extends Model {
                 FROM pedido
                 JOIN carrinho ON pedido.id_carrinho = carrinho.id_carrinho
                 JOIN itemcarrinho ON carrinho.id_carrinho = itemcarrinho.id_carrinho
-                JOIN produto ON itemcarrinho.id_produto = produto.id_produto
+                JOIN produto ON itemcarrinho.barcode = produto.barcode
                 JOIN subgrupo ON produto.id_subgrupo = subgrupo.id_subgrupo
                 ORDER BY pedido.id_pedido DESC";
 
@@ -63,7 +63,7 @@ class PedidoModel extends Model {
                 FROM pedido
                 JOIN carrinho ON pedido.id_carrinho = carrinho.id_carrinho
                 JOIN itemcarrinho ON carrinho.id_carrinho = itemcarrinho.id_carrinho
-                JOIN produto ON itemcarrinho.id_produto = produto.id_produto
+                JOIN produto ON itemcarrinho.barcode = produto.barcode
                 JOIN subgrupo ON produto.id_subgrupo = subgrupo.id_subgrupo
                 WHERE pedido.id_pedido = {$id}
                 ORDER BY pedido.id_pedido DESC";
@@ -103,7 +103,7 @@ class PedidoModel extends Model {
 
         foreach ($consulta as $linha) {
           $list1[] = array('id_pedido' => $linha['id_pedido'],'produto' => new Packproduto($linha['id_produto'], $linha['barcode'], $linha['preco'], $linha['estoque'], $linha['especificacao'], $linha['tipo'], $linha['id_subgrupo'], $linha['id_marca'], $linha['nome'], $linha['descricao'], $linha['imagem'], $linha['destaque']), 'quantidade' => $linha['quantidade']);
-        }
+        } // [0] - idpedido;  [1] - obj Packprod; [2] - quantidade;
 
         $list1 = $this->group_by("id_pedido", $list1);
 
@@ -124,11 +124,31 @@ class PedidoModel extends Model {
         $ha = array_unique($list, SORT_REGULAR);
         return $ha;
     }
+    
+    public function getPedidoPendente2() { // Edu
+        $list = [];
+        $sql = "SELECT * FROM pedido WHERE status = 'NAO ENTREGUE' ";
+        $consulta = $this->ExecuteQuery($sql, array());
+        foreach ($consulta as $linha):
+            $list[] = new Pedido($linha['id_pedido'],$linha['nome'],$linha['endereco'],$linha['cep'],$linha['cidade'],$linha['uf'],$linha['telefone'],$linha['email'],$linha['mensagem'],$linha['precototal'],$linha['data'],$linha['status'],$linha['id_carrinho']);
+        endforeach;
+        return $list;
+    }
+    
+     public function getPedidoConcluido2() { // Edu
+        $list = [];
+        $sql = "SELECT * FROM pedido WHERE status = 'ENTREGUE' ";
+        $consulta = $this->ExecuteQuery($sql, array());
+        foreach ($consulta as $linha):
+            $list[] = new Pedido($linha['id_pedido'],$linha['nome'],$linha['endereco'],$linha['cep'],$linha['cidade'],$linha['uf'],$linha['telefone'],$linha['email'],$linha['mensagem'],$linha['precototal'],$linha['data'],$linha['status'],$linha['id_carrinho']);
+        endforeach;
+        return $list;
+    }
 
     public function getPedidoConcluido() {
       $list = [];
       $list1 = [];
-        $sql = "SELECT pedido.*, itemcarrinho.*, produto.*, subgrupo.*, item.*, pedido.nome AS nomepedido FROM pedido JOIN carrinho ON pedido.id_carrinho = carrinho.id_carrinho JOIN itemcarrinho ON carrinho.id_carrinho = itemcarrinho.id_carrinho JOIN produto ON itemcarrinho.id_produto = produto.id_produto JOIN subgrupo ON produto.id_subgrupo = subgrupo.id_subgrupo join item on produto.id_subgrupo=item.id_subgrupo and produto.id_marca=item.id_marca and produto.tipo=item.tipo WHERE status='ENTREGUE' ORDER BY pedido.id_pedido DESC LIMIT 10";
+        $sql = "SELECT pedido.*, itemcarrinho.*, produto.*, subgrupo.*, item.*, pedido.nome AS nomepedido FROM pedido JOIN carrinho ON pedido.id_carrinho = carrinho.id_carrinho JOIN itemcarrinho ON carrinho.id_carrinho = itemcarrinho.id_carrinho JOIN produto ON itemcarrinho.barcode = produto.barcode JOIN subgrupo ON produto.id_subgrupo = subgrupo.id_subgrupo join item on produto.id_subgrupo=item.id_subgrupo and produto.id_marca=item.id_marca and produto.tipo=item.tipo WHERE status='ENTREGUE' ORDER BY pedido.id_pedido DESC";
 
         $consulta = $this->ExecuteQuery($sql, array());
 

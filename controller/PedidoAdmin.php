@@ -3,20 +3,119 @@
 class PedidoAdmin extends Admin {
 
     protected $model;
+    protected $modelItemCarrinho;
+    protected $modelProduto;
+    protected $modelSubgrupo;
 
     public function __construct() {
         parent::__construct();
         $this->model = new PedidoModel();
+        $this->modelItemCarrinho = new ItemcarrinhoModel();
+        $this->modelProduto = new ProdutoModel();
+        $this->modelSubgrupo = new SubgrupoModel();
     }
 
     public function index() {
 
-      //$teste = $this->model->getPedido();
-      //echo "<pre>";print_r($teste);echo"kk";die;
 
-      $data['pedidop'] = $this->model->getPedidoPendente();//proprio nome ja diz
-      $data['pedidoc'] = $this->model->getPedidoConcluido(); //pega só 10
-      //tem q fazer os join fudido
+      $data['pedidop'] = $this->model->getPedidoPendente2();//proprio nome ja diz
+      if(count($data['pedidop']) > 1):
+        foreach ($data['pedidop'] as $pedido):
+            $data['itemcart-pendente'.$pedido->getId_pedido()] = $this->modelItemCarrinho->getItensById_carrinho($pedido->getId_carrinho());
+            $data['prods-pendente'.$pedido->getId_pedido()] = [];
+            if(count($data['itemcart-pendente'.$pedido->getId_pedido()]) > 1):
+                foreach ($data['itemcart-pendente'.$pedido->getId_pedido()] as $itemcart):
+                    $data['prods-pendente'.$pedido->getId_pedido()][] = $this->modelProduto->getProdutoByBarcode($itemcart->getBarcode());
+                    $data['qtd-pendente'.$itemcart->getBarcode().$pedido->getId_pedido()] = $itemcart->getQuantidade();
+                endforeach;
+            else:
+                $data['prods-pendente'.$pedido->getId_pedido()][] = $this->modelProduto->getProdutoByBarcode($data['itemcart-pendente'.$pedido->getId_pedido()][0]->getBarcode());
+                $data['qtd-pendente'.$data['itemcart-pendente'.$pedido->getId_pedido()][0]->getBarcode().$pedido->getId_pedido()] = $data['itemcart-pendente'.$pedido->getId_pedido()][0]->getQuantidade();
+            endif;
+            if(count($data['prods-pendente'.$pedido->getId_pedido()]) > 1):
+                foreach ($data['prods-pendente'.$pedido->getId_pedido()] as $produto):
+                    $subgrupo = $this->modelSubgrupo->getSubgrupoById($produto->getId_subgrupo());
+                    $data['sub-nome-pendente'.$produto->getId_produto().$pedido->getId_pedido()] = $subgrupo->getNome();
+                endforeach;
+            else:
+                $subgrupo = $this->modelSubgrupo->getSubgrupoById($data['prods-pendente'.$pedido->getId_pedido()][0]->getId_subgrupo());
+                $data['sub-nome-pendente'.$data['prods-pendente'.$pedido->getId_pedido()][0]->getId_produto().$pedido->getId_pedido()] = $subgrupo->getNome();
+            endif;
+        endforeach;
+      elseif(!empty($data['pedidop'])):
+            $pedido = $data['pedidop'][0];
+            $data['itemcart-pendente'.$pedido->getId_pedido()] = $this->modelItemCarrinho->getItensById_carrinho($pedido->getId_carrinho());
+            $data['prods-pendente'.$pedido->getId_pedido()] = [];
+            if(count($data['itemcart-pendente'.$pedido->getId_pedido()]) > 1):
+                foreach ($data['itemcart-pendente'.$pedido->getId_pedido()] as $itemcart):
+                    $data['prods-pendente'.$pedido->getId_pedido()][] = $this->modelProduto->getProdutoByBarcode($itemcart->getBarcode());
+                    $data['qtd-pendente'.$itemcart->getBarcode().$pedido->getId_pedido()] = $itemcart->getQuantidade();
+                endforeach;
+            else:
+                $data['prods-pendente'.$pedido->getId_pedido()][] = $this->modelProduto->getProdutoByBarcode($data['itemcart-pendente'.$pedido->getId_pedido()][0]->getBarcode());
+                $data['qtd-pendente'.$data['itemcart-pendente'.$pedido->getId_pedido()][0]->getBarcode().$pedido->getId_pedido()] = $data['itemcart-pendente'.$pedido->getId_pedido()][0]->getQuantidade();
+            endif;
+            if(count($data['prods-pendente'.$pedido->getId_pedido()]) > 1):
+                foreach ($data['prods-pendente'.$pedido->getId_pedido()] as $produto):
+                    $subgrupo = $this->modelSubgrupo->getSubgrupoById($produto->getId_subgrupo());
+                    $data['sub-nome-pendente'.$produto->getId_produto().$pedido->getId_pedido()] = $subgrupo->getNome();
+                endforeach;
+            else:
+                $subgrupo = $this->modelSubgrupo->getSubgrupoById($data['prods-pendente'.$pedido->getId_pedido()][0]->getId_subgrupo());
+                $data['sub-nome-pendente'.$data['prods-pendente'.$pedido->getId_pedido()][0]->getId_produto().$pedido->getId_pedido()] = $subgrupo->getNome();
+            endif;
+      endif;
+      
+//      echo "até aqui tudo tranq";
+//      die;
+      $data['pedidoc'] = $this->model->getPedidoConcluido2(); //pega só 10
+      if(count($data['pedidoc']) > 1):
+        foreach ($data['pedidoc'] as $pedido):
+            $data['itemcart-concluso'.$pedido->getId_pedido()] = $this->modelItemCarrinho->getItensById_carrinho($pedido->getId_carrinho());
+            $data['prods-concluso'.$pedido->getId_pedido()] = [];
+            if(count($data['itemcart-concluso'.$pedido->getId_pedido()]) > 1):
+                foreach ($data['itemcart-concluso'.$pedido->getId_pedido()] as $itemcart):
+                    $data['prods-concluso'.$pedido->getId_pedido()][] = $this->modelProduto->getProdutoByBarcode($itemcart->getBarcode());
+                    $data['qtd-concluso'.$itemcart->getBarcode().$pedido->getId_pedido()] = $itemcart->getQuantidade();
+                endforeach;
+            else:
+                $data['prods-concluso'.$pedido->getId_pedido()][] = $this->modelProduto->getProdutoByBarcode($data['itemcart-concluso'.$pedido->getId_pedido()][0]->getBarcode());
+                $data['qtd-concluso'.$data['itemcart-concluso'.$pedido->getId_pedido()][0]->getBarcode().$pedido->getId_pedido()] = $data['itemcart-concluso'.$pedido->getId_pedido()][0]->getQuantidade();
+            endif;
+            if(count($data['prods-concluso'.$pedido->getId_pedido()]) > 1):
+                foreach ($data['prods-concluso'.$pedido->getId_pedido()] as $produto):
+                    $subgrupo = $this->modelSubgrupo->getSubgrupoById($produto->getId_subgrupo());
+                    $data['sub-nome-concluso'.$produto->getId_produto().$pedido->getId_pedido()] = $subgrupo->getNome();
+                endforeach;
+            else:
+                $subgrupo = $this->modelSubgrupo->getSubgrupoById($data['prods-concluso'.$pedido->getId_pedido()][0]->getId_subgrupo());
+                $data['sub-nome-concluso'.$data['prods-concluso'.$pedido->getId_pedido()][0]->getId_produto().$pedido->getId_pedido()] = $subgrupo->getNome();
+            endif;
+        endforeach;
+      elseif(!empty($data['pedidoc'])):
+            $pedido = $data['pedidoc'][0];
+            $data['itemcart-concluso'.$pedido->getId_pedido()] = $this->modelItemCarrinho->getItensById_carrinho($pedido->getId_carrinho());
+            $data['prods-concluso'.$pedido->getId_pedido()] = [];
+            if(count($data['itemcart-concluso'.$pedido->getId_pedido()]) > 1):
+                foreach ($data['itemcart-concluso'.$pedido->getId_pedido()] as $itemcart):
+                    $data['prods-concluso'.$pedido->getId_pedido()][] = $this->modelProduto->getProdutoByBarcode($itemcart->getBarcode());
+                    $data['qtd-concluso'.$itemcart->getBarcode().$pedido->getId_pedido()] = $itemcart->getQuantidade();
+                endforeach;
+            else:
+                $data['prods-concluso'.$pedido->getId_pedido()][] = $this->modelProduto->getProdutoByBarcode($data['itemcart-concluso'.$pedido->getId_pedido()][0]->getBarcode());
+                $data['qtd-concluso'.$data['itemcart-concluso'.$pedido->getId_pedido()][0]->getBarcode().$pedido->getId_pedido()] = $data['itemcart-concluso'.$pedido->getId_pedido()][0]->getQuantidade();
+            endif;
+            if(count($data['prods-concluso'.$pedido->getId_pedido()]) > 1):
+                foreach ($data['prods-concluso'.$pedido->getId_pedido()] as $produto):
+                    $subgrupo = $this->modelSubgrupo->getSubgrupoById($produto->getId_subgrupo());
+                    $data['sub-nome-concluso'.$produto->getId_produto().$pedido->getId_pedido()] = $subgrupo->getNome();
+                endforeach;
+            else:
+                $subgrupo = $this->modelSubgrupo->getSubgrupoById($data['prods-concluso'.$pedido->getId_pedido()][0]->getId_subgrupo());
+                $data['sub-nome-concluso'.$data['prods-concluso'.$pedido->getId_pedido()][0]->getId_produto().$pedido->getId_pedido()] = $subgrupo->getNome();
+            endif;
+      endif;
+      
 
       $this->view->load('header');
       $this->view->load('nav');

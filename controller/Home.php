@@ -427,7 +427,8 @@ class Home extends Controller{
         $idcarrinho = $this->modelCarrinho->getLastIdInserted();
 
         foreach($data['itens'] as $item){
-          $itemcarrinho = new ItemCarrinhoBanco(null,$item[0]->getId_produto(),$item[1],$idcarrinho);
+          $produto = $this->modelproduto->getProdutoById($item[0]->getId_produto());
+          $itemcarrinho = new ItemCarrinhoBanco(null,$produto->getBarcode(),$item[1],$idcarrinho);
           $test = $this->modelItemcarrinho->insertItemcarrinho($itemcarrinho);
         }
 
