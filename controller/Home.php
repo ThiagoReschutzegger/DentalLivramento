@@ -514,7 +514,7 @@ class Home extends Controller{
                   <tr>
                     <td class="logoContainer" align="center" style="border-collapse: collapse; padding: 20px 0 10px 0px; width: 320px; display: block; margin: 0 auto;">
                       <a href="http://dentallivramento.com.br" title="Lorem logo" style="color: #ffffff;">
-                        <img class="logo" style="width: 300px; border: none; text-decoration: none;" src="http://dentalbeta.tk/view/templates/Email-Template-Html-Download-free/logo.png" alt="logo" />
+                        <img class="logo" style="width: 300px; border: none; text-decoration: none;" src="http://dentallivramento.com.br/view/templates/Email-Template-Html-Download-free/logo.png" alt="logo" />
                       </a>
                     </td>
                   </tr>
@@ -544,7 +544,7 @@ class Home extends Controller{
                         </tr>
                       </table>
                     </td>
-                    <td id="featuredImage" class="column" style="border-collapse: collapse; display: block; margin: 0 auto;"><img src="http://dentalbeta.tk/view/templates/Email-Template-Html-Download-free/phone.png" style="width: 234px" alt="phone" /></td>
+                    <td id="featuredImage" class="column" style="border-collapse: collapse; display: block; margin: 0 auto;"><img src="http://dentallivramento.com.br/view/templates/Email-Template-Html-Download-free/phone.png" style="width: 234px" alt="phone" /></td>
                   </tr>
                 </table>
               </td>
@@ -582,7 +582,7 @@ class Home extends Controller{
                       <a href="https://www.instagram.com/dentallivramento/" title="Twitter"><img src="https://clipart.info/images/ccovers/1522452763logo-instagram-png-white.png" width="29" alt="Instagram" style="border: none; text-decoration: none;" /></a>
                     </td>
                     <td align="center" width="32" style="border-collapse: collapse;">
-                      <a href="https://www.facebook.com/DentalLivramento/" title="Facebook"><img src="http://dentalbeta.tk/view/templates/Email-Template-Html-Download-free/faceb.png" width="29" style="border: none; text-decoration: none;" alt="Facebook" /></a>
+                      <a href="https://www.facebook.com/DentalLivramento/" title="Facebook"><img src="http://dentallivramento.com.br/view/templates/Email-Template-Html-Download-free/faceb.png" width="29" style="border: none; text-decoration: none;" alt="Facebook" /></a>
                     </td>
                   </tr>
                 </table>
@@ -625,7 +625,7 @@ class Home extends Controller{
                   <tr>
                     <td class="logoContainer" align="center" style="font-family: arial, helvetica, sans-serif; color: #313a42;border-collapse: collapse; padding: 20px 0 10px 0px; width: 320px;">
                       <a href="http://dentallivramento.com.br" title="Lorem logo" style="color: #ffffff;">
-                        <img class="logo" style="width: 300px; border: none; text-decoration: none;" src="http://dentalbeta.tk/view/templates/Email-Template-Html-Download-free/logo.png" alt="logo" />
+                        <img class="logo" style="width: 300px; border: none; text-decoration: none;" src="http://dentallivramento.com.br/view/templates/Email-Template-Html-Download-free/logo.png" alt="logo" />
                       </a>
                     </td>
                   </tr>
@@ -655,7 +655,7 @@ class Home extends Controller{
                         </tr>
                       </table>
                     </td>
-                    <td id="featuredImage" class="column" style="border-collapse: collapse; display: block; margin: 0 auto;"><img src="http://dentalbeta.tk/view/templates/Email-Template-Html-Download-free/phone.png" width="234" alt="phone" /></td>
+                    <td id="featuredImage" class="column" style="border-collapse: collapse; display: block; margin: 0 auto;"><img src="http://dentallivramento.com.br/view/templates/Email-Template-Html-Download-free/phone.png" width="234" alt="phone" /></td>
                   </tr>
                 </table>
               </td>
@@ -691,7 +691,7 @@ class Home extends Controller{
                       <a href="https://www.instagram.com/dentallivramento/" title="Twitter"><img src="https://clipart.info/images/ccovers/1522452763logo-instagram-png-white.png" width="29" alt="Instagram" style="border: none; text-decoration: none;" /></a>
                     </td>
                     <td align="center" width="32" style="border-collapse: collapse;">
-                      <a href="https://www.facebook.com/DentalLivramento/" title="Facebook"><img src="http://dentalbeta.tk/view/templates/Email-Template-Html-Download-free/faceb.png" width="29" style="border: none; text-decoration: none;" alt="Facebook" /></a>
+                      <a href="https://www.facebook.com/DentalLivramento/" title="Facebook"><img src="http://dentallivramento.com.br/view/templates/Email-Template-Html-Download-free/faceb.png" width="29" style="border: none; text-decoration: none;" alt="Facebook" /></a>
                     </td>
                   </tr>
                 </table>
@@ -724,12 +724,12 @@ class Home extends Controller{
 
 
       //enquanto nao vem parametros:
-      // $acao = 'teste'; //pedido ou msg, PRA TESTAR COLOCA teste !!!!
+       //$acao = 'teste'; //pedido ou msg, PRA TESTAR COLOCA teste !!!!
        //$email = ''; //email do cliente
 
       //variaveis fixas
-      $email_envio = 'serjaoberranteiro666@gmail.com'; //email para aparecer quem enviou, não necessariamente a conta de email que esta enviando / vai ser o email do site/hostinger
-      $email_guillermo = 'dudumaciel2011@hotmail.com';
+      $email_envio = 'auto.contato@dentallivramento.com.br'; //email para aparecer quem enviou, não necessariamente a conta de email que esta enviando / vai ser o email do site/hostinger
+      $email_guillermo = 'dentallivramento@gmail.com';
 
       if($acao == 'pedido'){
         //avisando o cliente
@@ -754,8 +754,9 @@ class Home extends Controller{
       }
 
       if($acao == 'teste'){
-        $email = new Email('serjaoberranteiro666@gmail.com','serjaoberranteiro666@gmail.com','Teste topperson 3',$template_cliente,null);
-        if($email->send()) echo "foi"; return true;
+          echo "teste<br>";
+        $email = new Email('dudumaciel2011@hotmail.com','auto.contato@dentallivramento.com.br','Teste mailer',$template_cliente,null);
+      if($email->send()){ echo "foi"; return true;} else echo "nao foi";
       }
     }
 

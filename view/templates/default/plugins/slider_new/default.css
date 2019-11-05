@@ -46,6 +46,12 @@
     }
 }
 
+@media (max-width: 500px) {
+    .slider .slides {
+        height: 40vw;
+    }
+}
+
 @media (min-width: 600px) {
     .slider.fullscreen ul.indicators{
         bottom: 30px !important;
