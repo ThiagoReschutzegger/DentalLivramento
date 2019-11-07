@@ -36,7 +36,7 @@ class Slider_2Model extends Model {
     public function insertSlider_2($slider_2) {
       // print_r($slider_2);die;
         $sql = "INSERT INTO slider_2(imagem,status,id_item) VALUES(:imagem,1,:id_item)";
-        if ($this->ExecuteCommand($sql,[':id_item'=>$slider_2->getId_item(),':imagem'=>$slider_2->getImagem(),':status'=>$slider_2->getStatus()])){
+        if ($this->ExecuteCommand($sql,[':id_item'=>$slider_2->getId_item(),':imagem'=>$slider_2->getImagem()])){
             return true;
         } else {
             return false;

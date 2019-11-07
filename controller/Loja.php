@@ -91,6 +91,7 @@ class Loja extends Controller{
         $data['grupo-atual'] = $this->modelGrupo->getGrupoById($data['subgrupo']->getId_grupo());
         $data['categoria'] = $this->modelCategoria->getCategoria();
         $data['categoria-atual'] = $this->modelCategoria->getCategoriaByGrupoId($data['subgrupo']->getId_grupo());
+        $data['subgrupo-in-cat'] = $this->modelSubgrupo->getSubgrupoByCategoriaId($data['categoria-atual'][0]->getId_categoria());
         $data['itens'] = $this->father->getList();
 
         if (filter_input(INPUT_POST, 'filter')) {
@@ -147,6 +148,8 @@ class Loja extends Controller{
           $this->father->addMensagem($email, $msg);
           return true;
         }
+        
+        $data['total-prod'] = count($data['item']);
 
         $this->view->load('header',$data);
         $this->view->load('nav',$data);

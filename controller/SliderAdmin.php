@@ -85,7 +85,7 @@ class SliderAdmin extends Admin {
                         $imagem = 'http://dentallivramento.com.br/'.$destino;
                         $id_item = filter_input(INPUT_POST, 'id_item', FILTER_SANITIZE_STRING);
 
-                        if ($imagem && $id_item) {
+                        if ($imagem) {
                             $slider = new Slider(null,$imagem, 1, $id_item);
                             if($qual == 1):
                                 if ($this->model_1->insertSlider_1($slider)) {
