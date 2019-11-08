@@ -141,7 +141,7 @@ endforeach;
                         <?php if ($produtos->getEstoque()==0): ?>
                           <td>Indisponível no momento!</td>
                         <?php elseif (in_array($produtos->getId_produto(), $data['ids_cart'])): ?>
-                                <td><a href="/DentalLivramento/Home/viewCart" class="btn btn-primary btn-default">Ver no Carrinho</a></td>
+                          <td><a href="<?php echo $this->base_url; ?>Home/viewCart" class="btn btn-primary btn-default">Ver no Carrinho</a></td>
                             <?php else: ?>
                         <td class="count-input" style="border: 0; padding-left: 0; color: #797979">
                           <span class="quant-prod">Quantidade:&nbsp;&nbsp;</span>
@@ -197,7 +197,7 @@ endforeach;
                             <?php if ($produtos->getEstoque()==0): ?>
                               <td>Indisponível no momento!</td>
                             <?php elseif (in_array($produtos->getId_produto(), $data['ids_cart'])): ?>
-                                <td><a href="/DentalLivramento/Home/viewCart" class="btn btn-primary btn-compra">Ver no Carrinho</a></td>
+                                <td><a href="<?php echo $this->base_url; ?>Home/viewCart" class="btn btn-primary btn-compra">Ver no Carrinho</a></td>
                             <?php else: ?>
                             <td class="count-input">
                               <a class="incr-btn" data-action="decrease" href="#"><i class="fa fa-minus"></i></a>
@@ -220,7 +220,7 @@ endforeach;
                           <?php if ($produtos->getEstoque()==0): ?>
                               <td>Indisponível no momento!</td>
                             <?php elseif (in_array($produtos->getId_produto(), $data['ids_cart'])): ?>
-                                <td><a href="/DentalLivramento/Home/viewCart" class="btn btn-primary btn-compra">Ver no Carrinho</a></td>
+                                <td><a href="<?php echo $this->base_url; ?>Home/viewCart" class="btn btn-primary btn-compra">Ver no Carrinho</a></td>
                             <?php else: ?>
                           <td class="count-input">
                             <a class="incr-btn" data-action="decrease" href="#"><i class="fa fa-minus"></i></a>

@@ -197,7 +197,7 @@ $(document).ready(function(){
           <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
               <li class="dropdown nav-item">
-                  <a href="<?php echo $this->base_url;?>" class="nav-link dropdown-toggle">Home</a>
+                  <a href="<?php echo $this->base_url;?>" class="nav-link dropdown-toggle"><i class="fa fa-home"></i></a>
               </li>
               <?php foreach($data['categoria-dstq'] as $categoria): ?>
               <li class="dropdown nav-item">

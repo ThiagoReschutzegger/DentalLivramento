@@ -475,7 +475,7 @@ class Home extends Controller{
     }
 
     public function Mailer($acao = null,$email = null, $nome = null){ //param: acao, email, nome. Edu
-      return true;
+//      return true;
       if(!$nome) $nome = '';
       $titulo = '';
       if($acao == 'mensagem') $titulo = 'Mensagens';

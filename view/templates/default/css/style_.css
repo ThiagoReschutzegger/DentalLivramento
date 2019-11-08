@@ -3634,7 +3634,13 @@ body.bodyColor.container {
 .imageBox .productCaption, .whiteSection .featuredProducts .slide .productCaption, .mainContent .featuredProducts .slide .productCaption, .productsContent .productBox .productCaption {
   width: 100%;
   display: block;
-  text-align: center;
+  text-align: -webkit-center;
+}
+
+@media (max-width: 500px) {
+    .h3-compra{
+        width: 70%;
+    }
 }
 
 @media (min-width: 768px) {

@@ -1,6 +1,7 @@
 <?php
 $cat_atual = $data['categoria-atual'][0];
 $gp_atual = $data['grupo-atual'];
+$sub_atual = $data['subgrupo'];
 $ids_prod = []; //pra nao repetir os subgrupos na hora de listar la
 $ids_prod[] = 0;
 ?>
@@ -48,34 +49,35 @@ $ids_prod[] = 0;
       <div class="col-lg-3 col-md-4">
         <div class="sideBar menuBar">
         <div class="panel panel-default">
-          <div class="panel-heading">Categorias</div>
+          <div class="panel-heading"><?php echo $cat_atual->getNome();?></div>
           <div class="panel-body">
             <div class="collapse navbar-collapse navbar-ex1-collapse navbar-side-collapse">
                 <ul class="nav navbar-nav side-nav" style="background-color: white;">
                 <li>
-                  <a href="javascript:;" data-toggle="collapse" aria-expanded="true" data-target="#menu_side<?php echo $cat_atual->getId_categoria();?>"><?php echo $cat_atual->getNome();?><i class="fa fa-plus"></i></a>
-                  <ul id="menu_side<?php echo $cat_atual->getId_categoria();?>" class="collapse collapseItem show">
-                    <?php foreach ($data['grupo'] as $linha):
-                      if($linha->getId_categoria() == $cat_atual->getId_categoria()):
+                  <a href="javascript:;" data-toggle="collapse" aria-expanded="true" data-target="#menu_side<?php echo $gp_atual->getId_grupo();?>"><?php echo $gp_atual->getNome();?><i class="fa fa-plus"></i></a>
+                  <ul id="menu_side<?php echo $gp_atual->getId_grupo();?>" class="collapse collapseItem show">
+                    <?php foreach ($data['subgrupo-in-cat'] as $linha):
+                      if($linha->getId_grupo() == $gp_atual->getId_grupo()):
                     ?>
-                      <li><a href="<?php echo $this->base_url; ?>Loja/viewSub/<?php echo $linha->getId_grupo(); ?>" <?php if($linha->getId_grupo() == $gp_atual->getId_grupo()) echo "style='font-weight: bold !important; text-decoration: underline !important;'"; ?>><i class="fa fa-caret-right" aria-hidden="true"></i><?php echo $linha->getNome(); ?></a></li>
+                      <li><a href="<?php echo $this->base_url; ?>Loja/view/<?php echo $linha->getId_subgrupo(); ?>" <?php if($linha->getId_subgrupo() == $sub_atual->getId_subgrupo()) echo "style='font-weight: bold !important; text-decoration: underline !important;'"; ?>><i class="fa fa-caret-right" aria-hidden="true"></i><?php echo $linha->getNome(); ?></a></li>
                     <?php endif; endforeach; ?>
                   </ul>
                 </li>
-                <?php foreach ($data['categoria'] as $categorias):
-                    if($categorias->getId_categoria() == $cat_atual->getId_categoria()) continue;
+                <?php foreach ($data['grupo'] as $grupo):
+                    if($grupo->getId_grupo() == $gp_atual->getId_grupo()) continue;
+                    if($grupo->getId_categoria() == $cat_atual->getId_categoria()):
                 ?>
                     <li>
-                      <a href="javascript:;" data-toggle="collapse" aria-expanded="false" data-target="#menu_side<?php echo $categorias->getId_categoria();?>"><?php echo $categorias->getNome(); ?><i class="fa fa-plus"></i></a>
-                      <ul id="menu_side<?php echo $categorias->getId_categoria();?>" class="collapse collapseItem">
-                        <?php foreach ($data['grupo'] as $linha):
-                          if($linha->getId_categoria() == $categorias->getId_categoria()):
+                      <a href="javascript:;" data-toggle="collapse" aria-expanded="false" data-target="#menu_side<?php echo $grupo->getId_grupo();?>"><?php echo $grupo->getNome(); ?><i class="fa fa-plus"></i></a>
+                      <ul id="menu_side<?php echo $grupo->getId_grupo();?>" class="collapse collapseItem">
+                        <?php foreach ($data['subgrupo-in-cat'] as $linha):
+                          if($linha->getId_grupo() == $grupo->getId_grupo()):
                         ?>
-                          <li><a href="<?php echo $this->base_url; ?>Loja/viewSub/<?php echo $linha->getId_grupo(); ?>"><i class="fa fa-caret-right" aria-hidden="true"></i><?php echo $linha->getNome(); ?></a></li>
+                          <li><a href="<?php echo $this->base_url; ?>Loja/view/<?php echo $linha->getId_subgrupo(); ?>"><i class="fa fa-caret-right" aria-hidden="true"></i><?php echo $linha->getNome(); ?></a></li>
                           <?php endif; endforeach; ?>
                       </ul>
                     </li>
-              <?php endforeach;?>
+              <?php endif; endforeach;?>
               </ul>
             </div>
           </div>
@@ -85,8 +87,10 @@ $ids_prod[] = 0;
       </div>
       <div class="col-lg-9 col-md-8">
         <div class="row filterArea">
-            <div class="col-5 Vizualizando" style="padding-top: 10px;">
-                <a style="color: grey; font-size: 15px;" href="<?php echo $this->base_url; ?>Loja/viewSub/<?php echo $gp_atual->getId_grupo(); ?>" style="line-height: 25px"><i class="fa fa-reply" aria-hidden="true"></i>&nbsp;&nbsp;Ver mais</a>
+            <div class="col-5 Vizualizando">
+            <span style="color: gray; padding-top: 5px;">Vizualizando
+              <?php echo $data['total-prod']; ?>
+                produtos:</span>
           </div>
           <div class="col-md-7 col-sm-12">
             <div class="float-right select-shop">
@@ -133,7 +137,7 @@ $ids_prod[] = 0;
                             endforeach; ?>
                         </h3>
                     </a>
-                    <h3>R$ <?php echo  number_format($data['preco_min'.$item->getId_marca()."-".$item->getTipo()], 2); ?><a href="<?php echo $this->base_url; ?>Home/viewProduto/<?php echo $item->getId_item(); ?>"  class="btn btn-primary-outlined btn-compra">Comprar</a></h3>
+                    <h3 class="h3-compra">R$ <?php echo  number_format($data['preco_min'.$item->getId_marca()."-".$item->getTipo()], 2); ?><a href="<?php echo $this->base_url; ?>Home/viewProduto/<?php echo $item->getId_item(); ?>"  class="btn btn-primary-outlined btn-compra">Comprar</a></h3>
                   </div>
                 </div>
               </div>
@@ -159,7 +163,7 @@ $ids_prod[] = 0;
                             endforeach; ?>
                         </h3>
                     </a>
-                    <h3>R$ <?php echo  number_format($data['preco_min'.$item->getId_marca()."-".$item->getTipo()], 2); ?><a href="<?php echo $this->base_url; ?>Home/viewProduto/<?php echo $item->getId_item(); ?>"  class="btn btn-primary-outlined btn-compra" >Comprar</a></h3>
+                    <h3 class="h3-compra">R$ <?php echo  number_format($data['preco_min'.$item->getId_marca()."-".$item->getTipo()], 2); ?><a href="<?php echo $this->base_url; ?>Home/viewProduto/<?php echo $item->getId_item(); ?>"  class="btn btn-primary-outlined btn-compra" >Comprar</a></h3>
                   </div>
                 </div>
               </div>

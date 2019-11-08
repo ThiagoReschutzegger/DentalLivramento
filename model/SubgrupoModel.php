@@ -62,6 +62,16 @@ class SubgrupoModel extends Model {
         }
         return $list;
     }
+    
+    public function getSubgrupoByCategoriaId($id) {
+        $list = [];
+        $sql = "SELECT subgrupo.* FROM subgrupo JOIN grupo ON subgrupo.id_grupo = grupo.id_grupo JOIN categoria ON grupo.id_categoria = categoria.id_categoria WHERE categoria.id_categoria = :id ORDER BY nome ASC;";
+        $consulta = $this->ExecuteQuery($sql, [':id' => $id]);
+        foreach ($consulta as $subgrupo) {
+            $list[] = new Subgrupo($subgrupo['id_subgrupo'], $subgrupo['nome'], $subgrupo['id_grupo']);
+        }
+        return $list;
+    }
 
     public function getSubgrupoByGrupoForTxt($id) {
         $list = [];

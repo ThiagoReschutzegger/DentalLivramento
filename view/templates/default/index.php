@@ -21,13 +21,10 @@
 </div>-->
     <div class="slider fullscreen">
         <ul class="slides">
-              <li>
-                <img src="<?php echo $this->asset;?>img/slider-1.jpeg">
-              </li>
               <?php if($data['slider_1']):
                   foreach ($data['slider_1'] as $slider):  ?>
               <li>
-                  <img onclick="window.open('<?php echo $this->base_url.'Home/viewProduto/'.$slider->getId_item();?>');" style="cursor: pointer" src="<?php echo $slider->getImagem();?>">
+                  <img <?php if($slider->getId_item() != 0): ?>onclick="window.open('<?php echo $this->base_url.'Home/viewProduto/'.$slider->getId_item();?>');"<?php endif; ?> style="cursor: pointer" src="<?php echo $slider->getImagem();?>">
               </li>
               <?php endforeach; endif;?>
         </ul>
@@ -61,10 +58,10 @@
           </div>
         </div>
       </div>
-        <?php endforeach; endif;?>
+        <?php endforeach;?></div><?php endif;?>
 
 
-    </div>
+    
 
 <?php if (count($data['prod-destaq'])>3): ?>
     <div class="page-header text-uppercase">
@@ -96,13 +93,10 @@
         <div class="col-sm-12 ml-auto bannercontainer ">
                <div class="slider fullscreen">
                    <ul class="slides" style="height: 35vw;">
-                          <li>
-                            <img src="<?php echo $this->asset;?>img/slider-1.jpeg">
-                          </li>
                           <?php if($data['slider_2']):
                             foreach ($data['slider_2'] as $slider):  ?>
                             <li>
-                                <img onclick="window.open('<?php echo $this->base_url.'Home/viewProduto/'.$slider->getId_item();?>');" style="cursor: pointer" src="<?php echo $slider->getImagem();?>">
+                                <img <?php if($slider->getId_item() != 0): ?>onclick="window.open('<?php echo $this->base_url.'Home/viewProduto/'.$slider->getId_item();?>');"<?php endif; ?> style="cursor: pointer" src="<?php echo $slider->getImagem();?>">
                             </li>
                           <?php endforeach; endif;?>
                     </ul>
@@ -151,34 +145,7 @@
             <?php endforeach;?>
           </div>
     <?php endif; ?>
-    <div class="container">
-      <div class="row justify-content-md-end">
-        <div class="col-sm-12 ml-auto bannercontainer ">
-          <div class="fullscreenbanner-container bannerV4">
-            <div class="fullscreenbanner">
-                <ul>
-
-                  <script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script><iframe src="//lightwidget.com/widgets/a3e97b3bbf3a521886bd4b709841ca34.html" scrolling="no" allowtransparency="true" class="lightwidget-widget" style="width:100%;border:0;overflow:hidden;"></iframe>
-                   <!-- <script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script><iframe src="//lightwidget.com/widgets/9dd0a7f3fb2458b1baa16527e4c4e5fe.html" scrolling="no" allowtransparency="true" class="lightwidget-widget" style="width:100%;border:0;overflow:hidden;"></iframe> -->
-
-                </ul>
-              <ul>
-                <br>
-                <center>
-                <div class="btn-group" role="group" aria-label="Basic example">
-              	  <a href="https://www.instagram.com/dentallivramento/" target="_blank">
-                      <button type="button" class="btn btn-primary btn-rounded btn-lg"><i class="fa fa-instagram"></i>&nbspVISITE NOSSO INSTAGRAM</button>
-                  </a>
-              	</div>
-                </center>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
+    
   </div>
 </section>
 

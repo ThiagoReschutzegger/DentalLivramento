@@ -30,9 +30,9 @@
 	  
 
     <!-- CUSTOM CSS -->
-    <link href="<?php echo $this->asset ?>css/style.css" rel="stylesheet">
+    <link href="<?php echo $this->asset ?>css/style_.css" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo $this->asset ?>css/<?php echo $data['estilo']->getLocal(); ?>" id="option_color">
-    <link rel="stylesheet" href="<?php echo $this->asset ?>css/custom.css">
+    <link rel="stylesheet" href="<?php echo $this->asset ?>css/custom_.css">
     <link rel="stylesheet" href="<?php echo $this->asset ?>css/mmenu.css" />
 
     <!-- Icons -->
