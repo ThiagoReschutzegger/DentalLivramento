@@ -92,7 +92,7 @@
       <div class="row justify-content-md-end">
         <div class="col-sm-12 ml-auto bannercontainer ">
                <div class="slider fullscreen">
-                   <ul class="slides" style="height: 35vw;">
+                   <ul class="slides" style="height: 45vw;">
                           <?php if($data['slider_2']):
                             foreach ($data['slider_2'] as $slider):  ?>
                             <li>
@@ -116,22 +116,34 @@
     <style type="text/css" scoped>
     .tparrows {
 	display: none !important;
-}
+    }
+    @media (max-width: 500px) {
+        .sub-selec{
+            height: <?php $count = count($data['ids-selec']); echo (46*$count)+10*$count; ?>vw !important;
+        }
+        .sub-slide{
+            height: 46vw  !important;
+        }
+        .sub-img{
+            height: 46vw  !important;
+        }
+    }
+    
     </style>
 
-    <?php if (count($data['ids-selec'])<3): ?>
+    <?php if (count($data['ids-selec'])>0): ?>
      <!-- FEATURE COLLECTION SECTION -->
-          <div class="row featuredCollection version2 version3 subgrupo-selec" style='padding: 15px; padding-top: 80px;'>
+          <div class="row featuredCollection version2 version3 sub-selec" style='padding: 15px; padding-top: 80px;'>
             <?php foreach ($data['subgrupo-selec'] as $selecionado):
              if(!in_array($selecionado->getId_selecionado(), $data['ids-selec'])) continue;
             ?>
-                <div class="col-md-6 col-12">
-                  <div class="slide">
-                    <div class="productImage productImage1"
+              <div class="col-md-6 col-12" style="padding-bottom: 30px">
+                  <div class="slide sub-slide">
+                    <div class="productImage productImage1 sub-img"
                          style="
                                 background-size: cover;
                                 background-position: unset;
-                                height: 22vw !important;
+                                height: 22vw;
                                 background-image: url(<?php echo $selecionado->getImagem();?>) !important;
                          "
                          >

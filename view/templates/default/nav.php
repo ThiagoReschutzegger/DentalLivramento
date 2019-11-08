@@ -54,7 +54,7 @@ $(document).ready(function(){
     <div class="main-wrapper">
 
       <!-- HEADER -->
-      <div class="header clearfix" style="background-color:#2c2c54">
+      <div class="header clearfix" style="background:linear-gradient(45deg, #1d1d4a, #00048c);"><!-- #2c2c54 -->
 
         <!-- TOPBAR -->
         <div class="topBar">
@@ -104,7 +104,7 @@ $(document).ready(function(){
 				</div>
 			</nav>
       <!-- NAV TOP -->
-        <div class="navTop text-center">
+      <div class="navTop text-center" style="background-color: transparent;">
           <div class="container another-one-bites-the-dust">
 
               <a class="navbar-brand" href="<?php echo $this->base_url ?>Home" style="margin:-15px 0px 15px 15px">
