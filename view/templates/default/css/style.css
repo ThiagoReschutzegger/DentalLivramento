@@ -1764,7 +1764,7 @@ body.bodyColor.container {
 }
 
 .navTop .cart-dropdown > a {
-  background-color: transparent;
+  background-color: white !important;
   line-height: 25px;
   height: 35px;
   font-size: 13px;
@@ -1790,7 +1790,7 @@ body.bodyColor.container {
 }
 
 .navTop .cart-dropdown > a:hover {
-  background-color: transparent;
+  background-color: white !important;
 }
 
 .navTop .cart-dropdown > a i {
@@ -1825,6 +1825,7 @@ body.bodyColor.container {
   line-height: 12px;
   text-align: left;
   display: table;
+  background-color: white !important;
 }
 
 @media (min-width: 992px) {

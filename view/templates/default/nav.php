@@ -122,10 +122,10 @@ $(document).ready(function(){
                   </div>
                 </div>
 
-            <div class="dropdown cart-dropdown" style="background-color:white">
+            <div class="dropdown cart-dropdown">
               <a href="cart-page.html" class="dropdown-toggle shop-cart" data-toggle="dropdown">
                 <i class="fa fa-shopping-cart"></i>
-                <span class=" d-md-block">
+                <span class=" d-md-block" style="background-color:white !important;">
                   <span class="cart-total">Carrinho</span><br>
                   <span class="cart-price">R$ <?php echo (isset($_SESSION['carrinho']) && $data['itens'] != '')? number_format((float)$count, 2, ',', ''): "0,00" ?></span>
                 </span>
