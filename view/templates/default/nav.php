@@ -54,7 +54,7 @@ $(document).ready(function(){
     <div class="main-wrapper">
 
       <!-- HEADER -->
-      <div class="header clearfix">
+      <div class="header clearfix" style="background-color:#2c2c54">
 
         <!-- TOPBAR -->
         <div class="topBar">
