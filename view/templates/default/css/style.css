@@ -1571,6 +1571,7 @@ body.bodyColor.container {
 /*=== 2.3 HEADER V3 ===*/
 .navTop {
   padding: 10px 0;
+  background-color: #2c2c54;
 }
 
 @media (min-width: 992px) {
@@ -1796,7 +1797,7 @@ body.bodyColor.container {
   font-size: 20px;
   margin-right: 0px;
   padding: 0 10px;
-  background-color: #fa8231 !important;
+  background-color: #00BAFA !important;
   color: #ffffff;
   line-height: 35px;
   float: left;

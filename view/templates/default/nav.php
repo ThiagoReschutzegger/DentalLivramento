@@ -111,7 +111,7 @@ $(document).ready(function(){
                 <center><img class="logo-pl logo-nav image-fluid" src="<?php echo $this->asset ?>img/DentalLivramentoLogoFinal.png"></center>
               </a>
 
-                <div class="navTop-middle search-field-pc" style="border-left: 1px solid #cccccc;">
+                <div class="navTop-middle search-field-pc" style="background-color: white;border-left: 1px solid #cccccc;">
                   <div class="searchBox">
                     <span class="input-group">
                         <form method="post" action="<?php echo $this->base_url; ?>Loja/search" style="width: 100%;">
@@ -122,7 +122,7 @@ $(document).ready(function(){
                   </div>
                 </div>
 
-            <div class="dropdown cart-dropdown">
+            <div class="dropdown cart-dropdown" style="background-color:white">
               <a href="cart-page.html" class="dropdown-toggle shop-cart" data-toggle="dropdown">
                 <i class="fa fa-shopping-cart"></i>
                 <span class=" d-md-block">
